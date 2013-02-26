@@ -1,14 +1,25 @@
+## java files
 *.class
 
-# Package Files #
+## Package Files 
 *.jar
 *.war
 *.ear
 
 ## generic files to ignore
-## we ignore backup files (*~) and vim swap file (.swp), MacOS dir file (.DS_Store) and any file with .out extension
+## we ignore backup files (*~) and 
+## vim swap file (.swp) and
+## MacOS dir file (.DS_Store) and a
+## any file with .out extension
 *~
 *.lock
 *.DS_Store
 *.swp
 *.out
+
+## eclipse project files
+.project
+.classpath
+
+## ignores maven target dir
+*/target/*
