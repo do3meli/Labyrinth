@@ -77,6 +77,11 @@ public class TestJunit {
       public void wouldFail() {
         fail();
     }
+    
+    @Test
+    public void calc(){
+    	assertEquals(3+3,6);
+    }
 
 }
 
