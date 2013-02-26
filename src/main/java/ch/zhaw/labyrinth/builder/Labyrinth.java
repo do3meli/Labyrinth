@@ -92,7 +92,10 @@ public class Labyrinth {
   public int getStartCol() {
     return sx;
   }
-
+  /**
+   * 
+   * @return int value with start row
+   */
   public int getStartRow() {
     return sy;
   }
@@ -104,10 +107,7 @@ public class Labyrinth {
   public int getEndRow() {
     return ey;
   }
- /**
-  * @return void
-  *
-  */
+ 
   public void print() {
     for (int y = 0; y < matrix.length; y++) {
       for (int x = 0; x < matrix[0].length; x++) {
