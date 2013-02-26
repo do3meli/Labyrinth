@@ -105,7 +105,7 @@ public class Labyrinth {
     return ey;
   }
  /**
-  * @see dominic
+  * @return void
   *
   */
   public void print() {
