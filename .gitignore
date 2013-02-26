@@ -5,5 +5,10 @@
 *.war
 *.ear
 
-# Mac OSX
-.DS_Store
+## generic files to ignore
+## we ignore backup files (*~) and vim swap file (.swp), MacOS dir file (.DS_Store) and any file with .out extension
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
