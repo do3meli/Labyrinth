@@ -16,7 +16,7 @@ public abstract class LabyrinthBuilder {
 	
 	public LabyrinthBuilder(int dim){
 		// make dim odd and set dimension
-		setDimension(MakeIntOdd(dim));
+		setDimension(makeIntOdd(dim));
 		// create empty array
 		this.maze = new int[getDimension()][getDimension()];
 		
@@ -62,9 +62,9 @@ public abstract class LabyrinthBuilder {
 	 * @param x int
 	 * @return an odd int
 	 */
-	private int MakeIntOdd(int x){
+	private int makeIntOdd(int x){
 		 if ( x % 2 == 0 ){
-	         x = x++;
+	         x++;
 		 }
 		 return x; 
 	}

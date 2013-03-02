@@ -34,31 +34,49 @@ public class DeepFirstSearch extends LabyrinthBuilder {
 	
 
 	private void createMaze() {
+		
+		// get a Random int for direction
+		int dir = getRandomInt(4);
+		
+		// dir = 0 --> move up
+		if (dir == 0){
+			moveUp();
+		}
+		// dir = 1 --> move right
+		if (dir == 1){
+			moveRight();
+		}
+		// dir = 2 --> move down
+		if (dir == 2){
+			moveDown();
+		}
+		// dir = 3 --> move left
+		if (dir == 3){
+			moveLeft();
+		}
+		
+	}
+
+	
+	
+	private void moveLeft() {
 		// TODO Auto-generated method stub
 		
 	}
 
-
-
-
-
-	private void getRandomDirection() {
-		// UP = 0
-		// DOWN = 1
-		// RIGHT = 2
-		// LEFT = 3
-		
+	private void moveDown() {
+		// TODO Auto-generated method stub
 		
 	}
 
+	private void moveRight() {
+		// TODO Auto-generated method stub
+		
+	}
 
-
-
-
-	
-	
-	
-	
+	private void moveUp(){
+		 // TODO
+	}
 }
 
 
