@@ -33,9 +33,9 @@ public abstract class LabyrinthBuilder {
 	
 	/**
 	 * 
-	 * @param int x of maze Array
-	 * @param int y of maze Array
-	 * @param int value for maze[x][y]
+	 * @param x int of maze Array
+	 * @param y int of maze Array
+	 * @param value int for maze[x][y]
 	 */
 	public void setMaze(int x, int y, int value){
 		this.maze[x][y] = value;
@@ -64,7 +64,7 @@ public abstract class LabyrinthBuilder {
 	 */
 	private int makeIntOdd(int x){
 		 if ( x % 2 == 0 ){
-	         x++;
+	         x = x + 1;
 		 }
 		 return x; 
 	}
