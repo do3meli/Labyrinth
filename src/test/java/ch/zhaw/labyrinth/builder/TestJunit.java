@@ -7,7 +7,6 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 //NEW static import for assert methods
@@ -63,20 +62,7 @@ public class TestJunit {
         assertEquals("junit4", this.instance);
     }
     
-    // NEW if you expect an exception, you can define that
-    // as parameter to the test annotation
-    @Test(expected=ArithmeticException.class) 
-      public void divideByZero() {
-        int n = 2 / 0;
-    }
-    
-    // NEW if a test is not ready yet, you can annotate that
-    // (or you can simply remove the Test annotations...)
-    @Ignore
-    @Test 
-      public void wouldFail() {
-        fail();
-    }
+   
     
     @Test
     public void calc(){
