@@ -17,9 +17,12 @@
 *.swp
 *.out
 
-## eclipse project files
+
+## eclipse/intellij project files
 .project
 .classpath
+*.iml
+.idea
 
 ## ignores maven target dir
 */target/*
