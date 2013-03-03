@@ -11,12 +11,13 @@ import java.awt.*;
  */
 public class InitGui {
     private static JFrame frame;
+    private JPanel labyrinthPanel;
 
     public InitGui() {
-        initGui();
+
     }
 
-    public void initGui() {
+    public void initGui(Labyrinth laby) {
         // Variables
         JLabel createLabel = new JLabel("Create Algorithm");
         createLabel.setBounds(26, 10, 107, 16);
@@ -59,13 +60,13 @@ public class InitGui {
         buttonPanel.setBounds(0, 338, 196, 140);
         configPanel.add(buttonPanel);
 
-        JPanel labyrinthPanel = new JPanel();
+        labyrinthPanel = laby;
         labyrinthPanel.setBounds(195, 0, 605, 478);
-        labyrinthPanel.setBackground(Color.gray);
 
         frame.getContentPane().add(labyrinthPanel);
 
         frame.setSize(800, 500);
         frame.setVisible(true);
     }
+
 }
