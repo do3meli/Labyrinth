@@ -19,41 +19,53 @@ public class InitGui {
     public void initGui() {
         // Variables
         JLabel createLabel = new JLabel("Create Algorithm");
+        createLabel.setBounds(26, 10, 107, 16);
+        createLabel.setHorizontalAlignment(SwingConstants.LEFT);
         JLabel solveLabel = new JLabel("Solve Algorithm");
-        JLabel createLabyrinth = new JLabel("Create Labyrinth");
+        solveLabel.setBounds(26, 77, 100, 16);
 
         JButton startButton = new JButton("Start");
         JButton pauseButton = new JButton("Pause");
         JButton resetButton = new JButton("Reset");
-
-        JPanel labyrinthPanel = new JPanel();
         JPanel configPanel = new JPanel();
-        JPanel buttonPanel;
+        JPanel buttonPanel = new JPanel();
 
         String[] createAlgorithms = { "Depth-First", "Prim", "Kruskal"};
-        JComboBox createList = new JComboBox(createAlgorithms);
         String[] solveAlgorithms = { "Wall-Follower", "Right-Hand", "Trémaux", "Backtrack", "Shortest Path"};
         JComboBox solveList = new JComboBox(solveAlgorithms);
+        solveList.setBounds(26, 105, 143, 27);
+        JComboBox createList = new JComboBox(createAlgorithms);
+        createList.setBounds(26, 38, 130, 27);
 
         frame = new JFrame("LabyrinthSolver");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
         Container contentPane = frame.getContentPane();
-        contentPane.setLayout(new GridLayout(2,2));
+        frame.getContentPane().setLayout(null);
+        configPanel.setLayout(null);
+        configPanel.setBounds(0, 0, 196, 478);
 
-        labyrinthPanel.setLayout(new BorderLayout());
-        configPanel.setLayout(new GridLayout(2,4));
-        configPanel.add(createLabel,0,0);
-        configPanel.add(createList,0,1);
+        configPanel.add(createLabel);
+        configPanel.add(createList);
         configPanel.add(solveLabel);
         configPanel.add(solveList);
+
+        buttonPanel.add(startButton);
+        buttonPanel.add(pauseButton);
+        buttonPanel.add(resetButton);
+
         contentPane.add(configPanel);
-        contentPane.add(labyrinthPanel);
+
+        buttonPanel.setBounds(0, 338, 196, 140);
+        configPanel.add(buttonPanel);
+
+        JPanel labyrinthPanel = new JPanel();
+        labyrinthPanel.setBounds(195, 0, 605, 478);
+        labyrinthPanel.setBackground(Color.gray);
+
+        frame.getContentPane().add(labyrinthPanel);
 
         frame.setSize(800, 500);
         frame.setVisible(true);
     }
-
-
 }
