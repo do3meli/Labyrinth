@@ -12,12 +12,13 @@ import ch.zhaw.labyrinth.gui.Labyrinth;
 public class Starter {
     public static void main(String[] args) {
 
-
         Labyrinth labyrinth = new Labyrinth();
-
-        labyrinth.addLine(1,2,3,4);
-        labyrinth.addLine(10,20,30,40);
-        labyrinth.addLine(25,20,15,10);
+        labyrinth.addLine(20,20,20,40);
+        labyrinth.addLine(25,25,25,35);
+        labyrinth.addLine(20,20,60,20);
+        labyrinth.addLine(25,25,55,25);
+        labyrinth.addLine(25,35,55,35);
+        labyrinth.addLine(20,40,60,40);
 
         // Initialize GUI
         InitGui gui = new InitGui();
