@@ -20,7 +20,10 @@ public class DeepFirstSearch extends LabyrinthBuilder {
 		// call super constructor
 		super(n);
 		// fill whole array with WALL
-		Arrays.fill(getMaze(), getWall());
+		for(int x=0;x<getMaze().length;x++){
+		    Arrays.fill( getMaze()[x], getWall() );
+		}
+	
 		// set start point in array
 		this.x = getRandomInt(getDimension());
 		this.y = getRandomInt(getDimension());
@@ -61,14 +64,15 @@ public class DeepFirstSearch extends LabyrinthBuilder {
 	
 	private void moveLeft() {
 		// check if new value is not outside the matrix
-		if (this.y - 2 < getDimension()){
+		if (this.y - 2 <= getDimension()){
 			// check if 2 cells ahead is a wall
 			if(getMaze()[this.x][this.y - 4] == getWall() ){
 													
 				setMaze(this.x,this.y - 1,getPath());
 				setMaze(this.x,this.y - 2,getPath());
 													
-				this.y = y + 2;
+				this.y = y - 2;
+				createMaze();
 			}
 		}		
 	}
@@ -76,7 +80,7 @@ public class DeepFirstSearch extends LabyrinthBuilder {
 	private void moveDown() {
 		
 		// check if new value is not outside the matrix
-		if (this.x + 2 < getDimension()){
+		if (this.x + 2 <= getDimension()){
 			
 			// check if 2 cells ahead is a wall
 			if(getMaze()[this.x + 4][this.y] == getWall() ){
@@ -85,6 +89,7 @@ public class DeepFirstSearch extends LabyrinthBuilder {
 				setMaze(this.x + 2,this.y,getPath());
 				
 				this.x = x + 2;
+				createMaze();
 			}
 			
 		}
@@ -93,7 +98,7 @@ public class DeepFirstSearch extends LabyrinthBuilder {
 
 	private void moveRight() {
 		// check if new value is not outside the matrix
-		if (this.y + 2 < getDimension()){
+		if (this.y + 2 <= getDimension()){
 			// check if 2 cells ahead is a wall
 			if(getMaze()[this.x][this.y + 4] == getWall() ){
 										
@@ -101,6 +106,7 @@ public class DeepFirstSearch extends LabyrinthBuilder {
 				setMaze(this.x,this.y + 2,getPath());
 										
 				this.y = y + 2;
+				createMaze();
 			}
 		}
 		
@@ -108,7 +114,7 @@ public class DeepFirstSearch extends LabyrinthBuilder {
 
 	private void moveUp(){
 		// check if new value is not outside the matrix
-		if (this.x - 2 < getDimension()){
+		if (this.x - 2 <= getDimension()){
 			
 			// check if 2 cells ahead is a wall
 			if(getMaze()[this.x - 4][this.y] == getWall() ){
@@ -117,6 +123,7 @@ public class DeepFirstSearch extends LabyrinthBuilder {
 				setMaze(this.x - 2,this.y,getPath());
 							
 				this.x = x - 2;
+				createMaze();
 			}
 		}
 	}

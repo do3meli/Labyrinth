@@ -54,7 +54,7 @@ public abstract class LabyrinthBuilder {
 	 * @param int dimension of the matrix
 	 */
 	private void setDimension(int dim){
-		this.dimension = dim;
+		this.dimension = dim - 1;
 	}
 
 	/**
