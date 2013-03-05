@@ -6,14 +6,15 @@ import java.util.ArrayList;
 
 public class Labyrinth extends JPanel {
 
-    private final ArrayList<Line> lines = new ArrayList<Line>();
+    private final ArrayList<Point> points = new ArrayList<Point>();
 
-    public void addLine(int x1, int y1, int x2, int y2) {
-        this.lines.add(new Line(x1, y1, x2, y2));
+    public void addPoint(int x1, int y1, int value) {
+        if(value == 1)
+          this.points.add(new Point(x1, y1));
     }
 
     public void paintComponent(Graphics g) {
-        for(final Line r : lines) {
+        for(final Point r : points) {
             r.paint(g);
         }
     }
