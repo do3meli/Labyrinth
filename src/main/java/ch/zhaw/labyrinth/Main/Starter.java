@@ -16,6 +16,14 @@ public class Starter {
 
         LabyrinthBuilder lab = new DeepFirstSearch(20);
 
+        int[][] a= lab.getMaze();
+        for(int i=0; i<20; i++) {
+            for (int j=0; j<20; j++) {
+                System.out.print(a[i][j]);
+            }
+            System.out.println();
+        }
+
         Labyrinth labyrinth = new Labyrinth();
         labyrinth.addLine(20,20,20,40);
         labyrinth.addLine(25,25,25,35);
