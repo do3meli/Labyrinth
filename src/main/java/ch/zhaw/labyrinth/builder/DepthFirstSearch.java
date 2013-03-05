@@ -11,10 +11,6 @@ import java.util.Collections;
  */
 public class DepthFirstSearch extends LabyrinthBuilder {
   
-	
-	private int x;						   // keep track of current row x
-	private int y;						   // keep track of current col y
-	private Integer[] dir;
 
 	// Constructor
 	public DepthFirstSearch(int n){
@@ -28,12 +24,12 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 		}
 			
 		// set start point in array
-		this.x = getRandomInt(getDimension());
-		this.y = getRandomInt(getDimension());
+		int x = getRandomInt(getDimension());
+		int y = getRandomInt(getDimension());
 		setMaze(x,y,getPath());
 		
-		// create whole maze array
-		createMaze(this.x,this.y);
+		// revursivelly create whole maze array
+		createMaze(x,y);
 		
 	}
 	
@@ -43,12 +39,10 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 	private void createMaze(int x, int y) {
 		
 		// create directions 
-		this.dir = generateRandomDirections();
+		Integer[] dir = generateRandomDirections();
 		
 		for (int i = 0; i < 4; i++) {
 		
-			 
-			
 			// dir = 0 --> move up
 			if (dir[i] == 0){
 				moveUp(x,y);
@@ -85,7 +79,6 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 	}
 
 	private void moveDown(int x, int y) {
-		
 		// check if new value is not outside the matrix
 		if (x + 2 <= getDimension() -1){
 			
@@ -96,10 +89,8 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 				setMaze(x + 2,y,getPath());
 				
 				createMaze(x + 2,y);
-			}
-			
+			}	
 		}
-		
 	}
 
 	private void moveRight(int x, int y) {
@@ -117,7 +108,6 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 				createMaze(x,y+2);
 			}
 		}
-		
 	}
 
 	private void moveUp(int x, int y){
@@ -138,7 +128,7 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 	public Integer[] generateRandomDirections() {
 	      ArrayList<Integer> randoms = new ArrayList<Integer>();
 	      for (int i = 0; i < 4; i++)
-	           randoms.add(i + 1);
+	           randoms.add(i);
 	      Collections.shuffle(randoms);
 	 
 	     return randoms.toArray(new Integer[4]);
