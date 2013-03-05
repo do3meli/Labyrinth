@@ -1,4 +1,4 @@
-package ch.zhaw.labyrinth.Main;
+package ch.zhaw.labyrinth.main;
 
 import ch.zhaw.labyrinth.builder.DeepFirstSearch;
 import ch.zhaw.labyrinth.builder.LabyrinthBuilder;
@@ -14,11 +14,11 @@ import ch.zhaw.labyrinth.gui.Labyrinth;
 public class Starter {
     public static void main(String[] args) {
        
-    	int dim = 20;
+    	int dim = 21;
     	
     	Labyrinth labyrinth = new Labyrinth();
         LabyrinthBuilder lab = new DeepFirstSearch(dim);
- 
+      
         int[][] a= lab.getMaze();
         for(int i=0; i<dim; i++) {
             for (int j=0; j<dim; j++) {
@@ -27,10 +27,6 @@ public class Starter {
             }
             System.out.println();
         }
-
-
-
-
         // Initialize GUI
         InitGui gui = new InitGui();
         gui.initGui(labyrinth);
