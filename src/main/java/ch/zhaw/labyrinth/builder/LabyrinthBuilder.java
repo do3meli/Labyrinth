@@ -61,7 +61,7 @@ public abstract class LabyrinthBuilder {
 	 * @return an odd int
 	 */
 	private int makeIntOdd(int x){
-		 if ( x % 2 == 0 ){
+		 if ( x % 2 != 0 ){
 	         x = x + 1;
 		 }
 		 return x; 
