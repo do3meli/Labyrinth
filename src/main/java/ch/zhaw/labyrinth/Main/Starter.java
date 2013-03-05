@@ -13,12 +13,15 @@ import ch.zhaw.labyrinth.gui.Labyrinth;
  */
 public class Starter {
     public static void main(String[] args) {
-        Labyrinth labyrinth = new Labyrinth();
-        LabyrinthBuilder lab = new DeepFirstSearch(20);
+       
+    	int dim = 20;
+    	
+    	Labyrinth labyrinth = new Labyrinth();
+        LabyrinthBuilder lab = new DeepFirstSearch(dim);
  
         int[][] a= lab.getMaze();
-        for(int i=0; i<20; i++) {
-            for (int j=0; j<20; j++) {
+        for(int i=0; i<dim; i++) {
+            for (int j=0; j<dim; j++) {
                 System.out.print(a[i][j]);
                 labyrinth.addPoint(i,j,a[i][j]);
             }
