@@ -1,5 +1,7 @@
 package ch.zhaw.labyrinth.Main;
 
+import ch.zhaw.labyrinth.builder.DeepFirstSearch;
+import ch.zhaw.labyrinth.builder.LabyrinthBuilder;
 import ch.zhaw.labyrinth.gui.InitGui;
 import ch.zhaw.labyrinth.gui.Labyrinth;
 
@@ -11,6 +13,8 @@ import ch.zhaw.labyrinth.gui.Labyrinth;
  */
 public class Starter {
     public static void main(String[] args) {
+
+        LabyrinthBuilder lab = new DeepFirstSearch(20);
 
         Labyrinth labyrinth = new Labyrinth();
         labyrinth.addLine(20,20,20,40);

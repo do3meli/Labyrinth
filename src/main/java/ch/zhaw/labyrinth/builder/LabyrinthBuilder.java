@@ -74,11 +74,14 @@ public abstract class LabyrinthBuilder {
 	 * @return a random int within the dimension of the array
 	 */
 	public int getRandomInt(int dim){
-		Random r = new Random();
-		return r.nextInt(dim);
+		//Random r = new Random();
+		//return r.nextInt(dim);
+
+        return (int)(Math.random() * (dim - 1) + 1) ;
 	}
 	
 	/**
+     * TODO: ENUM
 	 * @return int value of WALL constant
 	 */
 	public static int getWall() {

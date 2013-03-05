@@ -60,7 +60,7 @@ public class DeepFirstSearch extends LabyrinthBuilder {
 		
 	}
 
-	
+	// TODO: create one move method/class to avoid code duplication
 	
 	private void moveLeft() {
 		// check if new value is not outside the matrix
@@ -97,10 +97,13 @@ public class DeepFirstSearch extends LabyrinthBuilder {
 	}
 
 	private void moveRight() {
+        int[][]maze = getMaze();
+
 		// check if new value is not outside the matrix
 		if (this.y + 2 <= getDimension()){
 			// check if 2 cells ahead is a wall
-			if(getMaze()[this.x][this.y + 4] == getWall() ){
+            int tile =  maze[this.x][this.y + 4];
+			if(tile == getWall() ){
 										
 				setMaze(this.x,this.y + 1,getPath());
 				setMaze(this.x,this.y + 2,getPath());
