@@ -11,6 +11,8 @@ import java.util.Collections;
  */
 public class DepthFirstSearch extends LabyrinthBuilder {
   
+	
+	private Integer[] dir;
 
 	// Constructor
 	public DepthFirstSearch(int n){
@@ -28,7 +30,7 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 		int y = getRandomInt(getDimension());
 		setMaze(x,y,getPath());
 		
-		// revursivelly create whole maze array
+		// create whole maze array
 		createMaze(x,y);
 		
 	}
@@ -39,10 +41,12 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 	private void createMaze(int x, int y) {
 		
 		// create directions 
-		Integer[] dir = generateRandomDirections();
+		this.dir = generateRandomDirections();
 		
 		for (int i = 0; i < 4; i++) {
 		
+			 
+			
 			// dir = 0 --> move up
 			if (dir[i] == 0){
 				moveUp(x,y);
@@ -79,6 +83,7 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 	}
 
 	private void moveDown(int x, int y) {
+		
 		// check if new value is not outside the matrix
 		if (x + 2 <= getDimension() -1){
 			
@@ -89,8 +94,10 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 				setMaze(x + 2,y,getPath());
 				
 				createMaze(x + 2,y);
-			}	
+			}
+			
 		}
+		
 	}
 
 	private void moveRight(int x, int y) {
@@ -108,6 +115,7 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 				createMaze(x,y+2);
 			}
 		}
+		
 	}
 
 	private void moveUp(int x, int y){
