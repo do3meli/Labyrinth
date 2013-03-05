@@ -1,7 +1,5 @@
 package ch.zhaw.labyrinth.builder;
 
-import java.util.Random;
-
 
 public abstract class LabyrinthBuilder {
   
@@ -74,9 +72,6 @@ public abstract class LabyrinthBuilder {
 	 * @return a random int within the dimension of the array
 	 */
 	public int getRandomInt(int dim){
-		//Random r = new Random();
-		//return r.nextInt(dim);
-
         return (int)(Math.random() * (dim - 1) + 1) ;
 	}
 	
@@ -89,6 +84,7 @@ public abstract class LabyrinthBuilder {
 	}
 
 	/**
+	 * TODO: ENUM
 	 * @return in value of PATH constant
 	 */
 	public static int getPath() {

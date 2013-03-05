@@ -19,6 +19,7 @@ public class DeepFirstSearch extends LabyrinthBuilder {
 		
 		// call super constructor
 		super(n);
+		
 		// fill whole array with WALL
 		for(int x=0;x<getMaze().length;x++){
 		    Arrays.fill( getMaze()[x], getWall() );
