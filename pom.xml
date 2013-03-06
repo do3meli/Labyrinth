@@ -33,7 +33,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>ch.zhaw.labyrinth.Main.Starter</mainClass>
+                            <mainClass>ch.zhaw.labyrinth.main.Starter</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
