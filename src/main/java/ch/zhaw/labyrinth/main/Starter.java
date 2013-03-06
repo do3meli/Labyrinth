@@ -20,8 +20,8 @@ public class Starter {
         LabyrinthBuilder lab = new DepthFirstSearch(dim);
       
         int[][] a= lab.getMaze();
-        for(int i=0; i<dim; i++) {
-            for (int j=0; j<dim; j++) {
+        for(int i=0; i<lab.getDimension(); i++) {
+            for (int j=0; j<lab.getDimension(); j++) {
                 System.out.print(a[i][j]);
                 labyrinth.addPoint(i,j,a[i][j]);
             }
