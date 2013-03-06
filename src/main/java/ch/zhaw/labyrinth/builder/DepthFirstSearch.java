@@ -133,8 +133,9 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 	
 	public Integer[] generateRandomDirections() {
 	      ArrayList<Integer> randoms = new ArrayList<Integer>();
-	      for (int i = 0; i < 4; i++)
+	      for (int i = 0; i < 4; i++){
 	           randoms.add(i);
+	      }
 	      Collections.shuffle(randoms);
 	 
 	     return randoms.toArray(new Integer[4]);
