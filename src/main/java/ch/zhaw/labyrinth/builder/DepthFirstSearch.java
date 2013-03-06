@@ -44,8 +44,6 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 		this.dir = generateRandomDirections();
 		
 		for (int i = 0; i < 4; i++) {
-		
-			 
 			
 			// dir = 0 --> move up
 			if (dir[i] == 0){
