@@ -12,7 +12,11 @@ public class Point {
     }
 
     public void paint(Graphics g) {
-        g.drawLine(this.x1, this.y1, this.x1+100, this.y1);
-        g.drawLine(this.x1, this.y1-100, this.x1+100, this.y1-100);
+
+        // TODO: Not very efficient, we could do this with drawRect
+        int size = 8;
+        for (int i = 0; i < size; i++) {
+            g.drawLine(this.x1*size, this.y1*size+i, this.x1*size+(size-1), this.y1*size+i);
+        }
     }
 }
