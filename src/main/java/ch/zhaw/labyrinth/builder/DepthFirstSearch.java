@@ -68,7 +68,7 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 	
 	private void moveLeft(int x, int y) {
 		// check if new value is not outside the matrix
-		if (y - 2 >= 0){
+		if (y - 2 > 0){
 			// check if 2 cells ahead is a wall
 			if(getMaze()[x][y - 2] == getWall() ){
 													
@@ -83,7 +83,7 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 	private void moveDown(int x, int y) {
 		
 		// check if new value is not outside the matrix
-		if (x + 2 <= getDimension() -1){
+		if (x + 2 < getDimension()){
 			
 			// check if 2 cells ahead is a wall
 			if(getMaze()[x + 2][y] == getWall() ){
@@ -99,13 +99,12 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 	}
 
 	private void moveRight(int x, int y) {
-        int[][]maze = getMaze();
+       
 
 		// check if new value is not outside the matrix
-		if (y + 2 <= getDimension() -1){
+		if (y + 2 < getDimension()){
 			// check if 2 cells ahead is a wall
-            int tile =  maze[x][y + 2];
-			if(tile == getWall() ){
+			if(getMaze()[x][y + 2] == getWall() ){
 										
 				setMaze(x,y + 1,getPath());
 				setMaze(x,y + 2,getPath());
@@ -118,7 +117,7 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 
 	private void moveUp(int x, int y){
 		// check if new value is not outside the matrix
-		if (x - 2 >= 0){
+		if (x - 2 > 0){
 			
 			// check if 2 cells ahead is a wall
 			if(getMaze()[x - 2][y] == getWall() ){
