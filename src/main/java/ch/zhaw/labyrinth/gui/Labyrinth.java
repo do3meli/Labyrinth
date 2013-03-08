@@ -11,7 +11,7 @@ public class Labyrinth extends JPanel {
     public void addPoint(int x1, int y1, int value) {
         if(value == 1){
           this.points.add(new Point(x1, y1));
-        }
+        }	
     }
 
     public void paintComponent(Graphics g) {
