@@ -20,21 +20,24 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 		// call super constructor
 		super(n);
 		
-		// fill whole array with WALL
-		for(int x=0;x<getMaze().length;x++){
-		    Arrays.fill( getMaze()[x], getWall() );
-		}
-			
-		// set start point in array
-		int x = getRandomInt(getDimension());
-		int y = getRandomInt(getDimension());
-		setMaze(x,y,getPath());
+		// now setup everything
+		setupMaze();
 		
-		// create whole maze array
-		createMaze(x,y);
 		
 	}
 	
+	public void setupMaze(){
+		// fill whole array with WALL
+		fillArray();
+					
+		// set start point in array
+		int x = getRandomIntOdd(getDimension());
+		int y = getRandomIntOdd(getDimension());
+		setMaze(x,y,getPath());
+				
+		// create whole maze array
+		createMaze(x,y);
+	}
 	
 	
 
@@ -99,8 +102,6 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 	}
 
 	private void moveRight(int x, int y) {
-       
-
 		// check if new value is not outside the matrix
 		if (y + 2 < getDimension()){
 			// check if 2 cells ahead is a wall
@@ -139,6 +140,12 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 	 
 	     return randoms.toArray(new Integer[4]);
 	 }
+	
+	public void fillArray(){
+		for(int x=0;x<getMaze().length;x++){
+		    Arrays.fill( getMaze()[x], getWall() );
+		}
+	}
 }
 
 

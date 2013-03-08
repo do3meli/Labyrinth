@@ -1,5 +1,7 @@
 package ch.zhaw.labyrinth.builder;
 
+import java.util.Random;
+
 
 public abstract class LabyrinthBuilder {
   
@@ -71,8 +73,13 @@ public abstract class LabyrinthBuilder {
 	/**
 	 * @return a random int within the dimension of the array
 	 */
-	public int getRandomInt(int dim){
-        return (int)(Math.random() * (dim - 1) + 1) ;
+	public int getRandomIntOdd(int dim){
+		Random rand = new Random();
+		int r = rand.nextInt(dim);
+		while (r % 2 == 0) {
+			r = rand.nextInt(dim);
+		}
+		return r;
 	}
 	
 	/**
