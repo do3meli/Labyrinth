@@ -83,9 +83,9 @@ public class TestLabyrinthBuilder {
     @Test
     public void testRandomInt(){
     	
-    	int checkInt = lab.getRandomInt(dimension);
+    	int checkInt = lab.getRandomIntOdd(dimension);
     	
-    	assertTrue( checkInt <= dimension);
+    	assertTrue( checkInt < dimension);
     	assertTrue( checkInt > 0);
     	
     	
