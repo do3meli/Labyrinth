@@ -1,9 +1,6 @@
 package ch.zhaw.labyrinth.main;
 
-import ch.zhaw.labyrinth.builder.DepthFirstSearch;
-import ch.zhaw.labyrinth.builder.LabyrinthBuilder;
-import ch.zhaw.labyrinth.gui.InitGui;
-import ch.zhaw.labyrinth.gui.Labyrinth;
+import ch.zhaw.labyrinth.gui.Gui;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,23 +10,23 @@ import ch.zhaw.labyrinth.gui.Labyrinth;
  */
 public class Starter {
     public static void main(String[] args) {
-       
-    	int dim = 21;
-    	
-    	Labyrinth labyrinth = new Labyrinth();
-        LabyrinthBuilder lab = new DepthFirstSearch(dim);
-      
-        int[][] a= lab.getMaze();
-        for(int i=0; i<lab.getDimension(); i++) {
-            for (int j=0; j<lab.getDimension(); j++) {
-                System.out.print(a[i][j]);
-                labyrinth.addPoint(i,j,a[i][j]);
-            }
-            System.out.println();
-        }
         // Initialize GUI
-        InitGui gui = new InitGui();
-        gui.initGui(labyrinth);
+        Gui gui = new Gui();
+
+        // Initialize Labyrinth
+//    	Labyrinth labyrinth = new Labyrinth();
+        // Builder
+//        LabyrinthBuilder lab = new DepthFirstSearch(dim);
+      
+//        int[][] a= lab.getMaze();
+//        for(int i=0; i<lab.getDimension(); i++) {
+//            for (int j=0; j<lab.getDimension(); j++) {
+//                System.out.print(a[i][j]);
+//                labyrinth.addPoint(i,j,a[i][j]);
+//            }
+//        }
+//
+//        gui.initGui(labyrinth);
 
     }
 }
