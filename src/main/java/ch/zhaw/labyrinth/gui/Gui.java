@@ -93,12 +93,12 @@ public class Gui {
         lblZoom.setBounds(6, 83, 61, 16);
         configPanel.add(lblZoom);
 
-        tfSize = new JTextField("");
+        tfSize = new JTextField("41");
         tfSize.setBounds(50, 49, 134, 28);
         configPanel.add(tfSize);
         tfSize.setColumns(10);
 
-        tfZoom = new JTextField("");
+        tfZoom = new JTextField("4");
         tfZoom.setBounds(50, 83, 134, 28);
         configPanel.add(tfZoom);
         tfZoom.setColumns(10);
@@ -146,7 +146,9 @@ public class Gui {
                 }
             }
 
+
             // TODO: Print Labyrinth point by point in gui
+            labyrinthPanel.add(labyrinth);
 
         }
     }
