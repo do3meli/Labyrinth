@@ -16,17 +16,16 @@ import java.awt.event.ActionListener;
  */
 public class Gui {
     private static JFrame frame;
-    private JPanel labyrinthPanel;
+    private LabyrinthPanel labyrinthPanel;
     private JTextField tfSize;
     private JTextField tfZoom;
     private String[] createAlgorithms = { "Depth-First", "Prim", "Kruskal"};
     private String[] solveAlgorithms = { "Wall-Follower", "Right-Hand", "Trémaux", "Backtrack", "Shortest Path"};
-    private Labyrinth labyrinth;
     private JComboBox solveList;
     private JComboBox createList;
 
     public Gui() {
-        labyrinth = new Labyrinth();
+        labyrinthPanel = new LabyrinthPanel();
         initGui();
 
     }
@@ -107,7 +106,6 @@ public class Gui {
         separator.setBounds(0, 193, 196, 16);
         configPanel.add(separator);
 
-        labyrinthPanel = new Labyrinth();
         labyrinthPanel.setBounds(195, 0, 605, 478);
 
         frame.getContentPane().add(labyrinthPanel);
@@ -122,33 +120,36 @@ public class Gui {
     private class StartActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
-            LabyrinthBuilder lab;
+            LabyrinthBuilder lbuilder;
+
             // Get Variables
-            String ssize = tfSize.getText();
-            int size = Integer.valueOf(ssize);
-            String szoome = tfZoom.getText();
-            int zoom = Integer.valueOf(ssize);
+            int size = Integer.valueOf(tfSize.getText());
+            int zoom = Integer.valueOf(tfZoom.getText());
+
+            // Set zoom factor
+            labyrinthPanel.setZoom(zoom);
 
             // Get Build Type
             String type = (String)createList.getSelectedItem();
 
             if (type.equals("Depth-First")) {
-                lab = new DepthFirstSearch(size);
+                lbuilder = new DepthFirstSearch(size);
             } else {
-                lab = null;
+                lbuilder = null;
             }
 
             // Build Labyrinth
-            int[][] a = lab.getMaze();
-            for(int i=0; i<lab.getDimension(); i++) {
-                for (int j=0; j<lab.getDimension(); j++) {
-                    labyrinth.addPoint(i,j,a[i][j]);
+            int[][] a = lbuilder.getMaze();
+            for(int i=0; i<lbuilder.getDimension(); i++) {
+                for (int j=0; j<lbuilder.getDimension(); j++) {
+                    labyrinthPanel.addPoint(i,j,a[i][j]);
                 }
             }
 
-
             // TODO: Print Labyrinth point by point in gui
-            labyrinthPanel.add(labyrinth);
+            frame.remove(labyrinthPanel);
+            frame.add(labyrinthPanel);
+            frame.validate();
 
         }
     }

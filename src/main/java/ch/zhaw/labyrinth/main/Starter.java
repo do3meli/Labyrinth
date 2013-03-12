@@ -14,7 +14,8 @@ public class Starter {
         Gui gui = new Gui();
 
         // Initialize Labyrinth
-//    	Labyrinth labyrinth = new Labyrinth();
+    	//Labyrinth labyrinth = new Labyrinth();
+
         // Builder
 //        LabyrinthBuilder lab = new DepthFirstSearch(dim);
       
