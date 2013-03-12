@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
  */
 public class Gui {
     private static JFrame frame;
+    private Container contentPane;
     private LabyrinthPanel labyrinthPanel;
     private JTextField tfSize;
     private JTextField tfZoom;
@@ -25,15 +26,39 @@ public class Gui {
     private JComboBox createList;
 
     public Gui() {
-        labyrinthPanel = new LabyrinthPanel();
-        initGui();
+        /* Use an appropriate Look and Feel */
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (UnsupportedLookAndFeelException ex) {
+            ex.printStackTrace();
+        } catch (IllegalAccessException ex) {
+            ex.printStackTrace();
+        } catch (InstantiationException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+            /* Turn off metal's use bold fonts */
+        UIManager.put("swing.boldMetal", Boolean.FALSE);
 
+        //Schedule a job for the event dispatch thread:
+        //creating and showing this application's GUI.
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                createAndShowGUI();
+            }
+        });
     }
 
     /**
      * @wbp.parser.entryPoint
      */
-    public void initGui() {
+    public void createAndShowGUI() {
+        frame = new JFrame("LabyrinthSolver");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        contentPane = frame.getContentPane();
+        contentPane.setLayout(null);
+
         // Variables
         JLabel createLabel = new JLabel("Create Algorithm");
         createLabel.setBounds(6, 6, 107, 16);
@@ -54,6 +79,8 @@ public class Gui {
         // Panels
         JPanel configPanel = new JPanel();
         JPanel buttonPanel = new JPanel();
+        labyrinthPanel = new LabyrinthPanel();
+        labyrinthPanel.setVisible(false);
 
         // DropDown Menus
         solveList = new JComboBox(solveAlgorithms);
@@ -61,12 +88,6 @@ public class Gui {
         createList = new JComboBox(createAlgorithms);
         createList.setBounds(0, 23, 184, 27);
 
-
-        frame = new JFrame("LabyrinthSolver");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        Container contentPane = frame.getContentPane();
-        frame.getContentPane().setLayout(null);
         configPanel.setLayout(null);
         configPanel.setBounds(0, 0, 196, 478);
 
@@ -78,8 +99,6 @@ public class Gui {
         buttonPanel.add(startButton);
         buttonPanel.add(pauseButton);
         buttonPanel.add(resetButton);
-
-        contentPane.add(configPanel);
 
         buttonPanel.setBounds(0, 338, 196, 140);
         configPanel.add(buttonPanel);
@@ -106,11 +125,10 @@ public class Gui {
         separator.setBounds(0, 193, 196, 16);
         configPanel.add(separator);
 
-        labyrinthPanel.setBounds(195, 0, 605, 478);
-
-        frame.getContentPane().add(labyrinthPanel);
-
-        frame.setSize(800, 500);
+        contentPane.add(configPanel);
+        contentPane.add(labyrinthPanel);
+        //frame.setSize(800, 500);
+        frame.pack();
         frame.setVisible(true);
     }
 
@@ -146,10 +164,11 @@ public class Gui {
                 }
             }
 
+            //labyrinthPanel.setBounds(195, 0, 605, 478);
+            //frame.getContentPane().add(labyrinthPanel);
+            labyrinthPanel.setVisible(true);
+            frame.pack();
             // TODO: Print Labyrinth point by point in gui
-            frame.remove(labyrinthPanel);
-            frame.add(labyrinthPanel);
-            frame.validate();
 
         }
     }
