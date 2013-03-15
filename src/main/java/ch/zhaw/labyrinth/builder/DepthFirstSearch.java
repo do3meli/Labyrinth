@@ -70,64 +70,51 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 	// TODO: create one move method/class to avoid code duplication
 	
 	private void moveLeft(int x, int y) {
-		// check if new value is not outside the matrix
-		if (y - 2 > 0){
-			// check if 2 cells ahead is a wall
-			if(getMaze()[x][y - 2] == getWall() ){
+		// check if new value is not outside the matrix and 
+		// check if 2 cells ahead is a wall
+		if ( y - 2 > 0 && getMaze()[x][y - 2] == getWall() ){
 													
-				setMaze(x,y - 1,getPath());
-				setMaze(x,y - 2,getPath());
+			setMaze(x,y - 1,getPath());
+			setMaze(x,y - 2,getPath());
 													
-				createMaze(x,y-2);
-			}
+			createMaze(x,y-2);
 		}		
 	}
 
 	private void moveDown(int x, int y) {
 		
-		// check if new value is not outside the matrix
-		if (x + 2 < getDimension()){
+		// check if new value is not outside the matrix and
+		// check if 2 cells ahead is a wall
+		if ( x + 2 < getDimension() && getMaze()[x + 2][y] == getWall() ){
 			
-			// check if 2 cells ahead is a wall
-			if(getMaze()[x + 2][y] == getWall() ){
+			setMaze(x + 1,y,getPath());
+			setMaze(x + 2,y,getPath());
 				
-				setMaze(x + 1,y,getPath());
-				setMaze(x + 2,y,getPath());
-				
-				createMaze(x + 2,y);
-			}
-			
+			createMaze(x + 2,y);
 		}
-		
 	}
 
 	private void moveRight(int x, int y) {
-		// check if new value is not outside the matrix
-		if (y + 2 < getDimension()){
-			// check if 2 cells ahead is a wall
-			if(getMaze()[x][y + 2] == getWall() ){
+		// check if new value is not outside the matrix and
+		// check if 2 cells ahead is a wall
+		if ( y + 2 < getDimension() && getMaze()[x][y + 2] == getWall() ){
 										
-				setMaze(x,y + 1,getPath());
-				setMaze(x,y + 2,getPath());
+			setMaze(x,y + 1,getPath());
+			setMaze(x,y + 2,getPath());
 										
-				createMaze(x,y+2);
-			}
-		}
-		
+			createMaze(x,y+2);
+		}	
 	}
 
 	private void moveUp(int x, int y){
-		// check if new value is not outside the matrix
-		if (x - 2 > 0){
-			
-			// check if 2 cells ahead is a wall
-			if(getMaze()[x - 2][y] == getWall() ){
+		// check if new value is not outside the matrix and 
+		// check if 2 cells ahead is a wall
+		if ( x - 2 > 0 && getMaze()[x - 2][y] == getWall() ){
+				
+			setMaze(x - 1,y,getPath());
+			setMaze(x - 2,y,getPath());
 							
-				setMaze(x - 1,y,getPath());
-				setMaze(x - 2,y,getPath());
-							
-				createMaze(x-2,y);
-			}
+			createMaze(x-2,y);
 		}
 	}
 	
