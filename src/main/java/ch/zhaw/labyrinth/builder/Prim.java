@@ -1,12 +1,10 @@
 package ch.zhaw.labyrinth.builder;
 
-public class Kruskal extends LabyrinthBuilder{
+public class Prim extends LabyrinthBuilder {
 
-	public Kruskal(int dim) {
+	public Prim(int dim) {
 		super(dim);
 		// TODO Auto-generated constructor stub
 	}
-
-	
 
 }
