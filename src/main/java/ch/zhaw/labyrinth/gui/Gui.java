@@ -17,7 +17,7 @@ import java.awt.event.ActionListener;
  */
 public class Gui {
     private static JFrame frame;
-    private JFrame labyrinthFrame;
+    private LabyrinthThread labyrinthFrame;
     private Container contentPane;
     private JTextField tfSize;
     private JTextField tfZoom;
@@ -69,7 +69,9 @@ public class Gui {
         // Buttons
         JButton startButton = new JButton("Start");
         JButton pauseButton = new JButton("Pause");
+        pauseButton.setEnabled(false);
         JButton resetButton = new JButton("Reset");
+        resetButton.setEnabled(false);
 
         // ActionListeners for Buttons
         startButton.addActionListener(new StartActionListener());
@@ -140,10 +142,6 @@ public class Gui {
             labyrinthFrame.setLocation(251, 0);
             labyrinthFrame.setVisible(true);
 
-            // Get Panel to draw in
-            Container container = labyrinthFrame.getContentPane();
-            JPanel panel = (JPanel)container.getComponent(0);
-
             // Get Variables
             int size = Integer.valueOf(tfSize.getText());
             int zoom = Integer.valueOf(tfZoom.getText());
@@ -162,7 +160,7 @@ public class Gui {
             }
 
             // Create Labyrinth
-            Labyrinth labyrinth = new Labyrinth(panel, lbuilder);
+            Labyrinth labyrinth = new Labyrinth(labyrinthFrame.getCanvas(), lbuilder);
 
             // Set Zoom Factor
             labyrinth.setZoom(zoom);
@@ -176,7 +174,7 @@ public class Gui {
     private class PauseActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
-            // Pause Labyrinth Creation
+            // TODO: Pause Labyrinth Creation
         }
     }
 
@@ -184,6 +182,7 @@ public class Gui {
         @Override
         public void actionPerformed(ActionEvent ae) {
             // Reset Labyrinth Creation
+
         }
     }
 }
