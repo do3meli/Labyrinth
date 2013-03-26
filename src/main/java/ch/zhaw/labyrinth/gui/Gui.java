@@ -2,6 +2,7 @@ package ch.zhaw.labyrinth.gui;
 
 import ch.zhaw.labyrinth.builder.DepthFirstSearch;
 import ch.zhaw.labyrinth.builder.LabyrinthBuilder;
+import ch.zhaw.labyrinth.builder.Prim;
 
 import javax.swing.*;
 import java.awt.*;
@@ -135,11 +136,12 @@ public class Gui {
         @Override
         public void actionPerformed(ActionEvent ae) {
             labyrinthFrame = new LabyrinthThread();
+            labyrinthFrame.setLocation(251, 0);
             labyrinthFrame.setVisible(true);
-//            JPanel canvas = labyrinthFrame.getCanvas();
-            JPanel canvas = new JPanel();
 
-            LabyrinthBuilder lbuilder;
+            // Get Panel to draw in
+            Container container = labyrinthFrame.getContentPane();
+            JPanel panel = (JPanel)container.getComponent(0);
 
             // Get Variables
             int size = Integer.valueOf(tfSize.getText());
@@ -151,13 +153,16 @@ public class Gui {
             // Get Build Type
             String type = (String)createList.getSelectedItem();
 
+            LabyrinthBuilder lbuilder;
             if (type.equals("Depth-First")) {
                 lbuilder = new DepthFirstSearch(size);
+            } else if (type.equals("Prim")) {
+                lbuilder = new Prim(size);
             } else {
                 lbuilder = null;
             }
 
-            Labyrinth labyrinth = new Labyrinth(canvas, lbuilder);
+            Labyrinth labyrinth = new Labyrinth(panel, lbuilder);
             labyrinth.start();
 
         }
