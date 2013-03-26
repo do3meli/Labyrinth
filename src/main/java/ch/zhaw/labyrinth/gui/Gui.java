@@ -21,10 +21,11 @@ public class Gui {
     private Container contentPane;
     private JTextField tfSize;
     private JTextField tfZoom;
-    private String[] createAlgorithms = { "Depth-First", "Prim", "Kruskal"};
-    private String[] solveAlgorithms = { "Wall-Follower", "Right-Hand", "Trémaux", "Backtrack", "Shortest Path"};
     private JComboBox solveList;
     private JComboBox createList;
+    // TODO: Move these to an Enum Class
+    private String[] createAlgorithms = { "Depth-First", "Prim", "Kruskal"};
+    private String[] solveAlgorithms = { "Wall-Follower", "Right-Hand", "Trémaux", "Backtrack", "Shortest Path"};
 
     public Gui() {
         /* Use an appropriate Look and Feel */
@@ -79,13 +80,13 @@ public class Gui {
         JPanel configPanel = new JPanel();
         JPanel buttonPanel = new JPanel();
 
-
         // DropDown Menus
         solveList = new JComboBox(solveAlgorithms);
         solveList.setBounds(0, 242, 184, 27);
         createList = new JComboBox(createAlgorithms);
         createList.setBounds(0, 23, 184, 27);
 
+        // Building the panels
         configPanel.setLayout(null);
         configPanel.setBounds(0, 0, 196, 478);
 

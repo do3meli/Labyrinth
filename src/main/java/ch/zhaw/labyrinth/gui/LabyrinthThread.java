@@ -27,4 +27,8 @@ public class LabyrinthThread extends JFrame {
         container.add(canvas, "Center");
 
     }
+
+    public JPanel getCanvas() {
+        return canvas;
+    }
 }

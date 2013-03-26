@@ -41,11 +41,11 @@ public class Labyrinth extends Thread{
     public void run() {
         try {
 
-            int[][] a = labyrinthBuilder.getMaze();
+            int[][] maze = labyrinthBuilder.getMaze();
             for(int i=0; i<labyrinthBuilder.getDimension(); i++) {
                 for (int j=0; j<labyrinthBuilder.getDimension(); j++) {
 
-                    move(i,j,a[i][j]);
+                    move(i,j,maze[i][j]);
                     sleep(10);
                 }
             }
