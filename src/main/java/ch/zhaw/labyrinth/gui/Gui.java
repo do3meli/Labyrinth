@@ -147,12 +147,10 @@ public class Gui {
             int size = Integer.valueOf(tfSize.getText());
             int zoom = Integer.valueOf(tfZoom.getText());
 
-            // Set zoom factor
-//            labyrinthPanel.setZoom(zoom);
-
             // Get Build Type
             String type = (String)createList.getSelectedItem();
 
+            // Build selected Labyrinth
             LabyrinthBuilder lbuilder;
             if (type.equals("Depth-First")) {
                 lbuilder = new DepthFirstSearch(size);
@@ -162,7 +160,13 @@ public class Gui {
                 lbuilder = null;
             }
 
+            // Create Labyrinth
             Labyrinth labyrinth = new Labyrinth(panel, lbuilder);
+
+            // Set Zoom Factor
+            labyrinth.setZoom(zoom);
+
+            // Start Thread
             labyrinth.start();
 
         }

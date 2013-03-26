@@ -12,17 +12,19 @@ import java.awt.*;
  * Time: 08:54
  */
 public class Labyrinth extends Thread{
-    JPanel box;
-    LabyrinthBuilder labyrinthBuilder;
+    private JPanel box;
+    private LabyrinthBuilder labyrinthBuilder;
+    private int zoom;
+
     int P = 1, Q = 1, p = 0, q = 0;
     public Labyrinth(JPanel pan, LabyrinthBuilder labyrinthBuilder) {
         box = pan;
         this.labyrinthBuilder = labyrinthBuilder;
+        zoom = 8;
 
     }
 
     public void move(int i, int j, int aij) {
-        int zoom = 8;
         p = i;
         q = j;
 
@@ -50,5 +52,9 @@ public class Labyrinth extends Thread{
 
         } catch (Exception e) {
         }
+    }
+
+    public void setZoom(int zoom) {
+        this.zoom = zoom;
     }
 }

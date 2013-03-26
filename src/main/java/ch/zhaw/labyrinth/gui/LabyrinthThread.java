@@ -2,7 +2,6 @@ package ch.zhaw.labyrinth.gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 /**
  * Created with IntelliJ IDEA.
@@ -29,15 +28,5 @@ public class LabyrinthThread extends JFrame {
         JPanel panel = new JPanel();
         container.add(panel, "North");
 
-    }
-
-    public void add(Container container, String title, ActionListener listener) {
-        JRadioButton button = new JRadioButton(title);
-        container.add(button);
-        button.addActionListener(listener);
-    }
-
-    public JPanel getCanvas() {
-        return canvas;
     }
 }
