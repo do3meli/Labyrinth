@@ -16,8 +16,8 @@ import java.awt.event.ActionListener;
  */
 public class Gui {
     private static JFrame frame;
+    private JFrame labyrinthFrame;
     private Container contentPane;
-    private LabyrinthPanel labyrinthPanel;
     private JTextField tfSize;
     private JTextField tfZoom;
     private String[] createAlgorithms = { "Depth-First", "Prim", "Kruskal"};
@@ -50,14 +50,13 @@ public class Gui {
         });
     }
 
-    /**
-     * @wbp.parser.entryPoint
-     */
-    public void createAndShowGUI() {
+      public void createAndShowGUI() {
         frame = new JFrame("LabyrinthSolver");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         contentPane = frame.getContentPane();
         contentPane.setLayout(null);
+
+        labyrinthFrame = new LabyrinthThread();
 
         // Variables
         JLabel createLabel = new JLabel("Create Algorithm");
@@ -79,8 +78,7 @@ public class Gui {
         // Panels
         JPanel configPanel = new JPanel();
         JPanel buttonPanel = new JPanel();
-        labyrinthPanel = new LabyrinthPanel();
-        labyrinthPanel.setVisible(false);
+
 
         // DropDown Menus
         solveList = new JComboBox(solveAlgorithms);
@@ -126,10 +124,9 @@ public class Gui {
         configPanel.add(separator);
 
         contentPane.add(configPanel);
-        contentPane.add(labyrinthPanel);
-        //frame.setSize(800, 500);
-        frame.pack();
+        frame.setSize(200, 600);
         frame.setVisible(true);
+        labyrinthFrame.setVisible(true);
     }
 
     /**
@@ -145,7 +142,7 @@ public class Gui {
             int zoom = Integer.valueOf(tfZoom.getText());
 
             // Set zoom factor
-            labyrinthPanel.setZoom(zoom);
+//            labyrinthPanel.setZoom(zoom);
 
             // Get Build Type
             String type = (String)createList.getSelectedItem();
@@ -156,19 +153,8 @@ public class Gui {
                 lbuilder = null;
             }
 
-            // Build Labyrinth
-            int[][] a = lbuilder.getMaze();
-            for(int i=0; i<lbuilder.getDimension(); i++) {
-                for (int j=0; j<lbuilder.getDimension(); j++) {
-                    labyrinthPanel.addPoint(i,j,a[i][j]);
-                }
-            }
-
-            //labyrinthPanel.setBounds(195, 0, 605, 478);
-            //frame.getContentPane().add(labyrinthPanel);
-            labyrinthPanel.setVisible(true);
-            frame.pack();
-            // TODO: Print Labyrinth point by point in gui
+            Labyrinth labyrinth = new Labyrinth(labyrinthFrame.getCanvas(), lbuilder);
+            labyrinth.start();
 
         }
     }

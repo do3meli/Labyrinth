@@ -20,7 +20,7 @@ public class LabyrinthThread extends JFrame {
 
     public LabyrinthThread() {
         setSize(400, 400);
-        setTitle("Labyrinth");
+        setTitle("Labyrinth Solver");
 
         Container container = getContentPane();
         canvas = new JPanel();
@@ -43,10 +43,13 @@ public class LabyrinthThread extends JFrame {
         });
         container.add(panel, "North");
     }
-    public void add(Container container, String title, ActionListener
-            listener) {
+    public void add(Container container, String title, ActionListener listener) {
         JRadioButton button = new JRadioButton(title);
         container.add(button);
         button.addActionListener(listener);
+    }
+
+    public JPanel getCanvas() {
+        return canvas;
     }
 }

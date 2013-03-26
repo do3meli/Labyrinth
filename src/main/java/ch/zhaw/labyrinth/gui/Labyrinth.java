@@ -22,6 +22,7 @@ public class Labyrinth extends Thread{
     }
 
     public void move(int i, int j, int aij) {
+        int zoom = 8;
         p = i;
         q = j;
 
@@ -30,12 +31,9 @@ public class Labyrinth extends Thread{
 
         Graphics g = box.getGraphics();
         g.setXORMode(box.getBackground());
-        if (aij == 1) {
-            int zoom = 8;
 
+        if (aij == 1)
             g.fillRect(p*zoom, q*zoom, P*zoom, Q*zoom);
-
-        }
     }
 
     public void run() {
@@ -46,7 +44,7 @@ public class Labyrinth extends Thread{
                 for (int j=0; j<labyrinthBuilder.getDimension(); j++) {
 
                     move(i,j,a[i][j]);
-                    sleep(25);
+                    sleep(10);
                 }
             }
 
