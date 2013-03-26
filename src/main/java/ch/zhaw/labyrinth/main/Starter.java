@@ -1,6 +1,8 @@
 package ch.zhaw.labyrinth.main;
 
-import ch.zhaw.labyrinth.gui.Gui;
+import ch.zhaw.labyrinth.gui.LabyrinthThread;
+
+import javax.swing.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,7 +13,10 @@ import ch.zhaw.labyrinth.gui.Gui;
 public class Starter {
     public static void main(String[] args) {
         // Initialize GUI
-        Gui gui = new Gui();
+        //Gui gui = new Gui();
+
+        JFrame frame = new LabyrinthThread();
+        frame.setVisible(true);
 
     }
 }
