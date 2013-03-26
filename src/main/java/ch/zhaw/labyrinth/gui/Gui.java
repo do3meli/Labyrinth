@@ -48,15 +48,14 @@ public class Gui {
                 createAndShowGUI();
             }
         });
+
     }
 
-      public void createAndShowGUI() {
+    public void createAndShowGUI() {
         frame = new JFrame("LabyrinthSolver");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         contentPane = frame.getContentPane();
         contentPane.setLayout(null);
-
-        labyrinthFrame = new LabyrinthThread();
 
         // Variables
         JLabel createLabel = new JLabel("Create Algorithm");
@@ -126,7 +125,7 @@ public class Gui {
         contentPane.add(configPanel);
         frame.setSize(200, 600);
         frame.setVisible(true);
-        labyrinthFrame.setVisible(true);
+
     }
 
     /**
@@ -135,6 +134,11 @@ public class Gui {
     private class StartActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
+            labyrinthFrame = new LabyrinthThread();
+            labyrinthFrame.setVisible(true);
+//            JPanel canvas = labyrinthFrame.getCanvas();
+            JPanel canvas = new JPanel();
+
             LabyrinthBuilder lbuilder;
 
             // Get Variables
@@ -153,7 +157,7 @@ public class Gui {
                 lbuilder = null;
             }
 
-            Labyrinth labyrinth = new Labyrinth(labyrinthFrame.getCanvas(), lbuilder);
+            Labyrinth labyrinth = new Labyrinth(canvas, lbuilder);
             labyrinth.start();
 
         }
