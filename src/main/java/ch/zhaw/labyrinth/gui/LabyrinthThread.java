@@ -11,7 +11,7 @@ import java.awt.*;
  */
 public class LabyrinthThread extends JFrame {
 
-    private static JPanel canvas;
+    private JPanel canvas;
 
     public LabyrinthThread() {
         createFrame();
@@ -25,8 +25,6 @@ public class LabyrinthThread extends JFrame {
         Container container = getContentPane();
         canvas = new JPanel();
         container.add(canvas, "Center");
-        JPanel panel = new JPanel();
-        container.add(panel, "North");
 
     }
 }

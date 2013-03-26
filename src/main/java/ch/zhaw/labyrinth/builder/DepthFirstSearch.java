@@ -38,8 +38,6 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 		// create whole maze array
 		createMaze(x,y);
 	}
-	
-	
 
 	private void createMaze(int x, int y) {
 		
