@@ -58,7 +58,6 @@ public class TestLabyrinthBuilder {
 
     // NEW test methods are found with the new annotation Test
     // instead of the signature void testMethod
-    @Ignore
     @Test
     public void testConstructorDimensionSet() {
     	
