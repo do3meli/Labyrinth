@@ -98,6 +98,18 @@ public abstract class LabyrinthBuilder {
 		return PATH;
 	}
 	
+	/**
+	 * This method nicely prints the array to the console.
+	 * Only used for Debugging
+	 */
+	public void printArray(){
+		for(int i=0; i < getDimension(); i++) {
+			for (int j=0; j < getDimension(); j++) {
+				System.out.print(getMaze()[i][j]);
+	        }
+	        System.out.println();
+	    }
+	}
 	
 	
 }

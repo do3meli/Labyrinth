@@ -23,6 +23,7 @@ public class Gui {
     private JTextField tfZoom;
     private JComboBox solveList;
     private JComboBox createList;
+    private JCheckBox debug;
     // TODO: Move these to an Enum Class
     private String[] createAlgorithms = { "Depth-First", "Prim", "Kruskal"};
     private String[] solveAlgorithms = { "Wall-Follower", "Right-Hand", "Trémaux", "Backtrack", "Shortest Path"};
@@ -87,7 +88,7 @@ public class Gui {
         solveList.setBounds(0, 242, 184, 27);
         createList = new JComboBox(createAlgorithms);
         createList.setBounds(0, 23, 184, 27);
-
+        
         // Building the panels
         configPanel.setLayout(null);
         configPanel.setBounds(0, 0, 196, 478);
@@ -121,7 +122,12 @@ public class Gui {
         tfZoom.setBounds(50, 83, 134, 28);
         configPanel.add(tfZoom);
         tfZoom.setColumns(10);
-
+        
+        // Tickbox for Debug
+        debug = new JCheckBox("enable debugging");
+        debug.setBounds(6, 120, 180, 16);
+        configPanel.add(debug);
+        
         JSeparator separator = new JSeparator();
         separator.setBounds(0, 193, 196, 16);
         configPanel.add(separator);
@@ -158,7 +164,13 @@ public class Gui {
             } else {
                 lbuilder = null;
             }
-
+            
+            // Print Debugging stuff to console if tickbox set
+            if(debug.isSelected()){
+            	lbuilder.printArray();
+            }
+            
+            
             // Create Labyrinth
             Labyrinth labyrinth = new Labyrinth(labyrinthFrame.getCanvas(), lbuilder);
 
