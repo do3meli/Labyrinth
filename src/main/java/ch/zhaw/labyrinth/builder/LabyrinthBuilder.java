@@ -71,7 +71,7 @@ public abstract class LabyrinthBuilder {
 
 
 	/**
-	 * @return a random int within the dimension of the array
+	 * @return a random int within the dimension 
 	 */
 	public int getRandomIntOdd(int dim){
 		Random rand = new Random();

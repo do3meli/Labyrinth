@@ -3,6 +3,7 @@ package ch.zhaw.labyrinth.builder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Random;
 
 /**
  * This implements a DeepFirstSearch algorithm like descripted on
@@ -37,6 +38,9 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 				
 		// create whole maze array
 		createMaze(x,y);
+		
+		// create input and ouput of the maze
+		createInputOutput();
 	}
 
 	private void createMaze(int x, int y) {
@@ -131,6 +135,28 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 		    Arrays.fill( getMaze()[x], getWall() );
 		}
 	}
+	
+	
+	public void createInputOutput(){
+		
+		// create random
+		Random rand = new Random();
+		int r = rand.nextInt(2);
+		
+		// r = 0 => entry is at the top of the maze
+		if ( r == 0){
+			
+		}
+		
+		// r = 1 => entry is on the left site
+		if ( r == 1){
+			
+		}
+		
+		
+		
+	}
+	
 }
 
 
