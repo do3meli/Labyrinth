@@ -150,27 +150,22 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 		int r_out = rand.nextInt(getDimension());
 		
 		
-		System.out.println("This is r_entry: " + r_entry);
-		System.out.println("This is r_out: " + r_out);
-		System.out.println("This is A[1][r_entry]: " + getMaze()[1][r_entry]);
+		
 		// r = 0 => entry is at the top of the maze
 		if ( r == 0){
 			
 			// check if 1 cell ahead entry is free
 			while(getMaze()[1][r_entry] != getPath()){
-				System.out.println("This is A[1][r_entry]: " + getMaze()[1][r_entry]);
+				
 				r_entry = rand.nextInt(getDimension());
-				System.out.println("This is r_entry: " + r_entry);
+				
 			}
 			
-			// check if 1 cell before exit is free
-			//while(getMaze()[getDimension() -1][r_out] != getPath()){
-		//		r_out = rand.nextInt(getDimension());
-		//	}
+		
 			
 			// now make the field a path
 			setMaze(0,r_entry,getPath());
-		//	setMaze(getDimension(),r_out,getPath());
+			
 		}
 		
 		// r = 1 => entry is on the left site
