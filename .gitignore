@@ -25,4 +25,4 @@
 .idea
 
 ## ignores maven target dir
-*/target/*
+target/*
