@@ -26,6 +26,7 @@ public class Gui {
     private JComboBox solveList;
     private JComboBox createList;
     private JCheckBox debug;
+    private JCheckBox chckbxFastMode;
     private Labyrinth labyrinth;
     private LabyrinthBuilder lbuilder;
     // TODO: Move these to an Enum Class
@@ -94,7 +95,7 @@ public class Gui {
         configPanel.add(solveList);
         buttonPanel.add(resetButton);
 
-        buttonPanel.setBounds(0, 338, 196, 140);
+        buttonPanel.setBounds(0, 338, 196, 39);
         configPanel.add(buttonPanel);
 
         JLabel lblSize = new JLabel("Size: ");
@@ -117,7 +118,7 @@ public class Gui {
         
         // Tickbox for Debug
         debug = new JCheckBox("enable debugging");
-        debug.setBounds(6, 120, 180, 16);
+        debug.setBounds(6, 389, 180, 16);
         configPanel.add(debug);
         
         JSeparator separator = new JSeparator();
@@ -143,6 +144,10 @@ public class Gui {
         pauseSbutton.setEnabled(false);
         pauseSbutton.setBounds(89, 281, 80, 29);
         configPanel.add(pauseSbutton);
+        
+        chckbxFastMode = new JCheckBox("fast mode");
+        chckbxFastMode.setBounds(6, 411, 180, 16);
+        configPanel.add(chckbxFastMode);
 
         // ActionListeners for Buttons
         startButton.addActionListener(new StartCreateActionListener());
@@ -152,6 +157,10 @@ public class Gui {
         frame.setSize(200, 600);
         frame.setVisible(true);
 
+    }
+
+    public boolean getChckbxFastMode() {
+        return chckbxFastMode.isSelected();
     }
 
     /**
@@ -187,7 +196,7 @@ public class Gui {
             
             
             // Create Labyrinth
-            labyrinth = new Labyrinth(labyrinthFrame.getCanvas(), lbuilder);
+            labyrinth = new Labyrinth(labyrinthFrame.getCanvas(), lbuilder, getChckbxFastMode());
 
             // Set Zoom Factor
             labyrinth.setZoom(zoom);

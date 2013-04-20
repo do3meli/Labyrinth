@@ -15,13 +15,14 @@ public class Labyrinth extends Thread{
     private JPanel box;
     private LabyrinthBuilder labyrinthBuilder;
     private int zoom;
+    private boolean fast;
 
     int P = 1, Q = 1, p = 0, q = 0;
-    public Labyrinth(JPanel pan, LabyrinthBuilder labyrinthBuilder) {
+    public Labyrinth(JPanel pan, LabyrinthBuilder labyrinthBuilder, boolean fast) {
         box = pan;
         this.labyrinthBuilder = labyrinthBuilder;
         zoom = 8;
-
+        this.fast = fast;
     }
 
     public void move(int i, int j, int aij) {
@@ -46,7 +47,9 @@ public class Labyrinth extends Thread{
                 for (int j=0; j<labyrinthBuilder.getDimension(); j++) {
 
                     move(i,j,maze[i][j]);
-                    sleep(10);
+                    if(!fast) {
+                        sleep(10);
+                    }
                 }
             }
 
