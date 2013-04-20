@@ -23,6 +23,7 @@
 .classpath
 *.iml
 .idea
+*.settings
 
 ## ignores maven target dir
 target/*
