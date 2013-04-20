@@ -70,17 +70,8 @@ public class Gui {
         createLabel.setHorizontalAlignment(SwingConstants.LEFT);
         JLabel solveLabel = new JLabel("Solve Algorithm");
         solveLabel.setBounds(6, 221, 100, 16);
-
-        // Buttons
-        JButton startButton = new JButton("Start");
-        JButton pauseButton = new JButton("Pause");
-        pauseButton.setEnabled(false);
         JButton resetButton = new JButton("Reset");
         resetButton.setEnabled(false);
-
-        // ActionListeners for Buttons
-        startButton.addActionListener(new StartCreateActionListener());
-        pauseButton.addActionListener(new PauseCreateActionListener());
         resetButton.addActionListener(new ResetActionListener());
 
         // Panels
@@ -101,9 +92,6 @@ public class Gui {
         configPanel.add(createList);
         configPanel.add(solveLabel);
         configPanel.add(solveList);
-
-        buttonPanel.add(startButton);
-        buttonPanel.add(pauseButton);
         buttonPanel.add(resetButton);
 
         buttonPanel.setBounds(0, 338, 196, 140);
@@ -137,6 +125,30 @@ public class Gui {
         configPanel.add(separator);
 
         contentPane.add(configPanel);
+
+        // Buttons
+        JButton startButton = new JButton("Start");
+        startButton.setBounds(16, 148, 75, 29);
+        configPanel.add(startButton);
+        JButton pauseButton = new JButton("Pause");
+        pauseButton.setBounds(89, 148, 80, 29);
+        configPanel.add(pauseButton);
+        pauseButton.setEnabled(false);
+
+        JButton startSbutton = new JButton("Start");
+        startSbutton.setBounds(16, 281, 75, 29);
+        configPanel.add(startSbutton);
+
+        JButton pauseSbutton = new JButton("Pause");
+        pauseSbutton.setEnabled(false);
+        pauseSbutton.setBounds(89, 281, 80, 29);
+        configPanel.add(pauseSbutton);
+
+        // ActionListeners for Buttons
+        startButton.addActionListener(new StartCreateActionListener());
+        pauseButton.addActionListener(new PauseCreateActionListener());
+        pauseSbutton.addActionListener(new PauseSolveActionListener());
+        startSbutton.addActionListener(new StartSolveActionListener());
         frame.setSize(200, 600);
         frame.setVisible(true);
 
@@ -186,7 +198,7 @@ public class Gui {
         }
     }
 
-    private class PauseCreateActionListener implements ActionListener {
+    private class StartSolveActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
             // TODO: Pause Labyrinth Creation
@@ -205,7 +217,15 @@ public class Gui {
         }
     }
 
-    private class StartSolveActionListener implements ActionListener {
+    private class PauseCreateActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            // TODO: Start Labyrinth Solver
+
+        }
+    }
+
+    private class PauseSolveActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
             // TODO: Start Labyrinth Solver

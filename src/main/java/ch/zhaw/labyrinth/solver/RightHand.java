@@ -23,8 +23,9 @@ public class RightHand extends Solver {
         // go through labyrinth
         for(int i=0; i<labyrinth.length; i++) {
             for (int j=0; j<labyrinth.length; j++) {
-                System.out.println(i + j);
+                System.out.print(labyrinth[i][j]);
             }
+            System.out.println();
         }
 
     }
