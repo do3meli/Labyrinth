@@ -31,7 +31,7 @@ public class Gui {
     private LabyrinthBuilder lbuilder;
     // TODO: Move these to an Enum Class
     private String[] createAlgorithms = { "Depth-First", "Prim", "Kruskal"};
-    private String[] solveAlgorithms = { "Wall-Follower", "Right-Hand", "Trémaux", "Backtrack", "Shortest Path"};
+    private String[] solveAlgorithms = { "Right-Hand", "Wall-Follower", "Trémaux", "Backtrack", "Shortest Path"};
 
     public Gui() {
         /* Use an appropriate Look and Feel */
@@ -223,6 +223,7 @@ public class Gui {
             }
 
             lbsolver.solve();
+            lbuilder.printArray();
         }
     }
 

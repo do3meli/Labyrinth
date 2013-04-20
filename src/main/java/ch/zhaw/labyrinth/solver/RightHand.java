@@ -1,8 +1,5 @@
 package ch.zhaw.labyrinth.solver;
 
-import ch.zhaw.labyrinth.builder.LabyrinthBuilder;
-import ch.zhaw.labyrinth.gui.Labyrinth;
-
 /**
  * Created with IntelliJ IDEA.
  * User: bbu
@@ -10,22 +7,30 @@ import ch.zhaw.labyrinth.gui.Labyrinth;
  * Time: 11:49
  */
 public class RightHand extends Solver {
-    private int[][] labyrinth;
+    private int[][] maze;
+    private int[][] solvedMaze;
 
-    public RightHand(int[][] labyrinth) {
-        this.labyrinth = labyrinth;
+    public RightHand(int[][] maze) {
+        this.maze = maze;
     }
 
     @Override
     public void solve() {
-        // find entry FIXME: Move to parent
+        // find entry
+        int x=0;
+        int y=findEntry(maze);
+
+        // set exit
+        int u=40;
+        int v=20;
 
         // go through labyrinth
-        for(int i=0; i<labyrinth.length; i++) {
-            for (int j=0; j<labyrinth.length; j++) {
-                System.out.print(labyrinth[i][j]);
+        while((x != u) && (y!=v)) {
+            if(maze[x+1][y] == 1) {
+                x++;
+                y++;
             }
-            System.out.println();
+
         }
 
     }
