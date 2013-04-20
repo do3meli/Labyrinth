@@ -1,5 +1,7 @@
 package ch.zhaw.labyrinth.solver;
 
-public class Solver {
+public abstract class Solver {
+
+    public abstract void solve();
 
 }

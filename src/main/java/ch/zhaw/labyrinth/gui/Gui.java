@@ -3,6 +3,8 @@ package ch.zhaw.labyrinth.gui;
 import ch.zhaw.labyrinth.builder.DepthFirstSearch;
 import ch.zhaw.labyrinth.builder.LabyrinthBuilder;
 import ch.zhaw.labyrinth.builder.Prim;
+import ch.zhaw.labyrinth.solver.RightHand;
+import ch.zhaw.labyrinth.solver.Solver;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,6 +26,8 @@ public class Gui {
     private JComboBox solveList;
     private JComboBox createList;
     private JCheckBox debug;
+    private Labyrinth labyrinth;
+    private LabyrinthBuilder lbuilder;
     // TODO: Move these to an Enum Class
     private String[] createAlgorithms = { "Depth-First", "Prim", "Kruskal"};
     private String[] solveAlgorithms = { "Wall-Follower", "Right-Hand", "Trémaux", "Backtrack", "Shortest Path"};
@@ -75,8 +79,8 @@ public class Gui {
         resetButton.setEnabled(false);
 
         // ActionListeners for Buttons
-        startButton.addActionListener(new StartActionListener());
-        pauseButton.addActionListener(new PauseActionListener());
+        startButton.addActionListener(new StartCreateActionListener());
+        pauseButton.addActionListener(new PauseCreateActionListener());
         resetButton.addActionListener(new ResetActionListener());
 
         // Panels
@@ -141,7 +145,7 @@ public class Gui {
     /**
      * ActionListeners
      */
-    private class StartActionListener implements ActionListener {
+    private class StartCreateActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
             labyrinthFrame = new LabyrinthThread();
@@ -156,7 +160,6 @@ public class Gui {
             String type = (String)createList.getSelectedItem();
 
             // Build selected Labyrinth
-            LabyrinthBuilder lbuilder;
             if (type.equals("Depth-First")) {
                 lbuilder = new DepthFirstSearch(size);
             } else if (type.equals("Prim")) {
@@ -172,7 +175,7 @@ public class Gui {
             
             
             // Create Labyrinth
-            Labyrinth labyrinth = new Labyrinth(labyrinthFrame.getCanvas(), lbuilder);
+            labyrinth = new Labyrinth(labyrinthFrame.getCanvas(), lbuilder);
 
             // Set Zoom Factor
             labyrinth.setZoom(zoom);
@@ -183,10 +186,30 @@ public class Gui {
         }
     }
 
-    private class PauseActionListener implements ActionListener {
+    private class PauseCreateActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
             // TODO: Pause Labyrinth Creation
+            // Get Build Type
+            String type = (String)solveList.getSelectedItem();
+
+            // Build selected Labyrinth
+            Solver lbsolver;
+            if (type.equals("Right-Hand")) {
+                lbsolver = new RightHand(lbuilder.getMaze());
+            } else {
+                lbsolver = null;
+            }
+
+            lbsolver.solve();
+        }
+    }
+
+    private class StartSolveActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            // TODO: Start Labyrinth Solver
+
         }
     }
 
