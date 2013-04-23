@@ -46,7 +46,7 @@ public class Labyrinth extends Thread{
             for(int i=0; i<labyrinthBuilder.getDimension(); i++) {
                 for (int j=0; j<labyrinthBuilder.getDimension(); j++) {
 
-                    move(i,j,maze[i][j]);
+                    move(j,i,maze[i][j]);
                     if(!fast) {
                         sleep(10);
                     }
