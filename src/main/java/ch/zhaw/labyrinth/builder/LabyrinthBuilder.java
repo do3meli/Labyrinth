@@ -109,6 +109,7 @@ public abstract class LabyrinthBuilder {
 	        }
 	        System.out.println();
 	    }
+		System.out.println();
 	}
 	
 	
