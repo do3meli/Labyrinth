@@ -36,7 +36,7 @@ public class Labyrinth extends Thread{
         Graphics g = box.getGraphics();
         g.setXORMode(box.getBackground());
 
-        if (aij == 1){
+        if (aij == LabyrinthBuilder.getWall()){
             g.fillRect(p*zoom, q*zoom, P*zoom, Q*zoom);
         }
     }
