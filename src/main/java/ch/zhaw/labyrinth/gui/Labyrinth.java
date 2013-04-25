@@ -29,14 +29,16 @@ public class Labyrinth extends Thread{
         p = i;
         q = j;
 
-        if (!box.isVisible())
+        if (!box.isVisible()){
             return;
+        }
 
         Graphics g = box.getGraphics();
         g.setXORMode(box.getBackground());
 
-        if (aij == 1)
+        if (aij == 1){
             g.fillRect(p*zoom, q*zoom, P*zoom, Q*zoom);
+        }
     }
 
     public void run() {
