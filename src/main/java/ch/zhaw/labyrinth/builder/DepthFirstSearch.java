@@ -156,16 +156,18 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 			
 			// check if 1 cell ahead entry is free
 			while(getMaze()[1][r_entry] != getPath()){
-				
 				r_entry = rand.nextInt(getDimension());
-				
 			}
 			
+			// check if 1 cell ahead output is free
+			while(getMaze()[getDimension()-2][r_out] != getPath()){
+				r_out = rand.nextInt(getDimension());
+			}
 		
-			
 			// now make the field a path
 			setMaze(0,r_entry,getPath());
-			
+			setMaze(getDimension()-1,r_out,getPath());
+		
 		}
 		
 		// r = 1 => entry is on the left site
