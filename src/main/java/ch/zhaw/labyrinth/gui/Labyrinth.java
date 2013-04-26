@@ -16,12 +16,15 @@ public class Labyrinth extends Thread{
     private LabyrinthBuilder labyrinthBuilder;
     private int zoom;
     private boolean fast;
-
-    int P = 1, Q = 1, p = 0, q = 0;
+    private int P = 1;
+    private int Q = 1;
+    private int p = 0;
+    private int q = 0;
+    
     public Labyrinth(JPanel pan, LabyrinthBuilder labyrinthBuilder, boolean fast) {
-        box = pan;
+        this.box = pan;
         this.labyrinthBuilder = labyrinthBuilder;
-        zoom = 8;
+        this.zoom = 8;
         this.fast = fast;
     }
 
@@ -35,7 +38,7 @@ public class Labyrinth extends Thread{
 
         Graphics g = box.getGraphics();
         g.setXORMode(box.getBackground());
-
+     
         if (aij == LabyrinthBuilder.getWall()){
             g.fillRect(p*zoom, q*zoom, P*zoom, Q*zoom);
         }
