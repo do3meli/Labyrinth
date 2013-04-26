@@ -167,7 +167,7 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 			// now make the field a path
 			setMaze(0,r_entry,getPath());
 			setMaze(getDimension()-1,r_out,getPath());
-		
+
 		}
 		
 		// r = 1 => entry is on the left site
@@ -187,9 +187,11 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 			setMaze(r_entry,0,getPath());
 			setMaze(r_out,getDimension()-1,getPath());
 		}
-		
-		
-		
+
+        // Store entry and exit
+        setEntry(r_entry, 0 );
+        setExit(r_out, getDimension()-1);
+
 	}
 	
 }

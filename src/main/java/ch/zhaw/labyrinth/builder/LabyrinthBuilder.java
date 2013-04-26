@@ -12,6 +12,9 @@ public abstract class LabyrinthBuilder {
 	// variables
 	private int dimension;                 // dimension of maze
 	private int[][] maze;				   // byte array for maze
+    private int[] entry;
+    private int[] exit;
+
  
 	
 	public LabyrinthBuilder(int dim){
@@ -69,8 +72,25 @@ public abstract class LabyrinthBuilder {
 		 return x; 
 	}
 
+    public int[] getEntry() {
+        return entry;
+    }
 
-	/**
+    public void setEntry(int x, int y) {
+        entry[0] = x;
+        entry[1] = y;
+    }
+
+    public int[] getExit() {
+        return exit;
+    }
+
+    public void setExit(int x, int y) {
+        exit[0] = x;
+        exit[1] = y;
+    }
+
+    /**
 	 * @return a random int within the dimension 
 	 */
 	public int getRandomIntOdd(int dim){
