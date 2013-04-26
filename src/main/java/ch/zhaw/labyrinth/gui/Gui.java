@@ -217,7 +217,7 @@ public class Gui {
             // Build selected Labyrinth
             Solver lbsolver;
             if (type.equals("Right-Hand")) {
-                lbsolver = new RightHand(lbuilder.getMaze());
+                lbsolver = new RightHand(lbuilder.getMaze(), lbuilder);
             } else {
                 lbsolver = null;
             }

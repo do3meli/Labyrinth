@@ -1,5 +1,7 @@
 package ch.zhaw.labyrinth.solver;
 
+import ch.zhaw.labyrinth.builder.LabyrinthBuilder;
+
 /**
  * Created with IntelliJ IDEA.
  * User: bbu
@@ -9,10 +11,14 @@ package ch.zhaw.labyrinth.solver;
 public class RightHand extends Solver {
     private int[][] maze;
     private int[][] solvedMaze;
+    private LabyrinthBuilder labyrinthBuilder;
 
-    public RightHand(int[][] maze) {
+    public RightHand(int[][] maze, LabyrinthBuilder labyrinthBuilder) {
         this.maze = maze;
-        this.solvedMaze = new int[100][100];
+        this.solvedMaze = new int[this.maze.length][this.maze.length];
+        this.labyrinthBuilder = labyrinthBuilder;
+
+
     }
 
     @Override
@@ -21,13 +27,14 @@ public class RightHand extends Solver {
         int steps = 0;
 
         // find entry
-        int[] entry = findEntry(maze);
+        int[] entry = labyrinthBuilder.getEntry();
         int x=entry[0];
         int y=entry[1];
 
         // set exit
-        int u=maze.length;
-        int v=20; // TODO: findExit(maze)
+        int[] exit = labyrinthBuilder.getExit();
+        int u=exit[0];
+        int v=exit[1];
 
         solvedMaze[x][y] = 4;  // mark entry
         solvedMaze[u][v] = 5;  // mark exit
@@ -37,25 +44,25 @@ public class RightHand extends Solver {
             if(steps > 1000) { System.out.println(steps); break; }
 
             // if possible turn right
-            if(maze[x][y+1] == 0) {
+            if(maze[x][y++] == 0 && solvedMaze[x][y++] != 3) {
                 y++;
                 solvedMaze[x][y] = 3;
                 continue;
             }
             // go down
-            else if (maze[x+1][y] == 0) {
+            else if (maze[x++][y] == 0 && solvedMaze[x++][y] != 3) {
                 x++;
                 solvedMaze[x][y] = 3;
                 continue;
             }
             // go left
-            else if (maze[x][y--] == 0) {
+            else if (maze[x][y--] == 0 && solvedMaze[x][y--] != 3) {
                 y--;
                 solvedMaze[x][y] = 3;
                 continue;
             }
             // go up
-            else if (maze[x--][y] == 0) {
+            else if (maze[x--][y] == 0 && solvedMaze[x--][y] != 3) {
                 x--;
                 solvedMaze[x][y] = 3;
                 continue;
