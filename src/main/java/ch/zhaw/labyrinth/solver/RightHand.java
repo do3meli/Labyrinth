@@ -17,48 +17,53 @@ public class RightHand extends Solver {
 
     @Override
     public void solve() {
+        // Step counter
+        int steps = 0;
+
         // find entry
-        int x=0;
-        int y=findEntry(maze);
+        int[] entry = findEntry(maze);
+        int x=entry[0];
+        int y=entry[1];
 
         // set exit
         int u=maze.length;
         int v=20; // TODO: findExit(maze)
 
+        solvedMaze[x][y] = 4;  // mark entry
+        solvedMaze[u][v] = 5;  // mark exit
         // go through labyrinth
         while((x != u) && (y!=v)) {
+            steps++;
+            if(steps > 1000) { System.out.println(steps); break; }
+
+            // if possible turn right
+            if(maze[x][y+1] == 0) {
+                y++;
+                solvedMaze[x][y] = 3;
+                continue;
+            }
             // go down
-            if(maze[x+1][y+1] == 0) {
+            else if (maze[x+1][y] == 0) {
                 x++;
-                y++;
                 solvedMaze[x][y] = 3;
                 continue;
             }
-
             // go left
-            if(maze[x-1][y+1] == 0) {
-                x--;
-                y++;
-                solvedMaze[x][y] = 3;
-                continue;
-            }
-
-            // go right
-            if(maze[x+1][y-1] == 0) {
-                x++;
+            else if (maze[x][y--] == 0) {
                 y--;
                 solvedMaze[x][y] = 3;
                 continue;
             }
-
             // go up
-            if(maze[x-1][y-1] == 0) {
+            else if (maze[x--][y] == 0) {
                 x--;
-                y--;
                 solvedMaze[x][y] = 3;
                 continue;
             }
+
         }
+
+        // Print Solved maze to console
         for(int i=0; i<maze.length;i++) {
             for (int j=0; j<maze.length; j++) {
                 System.out.print(solvedMaze[i][j]);
