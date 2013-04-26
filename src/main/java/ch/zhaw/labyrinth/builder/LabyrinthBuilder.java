@@ -22,7 +22,9 @@ public abstract class LabyrinthBuilder {
 		setDimension(makeIntOdd(dim));
 		// create empty array
 		this.maze = new int[getDimension()][getDimension()];
-		
+        entry = new int[5];
+        exit = new int[5];
+
 	}
 	
 	
