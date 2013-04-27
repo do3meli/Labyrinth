@@ -10,11 +10,10 @@ import ch.zhaw.labyrinth.gui.Gui;
  */
 public class Starter {
     public static void main(String[] args) {
-        // Initialize GUI
-        Gui gui = new Gui();
+        
+    	// Initialize GUI
+        new Gui();
 
-//        JFrame frame = new LabyrinthThread();
-//        frame.setVisible(true);
 
     }
 }
