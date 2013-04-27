@@ -9,8 +9,10 @@ public class Prim extends LabyrinthBuilder {
     private ArrayList<Cell> labyrinth;
 	private int[][] mazevisits;
 	
+	
 	// constans
 	private static final int VISITED = 1;
+	private static final int FRONTIER = 0;
 
 	public Prim(int dim) {
 		// call super constructor
@@ -42,31 +44,31 @@ public class Prim extends LabyrinthBuilder {
      */
 	
 	private void createMaze() {
-		// choose random cell
+		// choose random cell and set a wall
 		int r = getRandomIntOdd(getDimension());
-
         Cell cell = labyrinth.get(r);
         cell.setWay(true);
-
-        ArrayList<Cell> neighbours = cell.getNeighbours();
+        
+        // get all its neighbours
+        ArrayList<Cell> neighbours = cell.getNeighbours(getDimension());
 
 		// mark this cell now as visited
-		mazevisits[x][y] = VISITED;
+		mazevisits[cell.getX()][cell.getY()] = VISITED;
 
         // mark neighbours as frontier
         // TODO: Check for borders
-        //mazevisits[x+1][y] = FRONTIER;
-        //mazevisits[x-1][y] = FRONTIER;
-        //mazevisits[x][y+1] = FRONTIER;
-        //mazevisits[x][y-1] = FRONTIER;
+        mazevisits[cell.getX()+1][cell.getY()] = FRONTIER;
+        mazevisits[cell.getX()-1][cell.getY()] = FRONTIER;
+        mazevisits[cell.getX()][cell.getY()+1] = FRONTIER;
+        mazevisits[cell.getX()][cell.getY()-1] = FRONTIER;
 
 
 
 
 		while(!allVisited()) {
-            // Pick a random wall from the list.
-            x = getRandomIntOdd(getDimension());
-            y = getRandomIntOdd(getDimension());
+           // Pick a random wall from the list.
+           x = getRandomIntOdd(getDimension());
+           y = getRandomIntOdd(getDimension());
 
             // If the cell on the opposite side isn't in the maze yet:
             if(mazevisits[x][y] != VISITED) {
