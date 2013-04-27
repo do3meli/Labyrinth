@@ -54,17 +54,18 @@ public class Prim extends LabyrinthBuilder {
         while(isAnyFrontier()){
         	
         	// get random cell
-        	Cell rand_cell = getRandomFrontierCell();
+        	Cell randCell = getRandomFrontierCell();
         	
         	// now find the neighbours of that random cell
-        	findNeighbors(rand_cell.getX(),rand_cell.getY());
+        	findNeighbors(randCell.getX(),randCell.getY());
         	
         	// get random neighbour cell
         	int rand = r.nextInt(neighbours.size());
         	Cell n = neighbours.get(rand);
         	 
-        	mark(n.getX(), n.getY());
+        	mark(randCell.getX(), randCell.getY());
         	
+        	printArray();
         	
         }
         
