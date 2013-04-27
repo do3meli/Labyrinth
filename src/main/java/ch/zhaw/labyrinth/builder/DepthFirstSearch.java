@@ -1,17 +1,19 @@
 package ch.zhaw.labyrinth.builder;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
+import ch.zhaw.labyrinth.utils.Labyrinth;
 
 /**
- * This implements a DeepFirstSearch algorithm like descripted on
- * at the following website: http://www.migapro.com/depth-first-search/
+ * This implements a DeepFirstSearch algorithm like descripted
+ * on the following website: http://www.migapro.com/depth-first-search/
  * @author Dominic Schlegel
  */
-public class DepthFirstSearch extends LabyrinthBuilder {
+public class DepthFirstSearch extends Labyrinth {
   
+	private static final boolean WALL = false;
+	private static final boolean PATH = true;
 	
 	private Integer[] dir;
 
@@ -29,12 +31,12 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 	
 	public void setupMaze(){
 		// fill whole array with WALL
-		fillArray();
+		fillAllCellValues(WALL);
 					
 		// set start point in array
 		int x = getRandomIntOdd(getDimension());
 		int y = getRandomIntOdd(getDimension());
-		setMaze(x,y,getPath());
+		setCellValue(x,y,PATH);
 				
 		// create whole maze array
 		createMaze(x,y);
@@ -73,13 +75,14 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 	// TODO: create one move method/class to avoid code duplication
 	
 	private void moveLeft(int x, int y) {
+		
 		// check if new value is not outside the matrix and 
 		// check if 2 cells ahead is a wall
-		if ( y - 2 > 0 && getMaze()[x][y - 2] == getWall() ){
-													
-			setMaze(x,y - 1,getPath());
-			setMaze(x,y - 2,getPath());
-													
+		if ( y - 2 > 0 && getCellValueAt(x,y-2) == WALL ){
+			
+			setCellValue(x,y-1,PATH);
+			setCellValue(x,y-2,PATH);
+				
 			createMaze(x,y-2);
 		}		
 	}
@@ -88,10 +91,10 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 		
 		// check if new value is not outside the matrix and
 		// check if 2 cells ahead is a wall
-		if ( x + 2 < getDimension() && getMaze()[x + 2][y] == getWall() ){
+		if ( x + 2 < getDimension() && getCellValueAt(x+2,y) == WALL ){
 			
-			setMaze(x + 1,y,getPath());
-			setMaze(x + 2,y,getPath());
+			setCellValue(x+1,y,PATH);
+			setCellValue(x+2,y,PATH);
 				
 			createMaze(x + 2,y);
 		}
@@ -100,10 +103,10 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 	private void moveRight(int x, int y) {
 		// check if new value is not outside the matrix and
 		// check if 2 cells ahead is a wall
-		if ( y + 2 < getDimension() && getMaze()[x][y + 2] == getWall() ){
-										
-			setMaze(x,y + 1,getPath());
-			setMaze(x,y + 2,getPath());
+		if ( y + 2 < getDimension() && getCellValueAt(x,y+2) == WALL ){
+						
+			setCellValue(x,y+1,PATH);
+			setCellValue(x,y+2,PATH);
 										
 			createMaze(x,y+2);
 		}	
@@ -112,10 +115,10 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 	private void moveUp(int x, int y){
 		// check if new value is not outside the matrix and 
 		// check if 2 cells ahead is a wall
-		if ( x - 2 > 0 && getMaze()[x - 2][y] == getWall() ){
-				
-			setMaze(x - 1,y,getPath());
-			setMaze(x - 2,y,getPath());
+		if ( x - 2 > 0 && getCellValueAt(x-2,y) == WALL ){
+			
+			setCellValue(x-1,y,PATH);
+			setCellValue(x-2,y,PATH);
 							
 			createMaze(x-2,y);
 		}
@@ -131,12 +134,7 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 	     return randoms.toArray(new Integer[4]);
 	 }
 	
-	public void fillArray(){
-		for(int x=0;x<getMaze().length;x++){
-		    Arrays.fill( getMaze()[x], getWall() );
-		}
-	}
-	
+
 	
 	public void createInputOutput(){
 		
@@ -155,18 +153,18 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 		if ( r == 0){
 			
 			// check if 1 cell ahead entry is free
-			while(getMaze()[1][r_entry] != getPath()){
+			while(getCellValueAt(1,r_entry) != PATH){
 				r_entry = rand.nextInt(getDimension());
 			}
 			
 			// check if 1 cell ahead output is free
-			while(getMaze()[getDimension()-2][r_out] != getPath()){
+			while(getCellValueAt(getDimension()-2,r_out) != PATH){
 				r_out = rand.nextInt(getDimension());
 			}
 		
 			// now make the field a path
-			setMaze(0,r_entry,getPath());
-			setMaze(getDimension()-1,r_out,getPath());
+			setCellValue(0,r_entry,PATH);
+			setCellValue(getDimension()-1,r_out,PATH);
 
 		}
 		
@@ -174,23 +172,20 @@ public class DepthFirstSearch extends LabyrinthBuilder {
 		if ( r == 1){
 			
 			// check if 1 cell ahead entry is free
-			while(getMaze()[r_entry][1] != getPath()){
+			while(getCellValueAt(r_entry,1) != PATH){
 				r_entry = rand.nextInt(getDimension());
 			}
 			
 			// check if 1 cell ahead output is free
-			while(getMaze()[r_out][getDimension()-2] != getPath()){
+			while(getCellValueAt(r_out,getDimension()-2) != PATH){
 				r_out = rand.nextInt(getDimension());
 			}
 		
 			// now make the field a path
-			setMaze(r_entry,0,getPath());
-			setMaze(r_out,getDimension()-1,getPath());
+			setCellValue(r_entry,0,PATH);
+			setCellValue(r_out,getDimension()-1,PATH);
 		}
 
-        // Store entry and exit
-        setEntry(r_entry, 0 );
-        setExit(r_out, getDimension()-1);
 
 	}
 	
