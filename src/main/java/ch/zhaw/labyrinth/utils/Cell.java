@@ -3,6 +3,11 @@ package ch.zhaw.labyrinth.utils;
 
 /**
  * A maze consists out of n-Cells. This class describes a Cell
+ *
+ * IF path = true 
+ * 		=> you can walk throght the cell
+ * IF path = false
+ * 		=> you can not walk throught the cell
  */
 public class Cell {
 	
