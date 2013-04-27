@@ -23,12 +23,10 @@ public class Labyrinth {
 			for (int y = 0; y < getDimension(); y++) {
 				this.map.put(new Coordinate(x,y),new Cell());
 			}
-			
 		}
-		
 	}
 
-
+    // getter for dimension
 	public int getDimension() {
 		return dimension;
 	}
