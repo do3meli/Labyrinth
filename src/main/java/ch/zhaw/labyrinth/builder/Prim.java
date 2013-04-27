@@ -86,7 +86,7 @@ public class Prim extends LabyrinthBuilder {
 
 	private void addFrontier(int x, int y) {
 		
-		if( x >= 0 && y >= 0 && y < getDimension() && x < getDimension() && getMaze()[x][y] == getWall() ){
+		if( x > 0 && y > 0 && y < getDimension() && x < getDimension() && getMaze()[x][y] == getWall() ){
 			frontiers.add(new Cell(x,y));
 		}
 	}
