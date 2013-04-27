@@ -2,33 +2,28 @@ package ch.zhaw.labyrinth.builder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Random;
 
 public class Prim extends LabyrinthBuilder {
-
-	// vars
-    private ArrayList<Cell> labyrinth;
-	private int[][] mazevisits;
 	
-	
-	// constans
-	private static final int VISITED = 1;
-	private static final int FRONTIER = 0;
+	// variables
+	private ArrayList<Cell> frontiers;
+	private ArrayList<Cell> neighbours;
 
+
+	// public Constructor
 	public Prim(int dim) {
+		
 		// call super constructor
 		super(dim);
-		// create int array for track of visited cells
-		this.mazevisits = new int[getDimension()][getDimension()];
-
-        // Create "walled" Labyrinth
-        labyrinth = new ArrayList<Cell>();
-        for (int i = 0; i < getDimension(); i++) {
-            for(int j = 0; j<getDimension(); j++) {
-                Cell cell = new Cell(i,j);
-                cell.setWall(true);
-                labyrinth.add(cell);
-            }
-        }
+		
+		// init the array lists
+		frontiers = new ArrayList<Cell>();
+		neighbours = new ArrayList<Cell>();
+       
+		// Create "walled" Labyrinth
+        fillArray();
 
 		// now create the maze
 		createMaze();
@@ -44,61 +39,118 @@ public class Prim extends LabyrinthBuilder {
      */
 	
 	private void createMaze() {
-		// choose random cell and set a wall
-		int r = getRandomIntOdd(getDimension());
-        Cell cell = labyrinth.get(r);
-        cell.setWay(true);
+		
+		// create a Random
+		Random r = new Random();
+		
+		// choose random cell and set a way
+		int x = r.nextInt(getDimension());
+        int y = r.nextInt(getDimension());
+		
+        // mark it and look for his neighbours the frontier cells
+        mark(x,y);
         
-        // get all its neighbours
-        ArrayList<Cell> neighbours = cell.getNeighbours(getDimension());
+        // iterate as long as there are any FRONTIER cells
+        while(isAnyFrontier()){
+        	
+        	// get random cell
+        	Cell rand_cell = getRandomFrontierCell();
+        	
+        	// now find the neighbours of that random cell
+        	findNeighbors(rand_cell.getX(),rand_cell.getY());
+        	
+        	// get random neighbour cell
+        	int rand = r.nextInt(neighbours.size());
+        	Cell n = neighbours.get(rand);
+        	 
+        	mark(n.getX(), n.getY());
+        	
+        	
+        }
+        
+     
+	}
+	
+	
+	
 
-		// mark this cell now as visited
-		mazevisits[cell.getX()][cell.getY()] = VISITED;
 
-        // mark neighbours as frontier
-        // TODO: Check for borders
-        mazevisits[cell.getX()+1][cell.getY()] = FRONTIER;
-        mazevisits[cell.getX()-1][cell.getY()] = FRONTIER;
-        mazevisits[cell.getX()][cell.getY()+1] = FRONTIER;
-        mazevisits[cell.getX()][cell.getY()-1] = FRONTIER;
+	private void mark(int x, int y){
+		setMaze(x,y,getPath());
+		addFrontier(x-1,y);
+		addFrontier(x+1,y);
+		addFrontier(x,y-1);
+		addFrontier(x,y+1);
+	}
 
-
-
-
-		while(!allVisited()) {
-           // Pick a random wall from the list.
-           x = getRandomIntOdd(getDimension());
-           y = getRandomIntOdd(getDimension());
-
-            // If the cell on the opposite side isn't in the maze yet:
-            if(mazevisits[x][y] != VISITED) {
-                // Make the wall a passage and mark the cell on the opposite side as part of the maze.
-
-                // Add the neighboring walls of the cell to the wall list.
-            } else {
-                // If the cell on the opposite side already was in the maze, remove the wall from the list.
-            }
-
+	private void addFrontier(int x, int y) {
+		
+		if( x >= 0 && y >= 0 && y < getDimension() && x < getDimension() && getMaze()[x][y] == getWall() ){
+			frontiers.add(new Cell(x,y));
+		}
+	}
+	
+	private boolean isAnyFrontier(){
+		
+		if(frontiers.isEmpty()){
+			return false;
+		}else{
+			return true;
 		}
 		
 	}
 	
-	private boolean allVisited(){
-		for(int x = 0 ; x < 3 ; x++){
-			for(int y = 0 ; y < 3 ; y++){
-			      if(this.mazevisits[x][y] == 0){
-			    	  return false;
-			      }
-			}
-		}
-		return true;
-	}
-
-
 	public void fillArray(){
-		for(int x=0; x < this.mazevisits.length; x++){
-		    Arrays.fill( this.mazevisits[x], 0 );
+		for(int x=0;x<getMaze().length;x++){
+		    Arrays.fill( getMaze()[x], getWall() );
 		}
+	}
+	
+	
+	public Cell getRandomFrontierCell(){
+		
+		// shuffle my arraylist
+		Collections.shuffle(frontiers);
+		
+		// create random
+		Random r = new Random();
+		int rand = r.nextInt(frontiers.size());
+		
+		// save random cell
+		Cell cell = frontiers.get(rand);
+		
+		// remove from arraylist
+		frontiers.remove(rand);
+		
+		// return random cell
+		return cell;
+		
+	}
+	
+	
+	public void findNeighbors(int x, int y){
+		
+		// first clear everything
+		neighbours.clear();
+		
+		// find neighbours and add it to array list
+		
+		if ( x > 0 && y < getDimension() && x - 1 < getDimension() && getMaze()[x-1][y] == getWall()){
+			neighbours.add(new Cell(x-1,y));
+		}
+		
+		if ( x + 1 < getDimension() && y < getDimension() && getMaze()[x+1][y] == getWall()){
+			neighbours.add(new Cell(x+1,y));
+		}
+		
+		if ( y >= 1 && getMaze()[x][y-1] == getWall() ){
+			neighbours.add(new Cell(x,y-1));
+		}
+		
+		if ( y+1 < getDimension() && getMaze()[x][y+1] == getWall() ){
+			neighbours.add(new Cell(x,y+1));
+		}
+		
 	}
 	
 	

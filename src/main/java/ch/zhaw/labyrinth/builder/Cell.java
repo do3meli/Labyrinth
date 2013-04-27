@@ -1,7 +1,5 @@
 package ch.zhaw.labyrinth.builder;
 
-import java.util.ArrayList;
-
 /**
  * Created with IntelliJ IDEA.
  * User: bbu
@@ -10,9 +8,6 @@ import java.util.ArrayList;
  */
 public class Cell {
     // Instance Vars
-    private boolean frontier;
-    private boolean wall;
-    private boolean way;
     private int x;
     private int y;
     
@@ -23,69 +18,13 @@ public class Cell {
     }
 
 
-    // Getter and Setter
-    public boolean isFrontier() {
-        return frontier;
-    }
-
-    public void setFrontier(boolean frontier) {
-        this.frontier = frontier;
-    }
-
-    public boolean isWall() {
-        return wall;
-    }
-
-    public void setWall(boolean wall) {
-        this.wall = wall;
-    }
-
-    public boolean isWay() {
-        return way;
-    }
-
-    public void setWay(boolean way) {
-        this.way = way;
-    }
-
     public int getX() {
         return x;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
+  
     public int getY() {
         return y;
     }
 
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public ArrayList<Cell> getNeighbours( int dim) {
-    	
-    	// init new arraylist
-    	ArrayList<Cell> neighbours = new ArrayList<Cell>();
-    	
-    	// and not outside the dimension
-    	
-    	if( getX() + 1 < dim  ){
-    		neighbours.add(new Cell(this.getX() + 1,this.getY()));
-    	}
-    	if( getX() - 1 >= 0){
-    		neighbours.add(new Cell(this.getX() - 1,this.getY()));
-    	}
-    	if( getY() + 1 < dim){
-    		neighbours.add(new Cell(this.getX(),this.getY() +1 ));
-    	}
-    	if( getY() - 1 >= 0){
-    		neighbours.add(new Cell(this.getX(),this.getY() -1 ));
-    	}
-    	
-    	
-  
-        return neighbours;
-    }
 }
