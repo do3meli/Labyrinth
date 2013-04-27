@@ -1,13 +1,13 @@
 package ch.zhaw.labyrinth.utils;
 
+
+/**
+ * A maze consists out of n-Cells. This class describes a Cell
+ */
 public class Cell {
 	
-	// constants
-	private static final int PATH = 0;	
-	private static final int WALL = 1;
-	
 	// variables
-	private int value;
+	private boolean path;
 	private boolean visited;
 	
 	// constructor
@@ -15,26 +15,22 @@ public class Cell {
 		
 	}
 	
-	private void setValue(int v){
-		this.value = v;
+	// getter for path
+	public boolean isPath() {
+		return path;
 	}
 	
-	public int getValue() {
-		return value;
+	// setter for path
+	public void setPath(boolean path) {
+		this.path = path;
 	}
 	
-	public void setWall(){
-		setValue(WALL);
-	}
-	
-	public void setPath(){
-		setValue(PATH);
-	}
-	
+	// getter for visited
 	public boolean isVisited() {
 		return visited;
 	}
 	
+	// setter for visited
 	public void setVisited(boolean visited) {
 		this.visited = visited;
 	}
