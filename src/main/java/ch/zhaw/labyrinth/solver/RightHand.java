@@ -1,6 +1,5 @@
 package ch.zhaw.labyrinth.solver;
 
-import ch.zhaw.labyrinth.builder.LabyrinthBuilder;
 
 /**
  * Created with IntelliJ IDEA.
@@ -8,7 +7,7 @@ import ch.zhaw.labyrinth.builder.LabyrinthBuilder;
  * Date: 20.04.13
  * Time: 11:49
  */
-public class RightHand extends Solver {
+/*public class RightHand extends Solver {
     private int[][] maze;
     private int[][] solvedMaze;
     private LabyrinthBuilder labyrinthBuilder;
@@ -83,4 +82,4 @@ public class RightHand extends Solver {
     public void nextStep() {
     }
 
-}
+}*/

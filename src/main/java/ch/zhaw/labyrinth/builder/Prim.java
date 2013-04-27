@@ -5,12 +5,17 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
-public class Prim extends LabyrinthBuilder {
+import ch.zhaw.labyrinth.utils.Labyrinth;
+
+public class Prim extends Labyrinth {
 	
 	// variables
 	private ArrayList<Cell> frontiers;
 	private ArrayList<Cell> neighbours;
-
+	
+	// constants
+	private static final boolean WALL = false;
+	private static final boolean PATH = true;
 
 	// public Constructor
 	public Prim(int dim) {
@@ -23,7 +28,7 @@ public class Prim extends LabyrinthBuilder {
 		neighbours = new ArrayList<Cell>();
        
 		// Create "walled" Labyrinth
-        fillArray();
+        fillAllCellValues(WALL);
 
 		// now create the maze
 		createMaze();
@@ -65,7 +70,6 @@ public class Prim extends LabyrinthBuilder {
         	 
         	mark(randCell.getX(), randCell.getY());
         	
-        	printArray();
         	
         }
         
@@ -77,7 +81,7 @@ public class Prim extends LabyrinthBuilder {
 
 
 	private void mark(int x, int y){
-		setMaze(x,y,getPath());
+		setCellValue(x,y,WALL);
 		addFrontier(x-1,y);
 		addFrontier(x+1,y);
 		addFrontier(x,y-1);
@@ -86,7 +90,7 @@ public class Prim extends LabyrinthBuilder {
 
 	private void addFrontier(int x, int y) {
 		
-		if( x > 0 && y > 0 && y < getDimension() && x < getDimension() && getMaze()[x][y] == getWall() ){
+		if( x > 0 && y > 0 && y < getDimension() && x < getDimension() && getCellValueAt(x, y) == WALL ){
 			frontiers.add(new Cell(x,y));
 		}
 	}
@@ -100,13 +104,6 @@ public class Prim extends LabyrinthBuilder {
 		}
 		
 	}
-	
-	public void fillArray(){
-		for(int x=0;x<getMaze().length;x++){
-		    Arrays.fill( getMaze()[x], getWall() );
-		}
-	}
-	
 	
 	public Cell getRandomFrontierCell(){
 		
@@ -136,19 +133,19 @@ public class Prim extends LabyrinthBuilder {
 		
 		// find neighbours and add it to array list
 		
-		if ( x > 0 && y < getDimension() && x - 1 < getDimension() && getMaze()[x-1][y] == getWall()){
+		if ( x > 0 && y < getDimension() && x - 1 < getDimension() && getCellValueAt(x-1,y) == WALL){
 			neighbours.add(new Cell(x-1,y));
 		}
 		
-		if ( x + 1 < getDimension() && y < getDimension() && getMaze()[x+1][y] == getWall()){
+		if ( x + 1 < getDimension() && y < getDimension() && getCellValueAt(x+1,y) == WALL){
 			neighbours.add(new Cell(x+1,y));
 		}
 		
-		if ( y >= 1 && getMaze()[x][y-1] == getWall() ){
+		if ( y >= 1 && getCellValueAt(x,y-1) == WALL ){
 			neighbours.add(new Cell(x,y-1));
 		}
 		
-		if ( y+1 < getDimension() && getMaze()[x][y+1] == getWall() ){
+		if ( y+1 < getDimension() && getCellValueAt(x,y+1) == WALL ){
 			neighbours.add(new Cell(x,y+1));
 		}
 		
