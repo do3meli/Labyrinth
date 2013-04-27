@@ -38,7 +38,6 @@ public class Labyrinth {
 	
 	// getter for Cell with x and y attributes
 	public Cell getCellAt(int x, int y){
-		Coordinate c = new Coordinate(x,y);
-		return this.map.get(c);
+		return this.map.get(new Coordinate(x,y));
 	}
 }
