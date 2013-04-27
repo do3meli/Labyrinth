@@ -31,4 +31,14 @@ public class Labyrinth {
 		return dimension;
 	}
 	
+	// getter for Cell with coordinate attribute
+	public Cell getCellAt(Coordinate c){
+		return this.map.get(c);
+	}
+	
+	// getter for Cell with x and y attributes
+	public Cell getCellAt(int x, int y){
+		Coordinate c = new Coordinate(x,y);
+		return this.map.get(c);
+	}
 }
