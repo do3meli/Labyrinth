@@ -2,6 +2,7 @@ package ch.zhaw.labyrinth.utils;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class Labyrinth {
 	
@@ -40,4 +41,38 @@ public class Labyrinth {
 	public Cell getCellAt(int x, int y){
 		return this.map.get(new Coordinate(x,y));
 	}
+	
+	// fill empty Cell values with something
+	public void fillAllCellValues(boolean value){
+		for (int x = 0; x < getDimension(); x++) {
+			for (int y = 0; y < getDimension(); y++) {
+				Coordinate c = new Coordinate(x,y);
+				map.get(c).setPath(value);
+			}
+		}
+	}
+	
+	 /**
+	  * @return a random int within the dimension 
+	 */
+	public int getRandomIntOdd(int dim){
+		Random rand = new Random();
+		int r = rand.nextInt(dim);
+		while (r % 2 == 0) {
+			r = rand.nextInt(dim);
+		}
+		return r;
+	}
+	
+	// setter method to set the cell value from a coordinate
+	public void setCellValue(Coordinate c,boolean val){
+		map.get(c).setPath(val);
+	}
+	
+	// setter method to set the cell value from an x and y parameter
+	public void setCellValue(int x,int y,boolean val){
+		map.get(new Coordinate(x,y)).setPath(val);
+	}
+	
+	
 }
