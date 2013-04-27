@@ -54,7 +54,7 @@ public class ButtonPanel extends JPanel {
             //    lbuilder = null;
             //}
 
-            // Build Labyrinth
+            // Build LabyrinthDrawer
             //int[][] a = lbuilder.getMaze();
             //for(int i=0; i<lbuilder.getDimension(); i++) {
             //    for (int j=0; j<lbuilder.getDimension(); j++) {
@@ -62,7 +62,7 @@ public class ButtonPanel extends JPanel {
             //    }
             //}
 
-            // TODO: Print Labyrinth point by point in gui
+            // TODO: Print LabyrinthDrawer point by point in gui
             //labyrinthPanel.setBounds(195, 0, 605, 478);
             //labyrinthPanel.setVisible(true);
         }
@@ -71,14 +71,14 @@ public class ButtonPanel extends JPanel {
     private class PauseActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
-            // Pause Labyrinth Creation
+            // Pause LabyrinthDrawer Creation
         }
     }
 
     private class ResetActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
-            // Reset Labyrinth Creation
+            // Reset LabyrinthDrawer Creation
         }
     }
 }

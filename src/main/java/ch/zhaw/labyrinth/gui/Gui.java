@@ -5,6 +5,7 @@ import ch.zhaw.labyrinth.builder.LabyrinthBuilder;
 import ch.zhaw.labyrinth.builder.Prim;
 import ch.zhaw.labyrinth.solver.RightHand;
 import ch.zhaw.labyrinth.solver.Solver;
+import ch.zhaw.labyrinth.utils.Labyrinth;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,8 +28,8 @@ public class Gui {
     private JComboBox createList;
     private JCheckBox debug;
     private JCheckBox chckbxFastMode;
-    private Labyrinth labyrinth;
-    private LabyrinthBuilder lbuilder;
+    private LabyrinthDrawer labyrinthDrawer;
+    private Labyrinth lbuilder;
     // TODO: Move these to an Enum Class
     private String[] createAlgorithms = { "Depth-First", "Prim", "Kruskal"};
     private String[] solveAlgorithms = { "Right-Hand", "Wall-Follower", "Trémaux", "Backtrack", "Shortest Path"};
@@ -180,29 +181,29 @@ public class Gui {
             // Get Build Type
             String type = (String)createList.getSelectedItem();
 
-            // Build selected Labyrinth
+            // Build selected LabyrinthDrawer
             if (type.equals("Depth-First")) {
                 lbuilder = new DepthFirstSearch(size);
             } else if (type.equals("Prim")) {
-                lbuilder = new Prim(size);
+                // TODO: lbuilder = new Prim(size);
             } else {
                 lbuilder = null;
             }
             
             // Print Debugging stuff to console if tickbox set
             if(debug.isSelected()){
-            	lbuilder.printArray();
+            	// TODO: lbuilder.printArray();
             }
             
             
-            // Create Labyrinth
-            labyrinth = new Labyrinth(labyrinthFrame.getCanvas(), lbuilder, getChckbxFastMode());
+            // Draw Labyrinth
+            labyrinthDrawer = new LabyrinthDrawer(labyrinthFrame.getCanvas(), lbuilder, getChckbxFastMode());
 
             // Set Zoom Factor
-            labyrinth.setZoom(zoom);
+            labyrinthDrawer.setZoom(zoom);
 
             // Start Thread
-            labyrinth.start();
+            labyrinthDrawer.start();
 
         }
     }
@@ -210,27 +211,27 @@ public class Gui {
     private class StartSolveActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
-            // TODO: Pause Labyrinth Creation
+            // TODO: Pause LabyrinthDrawer Creation
             // Get Build Type
             String type = (String)solveList.getSelectedItem();
 
-            // Build selected Labyrinth
+            // Build selected LabyrinthDrawer
             Solver lbsolver;
             if (type.equals("Right-Hand")) {
-                lbsolver = new RightHand(lbuilder.getMaze(), lbuilder);
+                // TODO: lbsolver = new RightHand(lbuilder.getMaze(), lbuilder);
             } else {
                 lbsolver = null;
             }
 
-            lbsolver.solve();
-            lbuilder.printArray();
+            //lbsolver.solve();
+            //lbuilder.printArray();
         }
     }
 
     private class PauseCreateActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
-            // TODO: Start Labyrinth Solver
+            // TODO: Start LabyrinthDrawer Solver
 
         }
     }
@@ -238,7 +239,7 @@ public class Gui {
     private class PauseSolveActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
-            // TODO: Start Labyrinth Solver
+            // TODO: Start LabyrinthDrawer Solver
 
         }
     }
@@ -246,7 +247,7 @@ public class Gui {
     private class ResetActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
-            // Reset Labyrinth Creation
+            // Reset LabyrinthDrawer Creation
 
         }
     }

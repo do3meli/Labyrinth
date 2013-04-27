@@ -8,22 +8,22 @@ import java.util.Random;
 public class Labyrinth {
 	
 	// instance variables
-	private Map<Coordinate, Cell> map;
+	private HashMap<Coordinate, Cell> maze;
 	private int dimension;
 	
 	// constructor
 	public Labyrinth(int dim){
-		this.map = new HashMap<Coordinate, Cell>();
+		this.maze = new HashMap<Coordinate, Cell>();
 		this.dimension = dim;
-		createEmptyMap();
+		createEmptyMaze();
 	}
 	
-	// create empty map with cell's and coordinate's
-	private void createEmptyMap() {
+	// create empty maze with cell's and coordinate's
+	private void createEmptyMaze() {
 		
 		for (int x = 0; x < getDimension(); x++) {
 			for (int y = 0; y < getDimension(); y++) {
-				this.map.put(new Coordinate(x,y),new Cell());
+				this.maze.put(new Coordinate(x, y), new Cell());
 			}
 		}
 	}
@@ -35,23 +35,27 @@ public class Labyrinth {
 	
 	// getter for Cell with coordinate attribute
 	public Cell getCellAt(Coordinate c){
-		return this.map.get(c);
+		return this.maze.get(c);
 	}
 	
 	// getter for Cell with x and y attributes
 	public Cell getCellAt(int x, int y){
-		return this.map.get(new Coordinate(x,y));
+		return this.maze.get(new Coordinate(x,y));
 	}
 	
 	// fill empty Cell values with something
 	public void fillAllCellValues(boolean value){
 		
-		for (Entry<Coordinate, Cell> coordinate : map.entrySet() ) { 
+		for (Entry<Coordinate, Cell> coordinate : maze.entrySet() ) {
 			coordinate.getValue().setPath(value); 
 		} 
 	}
-	
-	 /**
+
+    public HashMap<Coordinate, Cell> getMaze() {
+        return maze;
+    }
+
+    /**
 	  * @return a random int within the dimension 
 	 */
 	public int getRandomIntOdd(int dim){
@@ -65,21 +69,21 @@ public class Labyrinth {
 	
 	// setter method to set the cell value from a coordinate
 	public void setCellValue(Coordinate c,boolean val){
-		map.get(c).setPath(val);
+		maze.get(c).setPath(val);
 	}
 	
 	// setter method to set the cell value from an x and y parameter
 	public void setCellValue(int x,int y,boolean val){
-		map.get(new Coordinate(x,y)).setPath(val);
+		maze.get(new Coordinate(x, y)).setPath(val);
 	}
 	
 	// getter method for cell value at specific coordinate
 	public boolean getCellValueAt(Coordinate c){
-		return map.get(c).isPath();
+		return maze.get(c).isPath();
 	}
 	
 	// getter method for cell value at specific x,y point
 	public boolean getCellValueAt(int x, int y){
-		return map.get(new Coordinate(x,y)).isPath();
+		return maze.get(new Coordinate(x,y)).isPath();
 	}
 }

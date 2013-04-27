@@ -1,9 +1,14 @@
 package ch.zhaw.labyrinth.gui;
 
 import ch.zhaw.labyrinth.builder.LabyrinthBuilder;
+import ch.zhaw.labyrinth.utils.Cell;
+import ch.zhaw.labyrinth.utils.Coordinate;
+import ch.zhaw.labyrinth.utils.Labyrinth;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,9 +16,9 @@ import java.awt.*;
  * Date: 26.03.13
  * Time: 08:54
  */
-public class Labyrinth extends Thread{
+public class LabyrinthDrawer extends Thread{
     private JPanel box;
-    private LabyrinthBuilder labyrinthBuilder;
+    private Labyrinth labyrinth;
     private int zoom;
     private boolean fast;
     private int P = 1;
@@ -21,9 +26,9 @@ public class Labyrinth extends Thread{
     private int p = 0;
     private int q = 0;
     
-    public Labyrinth(JPanel pan, LabyrinthBuilder labyrinthBuilder, boolean fast) {
+    public LabyrinthDrawer(JPanel pan, Labyrinth labyrinth, boolean fast) {
         this.box = pan;
-        this.labyrinthBuilder = labyrinthBuilder;
+        this.labyrinth = labyrinth;
         this.zoom = 8;
         this.fast = fast;
     }
@@ -47,15 +52,19 @@ public class Labyrinth extends Thread{
     public void run() {
         try {
 
-            int[][] maze = labyrinthBuilder.getMaze();
-            for(int i=0; i<labyrinthBuilder.getDimension(); i++) {
-                for (int j=0; j<labyrinthBuilder.getDimension(); j++) {
-
-                    move(j,i,maze[i][j]);
-                    if(!fast) {
-                        sleep(10);
-                    }
-                }
+            HashMap<Coordinate, Cell> maze = labyrinth.getMaze();
+            //for(int i=0; i< labyrinth.getDimension(); i++) {
+            //    for (int j=0; j< labyrinth.getDimension(); j++) {
+            //
+            //        move(j,i,maze[i][j]);
+            //        if(!fast) {
+            //            sleep(10);
+            //        }
+            //    }
+            //}
+            for (Map.Entry<Coordinate, Cell> entry : maze.entrySet())
+            {
+                System.out.println(entry.getKey() + "/" + entry.getValue());
             }
 
         } catch (Exception e) {

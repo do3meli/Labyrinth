@@ -1,5 +1,7 @@
 package ch.zhaw.labyrinth.builder;
 
+import ch.zhaw.labyrinth.utils.Cell;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,7 +24,7 @@ public class Prim extends LabyrinthBuilder {
 		frontiers = new ArrayList<Cell>();
 		neighbours = new ArrayList<Cell>();
        
-		// Create "walled" Labyrinth
+		// Create "walled" LabyrinthDrawer
         fillArray();
 
 		// now create the maze
@@ -57,13 +59,13 @@ public class Prim extends LabyrinthBuilder {
         	Cell randCell = getRandomFrontierCell();
         	
         	// now find the neighbours of that random cell
-        	findNeighbors(randCell.getX(),randCell.getY());
+        	// TODO: findNeighbors(randCell.getX(),randCell.getY());
         	
         	// get random neighbour cell
         	int rand = r.nextInt(neighbours.size());
         	Cell n = neighbours.get(rand);
         	 
-        	mark(randCell.getX(), randCell.getY());
+        	// TODO: mark(randCell.getX(), randCell.getY());
         	
         	printArray();
         	
@@ -87,7 +89,7 @@ public class Prim extends LabyrinthBuilder {
 	private void addFrontier(int x, int y) {
 		
 		if( x > 0 && y > 0 && y < getDimension() && x < getDimension() && getMaze()[x][y] == getWall() ){
-			frontiers.add(new Cell(x,y));
+			// TODO: frontiers.add(new Cell(x,y));
 		}
 	}
 	
@@ -137,19 +139,19 @@ public class Prim extends LabyrinthBuilder {
 		// find neighbours and add it to array list
 		
 		if ( x > 0 && y < getDimension() && x - 1 < getDimension() && getMaze()[x-1][y] == getWall()){
-			neighbours.add(new Cell(x-1,y));
+			// TODO: neighbours.add(new Cell(x-1,y));
 		}
 		
 		if ( x + 1 < getDimension() && y < getDimension() && getMaze()[x+1][y] == getWall()){
-			neighbours.add(new Cell(x+1,y));
+            // TODO:neighbours.add(new Cell(x+1,y));
 		}
 		
 		if ( y >= 1 && getMaze()[x][y-1] == getWall() ){
-			neighbours.add(new Cell(x,y-1));
+            // TODO:neighbours.add(new Cell(x,y-1));
 		}
 		
 		if ( y+1 < getDimension() && getMaze()[x][y+1] == getWall() ){
-			neighbours.add(new Cell(x,y+1));
+            // TODO:neighbours.add(new Cell(x,y+1));
 		}
 		
 	}
