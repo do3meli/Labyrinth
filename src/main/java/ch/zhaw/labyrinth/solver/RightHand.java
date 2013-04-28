@@ -1,23 +1,21 @@
 package ch.zhaw.labyrinth.solver;
 
 
+import ch.zhaw.labyrinth.utils.Coordinate;
+import ch.zhaw.labyrinth.utils.Labyrinth;
+
 /**
  * Created with IntelliJ IDEA.
  * User: bbu
  * Date: 20.04.13
  * Time: 11:49
  */
-/*public class RightHand extends Solver {
-    private int[][] maze;
-    private int[][] solvedMaze;
-    private LabyrinthBuilder labyrinthBuilder;
+public class RightHand extends Solver {
+    private Labyrinth solvedLabyrinth;
+    private Labyrinth labyrinth;
 
-    public RightHand(int[][] maze, LabyrinthBuilder labyrinthBuilder) {
-        this.maze = maze;
-        this.solvedMaze = new int[this.maze.length][this.maze.length];
-        this.labyrinthBuilder = labyrinthBuilder;
-
-
+    public RightHand(Labyrinth labyrinth) {
+        this.labyrinth = labyrinth;
     }
 
     @Override
@@ -26,60 +24,53 @@ package ch.zhaw.labyrinth.solver;
         int steps = 0;
 
         // find entry
-        int[] entry = labyrinthBuilder.getEntry();
-        int x=entry[0];
-        int y=entry[1];
+        Coordinate entry = labyrinth.getEntry();
+        int x=entry.getX();
+        int y=entry.getY();
 
         // set exit
-        int[] exit = labyrinthBuilder.getExit();
-        int u=exit[0];
-        int v=exit[1];
+        Coordinate exit = labyrinth.getExit();
+        int u=exit.getX();
+        int v=exit.getY();
 
-        solvedMaze[x][y] = 4;  // mark entry
-        solvedMaze[u][v] = 5;  // mark exit
         // go through labyrinth
         while((x != u) && (y!=v)) {
             steps++;
             if(steps > 1000) { System.out.println(steps); break; }
 
             // if possible turn right
-            if(maze[x][y++] == 0 && solvedMaze[x][y++] != 3) {
+            if(labyrinth.getCellValueAt(x, y++)) {
                 y++;
-                solvedMaze[x][y] = 3;
+                solvedLabyrinth.setCellValue(x,y,true);
                 continue;
             }
             // go down
-            else if (maze[x++][y] == 0 && solvedMaze[x++][y] != 3) {
+            else if (labyrinth.getCellValueAt(x++,y)) {
                 x++;
-                solvedMaze[x][y] = 3;
+                solvedLabyrinth.setCellValue(x,y,true);
                 continue;
             }
             // go left
-            else if (maze[x][y--] == 0 && solvedMaze[x][y--] != 3) {
+            else if (labyrinth.getCellValueAt(x,y--)) {
                 y--;
-                solvedMaze[x][y] = 3;
+                solvedLabyrinth.setCellValue(x,y,true);
                 continue;
             }
             // go up
-            else if (maze[x--][y] == 0 && solvedMaze[x--][y] != 3) {
+            else if (labyrinth.getCellValueAt(x--,y)) {
                 x--;
-                solvedMaze[x][y] = 3;
+                solvedLabyrinth.setCellValue(x,y,true);
                 continue;
             }
 
         }
 
-        // Print Solved maze to console
-        for(int i=0; i<maze.length;i++) {
-            for (int j=0; j<maze.length; j++) {
-                System.out.print(solvedMaze[i][j]);
-            }
-            System.out.println();
-        }
+        // TODO: Print Solved maze to console
+
 
     }
 
     public void nextStep() {
     }
 
-}*/
+}

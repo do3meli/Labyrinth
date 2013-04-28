@@ -1,6 +1,7 @@
 package ch.zhaw.labyrinth.gui;
 
 import ch.zhaw.labyrinth.builder.DepthFirstSearch;
+import ch.zhaw.labyrinth.solver.RightHand;
 import ch.zhaw.labyrinth.solver.Solver;
 import ch.zhaw.labyrinth.utils.Labyrinth;
 
@@ -215,12 +216,12 @@ public class Gui {
             // Build selected LabyrinthDrawer
             Solver lbsolver;
             if (type.equals("Right-Hand")) {
-                // TODO: lbsolver = new RightHand(lbuilder.getMaze(), lbuilder);
+                lbsolver = new RightHand(lbuilder);
             } else {
                 lbsolver = null;
             }
 
-            //lbsolver.solve();
+            lbsolver.solve();
             //lbuilder.printArray();
         }
     }

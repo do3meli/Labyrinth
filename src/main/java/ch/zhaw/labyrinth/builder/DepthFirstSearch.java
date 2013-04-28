@@ -3,6 +3,8 @@ package ch.zhaw.labyrinth.builder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+
+import ch.zhaw.labyrinth.utils.Coordinate;
 import ch.zhaw.labyrinth.utils.Labyrinth;
 
 /**
@@ -184,6 +186,9 @@ public class DepthFirstSearch extends Labyrinth {
 			setCellValue(r_out,getDimension()-1,PATH);
 		}
 
+        // Save entry & exit
+        setEntry(new Coordinate(r_entry, 0));
+        setExit(new Coordinate(r_out, getDimension()-1));
 
 	}
 	

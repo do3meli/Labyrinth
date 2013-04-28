@@ -10,6 +10,8 @@ public class Labyrinth {
 	// instance variables
 	private HashMap<Coordinate, Cell> maze;
 	private int dimension;
+    private Coordinate entry;
+    private Coordinate exit;
 	
 	// constructor
 	public Labyrinth(int dim){
@@ -80,4 +82,20 @@ public class Labyrinth {
 	public boolean getCellValueAt(int x, int y){
 		return maze.get(new Coordinate(x,y)).isPath();
 	}
+
+    public Coordinate getEntry() {
+        return entry;
+    }
+
+    public void setEntry(Coordinate entry) {
+        this.entry = entry;
+    }
+
+    public Coordinate getExit() {
+        return exit;
+    }
+
+    public void setExit(Coordinate exit) {
+        this.exit = exit;
+    }
 }
