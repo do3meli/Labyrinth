@@ -66,7 +66,8 @@ public class Labyrinth {
 	
 	// setter method to set the cell value from an x and y parameter
 	public void setCellValue(int x,int y,boolean val){
-		Cell cell = maze.get(new Coordinate(x, y));
+        Coordinate coordinate = new Coordinate(x,y);
+		Cell cell = maze.get(coordinate);
         cell.setPath(val);
 	}
 	
