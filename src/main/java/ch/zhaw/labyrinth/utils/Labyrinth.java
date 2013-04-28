@@ -98,4 +98,18 @@ public class Labyrinth {
     public void setExit(Coordinate exit) {
         this.exit = exit;
     }
+    
+    // this function is only use if debbuging is active set = true in GUI
+    public void printAsArray(){
+    	for(int i=0; i < getDimension(); i++) {
+			for (int j=0; j < getDimension(); j++) {
+				if(getCellValueAt(i,j) == true){
+					System.out.print(0);
+				}else{
+					System.out.print(1);
+				}
+	        }
+	        System.out.println();
+	    }
+    }
 }
