@@ -1,8 +1,6 @@
 package ch.zhaw.labyrinth.utils;
 
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Random;
 
 public class Labyrinth {
