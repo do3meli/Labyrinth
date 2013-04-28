@@ -1,6 +1,5 @@
 package ch.zhaw.labyrinth.gui;
 
-import ch.zhaw.labyrinth.builder.LabyrinthBuilder;
 import ch.zhaw.labyrinth.utils.Cell;
 import ch.zhaw.labyrinth.utils.Coordinate;
 import ch.zhaw.labyrinth.utils.Labyrinth;
@@ -44,9 +43,9 @@ public class LabyrinthDrawer extends Thread{
         Graphics g = box.getGraphics();
         g.setXORMode(box.getBackground());
      
-        if (aij == LabyrinthBuilder.getWall()){
-            g.fillRect(p*zoom, q*zoom, P*zoom, Q*zoom);
-        }
+        //TODO:if (aij == LabyrinthBuilder.getWall()){
+        //    g.fillRect(p*zoom, q*zoom, P*zoom, Q*zoom);
+        //}
     }
 
     public void run() {

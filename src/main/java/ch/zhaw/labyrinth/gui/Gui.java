@@ -1,9 +1,6 @@
 package ch.zhaw.labyrinth.gui;
 
 import ch.zhaw.labyrinth.builder.DepthFirstSearch;
-import ch.zhaw.labyrinth.builder.LabyrinthBuilder;
-import ch.zhaw.labyrinth.builder.Prim;
-import ch.zhaw.labyrinth.solver.RightHand;
 import ch.zhaw.labyrinth.solver.Solver;
 import ch.zhaw.labyrinth.utils.Labyrinth;
 
