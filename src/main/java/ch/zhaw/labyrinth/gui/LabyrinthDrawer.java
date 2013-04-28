@@ -32,7 +32,7 @@ public class LabyrinthDrawer extends Thread{
         this.fast = fast;
     }
 
-    public void move(int i, int j, int aij) {
+    public void move(int i, int j, boolean aij) {
         p = i;
         q = j;
 
@@ -43,28 +43,30 @@ public class LabyrinthDrawer extends Thread{
         Graphics g = box.getGraphics();
         g.setXORMode(box.getBackground());
      
-        //TODO:if (aij == LabyrinthBuilder.getWall()){
-        //    g.fillRect(p*zoom, q*zoom, P*zoom, Q*zoom);
-        //}
+        if (!aij){
+            g.fillRect(p*zoom, q*zoom, P*zoom, Q*zoom);
+        }
     }
 
     public void run() {
         try {
 
             HashMap<Coordinate, Cell> maze = labyrinth.getMaze();
-            //for(int i=0; i< labyrinth.getDimension(); i++) {
-            //    for (int j=0; j< labyrinth.getDimension(); j++) {
-            //
-            //        move(j,i,maze[i][j]);
-            //        if(!fast) {
-            //            sleep(10);
-            //        }
-            //    }
-            //}
-            for (Map.Entry<Coordinate, Cell> entry : maze.entrySet())
-            {
-                System.out.println(entry.getKey() + "/" + entry.getValue());
+            for(int i=0; i< labyrinth.getDimension(); i++) {
+                for (int j=0; j< labyrinth.getDimension(); j++) {
+
+                    Cell cell = maze.get(new Coordinate(i,j));
+
+                    move(j,i,cell.isPath());
+                    if(!fast) {
+                        sleep(10);
+                    }
+                }
             }
+            //for (Map.Entry<Coordinate, Cell> entry : maze.entrySet())
+            //{
+            //    System.out.println(entry.getKey() + "/" + entry.getValue());
+            //}
 
         } catch (Exception e) {
         }
