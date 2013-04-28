@@ -27,8 +27,6 @@ public class DepthFirstSearch extends Labyrinth {
 		
 		// now setup everything
 		setupMaze();
-		
-		
 	}
 	
 	public void setupMaze() {
@@ -74,7 +72,7 @@ public class DepthFirstSearch extends Labyrinth {
 
 	// TODO: create one move method/class to avoid code duplication
 	
-	private void moveLeft(int x, int y) {
+	private void moveUp(int x, int y) {
 		
 		// check if new value is not outside the matrix and 
 		// check if 2 cells ahead is a wall
@@ -87,7 +85,7 @@ public class DepthFirstSearch extends Labyrinth {
 		}		
 	}
 
-	private void moveDown(int x, int y) {
+	private void moveRight(int x, int y) {
 		
 		// check if new value is not outside the matrix and
 		// check if 2 cells ahead is a wall
@@ -100,7 +98,7 @@ public class DepthFirstSearch extends Labyrinth {
 		}
 	}
 
-	private void moveRight(int x, int y) {
+	private void moveDown(int x, int y) {
 		// check if new value is not outside the matrix and
 		// check if 2 cells ahead is a wall
 		if ( y + 2 < getDimension() && getCellValueAt(x,y+2) == WALL ){
@@ -112,7 +110,7 @@ public class DepthFirstSearch extends Labyrinth {
 		}	
 	}
 
-	private void moveUp(int x, int y){
+	private void moveLeft(int x, int y){
 		// check if new value is not outside the matrix and 
 		// check if 2 cells ahead is a wall
 		if ( x - 2 > 0 && getCellValueAt(x-2,y) == WALL ){
@@ -134,21 +132,17 @@ public class DepthFirstSearch extends Labyrinth {
 	     return randoms.toArray(new Integer[4]);
 	 }
 	
-
 	
 	public void createInputOutput(){
 		
 		// create random
 		Random rand = new Random();
 		int r = rand.nextInt(2);
-		
-		
+			
 		// get a random for entry and one for output
 		int rEntry = rand.nextInt(getDimension());
 		int rOut = rand.nextInt(getDimension());
-		
-		
-		
+			
 		// r = 0 => entry is at the top of the maze
 		if ( r == 0){
 			
@@ -165,7 +159,6 @@ public class DepthFirstSearch extends Labyrinth {
 			// now make the field a path
 			setCellValue(0,rEntry,PATH);
 			setCellValue(getDimension()-1,rOut,PATH);
-
 		}
 		
 		// r = 1 => entry is on the left site
@@ -193,5 +186,3 @@ public class DepthFirstSearch extends Labyrinth {
 	}
 	
 }
-
-
