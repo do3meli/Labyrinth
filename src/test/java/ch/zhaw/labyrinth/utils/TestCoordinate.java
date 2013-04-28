@@ -28,14 +28,15 @@ public class TestCoordinate {
 	@Test
 	public void testEquals(){
 		
-		Coordinate c2 = new Coordinate(2,5);
+		Coordinate c2 = new Coordinate(2,3);
 		Coordinate c3 = new Coordinate(1,5);
 		
 		assertFalse(c2.equals(c1));
 		assertFalse(c1.equals(c2));
 		assertTrue(c3.equals(c1));
 		assertTrue(c1.equals(c3));
-		
+		assertTrue(c1.equals(c1));
+		assertFalse(c1.equals(null));
 	}
 	
 	@Test
