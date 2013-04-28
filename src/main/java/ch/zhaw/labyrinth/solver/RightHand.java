@@ -1,8 +1,13 @@
 package ch.zhaw.labyrinth.solver;
 
 
+import ch.zhaw.labyrinth.utils.Cell;
 import ch.zhaw.labyrinth.utils.Coordinate;
 import ch.zhaw.labyrinth.utils.Labyrinth;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,6 +21,7 @@ public class RightHand extends Solver {
 
     public RightHand(Labyrinth labyrinth) {
         this.labyrinth = labyrinth;
+        solvedLabyrinth = new Labyrinth();
     }
 
     @Override
@@ -41,7 +47,7 @@ public class RightHand extends Solver {
             // if possible turn right
             if(labyrinth.getCellValueAt(x, y++)) {
                 y++;
-                solvedLabyrinth.setCellValue(x,y,true);
+                solvedLabyrinth.setCellValue(x, y, true);
                 continue;
             }
             // go down
@@ -65,9 +71,8 @@ public class RightHand extends Solver {
 
         }
 
-        // TODO: Print Solved maze to console
-
-
+        // Print Solved maze to console
+        System.out.print("fertig");
     }
 
     public void nextStep() {

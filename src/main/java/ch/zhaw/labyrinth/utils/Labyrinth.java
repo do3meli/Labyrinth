@@ -19,6 +19,8 @@ public class Labyrinth {
 		this.dimension = dim;
 		createEmptyMaze();
 	}
+
+    public Labyrinth() {};
 	
 	// create empty maze with cell's and coordinate's
 	private void createEmptyMaze() {
