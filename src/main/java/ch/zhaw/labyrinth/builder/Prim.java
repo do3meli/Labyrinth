@@ -27,9 +27,6 @@ public class Prim extends Labyrinth {
 		// init the array lists
 		frontiers = new ArrayList<Cell>();
 		neighbours = new ArrayList<Cell>();
-       
-		// Create "walled" Labyrinth
-        fillAllCellValues(WALL);
 
 		// now create the maze
 		createMaze();

@@ -42,14 +42,6 @@ public class Labyrinth {
 	public Cell getCellAt(int x, int y){
 		return this.maze.get(new Coordinate(x,y));
 	}
-	
-	// fill empty Cell values with something
-	public void fillAllCellValues(boolean value){
-		
-		for (Entry<Coordinate, Cell> coordinate : maze.entrySet() ) {
-			coordinate.getValue().setPath(value); 
-		} 
-	}
 
     public HashMap<Coordinate, Cell> getMaze() {
         return maze;
@@ -74,7 +66,8 @@ public class Labyrinth {
 	
 	// setter method to set the cell value from an x and y parameter
 	public void setCellValue(int x,int y,boolean val){
-		maze.get(new Coordinate(x, y)).setPath(val);
+		Cell cell = maze.get(new Coordinate(x, y));
+        cell.setPath(val);
 	}
 	
 	// getter method for cell value at specific coordinate

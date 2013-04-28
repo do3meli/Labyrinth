@@ -29,10 +29,8 @@ public class DepthFirstSearch extends Labyrinth {
 		
 	}
 	
-	public void setupMaze(){
-		// fill whole array with WALL
-		fillAllCellValues(WALL);
-					
+	public void setupMaze() {
+
 		// set start point in array
 		int x = getRandomIntOdd(getDimension());
 		int y = getRandomIntOdd(getDimension());
