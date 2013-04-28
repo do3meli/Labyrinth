@@ -144,8 +144,8 @@ public class DepthFirstSearch extends Labyrinth {
 		
 		
 		// get a random for entry and one for output
-		int r_entry = rand.nextInt(getDimension());
-		int r_out = rand.nextInt(getDimension());
+		int rEntry = rand.nextInt(getDimension());
+		int rOut = rand.nextInt(getDimension());
 		
 		
 		
@@ -153,18 +153,18 @@ public class DepthFirstSearch extends Labyrinth {
 		if ( r == 0){
 			
 			// check if 1 cell ahead entry is free
-			while(getCellValueAt(1,r_entry) != PATH){
-				r_entry = rand.nextInt(getDimension());
+			while(getCellValueAt(1,rEntry) != PATH){
+				rEntry = rand.nextInt(getDimension());
 			}
 			
 			// check if 1 cell ahead output is free
-			while(getCellValueAt(getDimension()-2,r_out) != PATH){
-				r_out = rand.nextInt(getDimension());
+			while(getCellValueAt(getDimension()-2,rOut) != PATH){
+				rOut = rand.nextInt(getDimension());
 			}
 		
 			// now make the field a path
-			setCellValue(0,r_entry,PATH);
-			setCellValue(getDimension()-1,r_out,PATH);
+			setCellValue(0,rEntry,PATH);
+			setCellValue(getDimension()-1,rOut,PATH);
 
 		}
 		
@@ -172,23 +172,23 @@ public class DepthFirstSearch extends Labyrinth {
 		if ( r == 1){
 			
 			// check if 1 cell ahead entry is free
-			while(getCellValueAt(r_entry,1) != PATH){
-				r_entry = rand.nextInt(getDimension());
+			while(getCellValueAt(rEntry,1) != PATH){
+				rEntry = rand.nextInt(getDimension());
 			}
 			
 			// check if 1 cell ahead output is free
-			while(getCellValueAt(r_out,getDimension()-2) != PATH){
-				r_out = rand.nextInt(getDimension());
+			while(getCellValueAt(rOut,getDimension()-2) != PATH){
+				rOut = rand.nextInt(getDimension());
 			}
 		
 			// now make the field a path
-			setCellValue(r_entry,0,PATH);
-			setCellValue(r_out,getDimension()-1,PATH);
+			setCellValue(rEntry,0,PATH);
+			setCellValue(rOut,getDimension()-1,PATH);
 		}
 
         // Save entry & exit
-        setEntry(new Coordinate(r_entry, 0));
-        setExit(new Coordinate(r_out, getDimension()-1));
+        setEntry(new Coordinate(rEntry, 0));
+        setExit(new Coordinate(rOut, getDimension()-1));
 
 	}
 	
