@@ -1,7 +1,8 @@
 package ch.zhaw.labyrinth.builder;
 
+import ch.zhaw.labyrinth.utils.Cell;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
@@ -62,13 +63,13 @@ public class Prim extends Labyrinth {
         	Cell randCell = getRandomFrontierCell();
         	
         	// now find the neighbours of that random cell
-        	findNeighbors(randCell.getX(),randCell.getY());
+        	// TODO: findNeighbors(randCell.getX(),randCell.getY());
         	
         	// get random neighbour cell
         	int rand = r.nextInt(neighbours.size());
         	Cell n = neighbours.get(rand);
         	 
-        	mark(randCell.getX(), randCell.getY());
+        	// TODO: mark(randCell.getX(), randCell.getY());
         	
         	
         }
@@ -91,7 +92,7 @@ public class Prim extends Labyrinth {
 	private void addFrontier(int x, int y) {
 		
 		if( x > 0 && y > 0 && y < getDimension() && x < getDimension() && getCellValueAt(x, y) == WALL ){
-			frontiers.add(new Cell(x,y));
+            // TODO: frontiers.add(new Cell(x,y));
 		}
 	}
 	
@@ -134,19 +135,19 @@ public class Prim extends Labyrinth {
 		// find neighbours and add it to array list
 		
 		if ( x > 0 && y < getDimension() && x - 1 < getDimension() && getCellValueAt(x-1,y) == WALL){
-			neighbours.add(new Cell(x-1,y));
+            // TODO: neighbours.add(new Cell(x-1,y));
 		}
 		
 		if ( x + 1 < getDimension() && y < getDimension() && getCellValueAt(x+1,y) == WALL){
-			neighbours.add(new Cell(x+1,y));
+            // TODO: neighbours.add(new Cell(x+1,y));
 		}
 		
 		if ( y >= 1 && getCellValueAt(x,y-1) == WALL ){
-			neighbours.add(new Cell(x,y-1));
+            // TODO: neighbours.add(new Cell(x,y-1));
 		}
 		
 		if ( y+1 < getDimension() && getCellValueAt(x,y+1) == WALL ){
-			neighbours.add(new Cell(x,y+1));
+			// TODO: neighbours.add(new Cell(x,y+1));
 		}
 		
 	}
