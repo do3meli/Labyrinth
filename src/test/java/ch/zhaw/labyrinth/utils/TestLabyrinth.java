@@ -47,16 +47,17 @@ public class TestLabyrinth {
 	@Test
 	public void testGetAndSetCellAtCoordinate(){
 		
-		
-		
 		Coordinate c = new Coordinate(5,2);
 		
 		lab.setCellValue(c, true);
 		assertEquals(true,lab.getCellAt(c).isPath());
+		assertEquals(true,lab.getCellValueAt(c));
 		
 		lab.setCellValue(c, false);
 		assertEquals(false,lab.getCellAt(c).isPath());
+		assertEquals(false,lab.getCellValueAt(c));
 		
+		c.equals(lab.getCellAt(c));
 	}
 	
 	@Test
@@ -67,25 +68,34 @@ public class TestLabyrinth {
 		
 		lab.setCellValue(x,y, true);
 		assertEquals(true,lab.getCellAt(x,y).isPath());
+		assertEquals(true,lab.getCellValueAt(x, y));
 		
 		lab.setCellValue(x,y, false);
 		assertEquals(false,lab.getCellAt(x,y).isPath());
-		
+		assertEquals(false,lab.getCellValueAt(x, y));
 	}
 	
 	@Test
 	public void testRandomInt(){
 	    	
-		int checkInt = lab.getRandomIntOdd(dim);
+		int even = 12;
+		int odd = 13;
+		
+		int checkInt1 = lab.getRandomIntOdd(dim);
+	    int checkInt2 = lab.getRandomIntOdd(even);
+		int checkInt3 = lab.getRandomIntOdd(odd);
 	    
 		// check random is between 0 and dim
-		assertTrue( checkInt < dim);
-	    assertTrue( checkInt > 0);
-	    
+		assertTrue( checkInt1 < dim);
+	    assertTrue( checkInt1 > 0);
+	    assertTrue( checkInt2 < even);
+	    assertTrue( checkInt2 > 0);
+	    assertTrue( checkInt3 < odd);
+	    assertTrue( checkInt3 > 0);
+	   
 	    // check it is a odd number
-	    assertFalse((checkInt & 1) == 0);
+	    assertFalse((checkInt1 & 1) == 0);
 	  
 	}
 	
-
 }

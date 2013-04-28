@@ -30,13 +30,16 @@ public class TestCoordinate {
 		
 		Coordinate c2 = new Coordinate(2,3);
 		Coordinate c3 = new Coordinate(1,5);
+		Coordinate c4 = new Coordinate(1,3);
 		
 		assertFalse(c2.equals(c1));
 		assertFalse(c1.equals(c2));
+		assertFalse(c1.equals(c4));
 		assertTrue(c3.equals(c1));
 		assertTrue(c1.equals(c3));
 		assertTrue(c1.equals(c1));
 		assertFalse(c1.equals(null));
+		assertFalse(c1.equals(new Object()));
 	}
 	
 	@Test
