@@ -3,7 +3,6 @@ package ch.zhaw.labyrinth.gui;
 import ch.zhaw.labyrinth.utils.Cell;
 import ch.zhaw.labyrinth.utils.Coordinate;
 import ch.zhaw.labyrinth.utils.Labyrinth;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
@@ -15,14 +14,12 @@ import java.util.HashMap;
  * Time: 08:54
  */
 public class LabyrinthDrawer extends Thread{
-    private JPanel box;
+   
+	// instance var
+	private JPanel box;
     private Labyrinth labyrinth;
     private int zoom;
     private boolean fast;
-    private int P = 1;
-    private int Q = 1;
-    private int p = 0;
-    private int q = 0;
     
     public LabyrinthDrawer(JPanel pan, Labyrinth labyrinth, boolean fast) {
         this.box = pan;
@@ -31,9 +28,7 @@ public class LabyrinthDrawer extends Thread{
         this.fast = fast;
     }
 
-    public void move(int i, int j, boolean aij) {
-        p = i;
-        q = j;
+    public void move(int i, int j, boolean paint) {
 
         if (!box.isVisible()){
             return;
@@ -42,8 +37,8 @@ public class LabyrinthDrawer extends Thread{
         Graphics g = box.getGraphics();
         g.setXORMode(box.getBackground());
      
-        if (!aij){
-            g.fillRect(p*zoom, q*zoom, P*zoom, Q*zoom);
+        if (!paint){
+            g.fillRect(i*zoom, j*zoom, 1*zoom, 1*zoom);
         }
     }
 
@@ -62,10 +57,6 @@ public class LabyrinthDrawer extends Thread{
                     }
                 }
             }
-            //for (Map.Entry<Coordinate, Cell> entry : maze.entrySet())
-            //{
-            //    System.out.println(entry.getKey() + "/" + entry.getValue());
-            //}
 
         } catch (Exception e) {
         }

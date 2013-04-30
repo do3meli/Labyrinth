@@ -190,7 +190,7 @@ public class Gui {
             
             // Print Debugging stuff to console if tickbox set
             if(debug.isSelected()){
-            	// TODO: lbuilder.printArray();
+            	lbuilder.printAsArray();
             }
             
             
