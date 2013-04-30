@@ -18,7 +18,9 @@ public class Labyrinth {
 		createEmptyMaze();
 	}
 
-    public Labyrinth() {};
+    public Labyrinth() {
+        this.maze = new HashMap<Coordinate, Cell>();
+    }
 	
 	// create empty maze with cell's and coordinate's
 	private void createEmptyMaze() {
@@ -70,6 +72,10 @@ public class Labyrinth {
 	public void setCellValue(int x,int y,boolean val){
         Coordinate coordinate = new Coordinate(x,y);
 		Cell cell = maze.get(coordinate);
+        if(cell == null) {
+            cell = new Cell();
+            maze.put(coordinate, cell);
+        }
         cell.setPath(val);
 	}
 	
@@ -80,7 +86,9 @@ public class Labyrinth {
 	
 	// getter method for cell value at specific x,y point
 	public boolean getCellValueAt(int x, int y){
-		return maze.get(new Coordinate(x,y)).isPath();
+        Coordinate coordinate = new Coordinate(x,y);
+        Cell cell = maze.get(coordinate);
+		return cell.isPath();
 	}
 
     public Coordinate getEntry() {

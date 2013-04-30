@@ -45,25 +45,25 @@ public class RightHand extends Solver {
             if(steps > 1000) { System.out.println(steps); break; }
 
             // if possible turn right
-            if(labyrinth.getCellValueAt(x, y++)) {
+            if(labyrinth.getCellValueAt(x, y+1)) {
                 y++;
                 solvedLabyrinth.setCellValue(x, y, true);
                 continue;
             }
             // go down
-            else if (labyrinth.getCellValueAt(x++,y)) {
+            else if (labyrinth.getCellValueAt(x+1,y)) {
                 x++;
                 solvedLabyrinth.setCellValue(x,y,true);
                 continue;
             }
             // go left
-            else if (labyrinth.getCellValueAt(x,y--)) {
+            else if (labyrinth.getCellValueAt(x,y-1)) {
                 y--;
                 solvedLabyrinth.setCellValue(x,y,true);
                 continue;
             }
             // go up
-            else if (labyrinth.getCellValueAt(x--,y)) {
+            else if (labyrinth.getCellValueAt(x-1,y)) {
                 x--;
                 solvedLabyrinth.setCellValue(x,y,true);
                 continue;
