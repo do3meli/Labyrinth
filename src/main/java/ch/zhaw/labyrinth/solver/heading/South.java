@@ -42,6 +42,11 @@ public class South implements Heading {
         return maze.getCellValueAt(x, y-1);
     }
 
+    @Override
+    public boolean isVisited(int x, int y) {
+        return maze.isCellVisited(x, y);
+    }
+
     // Move methods
     @Override
     public West goRight() {

@@ -43,6 +43,11 @@ public class East implements Heading {
         return maze.getCellValueAt(x-1, y);
     }
 
+    @Override
+    public boolean isVisited(int x, int y) {
+        return maze.isCellVisited(x, y);
+    }
+
     // Move methods
     @Override
     public South goRight() {

@@ -50,6 +50,18 @@ public class RightHand extends Solver {
             steps++;
             if(steps > 1000) { System.out.println(steps); break; }
 
+            // If we already visited the next cell, try to get right
+            // otherwise, go straight ahead
+            if(heading.isStraight() && heading.isVisited(x, y)) {
+                if(heading.isRight()) {
+                    heading.goRight();
+                } else {
+                    heading.goStraight();
+                }
+                setCoordinate(heading.getCoordinate());
+                continue;
+            }
+
             // Move according to heading
             if(heading.isRight()) {
                 heading = heading.goRight();
@@ -77,6 +89,7 @@ public class RightHand extends Solver {
 
         // Print Solved maze to console
         System.out.print("fertig");
+        solvedLabyrinth.printAsArray();
     }
 
     // Set x and y with the new values from the coordinate
