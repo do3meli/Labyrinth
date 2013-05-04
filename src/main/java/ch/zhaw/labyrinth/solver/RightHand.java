@@ -1,13 +1,9 @@
 package ch.zhaw.labyrinth.solver;
 
 
-import ch.zhaw.labyrinth.utils.Cell;
+import ch.zhaw.labyrinth.solver.heading.*;
 import ch.zhaw.labyrinth.utils.Coordinate;
 import ch.zhaw.labyrinth.utils.Labyrinth;
-
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,6 +14,8 @@ import java.util.Map;
 public class RightHand extends Solver {
     private Labyrinth solvedLabyrinth;
     private Labyrinth labyrinth;
+    private Heading heading;
+    private Coordinate currentLocation;
 
     public RightHand(Labyrinth labyrinth) {
         this.labyrinth = labyrinth;
@@ -33,6 +31,12 @@ public class RightHand extends Solver {
         Coordinate entry = labyrinth.getEntry();
         int x=entry.getX();
         int y=entry.getY();
+        // set heading
+        if(y==0) {
+            heading = new East(x, y, labyrinth, solvedLabyrinth);
+        } else if (x == 0) {
+            heading = new South(x, y, labyrinth, solvedLabyrinth);
+        }
 
         // set exit
         Coordinate exit = labyrinth.getExit();
@@ -44,30 +48,24 @@ public class RightHand extends Solver {
             steps++;
             if(steps > 1000) { System.out.println(steps); break; }
 
-            // if possible turn right
-            if(labyrinth.getCellValueAt(x, y+1)) {
-                y++;
-                solvedLabyrinth.setCellValue(x, y, true);
+            // Move according to heading
+            if(heading.isRight()) {
+                heading = heading.goRight();
                 continue;
             }
-            // go down
-            else if (labyrinth.getCellValueAt(x+1,y)) {
-                x++;
-                solvedLabyrinth.setCellValue(x,y,true);
+            if(heading.isStraight()) {
+                heading = heading.goStraight();
                 continue;
             }
-            // go left
-            else if (labyrinth.getCellValueAt(x,y-1)) {
-                y--;
-                solvedLabyrinth.setCellValue(x,y,true);
+            if(heading.isBack()) {
+                heading = heading.goBack();
                 continue;
             }
-            // go up
-            else if (labyrinth.getCellValueAt(x-1,y)) {
-                x--;
-                solvedLabyrinth.setCellValue(x,y,true);
+            if(heading.isLeft()) {
+                heading = heading.goLeft();
                 continue;
             }
+
 
         }
 
