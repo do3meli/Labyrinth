@@ -12,6 +12,8 @@ import ch.zhaw.labyrinth.utils.Labyrinth;
  * Time: 11:49
  */
 public class RightHand extends Solver {
+    int x;
+    int y;
     private Labyrinth solvedLabyrinth;
     private Labyrinth labyrinth;
     private Heading heading;
@@ -29,12 +31,12 @@ public class RightHand extends Solver {
 
         // find entry
         Coordinate entry = labyrinth.getEntry();
-        int x=entry.getX();
-        int y=entry.getY();
+        x=entry.getX();
+        y=entry.getY();
         // set heading
-        if(y==0) {
+        if(x == 0) {
             heading = new East(x, y, labyrinth, solvedLabyrinth);
-        } else if (x == 0) {
+        } else if (y == 0) {
             heading = new South(x, y, labyrinth, solvedLabyrinth);
         }
 
@@ -51,18 +53,22 @@ public class RightHand extends Solver {
             // Move according to heading
             if(heading.isRight()) {
                 heading = heading.goRight();
+                setCoordinate(heading.getCoordinate());
                 continue;
             }
             if(heading.isStraight()) {
                 heading = heading.goStraight();
+                setCoordinate(heading.getCoordinate());
                 continue;
             }
             if(heading.isBack()) {
                 heading = heading.goBack();
+                setCoordinate(heading.getCoordinate());
                 continue;
             }
             if(heading.isLeft()) {
                 heading = heading.goLeft();
+                setCoordinate(heading.getCoordinate());
                 continue;
             }
 
@@ -73,7 +79,10 @@ public class RightHand extends Solver {
         System.out.print("fertig");
     }
 
-    public void nextStep() {
+    // Set x and y with the new values from the coordinate
+    private void setCoordinate(Coordinate coordinate) {
+        x = coordinate.getX();
+        y = coordinate.getY();
     }
 
 }

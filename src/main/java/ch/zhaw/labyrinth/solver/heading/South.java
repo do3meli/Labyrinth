@@ -1,5 +1,6 @@
 package ch.zhaw.labyrinth.solver.heading;
 
+import ch.zhaw.labyrinth.utils.Coordinate;
 import ch.zhaw.labyrinth.utils.Labyrinth;
 
 /**
@@ -16,6 +17,11 @@ public class South implements Heading {
         this.y = y;
         this.maze = maze;
         this.solvedMaze = solvedMaze;
+    }
+
+    // Get Coordindate
+    public Coordinate getCoordinate() {
+        return new Coordinate(getX(), getY());
     }
 
     // Check methods
@@ -40,24 +46,49 @@ public class South implements Heading {
     @Override
     public West goRight() {
         solvedMaze.setCellValue(x-1, y, true);
-        return new West(x--, y, maze, solvedMaze);
+        setX(x-1);
+        maze.setCellVisited(x, y, true);
+        return new West(x, y, maze, solvedMaze);
     }
 
     @Override
     public East goLeft() {
         solvedMaze.setCellValue(x+1, y, true);
-        return new East(x++, y, maze, solvedMaze);
+        setX(x+1);
+        maze.setCellVisited(x, y, true);
+        return new East(x, y, maze, solvedMaze);
     }
 
     @Override
     public South goStraight() {
         solvedMaze.setCellValue(x, y+1, true);
-        return new South(x, y++, maze, solvedMaze);
+        setY(y+1);
+        maze.setCellVisited(x, y, true);
+        return new South(x, y, maze, solvedMaze);
     }
 
     @Override
     public North goBack() {
         solvedMaze.setCellValue(x, y-1, true);
-        return new North(x, y--, maze, solvedMaze);
+        setY(y-1);
+        maze.setCellVisited(x, y, true);
+        return new North(x, y, maze, solvedMaze);
+    }
+
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }
