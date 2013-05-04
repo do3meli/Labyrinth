@@ -1,11 +1,11 @@
 package ch.zhaw.labyrinth.builder;
 
+import ch.zhaw.labyrinth.utils.Coordinate;
+import ch.zhaw.labyrinth.utils.Labyrinth;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-
-import ch.zhaw.labyrinth.utils.Coordinate;
-import ch.zhaw.labyrinth.utils.Labyrinth;
 
 /**
  * This implements a DeepFirstSearch algorithm like descripted
@@ -78,8 +78,8 @@ public class DepthFirstSearch extends Labyrinth {
 		// check if 2 cells ahead is a wall
 		if ( y - 2 > 0 && getCellValueAt(x,y-2) == WALL ){
 			
-			setCellValue(x,y-1,PATH);
-			setCellValue(x,y-2,PATH);
+			setCellValue(x, y - 1, PATH);
+			setCellValue(x, y - 2, PATH);
 				
 			createMaze(x,y-2);
 		}		
@@ -91,8 +91,8 @@ public class DepthFirstSearch extends Labyrinth {
 		// check if 2 cells ahead is a wall
 		if ( x + 2 < getDimension() && getCellValueAt(x+2,y) == WALL ){
 			
-			setCellValue(x+1,y,PATH);
-			setCellValue(x+2,y,PATH);
+			setCellValue(x + 1, y, PATH);
+			setCellValue(x + 2, y, PATH);
 				
 			createMaze(x + 2,y);
 		}
@@ -157,8 +157,12 @@ public class DepthFirstSearch extends Labyrinth {
 			}
 		
 			// now make the field a path
-			setCellValue(0,rEntry,PATH);
-			setCellValue(getDimension()-1,rOut,PATH);
+			setCellValue(0, rEntry, PATH);
+			setCellValue(getDimension() - 1, rOut, PATH);
+
+            // Save entry & exit
+            setEntry(new Coordinate(rEntry, 0));
+            setExit(new Coordinate(rOut, getDimension() - 1));
 		}
 		
 		// r = 1 => entry is on the left site
@@ -175,13 +179,15 @@ public class DepthFirstSearch extends Labyrinth {
 			}
 		
 			// now make the field a path
-			setCellValue(rEntry,0,PATH);
-			setCellValue(rOut,getDimension()-1,PATH);
+			setCellValue(rEntry, 0, PATH);
+			setCellValue(rOut, getDimension() - 1, PATH);
+
+            // Save entry & exit
+            setEntry(new Coordinate(0, rEntry));
+            setExit(new Coordinate(getDimension() - 1, rOut));
 		}
 
-        // Save entry & exit
-        setEntry(new Coordinate(rEntry, 0));
-        setExit(new Coordinate(rOut, getDimension()-1));
+
 
 	}
 	
