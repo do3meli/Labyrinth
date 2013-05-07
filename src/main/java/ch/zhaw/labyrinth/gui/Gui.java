@@ -29,7 +29,7 @@ public class Gui {
     public Gui() {
         
     	// set up drop downs
-    	createAlgorithms = new String[]{ "Depth-First", "Prim", "Kruskal"};
+    	createAlgorithms = new String[]{ "Depth-First", "Import"};
     	solveAlgorithms = new String[]{ "Right-Hand", "Wall-Follower", "Trémaux", "Backtrack", "Shortest Path"};;
     	
     	/* Use an appropriate Look and Feel - if possible */
