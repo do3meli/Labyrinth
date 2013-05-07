@@ -4,20 +4,15 @@ import ch.zhaw.labyrinth.builder.DepthFirstSearch;
 import ch.zhaw.labyrinth.solver.RightHand;
 import ch.zhaw.labyrinth.solver.Solver;
 import ch.zhaw.labyrinth.utils.Labyrinth;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Created with IntelliJ IDEA.
- * User: bbu
- * Date: 03.03.13
- * Time: 10:45
- */
 public class Gui {
-    private static JFrame frame;
+    
+	// instance variables
+	private static JFrame frame;
     private LabyrinthThread labyrinthFrame;
     private Container contentPane;
     private JTextField tfSize;
@@ -28,24 +23,23 @@ public class Gui {
     private JCheckBox chckbxFastMode;
     private LabyrinthDrawer labyrinthDrawer;
     private Labyrinth lbuilder;
-    // TODO: Move these to an Enum Class
-    private String[] createAlgorithms = { "Depth-First", "Prim", "Kruskal"};
-    private String[] solveAlgorithms = { "Right-Hand", "Wall-Follower", "Trémaux", "Backtrack", "Shortest Path"};
+    private String[] createAlgorithms;
+    private String[] solveAlgorithms;
 
     public Gui() {
-        /* Use an appropriate Look and Feel */
+        
+    	// set up drop downs
+    	createAlgorithms = new String[]{ "Depth-First", "Prim", "Kruskal"};
+    	solveAlgorithms = new String[]{ "Right-Hand", "Wall-Follower", "Trémaux", "Backtrack", "Shortest Path"};;
+    	
+    	/* Use an appropriate Look and Feel - if possible */
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (UnsupportedLookAndFeelException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
-        } catch (IllegalAccessException ex) {
-            ex.printStackTrace();
-        } catch (InstantiationException ex) {
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        }
-            /* Turn off metal's use bold fonts */
+        } 
+        
+        /* Turn off metal's use bold fonts */
         UIManager.put("swing.boldMetal", Boolean.FALSE);
 
         //Schedule a job for the event dispatch thread:
@@ -59,103 +53,112 @@ public class Gui {
     }
 
     public void createAndShowGUI() {
-        frame = new JFrame("LabyrinthSolver");
+        
+    	// create a new frame
+    	frame = new JFrame("LabyrinthSolver");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(200, 450);
+        
+        // create a content pane and add it to the frame
         contentPane = frame.getContentPane();
         contentPane.setLayout(null);
 
-        // Variables
+        // Panels
+        JPanel configPanel = new JPanel();
+     
+        // Building the config panel
+        configPanel.setLayout(null);
+        configPanel.setBounds(0, 0, 196, 478);
+        
+        // Gui object: create label
         JLabel createLabel = new JLabel("Create Algorithm");
         createLabel.setBounds(6, 6, 107, 16);
         createLabel.setHorizontalAlignment(SwingConstants.LEFT);
-        JLabel solveLabel = new JLabel("Solve Algorithm");
-        solveLabel.setBounds(6, 221, 100, 16);
-        JButton resetButton = new JButton("Reset");
-        resetButton.setEnabled(false);
-        resetButton.addActionListener(new ResetActionListener());
-
-        // Panels
-        JPanel configPanel = new JPanel();
-        JPanel buttonPanel = new JPanel();
-
-        // DropDown Menus
-        solveList = new JComboBox(solveAlgorithms);
-        solveList.setBounds(0, 242, 184, 27);
+        configPanel.add(createLabel);
+        
+        // DropDown Menu for create list
         createList = new JComboBox(createAlgorithms);
         createList.setBounds(0, 23, 184, 27);
-        
-        // Building the panels
-        configPanel.setLayout(null);
-        configPanel.setBounds(0, 0, 196, 478);
-
-        configPanel.add(createLabel);
         configPanel.add(createList);
-        configPanel.add(solveLabel);
-        configPanel.add(solveList);
-        buttonPanel.add(resetButton);
-
-        buttonPanel.setBounds(0, 338, 196, 39);
-        configPanel.add(buttonPanel);
-
+        
+        // create and add SIZE label
         JLabel lblSize = new JLabel("Size: ");
         lblSize.setBounds(6, 55, 61, 16);
         configPanel.add(lblSize);
-
+        
+        // create and add maze size text field
+        tfSize = new JTextField("41");
+        tfSize.setBounds(50, 49, 134, 28);
+        tfSize.setColumns(10);
+        configPanel.add(tfSize);
+        
+        // create and add Zoom label
         JLabel lblZoom = new JLabel("Zoom: ");
         lblZoom.setBounds(6, 83, 61, 16);
         configPanel.add(lblZoom);
-
-        tfSize = new JTextField("41");
-        tfSize.setBounds(50, 49, 134, 28);
-        configPanel.add(tfSize);
-        tfSize.setColumns(10);
-
+        
+        // create and add zoom text field
         tfZoom = new JTextField("4");
-        tfZoom.setBounds(50, 83, 134, 28);
-        configPanel.add(tfZoom);
+        tfZoom.setBounds(50, 77, 134, 28);
         tfZoom.setColumns(10);
+        configPanel.add(tfZoom);
+       
+        // Start Buttons for create maze
+        JButton startButton = new JButton("Create");
+        startButton.setBounds(50, 120, 75, 29);
+        startButton.addActionListener(new StartCreateActionListener());
+        configPanel.add(startButton);
+        
+        
+        // create the separator between the panels
+        JSeparator separator = new JSeparator();
+        separator.setBounds(0, 163, 196, 16);
+        configPanel.add(separator);
+        
+        
+        // Gui object: Solve Algorithm 
+        JLabel solveLabel = new JLabel("Solve Algorithm");
+        solveLabel.setBounds(6, 180, 100, 16);
+        configPanel.add(solveLabel);
+        
+        // DropDown Menu for solve list
+        solveList = new JComboBox(solveAlgorithms);
+        solveList.setBounds(0, 197, 184, 27);
+        configPanel.add(solveList);
+        
+        // Start button for solve algorithmen
+        JButton startSbutton = new JButton("Solve");
+        startSbutton.setBounds(50, 230, 75, 29);
+        startSbutton.addActionListener(new StartSolveActionListener());
+        configPanel.add(startSbutton);
+       
+        // create the separator between the panels
+        JSeparator separator2 = new JSeparator();
+        separator2.setBounds(0, 280, 196, 16);
+        configPanel.add(separator2);
+        
+        // Options label
+        JLabel optLabel = new JLabel("Options");
+        optLabel.setBounds(6, 290, 107, 16);
+        optLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        configPanel.add(optLabel);
         
         // Tickbox for Debug
         debug = new JCheckBox("enable debugging");
-        debug.setBounds(6, 389, 180, 16);
+        debug.setBounds(6, 310, 180, 16);
         configPanel.add(debug);
         
-        JSeparator separator = new JSeparator();
-        separator.setBounds(0, 193, 196, 16);
-        configPanel.add(separator);
-
+        // tick box for fast mode
+        chckbxFastMode = new JCheckBox("fast mode");
+        chckbxFastMode.setBounds(6, 330, 180, 16);
+        configPanel.add(chckbxFastMode);
+        
+        // now we are done with the config panel - add it 
         contentPane.add(configPanel);
 
-        // Buttons
-        JButton startButton = new JButton("Start");
-        startButton.setBounds(16, 148, 75, 29);
-        configPanel.add(startButton);
-        JButton pauseButton = new JButton("Pause");
-        pauseButton.setBounds(89, 148, 80, 29);
-        configPanel.add(pauseButton);
-        pauseButton.setEnabled(false);
-
-        JButton startSbutton = new JButton("Start");
-        startSbutton.setBounds(16, 281, 75, 29);
-        configPanel.add(startSbutton);
-
-        JButton pauseSbutton = new JButton("Pause");
-        pauseSbutton.setEnabled(false);
-        pauseSbutton.setBounds(89, 281, 80, 29);
-        configPanel.add(pauseSbutton);
-        
-        chckbxFastMode = new JCheckBox("fast mode");
-        chckbxFastMode.setBounds(6, 411, 180, 16);
-        configPanel.add(chckbxFastMode);
-
-        // ActionListeners for Buttons
-        startButton.addActionListener(new StartCreateActionListener());
-        pauseButton.addActionListener(new PauseCreateActionListener());
-        pauseSbutton.addActionListener(new PauseSolveActionListener());
-        startSbutton.addActionListener(new StartSolveActionListener());
-        frame.setSize(200, 600);
+        // finally make the window visible
         frame.setVisible(true);
-
+      
     }
 
     public boolean getChckbxFastMode() {
@@ -226,27 +229,5 @@ public class Gui {
         }
     }
 
-    private class PauseCreateActionListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent ae) {
-            // TODO: Start LabyrinthDrawer Solver
 
-        }
-    }
-
-    private class PauseSolveActionListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent ae) {
-            // TODO: Start LabyrinthDrawer Solver
-
-        }
-    }
-
-    private class ResetActionListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent ae) {
-            // Reset LabyrinthDrawer Creation
-
-        }
-    }
 }
