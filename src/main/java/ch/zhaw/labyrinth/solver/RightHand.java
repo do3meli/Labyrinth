@@ -62,29 +62,33 @@ public class RightHand extends Solver {
                 continue;
             }
 
-            // Move according to heading
+            /**
+             *  Move according to heading
+              */
+            // If possible go right, always the first choice
             if(heading.isRight()) {
                 heading = heading.goRight();
                 setCoordinate(heading.getCoordinate());
                 continue;
             }
+            // Else go straight
             if(heading.isStraight()) {
                 heading = heading.goStraight();
                 setCoordinate(heading.getCoordinate());
                 continue;
             }
-            if(heading.isBack()) {
-                heading = heading.goBack();
-                setCoordinate(heading.getCoordinate());
-                continue;
-            }
+            // Try going left
             if(heading.isLeft()) {
                 heading = heading.goLeft();
                 setCoordinate(heading.getCoordinate());
                 continue;
             }
-
-
+            // If everything else fails got back
+            if(heading.isBack()) {
+                heading = heading.goBack();
+                setCoordinate(heading.getCoordinate());
+                continue;
+            }
         }
 
         // Print Solved maze to console
