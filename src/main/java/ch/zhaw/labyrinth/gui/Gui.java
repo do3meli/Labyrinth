@@ -1,6 +1,7 @@
 package ch.zhaw.labyrinth.gui;
 
 import ch.zhaw.labyrinth.builder.DepthFirstSearch;
+import ch.zhaw.labyrinth.builder.Import;
 import ch.zhaw.labyrinth.solver.RightHand;
 import ch.zhaw.labyrinth.solver.Solver;
 import ch.zhaw.labyrinth.utils.Labyrinth;
@@ -13,7 +14,6 @@ public class Gui {
     
 	// instance variables
 	private static JFrame frame;
-    private LabyrinthThread labyrinthFrame;
     private Container contentPane;
     private JTextField tfSize;
     private JTextField tfZoom;
@@ -160,24 +160,26 @@ public class Gui {
         frame.setVisible(true);
       
     }
-
+    
+    /**
+     * This returns the status of the check box for fast mode in GUI
+     * @return true if check box is selected, false if not 
+     */
     public boolean getChckbxFastMode() {
         return chckbxFastMode.isSelected();
     }
 
     /**
-     * ActionListeners
+     * ActionListener for Create Algorithm Button
      */
     private class StartCreateActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
-            labyrinthFrame = new LabyrinthThread();
-            labyrinthFrame.setLocation(251, 0);
-            labyrinthFrame.setVisible(true);
+           
 
-            // Get Variables
+            // Get Variables from GUI text boexes
             int size = Integer.valueOf(tfSize.getText());
-            int zoom = Integer.valueOf(tfZoom.getText());
+            final int zoom = Integer.valueOf(tfZoom.getText());
 
             // Get Build Type
             String type = (String)createList.getSelectedItem();
@@ -185,8 +187,8 @@ public class Gui {
             // Build selected LabyrinthDrawer
             if (type.equals("Depth-First")) {
                 lbuilder = new DepthFirstSearch(size);
-            } else if (type.equals("Prim")) {
-                lbuilder = null;
+            } else if (type.equals("Import")) {
+                lbuilder = new Import();
             } else {
                 lbuilder = null;
             }
@@ -196,19 +198,20 @@ public class Gui {
             	lbuilder.printAsArray();
             }
             
+           
+            //Schedule a job for the event dispatch thread:
+            //creating and showing this application's GUI.
+            javax.swing.SwingUtilities.invokeLater(new LabyrinthDrawer(lbuilder, getChckbxFastMode(),zoom));
             
-            // Draw Labyrinth
-            labyrinthDrawer = new LabyrinthDrawer(labyrinthFrame.getCanvas(), lbuilder, getChckbxFastMode());
+           
 
-            // Set Zoom Factor
-            labyrinthDrawer.setZoom(zoom);
-
-            // Start Thread
-            labyrinthDrawer.start();
-
+           
         }
     }
-
+    
+    /**
+     * ActionListener for Solve  Button
+     */
     private class StartSolveActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {

@@ -7,62 +7,76 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 
-/**
- * Created with IntelliJ IDEA.
- * User: bbu
- * Date: 26.03.13
- * Time: 08:54
- */
-public class LabyrinthDrawer extends Thread{
+
+public class LabyrinthDrawer extends JPanel implements Runnable {
    
+	// serial version UID
+	private static final long serialVersionUID = 623347107962887545L;
+	
 	// instance var
-	private JPanel box;
+	private JFrame frame;
+	private JPanel canvas;
     private Labyrinth labyrinth;
     private int zoom;
     private boolean fast;
+    private Cell curCell;
+    private Coordinate curCoordinate;
     
-    public LabyrinthDrawer(JPanel pan, Labyrinth labyrinth, boolean fast) {
-        this.box = pan;
+    // construktor
+    public LabyrinthDrawer(Labyrinth labyrinth, boolean fast, int zoom) {
         this.labyrinth = labyrinth;
-        this.zoom = 8;
-        this.fast = fast;
-    }
-
-    public void move(int i, int j, boolean paint) {
-
-        if (!box.isVisible()){
-            return;
-        }
-
-        Graphics g = box.getGraphics();
-        g.setXORMode(box.getBackground());
-     
-        if (!paint){
-            g.fillRect(i*zoom, j*zoom, 1*zoom, 1*zoom);
-        }
-    }
-
-    public void run() {
-        try {
-
-            HashMap<Coordinate, Cell> maze = labyrinth.getMaze();
-            for(int i=0; i< labyrinth.getDimension(); i++) {
-                for (int j=0; j< labyrinth.getDimension(); j++) {
-
-                    Cell cell = maze.get(new Coordinate(i,j));
-
-                    move(j,i,cell.isPath());
-                    if(!fast) {
-                        sleep(10);
-                    }
-                }
-            }
-
-        } catch (Exception e) {
-        }
-    }
-
-    public void setZoom(int zoom) {
         this.zoom = zoom;
+        this.fast = fast;  
+        
+        buildFrame();
     }
+    
+    
+    private void buildFrame(){
+    	
+    	// create the frame
+    	frame = new JFrame();   
+    	frame.setSize(400, 400);
+        frame.setTitle("Labyrinth Solver");
+        frame.setVisible(true);
+        
+        // create content pane and add it to the frame
+        Container container = frame.getContentPane();
+        canvas = new JPanel();
+        container.add(canvas, "Center");
+    }
+    
+   
+    
+    @Override
+	protected void paintComponent(Graphics g){
+    	
+    	super.paintComponent(g);
+        g.setXORMode(canvas.getBackground());
+     
+        if (!curCell.isPath()){
+            g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom);
+        }
+    }
+
+    
+    @Override
+    public void run() {
+   
+    	
+        HashMap<Coordinate, Cell> maze = labyrinth.getMaze();
+        
+        for(int i=0; i< labyrinth.getDimension(); i++) {
+            for (int j=0; j< labyrinth.getDimension(); j++) {
+            	
+            	curCoordinate = new Coordinate(i,j);
+                curCell = maze.get(curCoordinate);
+                
+                paintComponent(canvas.getGraphics()); 
+                
+            }
+        } 
+    } 
+
+ 
 }
