@@ -98,4 +98,31 @@ public class TestLabyrinth {
 	  
 	}
 	
+	@Test
+	public void testIsVisited(){
+		Coordinate c = new Coordinate(1,2);
+		
+		assertFalse(lab.getCellAt(c).isVisited());
+		lab.getCellAt(c).setVisited(true);
+		assertTrue(lab.getCellAt(c).isVisited());
+	}
+	
+	@Test
+	public void testGetAndSetEntry(){
+		Coordinate c = new Coordinate(0,5);
+		lab.setEntry(c);
+		Coordinate r = lab.getEntry();
+		
+		assertTrue(c.equals(r));
+	}
+	
+	@Test
+	public void testGetAndSetExit(){
+		Coordinate c = new Coordinate(2,5);
+		lab.setExit(c);
+		Coordinate r = lab.getExit();
+		
+		assertTrue(c.equals(r));
+	}
+	
 }
