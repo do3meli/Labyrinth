@@ -183,7 +183,7 @@ public class Gui {
             if (type.equals("Depth-First")) {
                 lbuilder = new DepthFirstSearch(size);
             } else if (type.equals("Prim")) {
-                // TODO: lbuilder = new Prim(size);
+                lbuilder = null;
             } else {
                 lbuilder = null;
             }
