@@ -187,7 +187,16 @@ public class Gui {
             if (type.equals("Depth-First")) {
                 lbuilder = new DepthFirstSearch(size);
             } else if (type.equals("Import")) {
-                lbuilder = new Import();
+                
+            	// create file chooser
+            	JFileChooser fChoose = new JFileChooser();
+            	
+            	// show it, and hand over the file to Import
+            	int returnVal = fChoose.showOpenDialog( frame );
+            		if ( returnVal == JFileChooser.APPROVE_OPTION ) {
+            			lbuilder = new Import(fChoose.getSelectedFile());
+            		}
+            	
             } else {
                 lbuilder = null;
             }
