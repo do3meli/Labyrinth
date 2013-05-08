@@ -97,7 +97,7 @@ public class Gui {
         configPanel.add(lblZoom);
         
         // create and add zoom text field
-        tfZoom = new JTextField("4");
+        tfZoom = new JTextField("8");
         tfZoom.setBounds(50, 77, 134, 28);
         tfZoom.setColumns(10);
         configPanel.add(tfZoom);
