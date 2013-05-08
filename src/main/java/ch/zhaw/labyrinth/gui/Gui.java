@@ -193,9 +193,9 @@ public class Gui {
             	
             	// show it, and hand over the file to Import
             	int returnVal = fChoose.showOpenDialog( frame );
-            		if ( returnVal == JFileChooser.APPROVE_OPTION ) {
-            			lbuilder = new Import(fChoose.getSelectedFile());
-            		}
+        		if ( returnVal == JFileChooser.APPROVE_OPTION ) {
+        			lbuilder = new Import(fChoose.getSelectedFile());
+        		}
             	
             } else {
                 lbuilder = null;

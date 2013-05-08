@@ -40,44 +40,39 @@ public class Import extends Labyrinth {
 	
        
         // init vars for iteration
-        int i=0;
         int j=0;
         
         // now iterate
         while(scanner.hasNext()){
             
-        	String val=scanner.nextLine();
+        	String line=scanner.nextLine();
             j=0;
             
-            if(val.contains(" ")){
+            if(line.contains(" ")){
                 
             	// split the line
-            	String str[]=val.split(" ");
+            	String str[]=line.split(" ");
                 
-            	// count lines
-            	int cn=str.length;
-                
-            	// as long as there are lines
-                while(cn>0){
-                   
-                	// create new cell
+            	// iterate over each element
+            	for (int k = 0; k < str.length; k++) {
+            		
+            		// create new cell
                     Cell c = new Cell();
                     
                     // set path based on 0 or 1
-                    if(str[j] == "0"){
+                    if(str[k].equals("0")){
                     	c.setPath(true);
                     }else{
                     	c.setPath(false);
                     }
                     
                     // put it into the maze
-                    getMaze().put(new Coordinate(i,j),c);
-                    
-                    // decrease lines
-                    cn--;
-                    // increase j
-                    j++;
-                }
+                    getMaze().put(new Coordinate(k,j),c);
+				}
+            	
+            	// increase j
+                j++;
+            	
             }
 		}
 	}
