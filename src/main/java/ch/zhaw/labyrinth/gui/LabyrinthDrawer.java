@@ -35,35 +35,43 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
     private void buildFrame(){
     	
     	// create the frame
-    	frame = new JFrame();   
-    	frame.setSize(400, 400);
-        frame.setTitle("Labyrinth Solver");
-        frame.setVisible(true);
-        
-        // create content pane and add it to the frame
-        Container container = frame.getContentPane();
+    	frame = new JFrame("Labyrinth Solver");   
+    	
+        // create the JPanel
         canvas = new JPanel();
-        container.add(canvas, "Center");
+        canvas.setBorder(BorderFactory.createEmptyBorder(1000, 1000, 1000, 1000));
+        canvas.setPreferredSize(new Dimension(400, 400));
+        
+        // add the canvas to the frame and make it visible
+        frame.add(canvas);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true); 
+        
     }
     
    
     
     @Override
 	protected void paintComponent(Graphics g){
-    	
     	super.paintComponent(g);
-        g.setXORMode(canvas.getBackground());
-     
+    	
         if (!curCell.isPath()){
-            g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom);
+            g.setColor(Color.black);
+        	g.fillRect(curCoordinate.getY()*zoom,curCoordinate.getX()*zoom,1*zoom,1*zoom );
+        	
         }
+      
     }
-
+    
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(300, 300);
+    }
     
     @Override
     public void run() {
    
-    	
         HashMap<Coordinate, Cell> maze = labyrinth.getMaze();
         
         for(int i=0; i< labyrinth.getDimension(); i++) {
@@ -73,6 +81,14 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
                 curCell = maze.get(curCoordinate);
                 
                 paintComponent(canvas.getGraphics()); 
+                if(!fast) {
+                	try {
+                	    Thread.sleep(5);
+                	} catch(InterruptedException ex) {
+                	    Thread.currentThread().interrupt();
+                	}
+                }
+                
                 
             }
         } 

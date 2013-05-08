@@ -21,7 +21,6 @@ public class Gui {
     private JComboBox createList;
     private JCheckBox debug;
     private JCheckBox chckbxFastMode;
-    private LabyrinthDrawer labyrinthDrawer;
     private Labyrinth lbuilder;
     private String[] createAlgorithms;
     private String[] solveAlgorithms;
@@ -30,7 +29,7 @@ public class Gui {
         
     	// set up drop downs
     	createAlgorithms = new String[]{ "Depth-First", "Import"};
-    	solveAlgorithms = new String[]{ "Right-Hand", "Wall-Follower", "Trémaux", "Backtrack", "Shortest Path"};;
+    	solveAlgorithms = new String[]{ "Right-Hand", "..."};;
     	
     	/* Use an appropriate Look and Feel - if possible */
         try {
