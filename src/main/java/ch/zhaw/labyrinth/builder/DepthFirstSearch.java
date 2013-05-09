@@ -76,7 +76,7 @@ public class DepthFirstSearch extends Labyrinth {
 		
 		// check if new value is not outside the matrix and 
 		// check if 2 cells ahead is a wall
-		if ( y - 2 > 0 && getCellValueAt(x,y-2) == WALL ){
+		if ( y - 2 > 0 && !getCellValueAt(x, y - 2)){
 			
 			setCellValue(x, y - 1, PATH);
 			setCellValue(x, y - 2, PATH);
@@ -89,7 +89,7 @@ public class DepthFirstSearch extends Labyrinth {
 		
 		// check if new value is not outside the matrix and
 		// check if 2 cells ahead is a wall
-		if ( x + 2 < getDimension() && getCellValueAt(x+2,y) == WALL ){
+		if ( x + 2 < getDimension() && !getCellValueAt(x + 2, y)){
 			
 			setCellValue(x + 1, y, PATH);
 			setCellValue(x + 2, y, PATH);
@@ -101,7 +101,7 @@ public class DepthFirstSearch extends Labyrinth {
 	private void moveDown(int x, int y) {
 		// check if new value is not outside the matrix and
 		// check if 2 cells ahead is a wall
-		if ( y + 2 < getDimension() && getCellValueAt(x,y+2) == WALL ){
+		if ( y + 2 < getDimension() && !getCellValueAt(x, y + 2)){
 						
 			setCellValue(x,y+1,PATH);
 			setCellValue(x,y+2,PATH);
@@ -113,7 +113,7 @@ public class DepthFirstSearch extends Labyrinth {
 	private void moveLeft(int x, int y){
 		// check if new value is not outside the matrix and 
 		// check if 2 cells ahead is a wall
-		if ( x - 2 > 0 && getCellValueAt(x-2,y) == WALL ){
+		if ( x - 2 > 0 && !getCellValueAt(x - 2, y)){
 			
 			setCellValue(x-1,y,PATH);
 			setCellValue(x-2,y,PATH);
@@ -147,18 +147,18 @@ public class DepthFirstSearch extends Labyrinth {
 		if ( r == 0){
 			
 			// check if 1 cell ahead entry is free
-			while(getCellValueAt(1,rEntry) != PATH){
+			while(!getCellValueAt(1, rEntry)){
 				rEntry = rand.nextInt(getDimension());
 			}
 			
 			// check if 1 cell ahead output is free
-			while(getCellValueAt(getDimension()-2,rOut) != PATH){
+			while(!getCellValueAt(getDimension() - 2, rOut)){
 				rOut = rand.nextInt(getDimension());
 			}
 		
 			// now make the field a path
-			setCellValue(0, rEntry, PATH);
-			setCellValue(getDimension() - 1, rOut, PATH);
+			setCellValue(rEntry, 0, PATH);
+			setCellValue(rOut, getDimension() - 1, PATH);
 
             // Save entry & exit
             setEntry(new Coordinate(rEntry, 0));
@@ -169,24 +169,23 @@ public class DepthFirstSearch extends Labyrinth {
 		if ( r == 1){
 			
 			// check if 1 cell ahead entry is free
-			while(getCellValueAt(rEntry,1) != PATH){
+			while(!getCellValueAt(rEntry, 1)){
 				rEntry = rand.nextInt(getDimension());
 			}
 			
 			// check if 1 cell ahead output is free
-			while(getCellValueAt(rOut,getDimension()-2) != PATH){
+			while(!getCellValueAt(rOut, getDimension() - 2)){
 				rOut = rand.nextInt(getDimension());
 			}
 		
 			// now make the field a path
-			setCellValue(rEntry, 0, PATH);
-			setCellValue(rOut, getDimension() - 1, PATH);
+			setCellValue(0, rEntry, PATH);
+			setCellValue(getDimension() - 1, rOut, PATH);
 
             // Save entry & exit
             setEntry(new Coordinate(0, rEntry));
             setExit(new Coordinate(getDimension() - 1, rOut));
 		}
-
 
 
 	}
