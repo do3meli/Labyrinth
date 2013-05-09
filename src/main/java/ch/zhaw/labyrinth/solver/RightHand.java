@@ -12,8 +12,7 @@ import ch.zhaw.labyrinth.utils.Labyrinth;
  * Time: 11:49
  */
 public class RightHand extends Solver {
-    int x;
-    int y;
+    int x,y,u,v;
     private Labyrinth solvedLabyrinth;
     private Labyrinth labyrinth;
     private Heading heading;
@@ -22,6 +21,7 @@ public class RightHand extends Solver {
     public RightHand(Labyrinth labyrinth) {
         this.labyrinth = labyrinth;
         solvedLabyrinth = new Labyrinth();
+        solvedLabyrinth.setDimension(labyrinth.getDimension());
     }
 
     @Override
@@ -29,21 +29,23 @@ public class RightHand extends Solver {
         // Step counter
         int steps = 0;
 
-        // find entry
+        // set entry and exit
         Coordinate entry = labyrinth.getEntry();
+        Coordinate exit = labyrinth.getExit();
         x=entry.getX();
         y=entry.getY();
+        u=exit.getX();
+        v=exit.getY();
+
+        solvedLabyrinth.setCellValue(x,y,true);
+        solvedLabyrinth.setCellValue(u,v,true);
+
         // set heading
         if(x == 0) {
             heading = new East(x, y, labyrinth, solvedLabyrinth);
         } else if (y == 0) {
             heading = new South(x, y, labyrinth, solvedLabyrinth);
         }
-
-        // set exit
-        Coordinate exit = labyrinth.getExit();
-        int u=exit.getX();
-        int v=exit.getY();
 
         // go through labyrinth
         while((x != u) && (y!=v)) {
@@ -92,8 +94,7 @@ public class RightHand extends Solver {
         }
 
         // Print Solved maze to console
-        System.out.print("fertig");
-        solvedLabyrinth.printAsArray();
+        heading.getSolvedLabyrinth().printAsArray();
     }
 
     // Set x and y with the new values from the coordinate
