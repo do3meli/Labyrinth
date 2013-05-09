@@ -36,8 +36,12 @@ public class Labyrinth {
 	public int getDimension() {
 		return dimension;
 	}
-	
-	// getter for Cell with coordinate attribute
+
+    public void setDimension(int dimension) {
+        this.dimension = dimension;
+    }
+
+    // getter for Cell with coordinate attribute
 	public Cell getCellAt(Coordinate c){
 		return this.maze.get(c);
 	}
@@ -124,6 +128,10 @@ public class Labyrinth {
     public void printAsArray(){
     	for(int i=0; i < getDimension(); i++) {
 			for (int j=0; j < getDimension(); j++) {
+                if(getCellAt(i,j) == null) {
+                    System.out.print("-");
+                    continue;
+                }
 				if(getCellValueAt(i,j) == true){
 					System.out.print(0);
 				}else{
