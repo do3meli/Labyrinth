@@ -14,7 +14,6 @@ public class Gui {
     
 	// instance variables
 	private static JFrame frame;
-    private Container contentPane;
     private JTextField tfSize;
     private JTextField tfZoom;
     private JComboBox solveList;
@@ -29,7 +28,7 @@ public class Gui {
         
     	// set up drop downs
     	createAlgorithms = new String[]{ "Depth-First", "Import"};
-    	solveAlgorithms = new String[]{ "Right-Hand", "..."};;
+    	solveAlgorithms = new String[]{ "Right-Hand", "..."};
     	
     	/* Use an appropriate Look and Feel - if possible */
         try {
@@ -59,6 +58,7 @@ public class Gui {
         frame.setSize(200, 450);
         
         // create a content pane and add it to the frame
+        Container contentPane = new Container();
         contentPane = frame.getContentPane();
         contentPane.setLayout(null);
 
@@ -232,12 +232,11 @@ public class Gui {
                 lbsolver = null;
             }
 
-            ;
-            //lbuilder.printArray();
-            final int zoom = Integer.valueOf(tfZoom.getText());
+            int zoom = Integer.valueOf(tfZoom.getText());
             Labyrinth maze = lbsolver.solve();
             maze.printAsArray();
             //javax.swing.SwingUtilities.invokeLater(new LabyrinthDrawer(maze, getChckbxFastMode(),zoom));
+
         }
     }
 
