@@ -16,14 +16,15 @@ public class RightHand extends Solver {
     private Labyrinth solvedLabyrinth;
     private Labyrinth labyrinth;
     private Heading heading;
-    private Coordinate currentLocation;
 
+    // Constructor
     public RightHand(Labyrinth labyrinth) {
         this.labyrinth = labyrinth;
         solvedLabyrinth = new Labyrinth();
         solvedLabyrinth.setDimension(labyrinth.getDimension());
     }
 
+    // Implemented methods
     @Override
     public void solve() {
         // Step counter
@@ -50,11 +51,14 @@ public class RightHand extends Solver {
         // go through labyrinth
         while((x != u) && (y!=v)) {
             steps++;
-            if(steps > 1000) { System.out.println(steps); break; }
+            if(steps > 1000) { System.out.println("Too many steps, aborting!"); break; }
 
-            // If we already visited the next cell, try to get right
+            // Debug only, print solved array
+            heading.getSolvedLabyrinth().printAsArray();
+
+            // If we already visited the next cell, try to go right
             // otherwise, go straight ahead
-            if(heading.isStraight() && heading.isVisited(x, y)) {
+            if(heading.isVisited(x,y)) {
                 if(heading.isRight()) {
                     heading.goRight();
                 } else {

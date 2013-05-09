@@ -54,33 +54,41 @@ public class North implements Heading {
     // Move methods
     @Override
     public East goRight() {
+        // mark current cell as visited
+        maze.setCellVisited(x, y, true);
+        // Store it in the solvedMaze Map
         solvedMaze.setCellValue(x+1, y, true);
         setX(x+1);
-        maze.setCellVisited(x, y, true);
         return new East(x, y, maze, solvedMaze);
     }
 
     @Override
     public West goLeft() {
+        // mark current cell as visited
+        maze.setCellVisited(x, y, true);
+        // Store it in the solvedMaze Map
         solvedMaze.setCellValue(x-1, y, true);
         setX(x-1);
-        maze.setCellVisited(x, y, true);
         return new West(x, y, maze, solvedMaze);
     }
 
     @Override
     public North goStraight() {
+        // mark current cell as visited
+        maze.setCellVisited(x, y, true);
+        // Store it in the solvedMaze Map
         solvedMaze.setCellValue(x, y-1, true);
         setY(y-1);
-        maze.setCellVisited(x, y, true);
         return new North(x, y, maze, solvedMaze);
     }
 
     @Override
     public South goBack() {
+        // mark current cell as visited
+        maze.setCellVisited(x, y, true);
+        // Store it in the solvedMaze Map
         solvedMaze.setCellValue(x, y+1, true);
         setY(y+1);
-        maze.setCellVisited(x, y, true);
         return new South(x++, y, maze, solvedMaze);
     }
 
