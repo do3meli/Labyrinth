@@ -51,16 +51,24 @@ public class RightHand extends Solver {
 
         // go through labyrinth
         while((x != u) || (y != v)) {
+            steps++;
+            if(steps > 2000) { System.out.println("Too many steps, aborting"); break; }
+
             // Debug only, print solved array
             //heading.getSolvedLabyrinth().printAsArray();
+
+            // TODO: It would be nice if we would update the GUI here. This way we'd have a real breadcrumb painting
+
 
             // If we already visited the next cell, try to go right
             // otherwise, go straight ahead
             if(heading.isVisited(x,y)) {
                 if(heading.isRight()) {
                     heading.goRight();
-                } else {
+                } else if (heading.isStraight()) {
                     heading.goStraight();
+                } else if (heading.isLeft()) {
+                    heading.goLeft();
                 }
                 setCoordinate(heading.getCoordinate());
                 continue;
