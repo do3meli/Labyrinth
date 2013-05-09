@@ -139,7 +139,7 @@ public class Labyrinth {
                     System.out.print("-");
                     continue;
                 }
-				if(getCellValueAt(x,y) == true){
+				if(getCellValueAt(x,y)){
 					System.out.print(0);
 				}else{
 					System.out.print(1);
