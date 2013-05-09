@@ -196,6 +196,8 @@ public class Gui {
             	int returnVal = fChoose.showOpenDialog( frame );
         		if ( returnVal == JFileChooser.APPROVE_OPTION ) {
         			lbuilder = new Import(fChoose.getSelectedFile());
+        		}else{
+        			JOptionPane.showMessageDialog(frame, "You did not select a file");
         		}
             	
             } else {
@@ -210,8 +212,11 @@ public class Gui {
            
             //Schedule a job for the event dispatch thread:
             //creating and showing this application's GUI.
-            labyrinthDrawer = new LabyrinthDrawer(lbuilder, getChckbxFastMode(),zoom, "create");
-            javax.swing.SwingUtilities.invokeLater(labyrinthDrawer);
+            if(lbuilder != null){
+            	labyrinthDrawer = new LabyrinthDrawer(lbuilder, getChckbxFastMode(),zoom, "create");
+                javax.swing.SwingUtilities.invokeLater(labyrinthDrawer);
+            }
+            
 
         }
     }
@@ -234,7 +239,6 @@ public class Gui {
                 lbsolver = null;
             }
 
-            int zoom = Integer.valueOf(tfZoom.getText());
             Labyrinth maze = lbsolver.solve();
             maze.printAsArray();
             labyrinthDrawer.setMode("solve");
