@@ -58,7 +58,7 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
     	
         if (!curCell.isPath()){
             g.setColor(Color.black);
-        	g.fillRect(curCoordinate.getY()*zoom,curCoordinate.getX()*zoom,1*zoom,1*zoom );
+        	g.fillRect(curCoordinate.getX()*zoom,curCoordinate.getY()*zoom,1*zoom,1*zoom );
         	
         }
       
