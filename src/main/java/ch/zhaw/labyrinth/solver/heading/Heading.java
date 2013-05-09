@@ -1,6 +1,7 @@
 package ch.zhaw.labyrinth.solver.heading;
 
 import ch.zhaw.labyrinth.utils.Coordinate;
+import ch.zhaw.labyrinth.utils.Labyrinth;
 
 /**
  * This interface defines how to move with a specific heading.
@@ -24,5 +25,8 @@ public interface Heading {
 
     // Get Coordinate
     Coordinate getCoordinate();
+
+    // Get solved maze
+    Labyrinth getSolvedLabyrinth();
 
 }

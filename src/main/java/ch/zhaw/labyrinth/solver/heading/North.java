@@ -84,6 +84,11 @@ public class North implements Heading {
         return new South(x++, y, maze, solvedMaze);
     }
 
+    @Override
+    public Labyrinth getSolvedLabyrinth() {
+        return solvedMaze;
+    }
+
     public int getX() {
         return x;
     }

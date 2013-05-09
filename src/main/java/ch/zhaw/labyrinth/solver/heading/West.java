@@ -83,6 +83,12 @@ public class West implements Heading {
         return new East(x, y, maze, solvedMaze);
     }
 
+    @Override
+    public Labyrinth getSolvedLabyrinth() {
+        return solvedMaze;
+    }
+
+
     public int getX() {
         return x;
     }
