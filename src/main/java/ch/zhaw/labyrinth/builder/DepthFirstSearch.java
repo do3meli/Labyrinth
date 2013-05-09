@@ -14,7 +14,6 @@ import java.util.Random;
  */
 public class DepthFirstSearch extends Labyrinth {
   
-	private static final boolean WALL = false;
 	private static final boolean PATH = true;
 	
 	private Integer[] dir;
