@@ -22,6 +22,7 @@ public class RightHand extends Solver {
         this.labyrinth = labyrinth;
         solvedLabyrinth = new Labyrinth();
         solvedLabyrinth.setDimension(labyrinth.getDimension());
+        solvedLabyrinth.createEmptyMaze();
     }
 
     // Implemented methods

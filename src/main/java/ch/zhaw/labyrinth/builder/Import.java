@@ -3,7 +3,6 @@ package ch.zhaw.labyrinth.builder;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
 import ch.zhaw.labyrinth.utils.Cell;
 import ch.zhaw.labyrinth.utils.Coordinate;
 import ch.zhaw.labyrinth.utils.Labyrinth;
@@ -25,7 +24,6 @@ public class Import extends Labyrinth {
 		super();
 		this.file = f;
 		readFileIntoArray();
-		printAsArray();
 	}
 
 	
@@ -46,7 +44,6 @@ public class Import extends Labyrinth {
         while(scanner.hasNext()){
             
         	String line=scanner.nextLine();
-            j=0;
             
             if(line.contains(" ")){
                 
@@ -75,7 +72,8 @@ public class Import extends Labyrinth {
             	
             }
 		}
+        
+        // now set maze dimension - otherwise paintComponent not working
+        setDimension(j);
 	}
-	
-	
 }
