@@ -41,7 +41,7 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
         // create the JPanel
         canvas = new JPanel();
         canvas.setBorder(BorderFactory.createEmptyBorder(1000, 1000, 1000, 1000));
-        canvas.setPreferredSize(new Dimension(400, 400));
+        canvas.setPreferredSize(new Dimension(labyrinth.getDimension()*zoom, labyrinth.getDimension()*zoom));
         
         // add the canvas to the frame and make it visible
         frame.add(canvas);
@@ -71,7 +71,7 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
     
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(300, 300);
+        return new Dimension(labyrinth.getDimension()*zoom, labyrinth.getDimension()*zoom);
     }
     
     @Override
