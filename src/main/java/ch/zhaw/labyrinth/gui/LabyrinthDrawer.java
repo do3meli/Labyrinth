@@ -14,7 +14,6 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
 	private static final long serialVersionUID = 623347107962887545L;
 	
 	// instance var
-	private JFrame frame;
 	private JPanel canvas;
     private Labyrinth labyrinth;
     private int zoom;
@@ -35,7 +34,7 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
     private void buildFrame(){
     	
     	// create the frame
-    	frame = new JFrame("Labyrinth Solver");   
+    	JFrame frame = new JFrame("Labyrinth Solver");   
     	
         // create the JPanel
         canvas = new JPanel();
@@ -92,6 +91,4 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
             }
         } 
     } 
-
- 
 }
