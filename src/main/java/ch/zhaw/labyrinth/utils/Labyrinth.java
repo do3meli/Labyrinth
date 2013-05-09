@@ -101,7 +101,14 @@ public class Labyrinth {
 		return maze.get(c).isPath();
 	}
 	
-	// getter method for cell value at specific x,y point
+
+    /**
+     * getter method for cell value at specific x,y point
+     *
+     * @param x x-coordinate
+     * @param y y-coordinate
+     * @return true when path, false when wall
+     */
 	public boolean getCellValueAt(int x, int y){
         Coordinate coordinate = new Coordinate(x,y);
         Cell cell = maze.get(coordinate);
@@ -126,13 +133,13 @@ public class Labyrinth {
     
     // this function is only use if debbuging is active set = true in GUI
     public void printAsArray(){
-    	for(int i=0; i < getDimension(); i++) {
-			for (int j=0; j < getDimension(); j++) {
-                if(getCellAt(i,j) == null) {
+    	for(int y=0; y < getDimension(); y++) {
+			for (int x=0; x < getDimension(); x++) {
+                if(getCellAt(x,y) == null) {
                     System.out.print("-");
                     continue;
                 }
-				if(getCellValueAt(i,j) == true){
+				if(getCellValueAt(x,y) == true){
 					System.out.print(0);
 				}else{
 					System.out.print(1);
