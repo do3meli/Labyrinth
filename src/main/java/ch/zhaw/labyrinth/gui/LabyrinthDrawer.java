@@ -20,12 +20,14 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
     private boolean fast;
     private Cell curCell;
     private Coordinate curCoordinate;
+    private String mode;
     
     // construktor
-    public LabyrinthDrawer(Labyrinth labyrinth, boolean fast, int zoom) {
+    public LabyrinthDrawer(Labyrinth labyrinth, boolean fast, int zoom, String mode) {
         this.labyrinth = labyrinth;
         this.zoom = zoom;
-        this.fast = fast;  
+        this.fast = fast;
+        this.mode = mode;
         
         buildFrame();
     }
@@ -52,10 +54,17 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
     @Override
 	protected void paintComponent(Graphics g){
     	super.paintComponent(g);
-    	
-        if (!curCell.isPath()){
-            g.setColor(Color.black);
-        	g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom );
+
+        if(mode.equals("create")) {
+            if (!curCell.isPath()){
+                g.setColor(Color.black);
+                g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom );
+            }
+        } else if (mode.equals("solve")) {
+            if (curCell.isPath()){
+                g.setColor(Color.green);
+                g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom );
+            }
         }
       
     }
@@ -75,16 +84,34 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
             	
             	curCoordinate = new Coordinate(i,j);
                 curCell = maze.get(curCoordinate);
-                
-                paintComponent(canvas.getGraphics()); 
-                if(!fast) {
-                	try {
-                	    Thread.sleep(5);
-                	} catch(InterruptedException ex) {
-                	    Thread.currentThread().interrupt();
-                	}
+
+                if(!(curCell == null)) {
+                    paintComponent(canvas.getGraphics());
+                    if(!fast) {
+                        try {
+                            Thread.sleep(5);
+                        } catch(InterruptedException ex) {
+                            Thread.currentThread().interrupt();
+                        }
+                    }
                 }
             }
         } 
-    } 
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
+    public Labyrinth getLabyrinth() {
+        return labyrinth;
+    }
+
+    public void setLabyrinth(Labyrinth labyrinth) {
+        this.labyrinth = labyrinth;
+    }
 }

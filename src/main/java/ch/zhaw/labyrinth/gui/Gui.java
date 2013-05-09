@@ -23,6 +23,7 @@ public class Gui {
     private Labyrinth lbuilder;
     private String[] createAlgorithms;
     private String[] solveAlgorithms;
+    private LabyrinthDrawer labyrinthDrawer;
 
     public Gui() {
         
@@ -209,7 +210,8 @@ public class Gui {
            
             //Schedule a job for the event dispatch thread:
             //creating and showing this application's GUI.
-            javax.swing.SwingUtilities.invokeLater(new LabyrinthDrawer(lbuilder, getChckbxFastMode(),zoom));
+            labyrinthDrawer = new LabyrinthDrawer(lbuilder, getChckbxFastMode(),zoom, "create");
+            javax.swing.SwingUtilities.invokeLater(labyrinthDrawer);
 
         }
     }
@@ -235,7 +237,9 @@ public class Gui {
             int zoom = Integer.valueOf(tfZoom.getText());
             Labyrinth maze = lbsolver.solve();
             maze.printAsArray();
-            //javax.swing.SwingUtilities.invokeLater(new LabyrinthDrawer(maze, getChckbxFastMode(),zoom));
+            labyrinthDrawer.setMode("solve");
+            labyrinthDrawer.setLabyrinth(maze);
+            javax.swing.SwingUtilities.invokeLater(labyrinthDrawer);
 
         }
     }
