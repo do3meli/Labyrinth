@@ -56,7 +56,7 @@ public class West implements Heading {
         // mark current cell as visited
         maze.setCellVisited(x, y, true);
         // Store it in the solvedMaze Map
-        solvedMaze.setCellValue(x, y+1, true);
+        solvedMaze.setCellValue(x, y-1, true);
         setY(y+1);
         return new North(x, y, maze, solvedMaze);
     }
@@ -66,7 +66,7 @@ public class West implements Heading {
         // mark current cell as visited
         maze.setCellVisited(x, y, true);
         // Store it in the solvedMaze Map
-        solvedMaze.setCellValue(x, y-1, true);
+        solvedMaze.setCellValue(x, y+1, true);
         setY(y-1);
         return new South(x, y, maze, solvedMaze);
     }
