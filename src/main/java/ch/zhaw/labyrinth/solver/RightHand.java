@@ -26,7 +26,7 @@ public class RightHand extends Solver {
 
     // Implemented methods
     @Override
-    public void solve() {
+    public Labyrinth solve() {
         // Step counter
         int steps = 0;
 
@@ -49,12 +49,12 @@ public class RightHand extends Solver {
         }
 
         // go through labyrinth
-        while((x != u) && (y!=v)) {
+        while((x != u) || (y != v)) {
             steps++;
             if(steps > 1000) { System.out.println("Too many steps, aborting!"); break; }
 
             // Debug only, print solved array
-            heading.getSolvedLabyrinth().printAsArray();
+            //heading.getSolvedLabyrinth().printAsArray();
 
             // If we already visited the next cell, try to go right
             // otherwise, go straight ahead
@@ -97,8 +97,8 @@ public class RightHand extends Solver {
             }
         }
 
-        // Print Solved maze to console
-        heading.getSolvedLabyrinth().printAsArray();
+        // return solved array to gui
+        return heading.getSolvedLabyrinth();
     }
 
     // Set x and y with the new values from the coordinate

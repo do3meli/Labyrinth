@@ -20,6 +20,7 @@ public class Labyrinth {
 
     public Labyrinth() {
         this.maze = new HashMap<Coordinate, Cell>();
+        createEmptyMaze();
     }
 	
 	// create empty maze with cell's and coordinate's

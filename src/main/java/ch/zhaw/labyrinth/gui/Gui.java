@@ -210,10 +210,7 @@ public class Gui {
             //Schedule a job for the event dispatch thread:
             //creating and showing this application's GUI.
             javax.swing.SwingUtilities.invokeLater(new LabyrinthDrawer(lbuilder, getChckbxFastMode(),zoom));
-            
-           
 
-           
         }
     }
     
@@ -235,8 +232,12 @@ public class Gui {
                 lbsolver = null;
             }
 
-            lbsolver.solve();
+            ;
             //lbuilder.printArray();
+            final int zoom = Integer.valueOf(tfZoom.getText());
+            Labyrinth maze = lbsolver.solve();
+            maze.printAsArray();
+            //javax.swing.SwingUtilities.invokeLater(new LabyrinthDrawer(maze, getChckbxFastMode(),zoom));
         }
     }
 

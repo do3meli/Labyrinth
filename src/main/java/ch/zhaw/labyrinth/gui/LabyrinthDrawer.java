@@ -49,9 +49,7 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
         frame.setVisible(true); 
         
     }
-    
-   
-    
+
     @Override
 	protected void paintComponent(Graphics g){
     	super.paintComponent(g);
@@ -87,11 +85,7 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
                 	    Thread.currentThread().interrupt();
                 	}
                 }
-                
-                
             }
         } 
     } 
-
- 
 }
