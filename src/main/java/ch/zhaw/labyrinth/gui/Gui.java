@@ -14,7 +14,6 @@ public class Gui {
     
 	// instance variables
 	private static JFrame frame;
-    private Container contentPane;
     private JTextField tfSize;
     private JTextField tfZoom;
     private JComboBox solveList;
@@ -59,6 +58,7 @@ public class Gui {
         frame.setSize(200, 450);
         
         // create a content pane and add it to the frame
+        Container contentPane = new Container();
         contentPane = frame.getContentPane();
         contentPane.setLayout(null);
 
