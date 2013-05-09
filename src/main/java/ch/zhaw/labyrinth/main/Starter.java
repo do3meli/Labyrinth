@@ -8,12 +8,9 @@ import ch.zhaw.labyrinth.gui.Gui;
  * Date: 03.03.13
  * Time: 10:56
  */
-public class Starter {
-    public static void main(String[] args) {
-        
+class Starter {
+    public static void main(String[] args) { 
     	// Initialize GUI
         new Gui();
-
-
     }
 }
