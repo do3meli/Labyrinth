@@ -130,7 +130,7 @@ public class Labyrinth {
     /**
      * This makes an input integer odd by adding 1
      * @return if input is odd it just returns input. if input is even it adds 1 and returns that.
-     * @input an integer 
+     * @param an integer 
      */
     public int makeIntOdd(int i){
     	if ( (i & 1) == 0 ) { 
