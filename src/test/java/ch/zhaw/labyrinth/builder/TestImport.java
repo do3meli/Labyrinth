@@ -2,7 +2,11 @@ package ch.zhaw.labyrinth.builder;
 
 import static org.junit.Assert.*;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -46,6 +50,42 @@ public class TestImport {
 		Coordinate cActual = imp.getExit();
 		Coordinate cExpected = new Coordinate(14,4);
 		assertTrue(cExpected.equals(cActual));	
+	}
+	
+	@Test
+	public void testWrongFileFormat() throws IOException{
+		
+		// setup tmp path and temp file name
+		final String tmpPath = System.getProperty("java.io.tmpdir");
+		final String tmpFile = "WrongMazeFile.txt";
+				
+		// create the file object
+		File wrongFile = new File(tmpPath + tmpFile);
+		
+		// if file already exists drop it
+		if(wrongFile.exists()){
+			wrongFile.delete();
+		}
+		
+		// create the file stream
+		BufferedWriter writer = new BufferedWriter(new FileWriter(wrongFile));
+	    
+		// now write something without spaces to the file and close the stream again
+		writer.write("ThisFileContainsNoSpaces");
+	    writer.newLine();
+	    writer.write("ThereforTheImportWillHopefullyNotWork");
+	    writer.flush();
+        writer.close();
+        
+        // now try lets import that file
+        Import imp2 = new Import(wrongFile);
+        
+        // now dimension should be = 0
+        assertEquals(0,imp2.getDimension());
+	    
+        // trash the file again
+        wrongFile.delete();
+        
 	}
 
 }
