@@ -48,6 +48,7 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true); 
+        frame.setResizable(false);
         
     }
 
