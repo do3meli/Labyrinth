@@ -34,7 +34,7 @@ public class TestLabyrinth {
 	
 	@Test
 	public void testGetDimension() {
-		assertEquals(dim,lab.getDimension());
+		assertEquals(lab.makeIntOdd(dim),lab.getDimension());
 	}
 	
 	@Test
