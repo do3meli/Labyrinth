@@ -14,7 +14,7 @@ public class TestDFS {
     // Note: this method must be static
     @BeforeClass
     public static void beforeEverything() {
-    	dfs = new Labyrinth(23);
+    	dfs = new DepthFirstSearch(23);
     }
     
     @Test
