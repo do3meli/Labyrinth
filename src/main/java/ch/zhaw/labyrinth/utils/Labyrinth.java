@@ -14,7 +14,7 @@ public class Labyrinth {
 	// constructor
 	public Labyrinth(int dim){
 		this.maze = new HashMap<Coordinate, Cell>();
-		this.dimension = dim;
+		setDimension(dim);
 		createEmptyMaze();
 	}
 
@@ -38,7 +38,7 @@ public class Labyrinth {
 	}
 
     public void setDimension(int dimension) {
-        this.dimension = dimension;
+        this.dimension = makeIntOdd(dimension);
     }
 
     // getter for Cell with coordinate attribute
@@ -126,12 +126,28 @@ public class Labyrinth {
     public Coordinate getExit() {
         return exit;
     }
+    
+    /**
+     * This makes an input integer odd by adding 1
+     * @return if input is odd it just returns input. if input is even it adds 1 and returns that.
+     * @input an integer 
+     */
+    public int makeIntOdd(int i){
+    	if ( (i & 1) == 0 ) { 
+    		return i+1; 
+    	}else{ 
+    		return i; 
+    	}
+    }
 
     public void setExit(Coordinate exit) {
         this.exit = exit;
     }
     
-    // this function is only use if debbuging is active set = true in GUI
+    /**
+     * Will print the Cell datastructure as an array with zeros and ones.
+     * This function is only use if debbuging is active set = true in GUI
+     */
     public void printAsArray(){
     	for(int y=0; y < getDimension(); y++) {
 			for (int x=0; x < getDimension(); x++) {
@@ -147,5 +163,6 @@ public class Labyrinth {
 	        }
 	        System.out.println();
 	    }
+    	System.out.println();
     }
 }
