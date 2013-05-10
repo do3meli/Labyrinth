@@ -53,6 +53,22 @@ public class TestImport {
 	}
 	
 	@Test
+	public void testSomeWalls(){
+		assertFalse(imp.getCellValueAt(5, 2));
+		assertFalse(imp.getCellValueAt(8, 7));
+		assertFalse(imp.getCellValueAt(10, 12));
+		assertFalse(imp.getCellValueAt(4, 6));
+	}
+	
+	@Test
+	public void testSomePaths(){
+		assertTrue(imp.getCellValueAt(2, 9));
+		assertTrue(imp.getCellValueAt(13, 13));
+		assertTrue(imp.getCellValueAt(4, 11));
+		assertTrue(imp.getCellValueAt(12, 2));
+	}
+	
+	@Test
 	public void testWrongFileFormat() throws IOException{
 		
 		// setup tmp path and temp file name
