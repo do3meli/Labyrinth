@@ -57,7 +57,7 @@ public class TestImport {
 		
 		// setup tmp path and temp file name
 		final String tmpPath = System.getProperty("java.io.tmpdir");
-		final String tmpFile = "WrongMazeFile.txt";
+		final String tmpFile = "/WrongMazeFile.txt";
 				
 		// create the file object
 		File wrongFile = new File(tmpPath + tmpFile);
