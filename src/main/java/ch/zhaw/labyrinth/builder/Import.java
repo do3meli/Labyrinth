@@ -84,7 +84,9 @@ public class Import extends Labyrinth {
             }
 		}
         
-        // now set maze dimension - otherwise paintComponent not working
-        setDimension(j);
+        // only set maze dimension when j greather than 0 - otherwise paintComponent not working
+        if(j>0){
+        	setDimension(j);
+        }
 	}
 }
