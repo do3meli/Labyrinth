@@ -239,11 +239,8 @@ public class Gui {
                 lbsolver = null;
             }
 
-            Labyrinth maze = lbsolver.solve();
-            maze.printAsArray();
             labyrinthDrawer.setMode("solve");
-            labyrinthDrawer.setLabyrinth(maze);
-            javax.swing.SwingUtilities.invokeLater(labyrinthDrawer);
+            lbsolver.solve(labyrinthDrawer);
 
         }
     }

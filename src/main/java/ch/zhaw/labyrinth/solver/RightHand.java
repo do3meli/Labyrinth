@@ -1,6 +1,7 @@
 package ch.zhaw.labyrinth.solver;
 
 
+import ch.zhaw.labyrinth.gui.LabyrinthDrawer;
 import ch.zhaw.labyrinth.solver.heading.*;
 import ch.zhaw.labyrinth.utils.Coordinate;
 import ch.zhaw.labyrinth.utils.Labyrinth;
@@ -27,7 +28,7 @@ public class RightHand extends Solver {
 
     // Implemented methods
     @Override
-    public Labyrinth solve() {
+    public void solve(LabyrinthDrawer labyrinthDrawer) {
         // Step counter
         int steps = 0;
 
@@ -56,8 +57,9 @@ public class RightHand extends Solver {
             // Debug only, print solved array
             //heading.getSolvedLabyrinth().printAsArray();
 
-            // TODO: It would be nice if we would update the GUI here. This way we'd have a real breadcrumb painting
-
+            // FIXME: Draw only the current coordinate
+            labyrinthDrawer.setLabyrinth(heading.getSolvedLabyrinth());
+            javax.swing.SwingUtilities.invokeLater(labyrinthDrawer);
 
             // If we already visited the next cell, try to go right
             // otherwise, go straight ahead, if thats not possible go left
@@ -104,8 +106,8 @@ public class RightHand extends Solver {
             }
         }
 
-        // return solved array to gui
-        return heading.getSolvedLabyrinth();
+        // Print steps
+        System.out.println(steps);
     }
 
     // Set x and y with the new values from the coordinate

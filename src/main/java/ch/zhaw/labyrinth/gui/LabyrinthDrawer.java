@@ -86,7 +86,7 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
         
         for(int i=0; i< labyrinth.getDimension(); i++) {
             for (int j=0; j< labyrinth.getDimension(); j++) {
-            	
+
             	curCoordinate = new Coordinate(i,j);
                 curCell = maze.get(curCoordinate);
 
@@ -101,7 +101,8 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
                     }
                 }
             }
-        } 
+        }
+        paintComponent(canvas.getGraphics());
     }
 
     public String getMode() {

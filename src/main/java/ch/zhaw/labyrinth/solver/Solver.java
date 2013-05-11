@@ -1,6 +1,6 @@
 package ch.zhaw.labyrinth.solver;
 
-import ch.zhaw.labyrinth.utils.Labyrinth;
+import ch.zhaw.labyrinth.gui.LabyrinthDrawer;
 
 /**
  * Abstract class which every algorithm has to extend
@@ -9,8 +9,9 @@ public abstract class Solver {
 
     /**
      * This method implements the solving algorithm
+     * @param labyrinthDrawer
      */
-    public abstract Labyrinth solve();
+    public abstract void solve(LabyrinthDrawer labyrinthDrawer);
 
 
 
