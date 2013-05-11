@@ -52,7 +52,6 @@ public class RightHand extends Solver {
         // go through labyrinth
         while((x != u) || (y != v)) {
             steps++;
-            if(steps > 2000) { System.out.println("Too many steps, aborting"); break; }
 
             // Debug only, print solved array
             //heading.getSolvedLabyrinth().printAsArray();
