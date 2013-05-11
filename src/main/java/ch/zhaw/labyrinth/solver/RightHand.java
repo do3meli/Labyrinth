@@ -7,10 +7,10 @@ import ch.zhaw.labyrinth.utils.Coordinate;
 import ch.zhaw.labyrinth.utils.Labyrinth;
 
 /**
- * Created with IntelliJ IDEA.
- * User: bbu
- * Date: 20.04.13
- * Time: 11:49
+ * This class implements the RightHand Algorithm.
+ *
+ * @author b.buetikofer
+ *
  */
 public class RightHand extends Solver {
     int x,y,u,v;

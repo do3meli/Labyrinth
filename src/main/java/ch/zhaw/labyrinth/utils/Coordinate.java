@@ -3,18 +3,21 @@ package ch.zhaw.labyrinth.utils;
 /**
  * This class represents the x and y-coordinate of a cell
  *
- * @param x
- *  x-Coordinate
- * @param y
- *  y-coordinate
+ * @author b.buetikofer
  */
 public class Coordinate {
 	
 	// instance variables
 	private int x;
 	private int y;
-	
-	// constructor
+
+    /**
+     *
+     * Default constructor. A coordinate has always an x- and y-value
+     *
+     * @param x x-Coordinate
+     * @param y y-coordinate
+     */
 	public Coordinate(int x, int y){
 		this.x = x;
 		this.y = y;

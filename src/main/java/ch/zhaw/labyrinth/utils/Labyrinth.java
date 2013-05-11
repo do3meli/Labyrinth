@@ -3,6 +3,12 @@ package ch.zhaw.labyrinth.utils;
 import java.util.HashMap;
 import java.util.Random;
 
+/**
+ * TODO: JavaDoc
+ *
+ * @author d.schlegel
+ *
+ */
 public class Labyrinth {
 	
 	// instance variables

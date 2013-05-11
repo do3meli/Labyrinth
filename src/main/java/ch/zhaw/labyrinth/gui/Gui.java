@@ -10,6 +10,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * This class is responsible for creating the GUI
+ *
+ * @author b.buetikofer, d.schlegel
+ *
+ */
 public class Gui {
     
 	// instance variables

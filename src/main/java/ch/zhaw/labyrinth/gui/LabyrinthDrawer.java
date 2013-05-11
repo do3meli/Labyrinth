@@ -7,7 +7,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 
-
+/**
+ * TODO: JavaDoc
+ *
+ * @author d.schlegel
+ *
+ */
 public class LabyrinthDrawer extends JPanel implements Runnable {
    
 	// serial version UID

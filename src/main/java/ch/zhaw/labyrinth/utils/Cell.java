@@ -8,6 +8,9 @@ package ch.zhaw.labyrinth.utils;
  * 		=> you can walk throght the cell
  * IF path = false
  * 		=> you can not walk throught the cell
+ *
+ * 	@author b.buetikofer, d.schlegel
+ *
  */
 public class Cell {
 	
