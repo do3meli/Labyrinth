@@ -39,9 +39,9 @@ public interface Heading {
      *
      * @param x x-coordinate
      * @param y y-coordinate
-     * @return true if visited
+     * @return number of visits
      */
-    boolean isVisited(int x, int y);
+    int getVisits(int x, int y);
 
     /**
      * Turns right and goes on step ahead
@@ -77,6 +77,6 @@ public interface Heading {
      *
      * @return the solvedMaze Map
      */
-    Labyrinth getSolvedMaze();
+    Labyrinth getSolvedLabyrinth();
 
 }
