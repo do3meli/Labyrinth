@@ -61,14 +61,16 @@ public class RightHand extends Solver {
 
 
             // If we already visited the next cell, try to go right
-            // otherwise, go straight ahead
+            // otherwise, go straight ahead, if thats not possible go left
             if(heading.isVisited(x,y)) {
                 if(heading.isRight()) {
-                    heading.goRight();
+                    heading = heading.goRight();
                 } else if (heading.isStraight()) {
-                    heading.goStraight();
+                    heading = heading.goStraight();
                 } else if (heading.isLeft()) {
-                    heading.goLeft();
+                    heading = heading.goLeft();
+                } else {
+                    heading = heading.goBack();
                 }
                 setCoordinate(heading.getCoordinate());
                 continue;
