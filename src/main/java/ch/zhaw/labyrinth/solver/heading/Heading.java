@@ -15,7 +15,7 @@ public interface Heading {
     boolean isBack();
 
     // Check if the cell was already visited
-    boolean isVisited(int x, int y);
+    int getVisits(int x, int y);
 
     // Methods to move
     Heading goRight();

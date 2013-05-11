@@ -84,16 +84,16 @@ public class Labyrinth {
     }
 
     // setter method to set the cell value from an x and y parameter
-    public void setCellVisited(int x,int y,boolean val){
+    public void setCellVisited(int x, int y){
         Coordinate coordinate = new Coordinate(x,y);
         Cell cell = maze.get(coordinate);
-        cell.setVisited(val);
+        cell.incVisits();
     }
 
-    public boolean isCellVisited(int x,int y){
+    public int isCellVisited(int x, int y){
         Coordinate coordinate = new Coordinate(x,y);
         Cell cell = maze.get(coordinate);
-        return cell.isVisited();
+        return cell.getVisits();
     }
 	
 	// getter method for cell value at specific coordinate

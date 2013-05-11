@@ -47,7 +47,7 @@ public class North implements Heading {
     }
 
     @Override
-    public boolean isVisited(int x, int y) {
+    public int getVisits(int x, int y) {
         return maze.isCellVisited(x, y);
     }
 
@@ -55,46 +55,52 @@ public class North implements Heading {
     @Override
     public East goRight() {
         // mark current cell as visited
-        maze.setCellVisited(x, y, true);
+        maze.setCellVisited(x, y);
         // Store it in the solvedMaze Map
-        solvedMaze.setCellValue(x+1, y, true);
         setX(x+1);
+        storeIt();
         return new East(x, y, maze, solvedMaze);
     }
 
     @Override
     public West goLeft() {
         // mark current cell as visited
-        maze.setCellVisited(x, y, true);
+        maze.setCellVisited(x, y);
         // Store it in the solvedMaze Map
-        solvedMaze.setCellValue(x-1, y, true);
         setX(x-1);
+        storeIt();
         return new West(x, y, maze, solvedMaze);
     }
 
     @Override
     public North goStraight() {
         // mark current cell as visited
-        maze.setCellVisited(x, y, true);
+        maze.setCellVisited(x, y);
         // Store it in the solvedMaze Map
-        solvedMaze.setCellValue(x, y-1, true);
-        setY(y-1);
+        setY(y - 1);
+        storeIt();
         return new North(x, y, maze, solvedMaze);
     }
 
     @Override
     public South goBack() {
         // mark current cell as visited
-        maze.setCellVisited(x, y, true);
+        maze.setCellVisited(x, y);
         // Store it in the solvedMaze Map
-        solvedMaze.setCellValue(x, y+1, true);
-        setY(y+1);
+        setY(y + 1);
+        storeIt();
+
         return new South(x++, y, maze, solvedMaze);
     }
 
     @Override
     public Labyrinth getSolvedLabyrinth() {
         return solvedMaze;
+    }
+
+    private void storeIt() {
+        solvedMaze.setCellValue(x, y, true);
+        solvedMaze.setCellVisited(x,y);
     }
 
     public int getX() {

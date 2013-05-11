@@ -13,10 +13,11 @@ public class Cell {
 	
 	// variables
 	private boolean path;
-	private boolean visited;
+	private int visits;
 	
 	// constructor
 	public Cell(){
+        visits = 0;
 		
 	}
 	
@@ -30,14 +31,14 @@ public class Cell {
 		this.path = path;
 	}
 	
-	// getter for visited
-	public boolean isVisited() {
-		return visited;
+	// getter for visits
+	public int getVisits() {
+		return visits;
 	}
 	
-	// setter for visited
-	public void setVisited(boolean visited) {
-		this.visited = visited;
+	// setter for visits
+	public void incVisits() {
+		this.visits++;
 	}
 	
 }

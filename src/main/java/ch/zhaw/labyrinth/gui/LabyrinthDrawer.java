@@ -63,7 +63,11 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
             }
         } else if (mode.equals("solve")) {
             if (curCell.isPath()){
-                g.setColor(Color.green);
+                if(curCell.getVisits() > 1) {
+                    g.setColor(Color.blue);
+                } else {
+                    g.setColor(Color.green);
+                }
                 g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom );
             }
         }

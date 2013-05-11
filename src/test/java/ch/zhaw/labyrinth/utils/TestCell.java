@@ -34,10 +34,10 @@ public class TestCell {
 	@Test
 	public void testSetVisited() {
 		
-		c.setVisited(true);
-		assertEquals(true,c.isVisited());
-		c.setVisited(false);
-		assertEquals(false,c.isVisited());
+		c.incVisits();
+		assertEquals(true,c.getVisits());
+		c.incVisits();
+		assertEquals(false,c.getVisits());
 		
 	}
 
