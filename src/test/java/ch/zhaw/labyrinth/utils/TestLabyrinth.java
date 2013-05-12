@@ -98,14 +98,14 @@ public class TestLabyrinth {
 	  
 	}
 	
-//	@Test
-//	public void testIsVisited(){
-//		Coordinate c = new Coordinate(1,2);
-//
-//		assertFalse(lab.getCellAt(c).getVisits());
-//		lab.getCellAt(c).incVisits();
-//		assertTrue(lab.getCellAt(c).getVisits());
-//	}
+	@Test
+	public void testIsVisited(){
+		Coordinate c = new Coordinate(1,2);
+
+		assertEquals(0,lab.getCellAt(c).getVisits());
+		lab.getCellAt(c).incVisits();
+		assertEquals(1,lab.getCellAt(c).getVisits());
+	}
 	
 	@Test
 	public void testGetAndSetEntry(){
