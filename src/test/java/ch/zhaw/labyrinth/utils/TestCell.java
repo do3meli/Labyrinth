@@ -34,10 +34,9 @@ public class TestCell {
 	@Test
 	public void testSetVisited() {
 		
+		assertEquals(0,c.getVisits());
 		c.incVisits();
-		assertEquals(true,c.getVisits());
-		c.incVisits();
-		assertEquals(false,c.getVisits());
+		assertEquals(1,c.getVisits());
 		
 	}
 
