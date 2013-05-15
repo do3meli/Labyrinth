@@ -35,7 +35,7 @@ public interface Heading {
     boolean isBack();
 
     /**
-     * Marks a cell as visited
+     * Get number of visits of given cell
      *
      * @param x x-coordinate
      * @param y y-coordinate

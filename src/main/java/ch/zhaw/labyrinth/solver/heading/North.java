@@ -9,23 +9,14 @@ import ch.zhaw.labyrinth.utils.Labyrinth;
  * Date: 04.05.13
  * Time: 11:33
  */
-public class North implements Heading {
+public class North extends AbstractHeading implements Heading {
 
-    int x;
-    int y;
-    Labyrinth maze;
-    Labyrinth solvedMaze;
 
     public North(int x, int y, Labyrinth maze, Labyrinth solvedMaze) {
         this.x = x;
         this.y = y;
         this.maze = maze;
         this.solvedMaze = solvedMaze;
-    }
-
-    // Get Coordindate
-    public Coordinate getCoordinate() {
-        return new Coordinate(getX(), getY());
     }
 
     // Check methods
@@ -93,29 +84,4 @@ public class North implements Heading {
         return new South(x++, y, maze, solvedMaze);
     }
 
-    @Override
-    public Labyrinth getSolvedLabyrinth() {
-        return solvedMaze;
-    }
-
-    private void storeIt() {
-        solvedMaze.setCellValue(x, y, true);
-        solvedMaze.setCellVisited(x,y);
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
 }

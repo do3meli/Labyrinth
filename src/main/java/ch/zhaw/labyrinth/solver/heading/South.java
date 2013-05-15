@@ -6,22 +6,13 @@ import ch.zhaw.labyrinth.utils.Labyrinth;
 /**
  * Implements the movements when heading south
  */
-public class South implements Heading {
-    int x;
-    int y;
-    Labyrinth maze;
-    Labyrinth solvedMaze;
+public class South extends AbstractHeading implements Heading {
 
     public South(int x, int y, Labyrinth maze, Labyrinth solvedMaze) {
         this.x = x;
         this.y = y;
         this.maze = maze;
         this.solvedMaze = solvedMaze;
-    }
-
-    // Get Coordindate
-    public Coordinate getCoordinate() {
-        return new Coordinate(getX(), getY());
     }
 
     // Check methods
@@ -88,29 +79,4 @@ public class South implements Heading {
         return new North(x, y, maze, solvedMaze);
     }
 
-    @Override
-    public Labyrinth getSolvedLabyrinth() {
-        return solvedMaze;
-    }
-
-    private void storeIt() {
-        solvedMaze.setCellValue(x, y, true);
-        solvedMaze.setCellVisited(x,y);
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
 }
