@@ -1,10 +1,13 @@
 package ch.zhaw.labyrinth.solver;
 
 
+import ch.zhaw.labyrinth.gui.Gui;
 import ch.zhaw.labyrinth.gui.LabyrinthDrawer;
 import ch.zhaw.labyrinth.solver.heading.*;
 import ch.zhaw.labyrinth.utils.Coordinate;
 import ch.zhaw.labyrinth.utils.Labyrinth;
+
+import java.util.Observable;
 
 /**
  * This class implements the RightHand Algorithm.
@@ -12,7 +15,7 @@ import ch.zhaw.labyrinth.utils.Labyrinth;
  * @author b.buetikofer
  *
  */
-public class RightHand extends Solver {
+public class RightHand extends Observable implements Solver {
     int x,y,u,v;
     private Labyrinth solvedLabyrinth;
     private Labyrinth labyrinth;
@@ -20,6 +23,7 @@ public class RightHand extends Solver {
 
     // Constructor
     public RightHand(Labyrinth labyrinth) {
+
         this.labyrinth = labyrinth;
         solvedLabyrinth = new Labyrinth();
         solvedLabyrinth.setDimension(labyrinth.getDimension());
@@ -31,6 +35,8 @@ public class RightHand extends Solver {
     public void solve(LabyrinthDrawer labyrinthDrawer) {
         // Step counter
         int steps = 0;
+
+        addObserver(labyrinthDrawer);
 
         // set entry and exit
         Coordinate entry = labyrinth.getEntry();
@@ -58,8 +64,11 @@ public class RightHand extends Solver {
             //heading.getSolvedLabyrinth().printAsArray();
 
             // FIXME: Draw only the current coordinate
-            labyrinthDrawer.setLabyrinth(heading.getSolvedLabyrinth());
-            javax.swing.SwingUtilities.invokeLater(labyrinthDrawer);
+            if(labyrinth.getCellAt(new Coordinate(x,y)).isPath()) {
+                labyrinthDrawer.setLabyrinth(heading.getSolvedLabyrinth(), new Coordinate(x, y));
+                setChanged();
+                notifyObservers();
+            }
 
             // If we already visited the next cell, try to go right
             // otherwise, go straight ahead, if thats not possible go left

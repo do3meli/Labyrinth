@@ -6,6 +6,8 @@ import ch.zhaw.labyrinth.utils.Labyrinth;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * TODO: JavaDoc
@@ -13,7 +15,7 @@ import java.util.HashMap;
  * @author d.schlegel
  *
  */
-public class LabyrinthDrawer extends JPanel implements Runnable {
+public class LabyrinthDrawer extends JPanel implements Runnable, Observer {
    
 	// serial version UID
 	private static final long serialVersionUID = 623347107962887545L;
@@ -26,14 +28,14 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
     private Cell curCell;
     private Coordinate curCoordinate;
     private String mode;
-    
+
     // construktor
     public LabyrinthDrawer(Labyrinth labyrinth, boolean fast, int zoom, String mode) {
         this.labyrinth = labyrinth;
         this.zoom = zoom;
         this.fast = fast;
         this.mode = mode;
-        
+
         buildFrame();
     }
     
@@ -67,13 +69,16 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
                 g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom );
             }
         } else if (mode.equals("solve")) {
-            if (curCell.isPath()){
-                if(curCell.getVisits() > 1) {
-                    g.setColor(Color.blue);
-                } else {
-                    g.setColor(Color.green);
-                }
-                g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom );
+            if(labyrinth.getCellAt(curCoordinate.getX(), curCoordinate.getY()).getVisits() > 1) {
+                g.setColor(Color.blue);
+            } else {
+                g.setColor(Color.green);
+            }
+            g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom );
+            try {
+                Thread.sleep(25);
+            } catch(InterruptedException ex) {
+                Thread.currentThread().interrupt();
             }
         }
       
@@ -86,22 +91,27 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
     
     @Override
     public void run() {
-   
         HashMap<Coordinate, Cell> maze = labyrinth.getMaze();
-        
-        for(int i=0; i< labyrinth.getDimension(); i++) {
-            for (int j=0; j< labyrinth.getDimension(); j++) {
 
-            	curCoordinate = new Coordinate(i,j);
-                curCell = maze.get(curCoordinate);
+        if(mode.equals("solve")) {
+            curCell = labyrinth.getCellAt(curCoordinate);
+            paintComponent(canvas.getGraphics());
+        } else {
 
-                if(!(curCell == null)) {
-                    paintComponent(canvas.getGraphics());
-                    if(!fast) {
-                        try {
-                            Thread.sleep(5);
-                        } catch(InterruptedException ex) {
-                            Thread.currentThread().interrupt();
+            for(int i=0; i< labyrinth.getDimension(); i++) {
+                for (int j=0; j< labyrinth.getDimension(); j++) {
+
+                    curCoordinate = new Coordinate(i,j);
+                    curCell = maze.get(curCoordinate);
+
+                    if(!(curCell == null)) {
+                        paintComponent(canvas.getGraphics());
+                        if(!fast) {
+                            try {
+                                Thread.sleep(5);
+                            } catch(InterruptedException ex) {
+                                Thread.currentThread().interrupt();
+                            }
                         }
                     }
                 }
@@ -124,5 +134,15 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
 
     public void setLabyrinth(Labyrinth labyrinth) {
         this.labyrinth = labyrinth;
+    }
+
+    public void setLabyrinth(Labyrinth labyrinth, Coordinate coordinate) {
+        this.labyrinth = labyrinth;
+        this.curCoordinate = coordinate;
+    }
+
+    @Override
+    public void update(Observable observable, Object o) {
+        paintComponent(canvas.getGraphics());
     }
 }

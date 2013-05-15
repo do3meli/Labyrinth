@@ -4,8 +4,9 @@ import ch.zhaw.labyrinth.gui.LabyrinthDrawer;
 
 /**
  * Abstract class which every algorithm has to extend
+ * TODO: Should be an Interface
  */
-public abstract class Solver {
+public interface Solver {
 
     /**
      * This method implements the solving algorithm
