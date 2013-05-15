@@ -1,10 +1,11 @@
 package ch.zhaw.labyrinth.solver.heading;
 
-import ch.zhaw.labyrinth.utils.Coordinate;
 import ch.zhaw.labyrinth.utils.Labyrinth;
 
 /**
- * Implements the movements when heading south
+ * This is the South implementation of Heading
+ *
+ * @author b.buetikofer
  */
 public class South extends AbstractHeading implements Heading {
 

@@ -1,13 +1,11 @@
 package ch.zhaw.labyrinth.solver.heading;
 
-import ch.zhaw.labyrinth.utils.Coordinate;
 import ch.zhaw.labyrinth.utils.Labyrinth;
 
 /**
- * Created with IntelliJ IDEA.
- * User: bbu
- * Date: 04.05.13
- * Time: 11:35
+ * This is the East implementation of Heading
+ *
+ * @author b.buetikofer
  */
 public class East extends AbstractHeading implements Heading {
 
