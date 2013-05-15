@@ -137,44 +137,43 @@ public class DepthFirstSearch extends Labyrinth {
 		// create random
 		Random rand = new Random();
 		int r = rand.nextInt(2);
-			
-		// get a random for entry and one for output
-		int rEntry = rand.nextInt(getDimension());
-		int rOut = rand.nextInt(getDimension());
+		
+		int rEntry = rand.nextInt(getDimension() - 2) + 1;
+		int rOut = rand.nextInt(getDimension() - 2) + 1;
 			
 		// r = 0 => entry is at the top of the maze
 		if ( r == 0){
 			
 			// check if 1 cell ahead entry is free
-			while(!getCellValueAt(1, rEntry)){
-				rEntry = rand.nextInt(getDimension());
+			while(!getCellValueAt(rEntry,1)){
+				rEntry = rand.nextInt(getDimension() -2) + 1;
 			}
 			
 			// check if 1 cell ahead output is free
-			while(!getCellValueAt(getDimension() - 2, rOut)){
-				rOut = rand.nextInt(getDimension());
+			while(!getCellValueAt(rOut,getDimension() - 2)){
+				rOut = rand.nextInt(getDimension() - 2) + 1;
 			}
 		
 			// now make the field a path
-			setCellValue(rEntry, 0, PATH);
-			setCellValue(rOut, getDimension() - 1, PATH);
+			setCellValue( rEntry,0, PATH);
+			setCellValue(rOut,getDimension() - 1, PATH);
 
             // Save entry & exit
-            setEntry(new Coordinate(rEntry, 0));
-            setExit(new Coordinate(rOut, getDimension() - 1));
+			setEntry(new Coordinate( rEntry,0));
+            setExit(new Coordinate(rOut,getDimension() - 1));
 		}
 		
 		// r = 1 => entry is on the left site
 		if ( r == 1){
 			
 			// check if 1 cell ahead entry is free
-			while(!getCellValueAt(rEntry, 1)){
-				rEntry = rand.nextInt(getDimension());
+			while(!getCellValueAt(1,rEntry)){
+				rEntry = rand.nextInt(getDimension()-2) + 1;
 			}
 			
 			// check if 1 cell ahead output is free
-			while(!getCellValueAt(rOut, getDimension() - 2)){
-				rOut = rand.nextInt(getDimension());
+			while(!getCellValueAt(getDimension() - 2,rOut)){
+				rOut = rand.nextInt(getDimension()-2) + 1;
 			}
 		
 			// now make the field a path
