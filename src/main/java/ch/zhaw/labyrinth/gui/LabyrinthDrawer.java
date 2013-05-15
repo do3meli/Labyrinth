@@ -107,7 +107,7 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
                 }
             }
         }
-        paintComponent(canvas.getGraphics());
+        //paintComponent(canvas.getGraphics());
     }
 
     public String getMode() {
