@@ -1,6 +1,7 @@
 package ch.zhaw.labyrinth.solver;
 
 
+import ch.zhaw.labyrinth.gui.Gui;
 import ch.zhaw.labyrinth.gui.LabyrinthDrawer;
 import ch.zhaw.labyrinth.solver.heading.*;
 import ch.zhaw.labyrinth.utils.Coordinate;
@@ -58,8 +59,11 @@ public class RightHand extends Solver {
             //heading.getSolvedLabyrinth().printAsArray();
 
             // FIXME: Draw only the current coordinate
-            labyrinthDrawer.setLabyrinth(heading.getSolvedLabyrinth(), heading.getCoordinate());
-            javax.swing.SwingUtilities.invokeLater(labyrinthDrawer);
+            if(labyrinth.getCellAt(new Coordinate(x,y)).isPath()) {
+                labyrinthDrawer.setLabyrinth(heading.getSolvedLabyrinth(), new Coordinate(x, y));
+                Gui.drawLabyrinth(labyrinthDrawer);
+            }
+            //javax.swing.SwingUtilities.invokeLater(labyrinthDrawer);
 
             // If we already visited the next cell, try to go right
             // otherwise, go straight ahead, if thats not possible go left

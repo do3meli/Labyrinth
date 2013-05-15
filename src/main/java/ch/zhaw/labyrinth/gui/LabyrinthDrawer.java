@@ -67,14 +67,14 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
                 g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom );
             }
         } else if (mode.equals("solve")) {
-            if (curCell.isPath()){
+            //if (curCell.isPath()){
                 if(curCell.getVisits() > 1) {
                     g.setColor(Color.blue);
                 } else {
                     g.setColor(Color.green);
                 }
                 g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom );
-            }
+            //}
         }
       
     }
@@ -87,6 +87,7 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
     @Override
     public void run() {
         HashMap<Coordinate, Cell> maze = labyrinth.getMaze();
+
         if(mode.equals("solve")) {
             paintComponent(canvas.getGraphics());
         } else {
@@ -132,6 +133,5 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
     public void setLabyrinth(Labyrinth labyrinth, Coordinate coordinate) {
         this.labyrinth = labyrinth;
         this.curCoordinate = coordinate;
-        setMode("solve");
     }
 }

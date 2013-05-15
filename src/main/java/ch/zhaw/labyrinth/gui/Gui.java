@@ -220,7 +220,7 @@ public class Gui {
             //creating and showing this application's GUI.
             if(lbuilder != null){
             	labyrinthDrawer = new LabyrinthDrawer(lbuilder, getChckbxFastMode(),zoom, "create");
-                javax.swing.SwingUtilities.invokeLater(labyrinthDrawer);
+                drawLabyrinth(labyrinthDrawer);
             }
             
 
@@ -249,6 +249,10 @@ public class Gui {
             lbsolver.solve(labyrinthDrawer);
 
         }
+    }
+
+    public static void drawLabyrinth(LabyrinthDrawer ld) {
+        javax.swing.SwingUtilities.invokeLater(ld);
     }
 
 
