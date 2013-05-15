@@ -37,7 +37,7 @@ public class RightHand extends Observable implements Solver {
         int steps = 0;
 
         addObserver(labyrinthDrawer);
-        labyrinthDrawer.setMode("solve");
+
         // set entry and exit
         Coordinate entry = labyrinth.getEntry();
         Coordinate exit = labyrinth.getExit();
