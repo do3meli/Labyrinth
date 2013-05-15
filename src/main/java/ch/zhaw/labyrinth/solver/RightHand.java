@@ -58,7 +58,7 @@ public class RightHand extends Solver {
             //heading.getSolvedLabyrinth().printAsArray();
 
             // FIXME: Draw only the current coordinate
-            labyrinthDrawer.setLabyrinth(heading.getSolvedLabyrinth());
+            labyrinthDrawer.setLabyrinth(heading.getSolvedLabyrinth(), heading.getCoordinate());
             javax.swing.SwingUtilities.invokeLater(labyrinthDrawer);
 
             // If we already visited the next cell, try to go right

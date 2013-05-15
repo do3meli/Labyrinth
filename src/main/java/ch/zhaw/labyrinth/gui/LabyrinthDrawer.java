@@ -86,28 +86,31 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
     
     @Override
     public void run() {
-   
         HashMap<Coordinate, Cell> maze = labyrinth.getMaze();
-        
-        for(int i=0; i< labyrinth.getDimension(); i++) {
-            for (int j=0; j< labyrinth.getDimension(); j++) {
+        if(mode.equals("solve")) {
+            paintComponent(canvas.getGraphics());
+        } else {
 
-            	curCoordinate = new Coordinate(i,j);
-                curCell = maze.get(curCoordinate);
+            for(int i=0; i< labyrinth.getDimension(); i++) {
+                for (int j=0; j< labyrinth.getDimension(); j++) {
 
-                if(!(curCell == null)) {
-                    paintComponent(canvas.getGraphics());
-                    if(!fast) {
-                        try {
-                            Thread.sleep(5);
-                        } catch(InterruptedException ex) {
-                            Thread.currentThread().interrupt();
+                    curCoordinate = new Coordinate(i,j);
+                    curCell = maze.get(curCoordinate);
+
+                    if(!(curCell == null)) {
+                        paintComponent(canvas.getGraphics());
+                        if(!fast) {
+                            try {
+                                Thread.sleep(5);
+                            } catch(InterruptedException ex) {
+                                Thread.currentThread().interrupt();
+                            }
                         }
                     }
                 }
             }
         }
-        paintComponent(canvas.getGraphics());
+        //paintComponent(canvas.getGraphics());
     }
 
     public String getMode() {
@@ -124,5 +127,11 @@ public class LabyrinthDrawer extends JPanel implements Runnable {
 
     public void setLabyrinth(Labyrinth labyrinth) {
         this.labyrinth = labyrinth;
+    }
+
+    public void setLabyrinth(Labyrinth labyrinth, Coordinate coordinate) {
+        this.labyrinth = labyrinth;
+        this.curCoordinate = coordinate;
+        setMode("solve");
     }
 }
