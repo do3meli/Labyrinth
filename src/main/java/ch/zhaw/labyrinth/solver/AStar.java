@@ -32,12 +32,20 @@ public class AStar extends Observable implements Solver {
     @Override
     public void solve(LabyrinthDrawer labyrinthDrawer) {
         /**
-         *  Current coordinates
+         *  Entry
          */
-        Coordinate currentCoordinate = maze.getEntry();
+        Coordinate entry = maze.getEntry();
+//        int x = entry.getX();
+//        int y = entry.getY();
+//
+//        Coordinate exit = maze.getEntry();
+//        int u = exit.getX();
+//        int v = exit.getY();
+
+
+        Coordinate currentCoordinate = entry;
         int x = currentCoordinate.getX();
         int y = currentCoordinate.getY();
-
         /**
          * Add start point to the openSet, set predecessor to self
          */
@@ -110,7 +118,7 @@ public class AStar extends Observable implements Solver {
         newCell.setG(constant + predecessorCell.getG());
 
         // Calculate H Value
-
+        newCell.setH((maze.getExit().getX() - x + maze.getExit().getY() - y) * 10);
 
         // Calculate F Value
         newCell.setF(newCell.getG() + newCell.getH());
