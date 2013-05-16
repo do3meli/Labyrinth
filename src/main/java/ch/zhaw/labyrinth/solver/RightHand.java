@@ -1,7 +1,6 @@
 package ch.zhaw.labyrinth.solver;
 
 
-import ch.zhaw.labyrinth.gui.Gui;
 import ch.zhaw.labyrinth.gui.LabyrinthDrawer;
 import ch.zhaw.labyrinth.solver.heading.*;
 import ch.zhaw.labyrinth.utils.Coordinate;
