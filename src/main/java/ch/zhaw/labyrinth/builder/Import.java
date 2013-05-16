@@ -17,7 +17,6 @@ public class Import extends Labyrinth {
 	
 	// instance vars
 	private File file;
-	private Scanner scanner;
 	
 	// constructor
 	public Import(File f) {
@@ -28,6 +27,9 @@ public class Import extends Labyrinth {
 
 	
 	private void readFileIntoArray() {
+		
+		// local variable
+		Scanner scanner = null;
 		
 		// try to load the file into the scanner
 		try {
