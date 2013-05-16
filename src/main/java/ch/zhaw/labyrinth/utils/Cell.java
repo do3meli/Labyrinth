@@ -17,16 +17,19 @@ public class Cell {
 	// instance variables
 	private boolean path;
 	private int visits;
+    private Coordinate predecessor;
+    private int f,g,h;
 	
 	/**
 	 * Default constructor for Cell object.
-	 * This only sets visits = 0
+     *
+	 * A newly create cell has no visits
+     *
 	 */
 	public Cell(){
         visits = 0;
-		
 	}
-	
+
 	/**
 	 * getter for path instance variable
 	 * @return boolean
@@ -56,5 +59,36 @@ public class Cell {
 	public void incVisits() {
 		this.visits++;
 	}
-	
+
+    public Coordinate getPredecessor() {
+        return predecessor;
+    }
+
+    public void setPredecessor(Coordinate predecessor) {
+        this.predecessor = predecessor;
+    }
+
+    public int getF() {
+        return f;
+    }
+
+    public void setF(int f) {
+        this.f = f;
+    }
+
+    public int getG() {
+        return g;
+    }
+
+    public void setG(int g) {
+        this.g = g;
+    }
+
+    public int getH() {
+        return h;
+    }
+
+    public void setH(int h) {
+        this.h = h;
+    }
 }

@@ -106,6 +106,39 @@ public class Labyrinth {
 	public boolean getCellValueAt(Coordinate c){
 		return maze.get(c).isPath();
 	}
+
+    /**
+     * Adds a reachable cell to the maze and saves it's predecessor
+     *
+     * @param coordinate
+     * @param predecessor
+     */
+    public void addPath(Coordinate coordinate, Coordinate predecessor) {
+        Cell cell = new Cell();
+        cell.setPath(true);
+        cell.setPredecessor(predecessor);
+        maze.put(coordinate, cell);
+    }
+
+    /**
+     * Adds a reachable cell to a maze
+     *
+     * @param coordinate
+     */
+    public void addPath(Coordinate coordinate) {
+        Cell cell = new Cell();
+        cell.setPath(true);
+        maze.put(coordinate, cell);
+    }
+
+    /**
+     * removes a cell from a maze
+     *
+     * @param currentCoordinate
+     */
+    public void removeCell(Coordinate currentCoordinate) {
+        maze.remove(currentCoordinate);
+    }
 	
 
     /**
@@ -171,4 +204,7 @@ public class Labyrinth {
 	    }
     	System.out.println();
     }
+
+
+
 }
