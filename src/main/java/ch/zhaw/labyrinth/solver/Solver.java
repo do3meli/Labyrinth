@@ -3,8 +3,7 @@ package ch.zhaw.labyrinth.solver;
 import ch.zhaw.labyrinth.gui.LabyrinthDrawer;
 
 /**
- * Abstract class which every algorithm has to extend
- * TODO: Should be an Interface
+ * Abstract class which every solver algorithm has to extend
  */
 public interface Solver {
 
@@ -13,7 +12,5 @@ public interface Solver {
      * @param labyrinthDrawer
      */
     public abstract void solve(LabyrinthDrawer labyrinthDrawer);
-
-
-
+    
 }
