@@ -56,37 +56,36 @@ public class AStar extends Observable implements Solver {
              * Add all reachable neighbors to the openSet and add calculate f-cost
              */
             // north
-            if(maze.getCellValueAt(x, y + 1) || !closedSet.getCellValueAt(x, y + 1)) {
+            if(maze.getCellValueAt(x, y + 1) && !closedSet.getCellValueAt(x, y + 1)) {
                 checkValue(x, y + 1, currentCoordinate, G_HORIZONTAL_VERTICAL);
             }
             // east
-            if(maze.getCellValueAt(x + 1, y) || !closedSet.getCellValueAt(x + 1, y)) {
+            if(maze.getCellValueAt(x + 1, y) && !closedSet.getCellValueAt(x + 1, y)) {
                 checkValue(x + 1, y, currentCoordinate, G_HORIZONTAL_VERTICAL);
             }
-
             // west
-            if(maze.getCellValueAt(x - 1, y) || !closedSet.getCellValueAt(x - 1, y)) {
+            if(maze.getCellValueAt(x - 1, y) && !closedSet.getCellValueAt(x - 1, y)) {
                 checkValue(x - 1, y, currentCoordinate, G_HORIZONTAL_VERTICAL);
             }
             // south
-            if(maze.getCellValueAt(x, y - 1) || !closedSet.getCellValueAt(x, y - 1)) {
+            if(maze.getCellValueAt(x, y - 1) && !closedSet.getCellValueAt(x, y - 1)) {
                 checkValue(x, y - 1, currentCoordinate, G_HORIZONTAL_VERTICAL);
             }
 
             // north-east
-            if(maze.getCellValueAt(x + 1, y + 1) || !closedSet.getCellValueAt(x + 1, y + 1)) {
+            if(maze.getCellValueAt(x + 1, y + 1) && !closedSet.getCellValueAt(x + 1, y + 1)) {
                 checkValue(x + 1, y + 1, currentCoordinate, G_DIAGONAL);
             }
             // south-west
-            if(maze.getCellValueAt(x - 1, y - 1) || !closedSet.getCellValueAt(x - 1, y - 1)) {
+            if(maze.getCellValueAt(x - 1, y - 1) && !closedSet.getCellValueAt(x - 1, y - 1)) {
                 checkValue(x - 1, y - 1, currentCoordinate, G_DIAGONAL);
             }
             // south-east
-            if(maze.getCellValueAt(x + 1, y - 1) || !closedSet.getCellValueAt(x + 1, y - 1)) {
+            if(maze.getCellValueAt(x + 1, y - 1) && !closedSet.getCellValueAt(x + 1, y - 1)) {
                 checkValue(x + 1, y - 1, currentCoordinate, G_DIAGONAL);
             }
             // north-west
-            if(maze.getCellValueAt(x - 1, y + 1) || !closedSet.getCellValueAt(x - 1, y + 1)) {
+            if(maze.getCellValueAt(x - 1, y + 1) && !closedSet.getCellValueAt(x - 1, y + 1)) {
                 checkValue(x - 1, y + 1, currentCoordinate, G_DIAGONAL);
             }
 
@@ -100,6 +99,8 @@ public class AStar extends Observable implements Solver {
              * Get cell with the lowest F value
              */
             currentCoordinate = openSet.getLowestF();
+            x=currentCoordinate.getX();
+            y=currentCoordinate.getY();
 
         }
 
@@ -107,6 +108,7 @@ public class AStar extends Observable implements Solver {
          * Move back the closedSet to get the path
          */
         labyrinthDrawer.setLabyrinth(closedSet);
+        labyrinthDrawer.setMode("AStar");
         setChanged();
         notifyObservers();
     }
@@ -134,19 +136,18 @@ public class AStar extends Observable implements Solver {
      *
      * @param x
      * @param y
-     * @param currentCoordinate
+     * @param predecessorCoordinate
      * @param constant
      */
-    private void checkGValueAndUpdate(int x, int y, Coordinate currentCoordinate, int constant) {
-        Cell currentCell = openSet.getCellAt(currentCoordinate);
-        int currentGValue = currentCell.getG();
-
-        Coordinate predecessorCoordinates = currentCell.getPredecessor();
-        Cell predecessorCell = openSet.getCellAt(predecessorCoordinates);
+    private void checkGValueAndUpdate(int x, int y, Coordinate predecessorCoordinate, int constant) {
+        Cell predecessorCell = openSet.getCellAt(predecessorCoordinate);
         int predecessorGValue = predecessorCell.getG();
 
+        Cell currentCell = openSet.getCellAt(x, y);
+        int currentGValue = currentCell.getG();
+
         if(currentGValue < predecessorGValue) {
-            currentCell.setPredecessor(currentCoordinate);
+            currentCell.setPredecessor(new Coordinate(x, y));
             // Calculate G Value
             currentCell.setG(constant + predecessorCell.getG());
 
