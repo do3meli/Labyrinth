@@ -23,17 +23,27 @@ public class Coordinate {
 		this.y = y;
 	}
 	
-	// getter for x
+	/**
+	 * Getter method for x
+	 * @return int the x coordinate
+	 */
 	public int getX() {
 		return x;
 	}
 	
-	// getter for y
+	/**
+	 * Getter method for y
+	 * @return int the y coordinate
+	 */
 	public int getY() {
 		return y;
 	}
 
-    @Override
+    
+    /**
+     * A cell is equals whenever the x and y coordinate are the same
+     */
+	@Override
     public boolean equals(Object o) {
         
     	if (this == o) {
