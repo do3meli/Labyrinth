@@ -2,6 +2,7 @@ package ch.zhaw.labyrinth.gui;
 
 import ch.zhaw.labyrinth.builder.DepthFirstSearch;
 import ch.zhaw.labyrinth.builder.Import;
+import ch.zhaw.labyrinth.solver.AStar;
 import ch.zhaw.labyrinth.solver.RightHand;
 import ch.zhaw.labyrinth.solver.Solver;
 import ch.zhaw.labyrinth.utils.Labyrinth;
@@ -35,7 +36,7 @@ public class Gui {
         
     	// set up drop downs
     	createAlgorithms = new String[]{ "Depth-First", "Import"};
-    	solveAlgorithms = new String[]{ "Right-Hand", "..."};
+    	solveAlgorithms = new String[]{ "Right-Hand", "A* Search"};
     	
     	/* Use an appropriate Look and Feel - if possible */
         try {
@@ -241,6 +242,8 @@ public class Gui {
             Solver lbsolver;
             if (type.equals("Right-Hand")) {
                 lbsolver = new RightHand(lbuilder);
+            } else if (type.equals("A* Search")) {
+                lbsolver = new AStar(lbuilder);
             } else {
                 lbsolver = null;
             }

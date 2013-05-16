@@ -1,6 +1,7 @@
 package ch.zhaw.labyrinth.utils;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -205,6 +206,21 @@ public class Labyrinth {
     	System.out.println();
     }
 
+    /**
+     *
+     * @return the coordinates to the cell with the lowest F value
+     */
+    public Coordinate getLowestF() {
+        int last = 0;
+        Coordinate coordinate = null;
 
+        for (Map.Entry<Coordinate, Cell> entry : maze.entrySet()) {
+            if(entry.getValue().getF() <= last) {
+                last=entry.getValue().getF();
+                coordinate = entry.getKey();
+            }
+        }
 
+        return coordinate;
+    }
 }

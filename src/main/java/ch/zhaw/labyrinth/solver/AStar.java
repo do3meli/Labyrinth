@@ -19,83 +19,143 @@ public class AStar extends Observable implements Solver {
     private Labyrinth maze;
     private Labyrinth closedSet;
     private Labyrinth openSet;
-    private Labyrinth cameFrom;
 
 
     public AStar(Labyrinth maze) {
         this.maze = maze;
-        openSet = new Labyrinth();
+        openSet = this.maze;
         closedSet = new Labyrinth();
-        cameFrom = new Labyrinth();
     }
 
     @Override
     public void solve(LabyrinthDrawer labyrinthDrawer) {
+        addObserver(labyrinthDrawer);
+
         /**
          *  Entry
          */
         Coordinate entry = maze.getEntry();
-//        int x = entry.getX();
-//        int y = entry.getY();
-//
-//        Coordinate exit = maze.getEntry();
-//        int u = exit.getX();
-//        int v = exit.getY();
+        Coordinate exit = maze.getEntry();
 
 
         Coordinate currentCoordinate = entry;
         int x = currentCoordinate.getX();
         int y = currentCoordinate.getY();
+
         /**
          * Add start point to the openSet, set predecessor to self
          */
         openSet.addPath(currentCoordinate, currentCoordinate);
 
         /**
-         * Add all reachable neighbors to the openSet and add calculate f-cost
+         * Dive into the recursion!! YAY
+         *
          */
-        // north
-        if(maze.getCellValueAt(x, y + 1)) {
-            addAndCalculate(x, y + 1, currentCoordinate, G_HORIZONTAL_VERTICAL);
-        }
-        // east
-        if(maze.getCellValueAt(x + 1, y)) {
-            addAndCalculate(x + 1, y, currentCoordinate, G_HORIZONTAL_VERTICAL);
-        }
+        while ( !currentCoordinate.equals(exit) ) {
+            /**
+             * Add all reachable neighbors to the openSet and add calculate f-cost
+             */
+            // north
+            if(maze.getCellValueAt(x, y + 1)) {
+                checkValue(x, y + 1, currentCoordinate, G_HORIZONTAL_VERTICAL);
+            }
+            // east
+            if(maze.getCellValueAt(x + 1, y)) {
+                checkValue(x + 1, y, currentCoordinate, G_HORIZONTAL_VERTICAL);
+            }
 
-        // west
-        if(maze.getCellValueAt(x - 1, y)) {
-            addAndCalculate(x - 1, y, currentCoordinate, G_HORIZONTAL_VERTICAL);
-        }
-        // south
-        if(maze.getCellValueAt(x, y - 1)) {
-            addAndCalculate(x, y - 1, currentCoordinate, G_HORIZONTAL_VERTICAL);
-        }
+            // west
+            if(maze.getCellValueAt(x - 1, y)) {
+                checkValue(x - 1, y, currentCoordinate, G_HORIZONTAL_VERTICAL);
+            }
+            // south
+            if(maze.getCellValueAt(x, y - 1)) {
+                checkValue(x, y - 1, currentCoordinate, G_HORIZONTAL_VERTICAL);
+            }
 
-        // north-east
-        if(maze.getCellValueAt(x + 1, y + 1)) {
-            addAndCalculate(x + 1, y + 1, currentCoordinate, G_DIAGONAL);
-        }
-        // south-west
-        if(maze.getCellValueAt(x - 1, y - 1)) {
-            addAndCalculate(x - 1, y - 1, currentCoordinate, G_DIAGONAL);
-        }
-        // south-east
-        if(maze.getCellValueAt(x + 1, y - 1)) {
-            addAndCalculate(x + 1, y - 1, currentCoordinate, G_DIAGONAL);
-        }
-        // north-west
-        if(maze.getCellValueAt(x - 1, y + 1)) {
-            addAndCalculate(x - 1, y + 1, currentCoordinate, G_DIAGONAL);
+            // north-east
+            if(maze.getCellValueAt(x + 1, y + 1)) {
+                checkValue(x + 1, y + 1, currentCoordinate, G_DIAGONAL);
+            }
+            // south-west
+            if(maze.getCellValueAt(x - 1, y - 1)) {
+                checkValue(x - 1, y - 1, currentCoordinate, G_DIAGONAL);
+            }
+            // south-east
+            if(maze.getCellValueAt(x + 1, y - 1)) {
+                checkValue(x + 1, y - 1, currentCoordinate, G_DIAGONAL);
+            }
+            // north-west
+            if(maze.getCellValueAt(x - 1, y + 1)) {
+                checkValue(x - 1, y + 1, currentCoordinate, G_DIAGONAL);
+            }
+
+            /**
+             * add current cell to the closed set and remove it from the maze
+             */
+            closedSet.addPath(currentCoordinate);
+            openSet.removeCell(currentCoordinate);
+
+            /**
+             * Get cell with the lowest F value
+             */
+            currentCoordinate = openSet.getLowestF();
+
         }
 
         /**
-         * add current cell to the closed set and remove it from the maze
+         * Move back the closedSet to get the path
          */
-        closedSet.addPath(currentCoordinate);
-        openSet.removeCell(currentCoordinate);
+        labyrinthDrawer.setLabyrinth(closedSet);
+        setChanged();
+        notifyObservers();
+    }
 
+    /**
+     * This method checks if cell at a given coordinate is already in the open set.
+     *
+     * @param x
+     * @param y
+     * @param currentCoordinate
+     * @param constant
+     */
+    private void checkValue(int x, int y, Coordinate currentCoordinate, int constant) {
+        if(!openSet.getCellValueAt(x, y)) {
+            addAndCalculate(x, y, currentCoordinate, constant);
+        } else {
+            checkGValueAndUpdate(x, y, currentCoordinate, constant);
+        }
+    }
 
+    /**
+     *
+     * If it's not it's added to the openSet. If it is, the new G value is compared with the one of its predecessor.
+     * If its lower the predecessor is set to the current cell
+     *
+     * @param x
+     * @param y
+     * @param currentCoordinate
+     * @param constant
+     */
+    private void checkGValueAndUpdate(int x, int y, Coordinate currentCoordinate, int constant) {
+        Cell currentCell = openSet.getCellAt(currentCoordinate);
+        int currentGValue = currentCell.getG();
+
+        Coordinate predecessorCoordinates = currentCell.getPredecessor();
+        Cell predecessorCell = openSet.getCellAt(predecessorCoordinates);
+        int predecessorGValue = predecessorCell.getG();
+
+        if(currentGValue < predecessorGValue) {
+            currentCell.setPredecessor(currentCoordinate);
+            // Calculate G Value
+            currentCell.setG(constant + predecessorCell.getG());
+
+            // Calculate H Value
+            currentCell.setH((maze.getExit().getX() - x + maze.getExit().getY() - y) * 10);
+
+            // Calculate F Value
+            currentCell.setF(currentCell.getG() + currentCell.getH());
+        }
     }
 
     /**
@@ -104,6 +164,7 @@ public class AStar extends Observable implements Solver {
      * @param x x-coordinate of the new cell
      * @param y y-coordinate of the new cell
      * @param currentCoordinate coordinate object of the cell from where this method was called
+     * @param constant cost constant
      */
     private void addAndCalculate(int x, int y, Coordinate currentCoordinate, int constant) {
         Coordinate newCoordinate = new Coordinate(x, y);
