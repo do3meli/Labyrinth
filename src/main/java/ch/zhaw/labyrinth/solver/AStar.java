@@ -23,7 +23,7 @@ public class AStar extends Observable implements Solver {
 
     public AStar(Labyrinth maze) {
         this.maze = maze;
-        openSet = this.maze;
+        openSet = new Labyrinth();
         closedSet = new Labyrinth();
     }
 
@@ -35,7 +35,7 @@ public class AStar extends Observable implements Solver {
          *  Entry
          */
         Coordinate entry = maze.getEntry();
-        Coordinate exit = maze.getEntry();
+        Coordinate exit = maze.getExit();
 
 
         Coordinate currentCoordinate = entry;
@@ -56,37 +56,37 @@ public class AStar extends Observable implements Solver {
              * Add all reachable neighbors to the openSet and add calculate f-cost
              */
             // north
-            if(maze.getCellValueAt(x, y + 1)) {
+            if(maze.getCellValueAt(x, y + 1) || !closedSet.getCellValueAt(x, y + 1)) {
                 checkValue(x, y + 1, currentCoordinate, G_HORIZONTAL_VERTICAL);
             }
             // east
-            if(maze.getCellValueAt(x + 1, y)) {
+            if(maze.getCellValueAt(x + 1, y) || !closedSet.getCellValueAt(x + 1, y)) {
                 checkValue(x + 1, y, currentCoordinate, G_HORIZONTAL_VERTICAL);
             }
 
             // west
-            if(maze.getCellValueAt(x - 1, y)) {
+            if(maze.getCellValueAt(x - 1, y) || !closedSet.getCellValueAt(x - 1, y)) {
                 checkValue(x - 1, y, currentCoordinate, G_HORIZONTAL_VERTICAL);
             }
             // south
-            if(maze.getCellValueAt(x, y - 1)) {
+            if(maze.getCellValueAt(x, y - 1) || !closedSet.getCellValueAt(x, y - 1)) {
                 checkValue(x, y - 1, currentCoordinate, G_HORIZONTAL_VERTICAL);
             }
 
             // north-east
-            if(maze.getCellValueAt(x + 1, y + 1)) {
+            if(maze.getCellValueAt(x + 1, y + 1) || !closedSet.getCellValueAt(x + 1, y + 1)) {
                 checkValue(x + 1, y + 1, currentCoordinate, G_DIAGONAL);
             }
             // south-west
-            if(maze.getCellValueAt(x - 1, y - 1)) {
+            if(maze.getCellValueAt(x - 1, y - 1) || !closedSet.getCellValueAt(x - 1, y - 1)) {
                 checkValue(x - 1, y - 1, currentCoordinate, G_DIAGONAL);
             }
             // south-east
-            if(maze.getCellValueAt(x + 1, y - 1)) {
+            if(maze.getCellValueAt(x + 1, y - 1) || !closedSet.getCellValueAt(x + 1, y - 1)) {
                 checkValue(x + 1, y - 1, currentCoordinate, G_DIAGONAL);
             }
             // north-west
-            if(maze.getCellValueAt(x - 1, y + 1)) {
+            if(maze.getCellValueAt(x - 1, y + 1) || !closedSet.getCellValueAt(x - 1, y + 1)) {
                 checkValue(x - 1, y + 1, currentCoordinate, G_DIAGONAL);
             }
 
@@ -163,26 +163,34 @@ public class AStar extends Observable implements Solver {
      *
      * @param x x-coordinate of the new cell
      * @param y y-coordinate of the new cell
-     * @param currentCoordinate coordinate object of the cell from where this method was called
+     * @param predecessorCoordinate coordinate object of the cell from where this method was called
      * @param constant cost constant
+     *
+     *  füge das aktuelle quadrat der offenen Liste hinzu. Trage das aktuelle Quadrat
+     *  als Vorgängerquadrat dieses Quadrats ein. Trage zusätzlich die Werte für die F-, G- und H-Kosten
+     *  dieses Quadrates ein.
+     *
      */
-    private void addAndCalculate(int x, int y, Coordinate currentCoordinate, int constant) {
-        Coordinate newCoordinate = new Coordinate(x, y);
-        Cell newCell = maze.getCellAt(newCoordinate);
+    private void addAndCalculate(int x, int y, Coordinate predecessorCoordinate, int constant) {
+        Coordinate currentCoordinate = new Coordinate(x, y);
+        Cell currentCell = maze.getCellAt(currentCoordinate);
+        currentCell.setPredecessor(predecessorCoordinate);
 
-        Coordinate predecessorCoordinate = newCell.getPredecessor();
         Cell predecessorCell = maze.getCellAt(predecessorCoordinate);
+        if(predecessorCell.getPredecessor() == null) {
+            predecessorCell.setPredecessor(predecessorCoordinate);
+        }
 
-        openSet.addPath(newCoordinate, currentCoordinate);
+        openSet.addPath(currentCoordinate, predecessorCoordinate);
 
         // Calculate G Value
-        newCell.setG(constant + predecessorCell.getG());
+        currentCell.setG(constant + predecessorCell.getG());
 
         // Calculate H Value
-        newCell.setH((maze.getExit().getX() - x + maze.getExit().getY() - y) * 10);
+        currentCell.setH((maze.getExit().getX() - x + maze.getExit().getY() - y) * 10);
 
         // Calculate F Value
-        newCell.setF(newCell.getG() + newCell.getH());
+        currentCell.setF(currentCell.getG() + currentCell.getH());
     }
 }
 

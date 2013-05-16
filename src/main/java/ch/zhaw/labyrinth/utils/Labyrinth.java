@@ -105,7 +105,11 @@ public class Labyrinth {
 	
 	// getter method for cell value at specific coordinate
 	public boolean getCellValueAt(Coordinate c){
-		return maze.get(c).isPath();
+        if(maze.get(c) == null) {
+            return false;
+        } else {
+		    return maze.get(c).isPath();
+        }
 	}
 
     /**
@@ -152,7 +156,11 @@ public class Labyrinth {
 	public boolean getCellValueAt(int x, int y){
         Coordinate coordinate = new Coordinate(x,y);
         Cell cell = maze.get(coordinate);
-		return cell.isPath();
+        if(cell == null) {
+            return false;
+        } else {
+		    return cell.isPath();
+        }
 	}
 
     public Coordinate getEntry() {
