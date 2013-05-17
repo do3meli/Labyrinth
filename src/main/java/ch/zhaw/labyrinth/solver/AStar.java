@@ -104,19 +104,12 @@ public class AStar extends Observable implements Solver {
             currentCoordinate = openSet.getLowestF();
             x=currentCoordinate.getX();
             y=currentCoordinate.getY();
-
-            /**
-             * add current cell to the closed set and remove it from the maze
-             */
-//            closedSet.addPath(currentCoordinate);
-//            openSet.removeCell(currentCoordinate);
-
-
         }
 
         /**
          * Move back the closedSet to get the path
          */
+        closedSet.addPath(currentCoordinate, exit);
         labyrinthDrawer.setLabyrinth(closedSet);
         labyrinthDrawer.setMode("AStar");
         setChanged();

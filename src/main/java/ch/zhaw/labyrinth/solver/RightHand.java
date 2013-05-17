@@ -115,6 +115,9 @@ public class RightHand extends Observable implements Solver {
         }
 
         // Print steps
+        labyrinthDrawer.setLabyrinth(heading.getSolvedLabyrinth(), exit);
+        setChanged();
+        notifyObservers();
         System.out.println(steps);
     }
 

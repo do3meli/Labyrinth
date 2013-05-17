@@ -101,12 +101,6 @@ public class LabyrinthDrawer extends JPanel implements Runnable, Observer {
         if(mode.equals("solve")) {
             curCell = labyrinth.getCellAt(curCoordinate);
             paintComponent(canvas.getGraphics());
-        } else if (mode.equals("AStar")) {
-            for (Map.Entry<Coordinate, Cell> entry : maze.entrySet() ) {
-                curCoordinate = entry.getKey();
-                curCell = entry.getValue();
-                paintComponent(canvas.getGraphics());
-            }
         } else {
 
             for(int i=0; i< labyrinth.getDimension(); i++) {
@@ -155,13 +149,17 @@ public class LabyrinthDrawer extends JPanel implements Runnable, Observer {
     @Override
     public void update(Observable observable, Object o) {
         if(mode.equals("AStar")) {
+            int steps = 0;
             HashMap<Coordinate, Cell> maze = labyrinth.getMaze();
             for (Map.Entry<Coordinate, Cell> entry : maze.entrySet() ) {
                 curCoordinate = entry.getKey();
                 curCell = entry.getValue();
                 paintComponent(canvas.getGraphics());
+                steps++;
             }
+            System.out.println(steps);
+        } else {
+            paintComponent(canvas.getGraphics());
         }
-        paintComponent(canvas.getGraphics());
     }
 }

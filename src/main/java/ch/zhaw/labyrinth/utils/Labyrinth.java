@@ -217,7 +217,7 @@ public class Labyrinth {
      * @return the coordinates to the cell with the lowest F value
      */
     public Coordinate getLowestF() {
-        int last = 999999999;
+        int last = 999999999;  // TODO: Very ulgy...
         Coordinate coordinate = null;
 
         for (Map.Entry<Coordinate, Cell> entry : maze.entrySet()) {
