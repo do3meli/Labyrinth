@@ -31,6 +31,7 @@ public class Gui {
     private String[] createAlgorithms;
     private String[] solveAlgorithms;
     private LabyrinthDrawer labyrinthDrawer;
+    private JButton startSbutton;
 
     public Gui() {
         
@@ -134,9 +135,10 @@ public class Gui {
         configPanel.add(solveList);
         
         // Start button for solve algorithmen
-        JButton startSbutton = new JButton("Solve");
+        startSbutton = new JButton("Solve");
         startSbutton.setBounds(50, 230, 75, 29);
         startSbutton.addActionListener(new StartSolveActionListener());
+        startSbutton.setEnabled(false);
         configPanel.add(startSbutton);
        
         // create the separator between the panels
@@ -175,6 +177,8 @@ public class Gui {
     public boolean getChckbxFastMode() {
         return chckbxFastMode.isSelected();
     }
+
+
 
     /**
      * ActionListener for Create Algorithm Button
@@ -223,7 +227,8 @@ public class Gui {
             	labyrinthDrawer = new LabyrinthDrawer(lbuilder, getChckbxFastMode(),zoom, "create");
                 drawLabyrinth(labyrinthDrawer);
             }
-            
+
+            startSbutton.setEnabled(true);
 
         }
     }
