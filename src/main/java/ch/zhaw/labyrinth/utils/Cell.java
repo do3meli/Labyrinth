@@ -63,14 +63,25 @@ public class Cell {
 		this.visits++;
 	}
 
+    /**
+     * Returns the coordinates of predecessor from this cell
+     * @return the coordinate to the predecessor
+     */
     public Coordinate getPredecessor() {
         return predecessor;
     }
 
+    /**
+     * Sets the predecessor
+     * @param predecessor
+     */
     public void setPredecessor(Coordinate predecessor) {
         this.predecessor = predecessor;
     }
 
+    /**
+     * Getter and Setter for F, G and H
+     */
     public int getF() {
         return f;
     }
