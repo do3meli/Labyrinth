@@ -59,10 +59,6 @@ public class RightHand extends Observable implements Solver {
         while((x != u) || (y != v)) {
             steps++;
 
-            // Debug only, print solved array
-            //heading.getSolvedLabyrinth().printAsArray();
-
-            // FIXME: Draw only the current coordinate
             if(labyrinth.getCellAt(new Coordinate(x,y)).isPath()) {
                 labyrinthDrawer.setLabyrinth(heading.getSolvedLabyrinth(), new Coordinate(x, y));
                 setChanged();
@@ -118,7 +114,7 @@ public class RightHand extends Observable implements Solver {
         labyrinthDrawer.setLabyrinth(heading.getSolvedLabyrinth(), exit);
         setChanged();
         notifyObservers();
-        System.out.println(steps);
+        System.out.println("Schritte: " + steps);
     }
 
     // Set x and y with the new values from the coordinate

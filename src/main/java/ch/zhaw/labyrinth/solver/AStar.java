@@ -129,6 +129,10 @@ public class AStar extends Observable implements Solver {
         labyrinthDrawer.setLabyrinth(closedSet);
         labyrinthDrawer.setMode("AStar");
 
+        // Print exit
+        setChanged();
+        notifyObservers(currentCoordinate);
+
         /**
          *  Working backwards from the target square, go from each square to its parent square
          *  until you reach the starting square.
@@ -214,9 +218,6 @@ public class AStar extends Observable implements Solver {
         currentCell.setPredecessor(predecessorCoordinate);
 
         Cell predecessorCell = closedSet.getCellAt(predecessorCoordinate);
-//        if(predecessorCell.getPredecessor() == null) {
-//            predecessorCell.setPredecessor(predecessorCoordinate);
-//        }
 
         openSet.addPath(currentCoordinate, currentCell);
 
