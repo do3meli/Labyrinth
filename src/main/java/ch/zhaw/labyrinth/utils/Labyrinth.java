@@ -130,9 +130,7 @@ public class Labyrinth {
      *
      * @param coordinate
      */
-    public void addPath(Coordinate coordinate) {
-        Cell cell = new Cell();
-        cell.setPath(true);
+    public void addPath(Coordinate coordinate, Cell cell) {
         maze.put(coordinate, cell);
     }
 
@@ -219,7 +217,7 @@ public class Labyrinth {
      * @return the coordinates to the cell with the lowest F value
      */
     public Coordinate getLowestF() {
-        int last = 0;
+        int last = 999999999;
         Coordinate coordinate = null;
 
         for (Map.Entry<Coordinate, Cell> entry : maze.entrySet()) {

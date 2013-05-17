@@ -52,14 +52,14 @@ public class AStar extends Observable implements Solver {
          *
          */
         Coordinate currentCoordinate = openSet.getLowestF();
-
-        /**
-         * add current cell to the closed set and remove it from the maze
-         */
-        closedSet.addPath(currentCoordinate);
-        openSet.removeCell(currentCoordinate);
+        Cell currentCell = openSet.getCellAt(currentCoordinate);
 
         while ( !currentCoordinate.equals(exit) ) {
+            // Move current coordinate into the closedSet
+            closedSet.addPath(currentCoordinate, currentCell);
+            openSet.removeCell(currentCoordinate);
+
+
             /**
              * Add all reachable neighbors to the openSet and add calculate f-cost
              */
@@ -108,8 +108,8 @@ public class AStar extends Observable implements Solver {
             /**
              * add current cell to the closed set and remove it from the maze
              */
-            closedSet.addPath(currentCoordinate);
-            openSet.removeCell(currentCoordinate);
+//            closedSet.addPath(currentCoordinate);
+//            openSet.removeCell(currentCoordinate);
 
 
         }
@@ -151,6 +151,9 @@ public class AStar extends Observable implements Solver {
      */
     private void checkGValueAndUpdate(int x, int y, Coordinate predecessorCoordinate, int constant) {
         Cell predecessorCell = openSet.getCellAt(predecessorCoordinate);
+        if(predecessorCell == null) {
+            predecessorCell = closedSet.getCellAt(predecessorCoordinate);
+        }
         int predecessorGValue = predecessorCell.getG();
 
         Cell currentCell = openSet.getCellAt(x, y);
@@ -187,12 +190,12 @@ public class AStar extends Observable implements Solver {
         Cell currentCell = maze.getCellAt(currentCoordinate);
         currentCell.setPredecessor(predecessorCoordinate);
 
-        Cell predecessorCell = maze.getCellAt(predecessorCoordinate);
+        Cell predecessorCell = closedSet.getCellAt(predecessorCoordinate);
         if(predecessorCell.getPredecessor() == null) {
             predecessorCell.setPredecessor(predecessorCoordinate);
         }
 
-        openSet.addPath(currentCoordinate, predecessorCoordinate);
+        openSet.addPath(currentCoordinate, currentCell);
 
         // Calculate G Value
         currentCell.setG(constant + predecessorCell.getG());
