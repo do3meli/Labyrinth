@@ -83,7 +83,7 @@ public class LabyrinthDrawer extends JPanel implements Runnable, Observer {
                 Thread.currentThread().interrupt();
             }
         } else if (mode.equals("AStar")) {
-            g.setColor(Color.darkGray);
+            g.setColor(Color.orange);
             g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom );
         }
       
