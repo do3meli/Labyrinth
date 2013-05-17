@@ -8,19 +8,29 @@ import ch.zhaw.labyrinth.utils.Labyrinth;
 import java.util.Observable;
 
 /**
+ * This class implements the A* Algorithm based on the explanations from
+ * http://www.policyalmanac.org/games/aStarTutorial.htm
  *
  * @author b.buetikofer
  *
  */
 public class AStar extends Observable implements Solver {
+    // Predefined constants for the travel-costs
     public static final int G_HORIZONTAL_VERTICAL = 10;
     public static final int G_DIAGONAL = 14;
 
+    // Our initial maze to solve
     private Labyrinth maze;
+    // this object will contain the shortest path
     private Labyrinth closedSet;
+    // In here are candidates for the shortest path
     private Labyrinth openSet;
 
-
+    /**
+     * Default constructor. This object has always an maze
+     *
+     * @param maze to solve
+     */
     public AStar(Labyrinth maze) {
         this.maze = maze;
         openSet = new Labyrinth();
@@ -48,8 +58,9 @@ public class AStar extends Observable implements Solver {
         openSet.addPath(startCoordinate, startCoordinate);
 
         /**
-         * Dive into the recursion!! YAY
-         *
+         * Here starts the fun.
+         * For every of the eight surrounding cells we will calculate their f, g and h value
+         * if they are reachable and not already part of the closedSet
          */
         Coordinate currentCoordinate = openSet.getLowestF();
         Cell currentCell = openSet.getCellAt(currentCoordinate);
@@ -172,11 +183,6 @@ public class AStar extends Observable implements Solver {
      * @param y y-coordinate of the new cell
      * @param predecessorCoordinate coordinate object of the cell from where this method was called
      * @param constant cost constant
-     *
-     *  füge das aktuelle quadrat der offenen Liste hinzu. Trage das aktuelle Quadrat
-     *  als Vorgängerquadrat dieses Quadrats ein. Trage zusätzlich die Werte für die F-, G- und H-Kosten
-     *  dieses Quadrates ein.
-     *
      */
     private void addAndCalculate(int x, int y, Coordinate predecessorCoordinate, int constant) {
         Coordinate currentCoordinate = new Coordinate(x, y);
