@@ -64,13 +64,12 @@ public class AStar extends Observable implements Solver {
          */
         Coordinate currentCoordinate = openSet.getLowestF();
         Cell currentCell = openSet.getCellAt(currentCoordinate);
+        Cell oldCell = null;
+        // Move starting coordinate into the closedSet
+        closedSet.addPath(currentCoordinate, currentCell);
+        openSet.removeCell(currentCoordinate);
 
         while ( !currentCoordinate.equals(exit) ) {
-            // Move current coordinate into the closedSet
-            closedSet.addPath(currentCoordinate, currentCell);
-            openSet.removeCell(currentCoordinate);
-
-
             /**
              * Add all reachable neighbors to the openSet and add calculate f-cost
              */
@@ -115,16 +114,41 @@ public class AStar extends Observable implements Solver {
             currentCoordinate = openSet.getLowestF();
             x=currentCoordinate.getX();
             y=currentCoordinate.getY();
+
+            // Move current coordinate into the closedSet
+            oldCell = openSet.getCellAt(currentCoordinate);
+            closedSet.addPath(currentCoordinate, oldCell.getPredecessor());
+            openSet.removeCell(currentCoordinate);
         }
 
         /**
-         * Move back the closedSet to get the path
+         * Add exit to closedSet
          */
-        closedSet.addPath(currentCoordinate, exit);
+        closedSet.addPath(currentCoordinate, oldCell);
+
         labyrinthDrawer.setLabyrinth(closedSet);
         labyrinthDrawer.setMode("AStar");
-        setChanged();
-        notifyObservers();
+
+        /**
+         *  Working backwards from the target square, go from each square to its parent square
+         *  until you reach the starting square.
+         */
+        int steps = 0;
+        Coordinate curCoordinate = new Coordinate(exit.getX(), exit.getY());
+        Coordinate target = new Coordinate(entry.getX(), entry.getY());
+
+        while(!curCoordinate.equals(target)) {
+            steps++;
+
+            Cell curCell = closedSet.getCellAt(curCoordinate);
+            curCoordinate = curCell.getPredecessor();
+
+            setChanged();
+            notifyObservers(curCoordinate);
+        }
+
+        System.out.println("Steps: " + steps);
+
     }
 
     /**
@@ -190,9 +214,9 @@ public class AStar extends Observable implements Solver {
         currentCell.setPredecessor(predecessorCoordinate);
 
         Cell predecessorCell = closedSet.getCellAt(predecessorCoordinate);
-        if(predecessorCell.getPredecessor() == null) {
-            predecessorCell.setPredecessor(predecessorCoordinate);
-        }
+//        if(predecessorCell.getPredecessor() == null) {
+//            predecessorCell.setPredecessor(predecessorCoordinate);
+//        }
 
         openSet.addPath(currentCoordinate, currentCell);
 

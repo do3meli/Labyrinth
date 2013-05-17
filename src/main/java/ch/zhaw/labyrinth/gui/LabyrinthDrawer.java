@@ -7,7 +7,6 @@ import ch.zhaw.labyrinth.utils.Labyrinth;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -122,7 +121,6 @@ public class LabyrinthDrawer extends JPanel implements Runnable, Observer {
                 }
             }
         }
-        //paintComponent(canvas.getGraphics());
     }
 
     public String getMode() {
@@ -149,15 +147,8 @@ public class LabyrinthDrawer extends JPanel implements Runnable, Observer {
     @Override
     public void update(Observable observable, Object o) {
         if(mode.equals("AStar")) {
-            int steps = 0;
-            HashMap<Coordinate, Cell> maze = labyrinth.getMaze();
-            for (Map.Entry<Coordinate, Cell> entry : maze.entrySet() ) {
-                curCoordinate = entry.getKey();
-                curCell = entry.getValue();
-                paintComponent(canvas.getGraphics());
-                steps++;
-            }
-            System.out.println(steps);
+            curCoordinate = (Coordinate)o;
+            paintComponent(canvas.getGraphics());
         } else {
             paintComponent(canvas.getGraphics());
         }

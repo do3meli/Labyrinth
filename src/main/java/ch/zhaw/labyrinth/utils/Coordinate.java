@@ -22,7 +22,7 @@ public class Coordinate {
 		this.x = x;
 		this.y = y;
 	}
-	
+
 	/**
 	 * Getter method for x
 	 * @return int the x coordinate
