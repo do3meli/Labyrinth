@@ -7,6 +7,8 @@ import ch.zhaw.labyrinth.solver.RightHand;
 import ch.zhaw.labyrinth.solver.Solver;
 import ch.zhaw.labyrinth.utils.Labyrinth;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,9 +34,14 @@ public class Gui {
     private String[] solveAlgorithms;
     private LabyrinthDrawer labyrinthDrawer;
     private JButton startSbutton;
+    private JSlider slider;
+    private JLabel sliderLabel;
+    private int speed;
+    private static Gui gui;
 
     public Gui() {
-        
+        gui = this;
+
     	// set up drop downs
     	createAlgorithms = new String[]{ "Depth-First", "Import"};
     	solveAlgorithms = new String[]{ "Right-Hand", "A* Search"};
@@ -161,6 +168,16 @@ public class Gui {
         chckbxFastMode = new JCheckBox("fast mode");
         chckbxFastMode.setBounds(6, 330, 180, 16);
         configPanel.add(chckbxFastMode);
+
+        // Speed Slider
+        slider = new JSlider();
+        slider.setValue(50);
+        slider.addChangeListener(new SpeedChangeAction());
+        sliderLabel = new JLabel("Speed");
+        slider.setBounds(6, 350, 130, 16);
+        sliderLabel.setBounds(136, 350, 40, 16);
+        configPanel.add(slider);
+        configPanel.add(sliderLabel);
         
         // now we are done with the config panel - add it 
         contentPane.add(configPanel);
@@ -178,7 +195,26 @@ public class Gui {
         return chckbxFastMode.isSelected();
     }
 
+    public int getTfZoom() {
+        return Integer.valueOf(tfZoom.getText());
 
+    }
+
+    public void setTfZoom(String zoom) {
+        tfZoom.setText(zoom);
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public static void drawLabyrinth(LabyrinthDrawer ld) {
+        javax.swing.SwingUtilities.invokeLater(ld);
+    }
 
     /**
      * ActionListener for Create Algorithm Button
@@ -190,7 +226,6 @@ public class Gui {
 
             // Get Variables from GUI text boexes
             int size = Integer.valueOf(tfSize.getText());
-            final int zoom = Integer.valueOf(tfZoom.getText());
 
             // Get Build Type
             String type = (String)createList.getSelectedItem();
@@ -224,7 +259,7 @@ public class Gui {
             //Schedule a job for the event dispatch thread:
             //creating and showing this application's GUI.
             if(lbuilder != null){
-            	labyrinthDrawer = new LabyrinthDrawer(lbuilder, getChckbxFastMode(),zoom, "create");
+            	labyrinthDrawer = new LabyrinthDrawer(lbuilder, "create", gui);
                 drawLabyrinth(labyrinthDrawer);
             }
 
@@ -259,9 +294,12 @@ public class Gui {
         }
     }
 
-    public static void drawLabyrinth(LabyrinthDrawer ld) {
-        javax.swing.SwingUtilities.invokeLater(ld);
+    private class SpeedChangeAction implements ChangeListener {
+        @Override
+        public void stateChanged(ChangeEvent e) {
+            setSpeed(slider.getValue());
+            String str = Integer.toString(getSpeed());
+            sliderLabel.setText(str);
+        }
     }
-
-
 }

@@ -114,7 +114,7 @@ public class RightHand extends Observable implements Solver {
         labyrinthDrawer.setLabyrinth(heading.getSolvedLabyrinth(), exit);
         setChanged();
         notifyObservers();
-        System.out.println("Schritte: " + steps);
+        System.out.println("Steps: " + steps);
     }
 
     // Set x and y with the new values from the coordinate

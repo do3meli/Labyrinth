@@ -29,12 +29,14 @@ public class LabyrinthDrawer extends JPanel implements Runnable, Observer {
     private Cell curCell;
     private Coordinate curCoordinate;
     private String mode;
+    private Gui gui;
 
     // construktor
-    public LabyrinthDrawer(Labyrinth labyrinth, boolean fast, int zoom, String mode) {
+    public LabyrinthDrawer(Labyrinth labyrinth, String mode, Gui gui) {
+        this.gui = gui;
         this.labyrinth = labyrinth;
-        this.zoom = zoom;
-        this.fast = fast;
+        this.zoom = gui.getTfZoom();
+        this.fast = gui.getChckbxFastMode();
         this.mode = mode;
 
         buildFrame();
@@ -112,7 +114,7 @@ public class LabyrinthDrawer extends JPanel implements Runnable, Observer {
                         paintComponent(canvas.getGraphics());
                         if(!fast) {
                             try {
-                                Thread.sleep(5);
+                                Thread.sleep(gui.getSpeed());
                             } catch(InterruptedException ex) {
                                 Thread.currentThread().interrupt();
                             }
@@ -151,6 +153,12 @@ public class LabyrinthDrawer extends JPanel implements Runnable, Observer {
             paintComponent(canvas.getGraphics());
         } else {
             paintComponent(canvas.getGraphics());
+        }
+
+        try {
+            Thread.sleep(gui.getSpeed());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }
