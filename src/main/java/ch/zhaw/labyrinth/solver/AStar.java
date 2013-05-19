@@ -41,6 +41,9 @@ public class AStar extends Observable implements Solver {
     public void solve(LabyrinthDrawer labyrinthDrawer) {
         addObserver(labyrinthDrawer);
 
+        // Timer
+        long startTime = System.currentTimeMillis();
+
         /**
          *  Entry
          */
@@ -125,6 +128,7 @@ public class AStar extends Observable implements Solver {
          * Add exit to closedSet
          */
         closedSet.addPath(currentCoordinate, oldCell);
+        long stopTime = System.currentTimeMillis();
 
         labyrinthDrawer.setLabyrinth(closedSet);
         labyrinthDrawer.setMode("AStar");
@@ -151,17 +155,17 @@ public class AStar extends Observable implements Solver {
             notifyObservers(curCoordinate);
         }
 
-        System.out.println("Steps: " + steps);
+        System.out.println("Steps: " + steps + ", took: " + (stopTime - startTime) + "ms");
 
     }
 
     /**
      * This method checks if cell at a given coordinate is already in the open set.
      *
-     * @param x
-     * @param y
-     * @param currentCoordinate
-     * @param constant
+     * @param x x-ccordinate
+     * @param y y-coordinate
+     * @param currentCoordinate coordinates of the current cell
+     * @param constant the cost constant
      */
     private void checkValue(int x, int y, Coordinate currentCoordinate, int constant) {
         if(!openSet.getCellValueAt(x, y)) {
@@ -176,10 +180,10 @@ public class AStar extends Observable implements Solver {
      * If it's not it's added to the openSet. If it is, the new G value is compared with the one of its predecessor.
      * If its lower the predecessor is set to the current cell
      *
-     * @param x
-     * @param y
-     * @param predecessorCoordinate
-     * @param constant
+     * @param x x-ccordinate
+     * @param y y-coordinate
+     * @param predecessorCoordinate coordinates of predecessor
+     * @param constant the cost constant
      */
     private void checkGValueAndUpdate(int x, int y, Coordinate predecessorCoordinate, int constant) {
         Cell predecessorCell = openSet.getCellAt(predecessorCoordinate);

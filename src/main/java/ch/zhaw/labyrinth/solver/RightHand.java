@@ -2,7 +2,9 @@ package ch.zhaw.labyrinth.solver;
 
 
 import ch.zhaw.labyrinth.gui.LabyrinthDrawer;
-import ch.zhaw.labyrinth.solver.heading.*;
+import ch.zhaw.labyrinth.solver.heading.East;
+import ch.zhaw.labyrinth.solver.heading.Heading;
+import ch.zhaw.labyrinth.solver.heading.South;
 import ch.zhaw.labyrinth.utils.Coordinate;
 import ch.zhaw.labyrinth.utils.Labyrinth;
 
@@ -36,6 +38,9 @@ public class RightHand extends Observable implements Solver {
         int steps = 0;
 
         addObserver(labyrinthDrawer);
+
+        // Timer
+        long startTime = System.currentTimeMillis();
 
         // set entry and exit
         Coordinate entry = labyrinth.getEntry();
@@ -110,11 +115,15 @@ public class RightHand extends Observable implements Solver {
             }
         }
 
+        // Timer
+        long stopTime = System.currentTimeMillis();
+
         // Print steps
+        System.out.println("Steps: " + steps + ", took: " + (stopTime-startTime) + "ms");
         labyrinthDrawer.setLabyrinth(heading.getSolvedLabyrinth(), exit);
         setChanged();
         notifyObservers();
-        System.out.println("Steps: " + steps);
+
     }
 
     // Set x and y with the new values from the coordinate
