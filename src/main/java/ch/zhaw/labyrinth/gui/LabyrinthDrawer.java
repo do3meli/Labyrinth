@@ -36,7 +36,6 @@ public class LabyrinthDrawer extends JPanel implements Runnable, Observer {
         this.gui = gui;
         this.labyrinth = labyrinth;
         this.zoom = gui.getTfZoom();
-        this.fast = gui.getChckbxFastMode();
         this.mode = mode;
 
         buildFrame();

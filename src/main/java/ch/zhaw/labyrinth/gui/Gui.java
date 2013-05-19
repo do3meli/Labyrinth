@@ -185,14 +185,6 @@ public class Gui {
         frame.setVisible(true);
       
     }
-    
-    /**
-     * This returns the status of the check box for fast mode in GUI
-     * @return true if check box is selected, false if not 
-     */
-    public boolean getChckbxFastMode() {
-        return chckbxFastMode.isSelected();
-    }
 
     public int getTfZoom() {
         return Integer.valueOf(tfZoom.getText());
