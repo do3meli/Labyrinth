@@ -19,23 +19,24 @@ public class DepthFirstSearch extends Observable implements Builder {
 	private static final boolean PATH = true;
 	
 	// instance var
-	private Integer[] dir;
 	private Labyrinth lab;
 	
 	/**
-	 * Default Constructor
+	 * Default Constructor DFS
 	 * @param n size of the maze
 	 */
 	public DepthFirstSearch(int dim){
 		
-		// call super constructor
+		// create a maze object
 		this.lab = new Labyrinth(dim);
-		
-		// now setup everything
-		setupMaze();
 	}
 	
-	public void setupMaze() {
+	/**
+	 * This builds the maze with the DepthFirstSearch Algorithm
+	 * @return Labyrinth
+	 */
+	@Override
+	public Labyrinth build() {
 
 		// set start point in array
 		int x = lab.getRandomIntOdd(lab.getDimension());
@@ -47,13 +48,21 @@ public class DepthFirstSearch extends Observable implements Builder {
 		
 		// create input and ouput of the maze
 		createInputOutput();
+		
+		// now return the created maze
+		return lab;
 
 	}
-
+	
+	/**
+	 * Method which is recursively called by the maze creation process.
+	 * @param x int current location
+	 * @param y int current location
+	 */
 	private void createMaze(int x, int y) {
 		
 		// create directions 
-		this.dir = generateRandomDirections();
+		Integer[] dir = generateRandomDirections();
 		
 		for (int i = 0; i < 4; i++) {
 			
@@ -78,6 +87,11 @@ public class DepthFirstSearch extends Observable implements Builder {
 
 	// TODO: create one move method/class to avoid code duplication
 	
+	/**
+	 * This goes 2 cells up if that is still within the dimension
+	 * @param x int current location
+	 * @param y int current location
+	 */
 	private void moveUp(int x, int y) {
 		
 		// check if new value is not outside the matrix and 
@@ -90,7 +104,12 @@ public class DepthFirstSearch extends Observable implements Builder {
 			createMaze(x,y-2);
 		}		
 	}
-
+	
+	/**
+	 * This goes 2 cells right if that is still within the dimension
+	 * @param x int current location
+	 * @param y int current location
+	 */
 	private void moveRight(int x, int y) {
 		
 		// check if new value is not outside the matrix and
@@ -103,7 +122,12 @@ public class DepthFirstSearch extends Observable implements Builder {
 			createMaze(x + 2,y);
 		}
 	}
-
+	
+	/**
+	 * This goes 2 cells down if that is still within the dimension
+	 * @param x int current location
+	 * @param y int current location
+	 */
 	private void moveDown(int x, int y) {
 		// check if new value is not outside the matrix and
 		// check if 2 cells ahead is a wall
@@ -115,7 +139,12 @@ public class DepthFirstSearch extends Observable implements Builder {
 			createMaze(x,y+2);
 		}	
 	}
-
+	
+	/**
+	 * This goes 2 cells left if that is still within the dimension
+	 * @param x int current location
+	 * @param y int current location
+	 */
 	private void moveLeft(int x, int y){
 		// check if new value is not outside the matrix and 
 		// check if 2 cells ahead is a wall
@@ -128,7 +157,11 @@ public class DepthFirstSearch extends Observable implements Builder {
 		}
 	}
 	
-	public Integer[] generateRandomDirections() {
+	/**
+	 * Creates a random shuffeled Integer Array which is used for the directions
+	 * @return Integer[] Array with 4 random shuffeled directions
+	 */
+	private Integer[] generateRandomDirections() {
 	      ArrayList<Integer> randoms = new ArrayList<Integer>();
 	      for (int i = 0; i < 4; i++){
 	           randoms.add(i);
@@ -138,7 +171,11 @@ public class DepthFirstSearch extends Observable implements Builder {
 	     return randoms.toArray(new Integer[4]);
 	 }
 	
-	
+	/**
+	 * After the maze is created this adds a random entry and exit to the maze.
+	 * If the entry is at the top the exit is at the bottom.
+	 * If the entry is left the exit is right.
+	 */
 	public void createInputOutput(){
 		
 		// create random
@@ -191,13 +228,6 @@ public class DepthFirstSearch extends Observable implements Builder {
             lab.setEntry(new Coordinate(0, rEntry));
             lab.setExit(new Coordinate(lab.getDimension() - 1, rOut));
 		}
-
-
-	}
-
-	@Override
-	public Labyrinth build() {
-		return lab;
 	}
 	
 }

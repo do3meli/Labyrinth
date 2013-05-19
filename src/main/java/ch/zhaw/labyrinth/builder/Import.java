@@ -20,17 +20,21 @@ public class Import extends Observable implements Builder {
 	private File file;
 	private Labyrinth lab;
 	
-	// constructor
+	/**
+	 * This is the default Constructor for Importing a maze
+	 * @param f File with the predefined maze as array in it
+	 */
 	public Import(File f) {
-		
 		this.file = f;
-		this.lab = new Labyrinth();
-		
-		readFileIntoArray();
+		this.lab = new Labyrinth();	
 	}
 
-	
-	private void readFileIntoArray() {
+	/**
+	 * This builds up a maze data structure from a given file
+	 * @return Labyrinth
+	 */
+	@Override
+	public Labyrinth build() {
 		
 		// local variable
 		Scanner scanner = null;
@@ -41,7 +45,6 @@ public class Import extends Observable implements Builder {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-	
        
         // j var for line
         int j=0;
@@ -73,7 +76,6 @@ public class Import extends Observable implements Builder {
                     if( (j == 0 || k == 0) && str[k].equals("0")){
                     	lab.setEntry(new Coordinate(k,j));
                     }
-                   
                     
                     // set exit if there is 0 in the last row or last column
                     if( (scanner.hasNext() == false || k == str.length -1) && str[k].equals("0")){
@@ -86,19 +88,16 @@ public class Import extends Observable implements Builder {
             	
             	// increase j
                 j++;
-            	
             }
 		}
         
-        // only set maze dimension when j greather than 0 - otherwise paintComponent not working
-        if(j>0){
+        // only set maze dimension when j greather than 0
+        // otherwise paintComponent not working
+        if( j > 0 ){
         	lab.setDimension(j);
         }
-	}
-
-
-	@Override
-	public Labyrinth build() {
-		return lab;
-	}
+    
+    // build() return
+    return lab;
+	}	
 }
