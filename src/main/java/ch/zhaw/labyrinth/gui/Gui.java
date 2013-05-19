@@ -84,11 +84,12 @@ public class Gui {
         // Building the config panel
         configPanel.setLayout(null);
         configPanel.setBounds(0, 0, 196, 478);
-        
+
         // Gui object: create label
         JLabel createLabel = new JLabel("Create Algorithm");
-        createLabel.setBounds(6, 6, 107, 16);
+        createLabel.setBounds(6, 6, 120, 16);
         createLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        createLabel.setFont(new Font(createLabel.getFont().getName(),Font.BOLD,createLabel.getFont().getSize()));
         configPanel.add(createLabel);
         
         // DropDown Menu for create list
@@ -123,17 +124,16 @@ public class Gui {
         startButton.setBounds(50, 120, 75, 29);
         startButton.addActionListener(new StartCreateActionListener());
         configPanel.add(startButton);
-        
-        
+
         // create the separator between the panels
         JSeparator separator = new JSeparator();
         separator.setBounds(0, 163, 196, 16);
         configPanel.add(separator);
         
-        
-        // Gui object: Solve Algorithm 
+        // Gui object: Solve Algorithm
         JLabel solveLabel = new JLabel("Solve Algorithm");
-        solveLabel.setBounds(6, 180, 100, 16);
+        solveLabel.setBounds(6, 180, 120, 16);
+        solveLabel.setFont(new Font(createLabel.getFont().getName(),Font.BOLD,createLabel.getFont().getSize()));
         configPanel.add(solveLabel);
         
         // DropDown Menu for solve list
@@ -157,28 +157,24 @@ public class Gui {
         JLabel optLabel = new JLabel("Options");
         optLabel.setBounds(6, 290, 107, 16);
         optLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        optLabel.setFont(new Font(createLabel.getFont().getName(),Font.BOLD,createLabel.getFont().getSize()));
         configPanel.add(optLabel);
-        
-        // Tickbox for Debug
-        debug = new JCheckBox("enable debugging");
-        debug.setBounds(6, 310, 180, 16);
-        configPanel.add(debug);
-        
-        // tick box for fast mode
-        chckbxFastMode = new JCheckBox("fast mode");
-        chckbxFastMode.setBounds(6, 330, 180, 16);
-        configPanel.add(chckbxFastMode);
 
         // Speed Slider
-        slider = new JSlider();
-        slider.setValue(50);
+        slider = new JSlider(0,50);
+        slider.setValue(25);
         slider.addChangeListener(new SpeedChangeAction());
-        sliderLabel = new JLabel("Speed");
-        slider.setBounds(6, 350, 130, 16);
-        sliderLabel.setBounds(136, 350, 40, 16);
+        sliderLabel = new JLabel("25");
+        slider.setBounds(6, 310, 130, 16);
+        sliderLabel.setBounds(136, 310, 40, 16);
         configPanel.add(slider);
         configPanel.add(sliderLabel);
-        
+
+        // Tickbox for Debug
+        debug = new JCheckBox("enable debugging");
+        debug.setBounds(6, 340, 180, 16);
+        configPanel.add(debug);
+
         // now we are done with the config panel - add it 
         contentPane.add(configPanel);
 
