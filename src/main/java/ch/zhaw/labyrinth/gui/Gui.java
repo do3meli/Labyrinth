@@ -12,6 +12,8 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 /**
  * This class is responsible for creating the GUI
@@ -96,6 +98,7 @@ public class Gui {
         createList = new JComboBox(createAlgorithms);
         createList.setBounds(0, 23, 184, 27);
         configPanel.add(createList);
+        createList.addItemListener(new ImportItemListener());
         
         // create and add SIZE label
         JLabel lblSize = new JLabel("Size: ");
@@ -217,7 +220,7 @@ public class Gui {
      */
     private class StartCreateActionListener implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent ae) {
+        public void actionPerformed(ActionEvent e) {
            
 
             // Get Variables from GUI text boexes
@@ -230,37 +233,14 @@ public class Gui {
             if (type.equals("Depth-First")) {
                 lbuilder = new DepthFirstSearch(size);
             } else if (type.equals("Import")) {
-                
-            	// create file chooser
-            	JFileChooser fChoose = new JFileChooser();
-            	
-            	// show it, and hand over the file to Import
-            	int returnVal = fChoose.showOpenDialog( frame );
-        		if ( returnVal == JFileChooser.APPROVE_OPTION ) {
-        			lbuilder = new Import(fChoose.getSelectedFile());
-        		}else{
-        			JOptionPane.showMessageDialog(frame, "You did not select a file");
-        		}
-            	
+            	showFileChooser();
             } else {
                 lbuilder = null;
             }
             
-            // Print Debugging stuff to console if tickbox set
-            if(debug.isSelected()){
-            	lbuilder.printAsArray();
-            }
-            
-           
-            //Schedule a job for the event dispatch thread:
-            //creating and showing this application's GUI.
-            if(lbuilder != null){
-            	labyrinthDrawer = new LabyrinthDrawer(lbuilder, "create", gui);
-                drawLabyrinth(labyrinthDrawer);
-            }
-
+            // create the labyrinth drawer and active button
+            createLabyrinth();   
             startSbutton.setEnabled(true);
-
         }
     }
     
@@ -298,4 +278,56 @@ public class Gui {
             sliderLabel.setText(str);
         }
     }
+    
+    /**
+     * This ItemListeners does fire when the item of the createList is getting changed.
+     * if the selected item is Import it does show JFileChooser otherwise it does nothing.
+     * @author d.schlegel
+     */
+    private class ImportItemListener implements ItemListener {
+
+		@Override
+		public void itemStateChanged(ItemEvent e) {
+			if (e.getStateChange() == ItemEvent.SELECTED && e.getItem() == "Import") {
+				
+				showFileChooser();
+			} 
+		}
+    }
+    
+    /**
+     * This creates the labyrinth drawer object and calls the paint methods.
+     * If debugging is selected it also prints the maze as array.
+     */
+    private void createLabyrinth(){
+    	   
+        // Print Debugging stuff to console if tickbox set
+        if(debug.isSelected()){
+        	lbuilder.printAsArray();
+        }
+        
+        //Schedule a job for the event dispatch thread:
+        //creating and showing this application's GUI.
+        if(lbuilder != null){
+        	labyrinthDrawer = new LabyrinthDrawer(lbuilder, "create", gui);
+            drawLabyrinth(labyrinthDrawer);
+        }
+    }
+    
+    private void showFileChooser(){
+    	
+    	// create file chooser
+    	JFileChooser fChoose = new JFileChooser();
+    	
+    	// show it, and hand over the file to Import
+    	int returnVal = fChoose.showOpenDialog( frame );
+		if ( returnVal == JFileChooser.APPROVE_OPTION ) {
+			lbuilder = new Import(fChoose.getSelectedFile());
+		}else{
+			JOptionPane.showMessageDialog(frame, "You did not select a file");
+		}
+		
+		createLabyrinth();
+    }
+    
 }
