@@ -25,7 +25,6 @@ public class LabyrinthDrawer extends JPanel implements Runnable, Observer {
 	private JPanel canvas;
     private Labyrinth labyrinth;
     private int zoom;
-    private boolean fast;
     private Cell curCell;
     private Coordinate curCoordinate;
     private String mode;
