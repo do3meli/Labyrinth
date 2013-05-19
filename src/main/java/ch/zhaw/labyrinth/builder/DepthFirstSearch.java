@@ -198,8 +198,6 @@ public class DepthFirstSearch extends Observable implements Builder {
 	@Override
 	public Labyrinth build() {
 		return lab;
-		// TODO Auto-generated method stub
-		
 	}
 	
 }
