@@ -229,4 +229,6 @@ public class Labyrinth {
 
         return coordinate;
     }
+
+	
 }

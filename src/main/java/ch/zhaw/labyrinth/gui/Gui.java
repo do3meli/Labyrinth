@@ -222,7 +222,7 @@ public class Gui {
 
             // Build selected LabyrinthDrawer
             if (type.equals("Depth-First")) {
-                lbuilder = new DepthFirstSearch(size);
+                lbuilder = new DepthFirstSearch(size).build();
             } else if (type.equals("Import")) {
             	showFileChooser();
             } else {
@@ -313,7 +313,7 @@ public class Gui {
     	// show it, and hand over the file to Import
     	int returnVal = fChoose.showOpenDialog( frame );
 		if ( returnVal == JFileChooser.APPROVE_OPTION ) {
-			lbuilder = new Import(fChoose.getSelectedFile());
+			lbuilder = new Import(fChoose.getSelectedFile()).build();
 		}else{
 			JOptionPane.showMessageDialog(frame, "You did not select a file");
 			lbuilder = null;

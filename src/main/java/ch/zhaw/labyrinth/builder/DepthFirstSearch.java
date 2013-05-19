@@ -5,6 +5,7 @@ import ch.zhaw.labyrinth.utils.Labyrinth;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Observable;
 import java.util.Random;
 
 /**
@@ -12,17 +13,23 @@ import java.util.Random;
  * on the following website: http://www.migapro.com/depth-first-search/
  * @author Dominic Schlegel
  */
-public class DepthFirstSearch extends Labyrinth {
+public class DepthFirstSearch extends Observable implements Builder {
   
+	// constant
 	private static final boolean PATH = true;
 	
+	// instance var
 	private Integer[] dir;
-
-	// Constructor
-	public DepthFirstSearch(int n){
+	private Labyrinth lab;
+	
+	/**
+	 * Default Constructor
+	 * @param n size of the maze
+	 */
+	public DepthFirstSearch(int dim){
 		
 		// call super constructor
-		super(n);
+		this.lab = new Labyrinth(dim);
 		
 		// now setup everything
 		setupMaze();
@@ -31,9 +38,9 @@ public class DepthFirstSearch extends Labyrinth {
 	public void setupMaze() {
 
 		// set start point in array
-		int x = getRandomIntOdd(getDimension());
-		int y = getRandomIntOdd(getDimension());
-		setCellValue(x,y,PATH);
+		int x = lab.getRandomIntOdd(lab.getDimension());
+		int y = lab.getRandomIntOdd(lab.getDimension());
+		lab.setCellValue(x,y,PATH);
 				
 		// create whole maze array
 		createMaze(x,y);
@@ -75,10 +82,10 @@ public class DepthFirstSearch extends Labyrinth {
 		
 		// check if new value is not outside the matrix and 
 		// check if 2 cells ahead is a wall
-		if ( y - 2 > 0 && !getCellValueAt(x, y - 2)){
+		if ( y - 2 > 0 && !lab.getCellValueAt(x, y - 2)){
 			
-			setCellValue(x, y - 1, PATH);
-			setCellValue(x, y - 2, PATH);
+			lab.setCellValue(x, y - 1, PATH);
+			lab.setCellValue(x, y - 2, PATH);
 				
 			createMaze(x,y-2);
 		}		
@@ -88,10 +95,10 @@ public class DepthFirstSearch extends Labyrinth {
 		
 		// check if new value is not outside the matrix and
 		// check if 2 cells ahead is a wall
-		if ( x + 2 < getDimension() && !getCellValueAt(x + 2, y)){
+		if ( x + 2 < lab.getDimension() && !lab.getCellValueAt(x + 2, y)){
 			
-			setCellValue(x + 1, y, PATH);
-			setCellValue(x + 2, y, PATH);
+			lab.setCellValue(x + 1, y, PATH);
+			lab.setCellValue(x + 2, y, PATH);
 				
 			createMaze(x + 2,y);
 		}
@@ -100,10 +107,10 @@ public class DepthFirstSearch extends Labyrinth {
 	private void moveDown(int x, int y) {
 		// check if new value is not outside the matrix and
 		// check if 2 cells ahead is a wall
-		if ( y + 2 < getDimension() && !getCellValueAt(x, y + 2)){
+		if ( y + 2 < lab.getDimension() && !lab.getCellValueAt(x, y + 2)){
 						
-			setCellValue(x,y+1,PATH);
-			setCellValue(x,y+2,PATH);
+			lab.setCellValue(x,y+1,PATH);
+			lab.setCellValue(x,y+2,PATH);
 										
 			createMaze(x,y+2);
 		}	
@@ -112,10 +119,10 @@ public class DepthFirstSearch extends Labyrinth {
 	private void moveLeft(int x, int y){
 		// check if new value is not outside the matrix and 
 		// check if 2 cells ahead is a wall
-		if ( x - 2 > 0 && !getCellValueAt(x - 2, y)){
+		if ( x - 2 > 0 && !lab.getCellValueAt(x - 2, y)){
 			
-			setCellValue(x-1,y,PATH);
-			setCellValue(x-2,y,PATH);
+			lab.setCellValue(x-1,y,PATH);
+			lab.setCellValue(x-2,y,PATH);
 							
 			createMaze(x-2,y);
 		}
@@ -138,54 +145,61 @@ public class DepthFirstSearch extends Labyrinth {
 		Random rand = new Random();
 		int r = rand.nextInt(2);
 		
-		int rEntry = rand.nextInt(getDimension() - 2) + 1;
-		int rOut = rand.nextInt(getDimension() - 2) + 1;
+		int rEntry = rand.nextInt(lab.getDimension() - 2) + 1;
+		int rOut = rand.nextInt(lab.getDimension() - 2) + 1;
 			
 		// r = 0 => entry is at the top of the maze
 		if ( r == 0){
 			
 			// check if 1 cell ahead entry is free
-			while(!getCellValueAt(rEntry,1)){
-				rEntry = rand.nextInt(getDimension() -2) + 1;
+			while(!lab.getCellValueAt(rEntry,1)){
+				rEntry = rand.nextInt(lab.getDimension() -2) + 1;
 			}
 			
 			// check if 1 cell ahead output is free
-			while(!getCellValueAt(rOut,getDimension() - 2)){
-				rOut = rand.nextInt(getDimension() - 2) + 1;
+			while(!lab.getCellValueAt(rOut,lab.getDimension() - 2)){
+				rOut = rand.nextInt(lab.getDimension() - 2) + 1;
 			}
 		
 			// now make the field a path
-			setCellValue( rEntry,0, PATH);
-			setCellValue(rOut,getDimension() - 1, PATH);
+			lab.setCellValue( rEntry,0, PATH);
+			lab.setCellValue(rOut,lab.getDimension() - 1, PATH);
 
             // Save entry & exit
-			setEntry(new Coordinate( rEntry,0));
-            setExit(new Coordinate(rOut,getDimension() - 1));
+			lab.setEntry(new Coordinate( rEntry,0));
+            lab.setExit(new Coordinate(rOut,lab.getDimension() - 1));
 		}
 		
 		// r = 1 => entry is on the left site
 		if ( r == 1){
 			
 			// check if 1 cell ahead entry is free
-			while(!getCellValueAt(1,rEntry)){
-				rEntry = rand.nextInt(getDimension()-2) + 1;
+			while(!lab.getCellValueAt(1,rEntry)){
+				rEntry = rand.nextInt(lab.getDimension()-2) + 1;
 			}
 			
 			// check if 1 cell ahead output is free
-			while(!getCellValueAt(getDimension() - 2,rOut)){
-				rOut = rand.nextInt(getDimension()-2) + 1;
+			while(!lab.getCellValueAt(lab.getDimension() - 2,rOut)){
+				rOut = rand.nextInt(lab.getDimension()-2) + 1;
 			}
 		
 			// now make the field a path
-			setCellValue(0, rEntry, PATH);
-			setCellValue(getDimension() - 1, rOut, PATH);
+			lab.setCellValue(0, rEntry, PATH);
+			lab.setCellValue(lab.getDimension() - 1, rOut, PATH);
 
             // Save entry & exit
-            setEntry(new Coordinate(0, rEntry));
-            setExit(new Coordinate(getDimension() - 1, rOut));
+            lab.setEntry(new Coordinate(0, rEntry));
+            lab.setExit(new Coordinate(lab.getDimension() - 1, rOut));
 		}
 
 
+	}
+
+	@Override
+	public Labyrinth build() {
+		return lab;
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
