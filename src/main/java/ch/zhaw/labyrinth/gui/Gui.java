@@ -231,7 +231,7 @@ public class Gui {
             
             // create the labyrinth drawer and active button
             createLabyrinth();   
-            startSbutton.setEnabled(true);
+            
         }
     }
     
@@ -303,6 +303,9 @@ public class Gui {
         	labyrinthDrawer = new LabyrinthDrawer(lbuilder, "create", gui);
             drawLabyrinth(labyrinthDrawer);
         }
+        
+        // now enable the solver button
+        startSbutton.setEnabled(true);
     }
     
     private void showFileChooser(){
