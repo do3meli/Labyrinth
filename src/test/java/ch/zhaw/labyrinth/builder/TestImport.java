@@ -41,7 +41,7 @@ public class TestImport {
 	public void testImportEntry(){
 	
 		Coordinate cActual = imp.getEntry();
-		Coordinate cExpected = new Coordinate(0,1);
+		Coordinate cExpected = new Coordinate(19,0);
 		assertTrue(cExpected.equals(cActual));	
 		
 	}
@@ -49,13 +49,13 @@ public class TestImport {
 	@Test
 	public void testImportExit(){
 		Coordinate cActual = imp.getExit();
-		Coordinate cExpected = new Coordinate(14,4);
+		Coordinate cExpected = new Coordinate(7,22);
 		assertTrue(cExpected.equals(cActual));	
 	}
 	
 	@Test
 	public void testSomeWalls(){
-		assertFalse(imp.getCellValueAt(5, 2));
+		assertFalse(imp.getCellValueAt(4, 2));
 		assertFalse(imp.getCellValueAt(8, 7));
 		assertFalse(imp.getCellValueAt(10, 12));
 		assertFalse(imp.getCellValueAt(4, 6));
@@ -66,7 +66,7 @@ public class TestImport {
 		assertTrue(imp.getCellValueAt(2, 9));
 		assertTrue(imp.getCellValueAt(13, 13));
 		assertTrue(imp.getCellValueAt(4, 11));
-		assertTrue(imp.getCellValueAt(12, 2));
+		assertTrue(imp.getCellValueAt(11, 2));
 	}
 	
 	@Test
