@@ -11,10 +11,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * TODO: JavaDoc
- *
+ * Draws a given Builder or Solver Algorithm to the screen
  * @author d.schlegel
- *
  */
 public class LabyrinthDrawer extends JPanel implements Runnable, Observer {
    
@@ -30,7 +28,12 @@ public class LabyrinthDrawer extends JPanel implements Runnable, Observer {
     private String mode;
     private Gui gui;
 
-    // construktor
+    /**
+     * Default Construktor
+     * @param labyrinth
+     * @param mode either create or solve
+     * @param gui 
+     */
     public LabyrinthDrawer(Labyrinth labyrinth, String mode, Gui gui) {
         this.gui = gui;
         this.labyrinth = labyrinth;
@@ -59,7 +62,11 @@ public class LabyrinthDrawer extends JPanel implements Runnable, Observer {
         frame.setResizable(false);
         
     }
-
+    
+    /**
+     * This is responsible for painting the stuff to the screen
+     * @param g Graphics
+     */
     @Override
 	protected void paintComponent(Graphics g){
     	super.paintComponent(g);
@@ -83,6 +90,10 @@ public class LabyrinthDrawer extends JPanel implements Runnable, Observer {
       
     }
     
+    /**
+     * Sets the preferred window size to the size of the maze * zoom factor
+     * @return Dimension
+     */
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(labyrinth.getDimension()*zoom, labyrinth.getDimension()*zoom);
@@ -110,28 +121,53 @@ public class LabyrinthDrawer extends JPanel implements Runnable, Observer {
             }
         }
     }
-
+    
+    /**
+     * Getter method for mode instance variable
+     * @return String with Draw mode
+     */
     public String getMode() {
         return mode;
     }
 
+    /**
+     * Setter method for instance variable mode
+     * @param mode either solve or create
+     */
     public void setMode(String mode) {
         this.mode = mode;
     }
-
+    
+    /**
+     * Getter method for Labyrinth instance var
+     * @return Labyrinth
+     */
     public Labyrinth getLabyrinth() {
         return labyrinth;
     }
 
+    /**
+     * Setter method for Labyrinth instance var
+     * @param labyrinth
+     */
     public void setLabyrinth(Labyrinth labyrinth) {
         this.labyrinth = labyrinth;
     }
 
+    /**
+     * Setter method for Labyrinth instance var.
+     * This also sets the curCoordinate compared to setLabyrinth(Labyrinth labyrinth)
+     * @param labyrinth
+     * @param coordinate
+     */
     public void setLabyrinth(Labyrinth labyrinth, Coordinate coordinate) {
         this.labyrinth = labyrinth;
         this.curCoordinate = coordinate;
     }
-
+    
+    /**
+     * Update GUI via observer
+     */
     @Override
     public void update(Observable observable, Object o) {
         if(mode.equals("AStar")) {
