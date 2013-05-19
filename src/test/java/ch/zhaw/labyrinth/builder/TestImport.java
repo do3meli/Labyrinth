@@ -11,12 +11,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ch.zhaw.labyrinth.utils.Coordinate;
+import ch.zhaw.labyrinth.utils.Labyrinth;
 
 public class TestImport {
 	
 	// instance variables
 	private static File f;
-	private static Import imp;
+	private static Labyrinth imp;
 	
 	// NEW methods with the annotation BeforeClass are executed
     // before executing all tests
@@ -24,7 +25,7 @@ public class TestImport {
     @BeforeClass
     public static void beforeEverything() {
     	f = new File("src/test/resources/Maze1.txt");
-    	imp = new Import(f);
+    	imp = new Import(f).build();
     }
 	
 	@Test
@@ -94,7 +95,7 @@ public class TestImport {
         writer.close();
         
         // now try lets import that file
-        Import imp2 = new Import(wrongFile);
+        Labyrinth imp2 = new Import(wrongFile).build();
         
         // now dimension should be = 0
         assertEquals(0,imp2.getDimension());
