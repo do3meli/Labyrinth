@@ -30,7 +30,6 @@ public class Gui {
     private JComboBox solveList;
     private JComboBox createList;
     private JCheckBox debug;
-    private JCheckBox chckbxFastMode;
     private Labyrinth lbuilder;
     private String[] createAlgorithms;
     private String[] solveAlgorithms;
@@ -317,6 +316,7 @@ public class Gui {
 			lbuilder = new Import(fChoose.getSelectedFile());
 		}else{
 			JOptionPane.showMessageDialog(frame, "You did not select a file");
+			lbuilder = null;
 		}
 		
 		createLabyrinth();
