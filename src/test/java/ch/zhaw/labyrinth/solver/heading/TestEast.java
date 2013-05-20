@@ -80,7 +80,7 @@ public class TestEast {
 		assertEquals(0,lab.isCellVisited(x, y));
 		east.goBack();
 		assertEquals(1,lab.isCellVisited(x, y));
-		assertEquals(x-2,east.getX());
+		assertEquals(x-1,east.getX());
 		assertEquals(true,lab.getCellValueAt(x-1, y));
 	}
 }
