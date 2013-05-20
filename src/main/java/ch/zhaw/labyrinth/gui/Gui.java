@@ -39,6 +39,8 @@ public class Gui {
     private JLabel sliderLabel;
     private int speed;
     private static Gui gui;
+    private String mode;
+    private Solver lbsolver;
 
     public Gui() {
         gui = this;
@@ -185,6 +187,18 @@ public class Gui {
       
     }
 
+    /**
+     * Stats a new thread where the solver is running
+     */
+    private void startSolver() {
+        new Thread(new Runnable() {
+            public void run() {
+                labyrinthDrawer.setMode(getMode());
+                getLbsolver().solve(labyrinthDrawer);
+            };
+        }).start();
+    }
+
     public int getTfZoom() {
         return Integer.valueOf(tfZoom.getText());
 
@@ -206,13 +220,28 @@ public class Gui {
         javax.swing.SwingUtilities.invokeLater(ld);
     }
 
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
+    public Solver getLbsolver() {
+        return lbsolver;
+    }
+
+    public void setLbsolver(Solver lbsolver) {
+        this.lbsolver = lbsolver;
+    }
+
     /**
      * ActionListener for Create Algorithm Button
      */
     private class StartCreateActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-           
 
             // Get Variables from GUI text boexes
             int size = Integer.valueOf(tfSize.getText());
@@ -246,17 +275,16 @@ public class Gui {
             String type = (String)solveList.getSelectedItem();
 
             // Build selected LabyrinthDrawer
-            Solver lbsolver;
             if (type.equals("Right-Hand")) {
-                lbsolver = new RightHand(lbuilder);
+                setLbsolver(new RightHand(lbuilder));
             } else if (type.equals("A* Search")) {
-                lbsolver = new AStar(lbuilder);
+                setLbsolver(new AStar(lbuilder));
             } else {
-                lbsolver = null;
+                setLbsolver(null);
             }
+            setMode("solve");
+            startSolver();
 
-            labyrinthDrawer.setMode("solve");
-            lbsolver.solve(labyrinthDrawer);
 
         }
     }
