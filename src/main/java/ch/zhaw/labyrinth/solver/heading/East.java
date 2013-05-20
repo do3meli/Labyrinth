@@ -75,6 +75,6 @@ public class East extends AbstractHeading implements Heading {
         // Store it in the solvedMaze Map
         setX(x - 1);
         storeIt();
-        return new West(x--, y, maze, solvedMaze);
+        return new West(x, y, maze, solvedMaze);
     }
 }

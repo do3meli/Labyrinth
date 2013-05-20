@@ -79,7 +79,7 @@ public class North extends AbstractHeading implements Heading {
         setY(y + 1);
         storeIt();
 
-        return new South(x++, y, maze, solvedMaze);
+        return new South(x, y, maze, solvedMaze);
     }
 
 }
