@@ -34,7 +34,7 @@ public class TestEast {
 	}
 	
 	@Test
-	public void testIsLeftt() {
+	public void testIsLeft() {
 		assertEquals(false,east.isLeft());
 	}
 	
