@@ -10,11 +10,11 @@ import org.junit.Test;
 import ch.zhaw.labyrinth.builder.Import;
 import ch.zhaw.labyrinth.utils.Labyrinth;
 
-public class TestEast {
+public class TestSouth {
 	
 	// instance variables
 	private static Labyrinth lab;
-	private static East east;
+	private static South south;
 	
 	// constancts
 	private static final int x = 3;
@@ -25,62 +25,63 @@ public class TestEast {
     @Before
     public void setUp() {
     	lab = new Import(new File("src/test/resources/Maze1.txt")).build();
-    	east = new East(x,y,lab,new Labyrinth());
+    	south = new South(x,y,lab,new Labyrinth());
     }
-    
-	@Test
+	
+    @Test
 	public void testIsRight() {
-		assertEquals(true,east.isRight());
+		assertEquals(true,south.isRight());
 	}
 	
 	@Test
 	public void testIsLeft() {
-		assertEquals(false,east.isLeft());
+		assertEquals(true,south.isLeft());
 	}
 	
 	@Test
 	public void testIsStraight() {
-		assertEquals(true,east.isStraight());
+		assertEquals(true,south.isStraight());
 	}
 	
 	@Test
 	public void testIsBack() {
-		assertEquals(true,east.isBack());
+		assertEquals(false,south.isBack());
 	}
 	
 	@Test
 	public void testGoRight() {
 		assertEquals(0,lab.isCellVisited(x, y));
-		east.goRight();
+		south.goRight();
 		assertEquals(1,lab.isCellVisited(x, y));
-		assertEquals(y+1,east.getY());
-		assertEquals(true,lab.getCellValueAt(x, y+1));
+		assertEquals(x-1,south.getX());
+		assertEquals(true,lab.getCellValueAt(x-1, y));
 	}
 	
 	@Test
 	public void testGoLeft() {
 		assertEquals(0,lab.isCellVisited(x, y));
-		east.goLeft();
+		south.goLeft();
 		assertEquals(1,lab.isCellVisited(x, y));
-		assertEquals(y-1,east.getY());
-		assertEquals(false,lab.getCellValueAt(x, y-1));
+		assertEquals(x+1,south.getX());
+		assertEquals(true,lab.getCellValueAt(x+1, y));
 	}
 	
 	@Test
 	public void testGoStraight() {
 		assertEquals(0,lab.isCellVisited(x, y));
-		east.goStraight();
+		south.goStraight();
 		assertEquals(1,lab.isCellVisited(x, y));
-		assertEquals(x+1,east.getX());
-		assertEquals(true,lab.getCellValueAt(x+1, y));
+		assertEquals(y+1,south.getY());
+		assertEquals(true,lab.getCellValueAt(x, y+1));
 	}
 	
 	@Test
 	public void testGoBack() {
 		assertEquals(0,lab.isCellVisited(x, y));
-		east.goBack();
+		south.goBack();
 		assertEquals(1,lab.isCellVisited(x, y));
-		assertEquals(x-1,east.getX());
-		assertEquals(true,lab.getCellValueAt(x-1, y));
+		assertEquals(y-1,south.getY());
+		assertEquals(false,lab.getCellValueAt(x, y-1));
 	}
+
 }
