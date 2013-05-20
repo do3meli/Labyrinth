@@ -50,36 +50,36 @@ public class TestWest {
    	
    	@Test
    	public void testGoRight() {
-   		assertEquals(0,lab.isCellVisited(x, y));
+   		assertEquals(0,west.getVisits(x, y));
    		west.goRight();
-   		assertEquals(1,lab.isCellVisited(x, y));
+   		assertEquals(1,west.getVisits(x, y));
    		assertEquals(y-1,west.getY());
    		assertEquals(false,lab.getCellValueAt(x, y-1));
    	}
    	
    	@Test
    	public void testGoLeft() {
-   		assertEquals(0,lab.isCellVisited(x, y));
+   		assertEquals(0,west.getVisits(x, y));
    		west.goLeft();
-   		assertEquals(1,lab.isCellVisited(x, y));
+   		assertEquals(1,west.getVisits(x, y));
    		assertEquals(y+1,west.getY());
    		assertEquals(true,lab.getCellValueAt(x, y+1));
    	}
    	
    	@Test
    	public void testGoStraight() {
-   		assertEquals(0,lab.isCellVisited(x, y));
+   		assertEquals(0,west.getVisits(x, y));
    		west.goStraight();
-   		assertEquals(1,lab.isCellVisited(x, y));
+   		assertEquals(1,west.getVisits(x, y));
    		assertEquals(x-1,west.getX());
    		assertEquals(true,lab.getCellValueAt(x-1, y));
    	}
    	
    	@Test
    	public void testGoBack() {
-   		assertEquals(0,lab.isCellVisited(x, y));
+   		assertEquals(0,west.getVisits(x, y));
    		west.goBack();
-   		assertEquals(1,lab.isCellVisited(x, y));
+   		assertEquals(1,west.getVisits(x, y));
    		assertEquals(x+1,west.getX());
    		assertEquals(true,lab.getCellValueAt(x+1,y));
    	}
