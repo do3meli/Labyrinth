@@ -80,28 +80,49 @@ public class Cell {
     }
 
     /**
-     * Getter and Setter for F, G and H
+     * Getter for F
+     * @return int f
      */
     public int getF() {
         return f;
     }
-
+    
+    /**
+     * setter method for F
+     * @param f
+     */
     public void setF(int f) {
         this.f = f;
     }
-
+    
+    /**
+     * Getter method for g
+     * @return int g
+     */
     public int getG() {
         return g;
     }
-
+    
+    /**
+     * setter method for G
+     * @param g int
+     */
     public void setG(int g) {
         this.g = g;
     }
-
+    
+    /**
+     * getter Method for H
+     * @return int h
+     */
     public int getH() {
         return h;
     }
-
+    
+    /**
+     * setter method for H
+     * @param h int
+     */
     public void setH(int h) {
         this.h = h;
     }

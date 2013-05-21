@@ -5,10 +5,11 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * TODO: JavaDoc
+ * This class represents a maze. 
+ * A maze contains a HashMap with a Coordinate as Key
+ * and a Cell as value.
  *
  * @author d.schlegel
- *
  */
 public class Labyrinth {
 	
@@ -18,18 +19,26 @@ public class Labyrinth {
     private Coordinate entry;
     private Coordinate exit;
 	
-	// constructor
+	/**
+	 * Default constructor for creating a Labyrinth
+	 * @param dim int dimension of the maze
+	 */
 	public Labyrinth(int dim){
 		this.maze = new HashMap<Coordinate, Cell>();
 		setDimension(dim);
 		createEmptyMaze();
 	}
-
+	
+	/**
+	 * Constructor used by some solver classes
+	 */
     public Labyrinth() {
         this.maze = new HashMap<Coordinate, Cell>();
     }
 	
-	// create empty maze with cell's and coordinate's
+	/**
+	 *  create empty maze with cell's and coordinate's
+	 */
 	public void createEmptyMaze() {
 		
 		for (int x = 0; x < getDimension(); x++) {
@@ -39,31 +48,54 @@ public class Labyrinth {
 		}
 	}
 
-    // getter for dimension
+    /**
+     * getter for dimension
+     * @return int Dimension
+     */
 	public int getDimension() {
 		return dimension;
 	}
-
+	
+	/**
+	 * set the Dimension. 
+	 * makes sure dimension is odd by calling makeIntOdd
+	 * @param dimension
+	 */
     public void setDimension(int dimension) {
         this.dimension = makeIntOdd(dimension);
     }
 
-    // getter for Cell with coordinate attribute
+    /**
+     * getter for Cell with coordinate attribute
+     * @param c Coordinate
+     * @return Cell
+     */
 	public Cell getCellAt(Coordinate c){
 		return this.maze.get(c);
 	}
 	
-	// getter for Cell with x and y attributes
+	/**
+	 * getter for Cell with x and y attributes
+	 * @param x x-axis int value
+	 * @param y y-axis int value
+	 * @return Cell
+	 */
 	public Cell getCellAt(int x, int y){
 		return this.maze.get(new Coordinate(x,y));
 	}
-
+	
+	/**
+	 * Returns the maze as HashMap
+	 * @return HashMap<Coordinate,Cell> with the maze
+	 */
     public HashMap<Coordinate, Cell> getMaze() {
         return maze;
     }
 
     /**
-	  * @return a random int within the dimension 
+     * Gets a Random integer which is odd
+     * @param int dimension
+	 * @return a random int within the dimension 
 	 */
 	public int getRandomIntOdd(int dim){
 		Random rand = new Random();
@@ -74,12 +106,21 @@ public class Labyrinth {
 		return r;
 	}
 	
-	// setter method to set the cell value from a coordinate
+	/**
+	 * setter method to set the cell value from a coordinate
+	 * @param c Coordinate
+	 * @param val boolean if cell is path = true otherwise false
+	 */
 	public void setCellValue(Coordinate c,boolean val){
 		maze.get(c).setPath(val);
 	}
 	
-	// setter method to set the cell value from an x and y parameter
+	/**
+	 * setter method to set the cell value from an x and y parameter
+	 * @param x x-axis int
+	 * @param y y-axis int
+	 * @param val boolean if cell is path = true otherwise false
+	 */
     public void setCellValue(int x,int y,boolean val){
         Coordinate coordinate = new Coordinate(x,y);
         Cell cell = maze.get(coordinate);
@@ -90,20 +131,35 @@ public class Labyrinth {
         cell.setPath(val);
     }
 
-    // setter method to set the cell value from an x and y parameter
+    /**
+     * setter method to set the cell visited value from an x and y parameter
+     * @param x x-axis value
+     * @param y y-axis value
+     */
     public void setCellVisited(int x, int y){
         Coordinate coordinate = new Coordinate(x,y);
         Cell cell = maze.get(coordinate);
         cell.incVisits();
     }
-
+    
+    /**
+     * Getter method for visit count of a Cell
+     * @param x x-axis int
+     * @param y y-axis int
+     * @return int with count of cell visited
+     * @see Cell
+     */
     public int isCellVisited(int x, int y){
         Coordinate coordinate = new Coordinate(x,y);
         Cell cell = maze.get(coordinate);
         return cell.getVisits();
     }
 	
-	// getter method for cell value at specific coordinate
+	/**
+	 * getter method for cell value at specific coordinate
+	 * @param c Coordinate
+	 * @return val boolean if cell is path = true otherwise false
+	 */
 	public boolean getCellValueAt(Coordinate c){
         if(maze.get(c) == null) {
             return false;
@@ -114,7 +170,6 @@ public class Labyrinth {
 
     /**
      * Adds a reachable cell to the maze and saves it's predecessor
-     *
      * @param coordinate
      * @param predecessor
      */
@@ -127,7 +182,6 @@ public class Labyrinth {
 
     /**
      * Adds a reachable cell to a maze
-     *
      * @param coordinate
      */
     public void addPath(Coordinate coordinate, Cell cell) {
@@ -136,14 +190,12 @@ public class Labyrinth {
 
     /**
      * removes a cell from a maze
-     *
      * @param currentCoordinate
      */
     public void removeCell(Coordinate currentCoordinate) {
         maze.remove(currentCoordinate);
     }
 	
-
     /**
      * getter method for cell value at specific x,y point
      *
@@ -160,15 +212,27 @@ public class Labyrinth {
 		    return cell.isPath();
         }
 	}
-
+	
+	/**
+	 * Getter method for Entry
+	 * @return Coordinate holding the Entry
+	 */
     public Coordinate getEntry() {
         return entry;
     }
-
+    
+    /**
+     * Setter method for Entry
+     * @param entry Coordinate holding the Entry
+     */
     public void setEntry(Coordinate entry) {
         this.entry = entry;
     }
-
+    
+    /**
+     * Getter Method for exit
+     * @return Coordinate holding the exit
+     */
     public Coordinate getExit() {
         return exit;
     }
@@ -185,7 +249,11 @@ public class Labyrinth {
     		return i; 
     	}
     }
-
+    
+    /**
+     * Setter method for Exit
+     * @param exit Coordinate holding the exit
+     */
     public void setExit(Coordinate exit) {
         this.exit = exit;
     }
@@ -213,7 +281,7 @@ public class Labyrinth {
     }
 
     /**
-     *
+     * Gets the lowest F
      * @return the coordinates to the cell with the lowest F value
      */
     public Coordinate getLowestF() {

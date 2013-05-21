@@ -42,6 +42,7 @@ public class Coordinate {
     
     /**
      * A cell is equals whenever the x and y coordinate are the same
+     * @return boolean which says if objects are equals or not
      */
 	@Override
     public boolean equals(Object o) {
@@ -64,7 +65,7 @@ public class Coordinate {
 
         return true;
     }
-
+	
     @Override
     public int hashCode() {
         int result = x;
