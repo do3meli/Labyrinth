@@ -33,7 +33,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>ch.zhaw.mazeModel.main.Starter</mainClass>
+                            <mainClass>ch.zhaw.labyrinth.main.Starter</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -57,7 +57,7 @@
         </plugins>
     </build>
 
-    <name>mazeModel</name>
+    <name>LabyrinthSolver</name>
     <url>http://maven.apache.org</url>
 
 </project>
