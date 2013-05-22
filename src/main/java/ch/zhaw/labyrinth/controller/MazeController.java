@@ -38,9 +38,10 @@ public class MazeController {
 
         // Add Listeners
         view.addImportListener(new ImportItemListener());
+        view.addChangeSpeedListener(new SpeedChangeAction());
         view.addCreateListener(new CreateActionListener());
         //view.addSolveListener(new SolveActionListener());
-        view.addChangeSpeedListener(new SpeedChangeAction());
+
 
 
     }
@@ -56,8 +57,7 @@ public class MazeController {
             mazePanel.setMode("Create");
             mazePanel.setZoom(view.getZoom());
             mazePanel.setDimension(view.getDimension());
-//            mazePanel.setSpeed(view.getSpeed());
-            mazePanel.setSpeed(50);
+            mazePanel.setSpeed(view.getSpeed());
 
             // Build panel
             mazePanel.buildFrame();
