@@ -2,7 +2,6 @@ package ch.zhaw.labyrinth.model.builder;
 
 import ch.zhaw.labyrinth.model.MazeModel;
 import ch.zhaw.labyrinth.model.utils.Coordinate;
-import ch.zhaw.labyrinth.view.MazeView;
 
 import java.util.*;
 
@@ -18,7 +17,6 @@ public class DepthFirstSearch extends Observable implements Builder {
 	
 	// instance var
 	private MazeModel lab;
-    private MazeView view;
 
 	/**
 	 * Default Constructor DFS
@@ -39,7 +37,6 @@ public class DepthFirstSearch extends Observable implements Builder {
      */
 	@Override
 	public MazeModel build() {
-        this.view = view;
 
 		// set start point in array
 		int x = lab.getRandomIntOdd(lab.getDimension());
@@ -57,11 +54,6 @@ public class DepthFirstSearch extends Observable implements Builder {
 
 	}
 
-    @Override
-    public void registerObserver(Observer obs) {
-        this.addObserver(obs);
-    }
-	
 	/**
 	 * Method which is recursively called by the maze creation process.
 	 * @param x int current location
@@ -90,11 +82,12 @@ public class DepthFirstSearch extends Observable implements Builder {
 			if (dir[i] == 3){
 				moveLeft(x,y);
 			}
+
+            setChanged();
+            notifyObservers(new Coordinate(x, y));
 		}
 	}
 
-	// TODO: create one move method/class to avoid code duplication
-	
 	/**
 	 * This goes 2 cells up if that is still within the dimension
 	 * @param x int current location
@@ -237,5 +230,10 @@ public class DepthFirstSearch extends Observable implements Builder {
             lab.setExit(new Coordinate(lab.getDimension() - 1, rOut));
 		}
 	}
+
+    @Override
+    public void registerObserver(Observer obs) {
+        this.addObserver(obs);
+    }
 	
 }

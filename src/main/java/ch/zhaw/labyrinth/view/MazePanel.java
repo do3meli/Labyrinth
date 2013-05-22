@@ -48,6 +48,7 @@ public class MazePanel extends JPanel implements Observer {
         canvas = new JPanel();
         canvas.setBorder(BorderFactory.createEmptyBorder(1000, 1000, 1000, 1000));
         canvas.setPreferredSize(new Dimension(getDimension()*zoom, getDimension()*zoom));
+        canvas.setBackground(Color.black);
         
         // add the canvas to the frame and make it visible
         frame.add(canvas);
@@ -66,11 +67,11 @@ public class MazePanel extends JPanel implements Observer {
 	protected void paintComponent(Graphics g){
     	super.paintComponent(g);
 
-//        if(mode.equals("create")) {
-//            if (!curCell.isPath()){
-//                g.setColor(Color.black);
-//                g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom );
-//            }
+        if(mode.equals("create")) {
+            if (curCell.isPath()){
+                g.setColor(Color.black);
+            }
+        }
 //        } else if (mode.equals("solve")) {
 //            if(maze.getCellAt(curCoordinate.getX(), curCoordinate.getY()).getVisits() > 1) {
 //                g.setColor(Color.blue);
@@ -82,6 +83,7 @@ public class MazePanel extends JPanel implements Observer {
 //            g.setColor(Color.orange);
 //            g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom );
 //        }
+
         g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom );
       
     }
@@ -168,12 +170,8 @@ public class MazePanel extends JPanel implements Observer {
      */
     @Override
     public void update(Observable observable, Object o) {
-        if(mode.equals("AStar")) {
-            curCoordinate = (Coordinate)o;
-            paintComponent(canvas.getGraphics());
-        } else {
-            paintComponent(canvas.getGraphics());
-        }
+        curCoordinate = (Coordinate)o;
+        paintComponent(canvas.getGraphics());
 
         try {
             Thread.sleep(getSpeed());
@@ -181,6 +179,8 @@ public class MazePanel extends JPanel implements Observer {
             e.printStackTrace();
         }
     }
+
+
 
     public void setZoom(int zoom) {
         this.zoom = zoom;

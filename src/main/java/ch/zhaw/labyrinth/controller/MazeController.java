@@ -50,30 +50,27 @@ public class MazeController {
     private class CreateActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            // Configure the MazePanel object
+            mazePanel.setMode("Create");
+            mazePanel.setZoom(view.getZoom());
+            mazePanel.setDimension(view.getDimension());
+//            mazePanel.setSpeed(view.getSpeed());
+            mazePanel.setSpeed(50);
 
-            // Get Variables from GUI text boxes
-            int dimension = view.getDimension();
+            // Build panel
+            mazePanel.buildFrame();
 
             // Get Build Type
             String createAlgorithm = view.getCreateAlgorithm();
 
-            // Build selected MazePanel
+            // Build selected maze
             if (createAlgorithm.equals("Depth-First")) {
-                mazeBuilder = new DepthFirstSearch(model, dimension);
+                mazeBuilder = new DepthFirstSearch(model, view.getDimension());
             } else if (createAlgorithm.equals("Import")) {
                 view.showFileChooser();
             } else {
                 mazeBuilder = null;
             }
-
-            // Configure the MazePanel object
-            mazePanel.setMode("Create");
-            mazePanel.setZoom(view.getZoom());
-            mazePanel.setDimension(view.getDimension());
-            mazePanel.setSpeed(view.getSpeed());
-
-            // Build panel
-            mazePanel.buildFrame();
 
             // Register observer
             mazeBuilder.registerObserver(mazePanel);
