@@ -23,7 +23,7 @@ public class MazeController {
     private Builder mazeBuilder;
 
     /**
-     *
+     * TODO: JavaDoc
      * @param model
      * @param view
      */
@@ -41,8 +41,6 @@ public class MazeController {
         view.addChangeSpeedListener(new SpeedChangeAction());
         view.addCreateListener(new CreateActionListener());
         //view.addSolveListener(new SolveActionListener());
-
-
 
     }
 
@@ -70,8 +68,6 @@ public class MazeController {
                 mazeBuilder = new DepthFirstSearch(model, view.getDimension());
             } else if (createAlgorithm.equals("Import")) {
                 view.showFileChooser();
-            } else {
-                mazeBuilder = null;
             }
 
             // Register observer
@@ -106,7 +102,7 @@ public class MazeController {
 //
 //        }
 //    }
-//
+
     private class SpeedChangeAction implements ChangeListener {
         @Override
         public void stateChanged(ChangeEvent e) {
