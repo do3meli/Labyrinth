@@ -1,11 +1,13 @@
 package ch.zhaw.labyrinth.controller;
 
+import ch.zhaw.labyrinth.model.MazeModel;
 import ch.zhaw.labyrinth.model.builder.Builder;
 import ch.zhaw.labyrinth.model.builder.DepthFirstSearch;
-import ch.zhaw.labyrinth.model.MazeModel;
 import ch.zhaw.labyrinth.view.MazePanel;
 import ch.zhaw.labyrinth.view.MazeView;
 
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -38,7 +40,7 @@ public class MazeController {
         view.addImportListener(new ImportItemListener());
         view.addCreateListener(new CreateActionListener());
         //view.addSolveListener(new SolveActionListener());
-        //view.addChangeSpeedListener(new SpeedChangeAction());
+        view.addChangeSpeedListener(new SpeedChangeAction());
 
 
     }
@@ -105,14 +107,14 @@ public class MazeController {
 //        }
 //    }
 //
-//    private class SpeedChangeAction implements ChangeListener {
-//        @Override
-//        public void stateChanged(ChangeEvent e) {
-//            setSpeed(slider.getValue());
-//            String str = Integer.toString(getSpeed());
-//            sliderLabel.setText(str);
-//        }
-//    }
+    private class SpeedChangeAction implements ChangeListener {
+        @Override
+        public void stateChanged(ChangeEvent e) {
+            view.setSpeed(view.getSlider().getValue());
+            String str = Integer.toString(view.getSpeed());
+            view.setSliderLabel(str);
+        }
+    }
 
     /**
      * This ItemListeners does fire when the item of the createList is getting changed.

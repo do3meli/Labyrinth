@@ -235,7 +235,23 @@ public class MazeView {
         return (String)solveList.getSelectedItem();
     }
 
-     /**
+    public String getSliderLabel() {
+        return sliderLabel.getText();
+    }
+
+    public void setSliderLabel(String sliderLabel) {
+        this.sliderLabel.setText(sliderLabel);
+    }
+
+    public JSlider getSlider() {
+        return slider;
+    }
+
+    public void setSlider(JSlider slider) {
+        this.slider = slider;
+    }
+
+    /**
      * This creates the labyrinth drawer object and calls the paint methods.
      * If debugging is selected it also prints the maze as array.
      */
