@@ -2,13 +2,10 @@ package ch.zhaw.labyrinth.controller;
 
 import ch.zhaw.labyrinth.model.builder.Builder;
 import ch.zhaw.labyrinth.model.builder.DepthFirstSearch;
-import ch.zhaw.labyrinth.model.solver.AStar;
-import ch.zhaw.labyrinth.model.solver.RightHand;
-import ch.zhaw.labyrinth.model.utils.MazeModel;
+import ch.zhaw.labyrinth.model.MazeModel;
+import ch.zhaw.labyrinth.view.MazePanel;
 import ch.zhaw.labyrinth.view.MazeView;
 
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -20,6 +17,7 @@ import java.awt.event.ItemListener;
 public class MazeController {
     private MazeModel model;
     private MazeView view;
+    private MazePanel mazePanel;
     private Builder mazeBuilder;
 
     /**
@@ -30,6 +28,11 @@ public class MazeController {
     public MazeController(MazeModel model, MazeView view) {
         this.model = model;
         this.view = view;
+
+        mazePanel = new MazePanel();
+
+        // Create Gui
+        view.createAndShowGUI();
 
         // Add Listeners
         view.addImportListener(new ImportItemListener());
@@ -49,22 +52,34 @@ public class MazeController {
         public void actionPerformed(ActionEvent e) {
 
             // Get Variables from GUI text boxes
-            int size = view.getSize();
+            int dimension = view.getDimension();
 
             // Get Build Type
             String createAlgorithm = view.getCreateAlgorithm();
 
-            // Build selected LabyrinthDrawer
+            // Build selected MazePanel
             if (createAlgorithm.equals("Depth-First")) {
-                mazeBuilder = new DepthFirstSearch(size);
+                mazeBuilder = new DepthFirstSearch(model, dimension);
             } else if (createAlgorithm.equals("Import")) {
                 view.showFileChooser();
             } else {
                 mazeBuilder = null;
             }
 
-            // create the labyrinth drawer and active button
-            view.createLabyrinth(); // TODO: Move this into model
+            // Configure the MazePanel object
+            mazePanel.setMode("Create");
+            mazePanel.setZoom(view.getZoom());
+            mazePanel.setDimension(view.getDimension());
+            mazePanel.setSpeed(view.getSpeed());
+
+            // Build panel
+            mazePanel.buildFrame();
+
+            // Register observer
+            mazeBuilder.registerObserver(mazePanel);
+
+            // Build Maze
+            mazeBuilder.build();
 
         }
     }
@@ -78,7 +93,7 @@ public class MazeController {
 //            // Get Build Type
 //            String type = view.getSolveAlgorithm();
 //
-//            // Build selected LabyrinthDrawer
+//            // Build selected MazePanel
 //            if (type.equals("Right-Hand")) {
 //                setLbsolver(new RightHand(lbuilder));
 //            } else if (type.equals("A* Search")) {

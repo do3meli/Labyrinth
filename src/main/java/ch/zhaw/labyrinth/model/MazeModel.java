@@ -1,4 +1,7 @@
-package ch.zhaw.labyrinth.model.utils;
+package ch.zhaw.labyrinth.model;
+
+import ch.zhaw.labyrinth.model.utils.Cell;
+import ch.zhaw.labyrinth.model.utils.Coordinate;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,22 +15,24 @@ import java.util.Random;
  * @author d.schlegel
  */
 public class MazeModel {
-	
+    private static final String[] CREATE_ALGORITHMS = { "Depth-First", "Import" };
+    private static final String[] SOLVE_ALGORITHMS = { "Right-Hand", "A* Search" };
+
 	// instance variables
 	private HashMap<Coordinate, Cell> maze;
 	private int dimension;
     private Coordinate entry;
     private Coordinate exit;
 	
-	/**
-	 * Default constructor for creating a MazeModel
-	 * @param dim int dimension of the maze
-	 */
-	public MazeModel(int dim){
-		this.maze = new HashMap<Coordinate, Cell>();
-		setDimension(dim);
-		createEmptyMaze();
-	}
+//	/**
+//	 * Default constructor for creating a MazeModel
+//	 * @param dim int dimension of the maze
+//	 */
+//	public MazeModel(int dim){
+//		this.maze = new HashMap<Coordinate, Cell>();
+//		setDimension(dim);
+//		createEmptyMaze();
+//	}
 	
 	/**
 	 * Constructor used by some solver classes
@@ -298,5 +303,11 @@ public class MazeModel {
         return coordinate;
     }
 
-	
+    public String[] getCreateAlgorithms() {
+        return CREATE_ALGORITHMS;
+    }
+
+    public String[] getSolveAlgorithms() {
+        return SOLVE_ALGORITHMS;
+    }
 }

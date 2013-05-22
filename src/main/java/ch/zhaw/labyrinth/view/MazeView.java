@@ -2,7 +2,7 @@ package ch.zhaw.labyrinth.view;
 
 import ch.zhaw.labyrinth.model.builder.Import;
 import ch.zhaw.labyrinth.model.solver.Solver;
-import ch.zhaw.labyrinth.model.utils.MazeModel;
+import ch.zhaw.labyrinth.model.MazeModel;
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
@@ -19,51 +19,33 @@ public class MazeView {
     
 	// instance variables
     private MazeModel model;
+    private MazeModel lbuilder;
+    private MazePanel mazePanel;
+    private MazeView view;
     private JButton startButton;
-	private static JFrame frame;
-    private JTextField tfSize;
+	private JFrame frame;
+    private JTextField tfDimension;
     private JTextField tfZoom;
     private JComboBox solveList;
     private JComboBox createList;
     private JCheckBox debug;
-    private MazeModel lbuilder;
     private String[] createAlgorithms;
     private String[] solveAlgorithms;
-    private LabyrinthDrawer labyrinthDrawer;
     private JButton solveButton;
     private JSlider slider;
     private JLabel sliderLabel;
     private int speed;
-    private static MazeView mazeView;
     private String mode;
     private Solver lbsolver;
 
+    /**
+     * Default constructor for MazeView
+     *
+     * @param model the MazeModel
+     */
     public MazeView(MazeModel model) {
         this.model = model;
-        mazeView = this;
-
-    	// set up drop downs
-    	createAlgorithms = new String[]{ "Depth-First", "Import"};
-    	solveAlgorithms = new String[]{ "Right-Hand", "A* Search"};
-    	
-    	/* Use an appropriate Look and Feel - if possible */
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } 
-        
-        /* Turn off metal's use bold fonts */
-        UIManager.put("swing.boldMetal", Boolean.FALSE);
-
-        //Schedule a job for the event dispatch thread:
-        //creating and showing this application's GUI.
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });
-
+        this.view = this;
     }
 
     public void createAndShowGUI() {
@@ -85,6 +67,10 @@ public class MazeView {
         configPanel.setLayout(null);
         configPanel.setBounds(0, 0, 196, 478);
 
+        // set up drop downs
+        createAlgorithms = model.getCreateAlgorithms();
+        solveAlgorithms = model.getSolveAlgorithms();
+
         // Gui object: create label
         JLabel createLabel = new JLabel("Create Algorithm");
         createLabel.setBounds(6, 6, 120, 16);
@@ -103,10 +89,10 @@ public class MazeView {
         configPanel.add(lblSize);
         
         // create and add maze size text field
-        tfSize = new JTextField("41");
-        tfSize.setBounds(50, 49, 134, 28);
-        tfSize.setColumns(10);
-        configPanel.add(tfSize);
+        tfDimension = new JTextField("41");
+        tfDimension.setBounds(50, 49, 134, 28);
+        tfDimension.setColumns(10);
+        configPanel.add(tfDimension);
         
         // create and add Zoom label
         JLabel lblZoom = new JLabel("Zoom: ");
@@ -186,8 +172,8 @@ public class MazeView {
     private void startSolver() {
         new Thread(new Runnable() {
             public void run() {
-                labyrinthDrawer.setMode(getMode());
-                getLbsolver().solve(labyrinthDrawer);
+                mazePanel.setMode(getMode());
+                getLbsolver().solve(mazePanel);
             };
         }).start();
     }
@@ -209,10 +195,6 @@ public class MazeView {
         this.speed = speed;
     }
 
-    public static void drawLabyrinth(LabyrinthDrawer ld) {
-        javax.swing.SwingUtilities.invokeLater(ld);
-    }
-
     public String getMode() {
         return mode;
     }
@@ -229,12 +211,12 @@ public class MazeView {
         this.lbsolver = lbsolver;
     }
 
-    public int getSize() {
-        return Integer.valueOf(tfSize.getText());
+    public int getDimension() {
+        return Integer.valueOf(tfDimension.getText());
     }
 
-    public void setSize(int size) {
-        tfSize.setText(String.valueOf(size));
+    public void setDimension(int size) {
+        tfDimension.setText(String.valueOf(size));
     }
 
     public int getZoom() {
@@ -258,19 +240,18 @@ public class MazeView {
      * If debugging is selected it also prints the maze as array.
      */
      public void createLabyrinth(){
-    	   
+
         // Print Debugging stuff to console if tickbox set
         if(debug.isSelected()){
         	lbuilder.printAsArray();
         }
-        
+
         //Schedule a job for the event dispatch thread:
         //creating and showing this application's GUI.
         if(lbuilder != null){
-        	labyrinthDrawer = new LabyrinthDrawer(lbuilder, "create", mazeView);
-            drawLabyrinth(labyrinthDrawer);
+        	mazePanel = new MazePanel();
         }
-        
+
         // now enable the solver button
         solveButton.setEnabled(true);
     }

@@ -1,6 +1,6 @@
 package ch.zhaw.labyrinth.model.solver.heading;
 
-import ch.zhaw.labyrinth.model.utils.MazeModel;
+import ch.zhaw.labyrinth.model.MazeModel;
 
 /**
  * This is the North implementation of Heading

@@ -1,12 +1,14 @@
 package ch.zhaw.labyrinth.model.builder;
 
+import ch.zhaw.labyrinth.model.MazeModel;
+import ch.zhaw.labyrinth.model.utils.Cell;
+import ch.zhaw.labyrinth.model.utils.Coordinate;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Observable;
+import java.util.Observer;
 import java.util.Scanner;
-import ch.zhaw.labyrinth.model.utils.Cell;
-import ch.zhaw.labyrinth.model.utils.Coordinate;
-import ch.zhaw.labyrinth.model.utils.MazeModel;
 
 /**
  * This will import a File into the maze data structre we have
@@ -32,7 +34,7 @@ public class Import extends Observable implements Builder {
 	/**
 	 * This builds up a maze data structure from a given file
 	 * @return MazeModel
-	 */
+     */
 	@Override
 	public MazeModel build() {
 		
@@ -99,5 +101,10 @@ public class Import extends Observable implements Builder {
     
     // build() return
     return lab;
-	}	
+	}
+
+    @Override
+    public void registerObserver(Observer observer) {
+        this.addObserver(observer);
+    }
 }

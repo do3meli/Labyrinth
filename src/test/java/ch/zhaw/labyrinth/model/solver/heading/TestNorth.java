@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 
-import ch.zhaw.labyrinth.model.utils.MazeModel;
+import ch.zhaw.labyrinth.model.MazeModel;
 import org.junit.Before;
 import org.junit.Test;
 

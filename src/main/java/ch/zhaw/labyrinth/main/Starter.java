@@ -1,7 +1,7 @@
 package ch.zhaw.labyrinth.main;
 
 import ch.zhaw.labyrinth.controller.MazeController;
-import ch.zhaw.labyrinth.model.utils.MazeModel;
+import ch.zhaw.labyrinth.model.MazeModel;
 import ch.zhaw.labyrinth.view.MazeView;
 
 /**
@@ -17,7 +17,6 @@ class Starter {
         MazeView view = new MazeView(model);
         MazeController controller = new MazeController(model, view);
 
-        //view.setVisible(true);
 
     }
 }

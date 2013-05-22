@@ -1,7 +1,7 @@
 package ch.zhaw.labyrinth.model.solver.heading;
 
 import ch.zhaw.labyrinth.model.utils.Coordinate;
-import ch.zhaw.labyrinth.model.utils.MazeModel;
+import ch.zhaw.labyrinth.model.MazeModel;
 
 /**
  * This interface defines how to move with a specific heading.

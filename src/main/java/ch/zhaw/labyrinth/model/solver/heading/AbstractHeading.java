@@ -1,7 +1,7 @@
 package ch.zhaw.labyrinth.model.solver.heading;
 
 import ch.zhaw.labyrinth.model.utils.Coordinate;
-import ch.zhaw.labyrinth.model.utils.MazeModel;
+import ch.zhaw.labyrinth.model.MazeModel;
 
 /**
  * Abstract Class representing a heading. All generic methods are defined in this class

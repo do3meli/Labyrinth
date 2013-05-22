@@ -1,14 +1,15 @@
 package ch.zhaw.labyrinth.model.solver;
 
 
-import ch.zhaw.labyrinth.model.utils.MazeModel;
-import ch.zhaw.labyrinth.view.LabyrinthDrawer;
+import ch.zhaw.labyrinth.model.MazeModel;
 import ch.zhaw.labyrinth.model.solver.heading.East;
 import ch.zhaw.labyrinth.model.solver.heading.Heading;
 import ch.zhaw.labyrinth.model.solver.heading.South;
 import ch.zhaw.labyrinth.model.utils.Coordinate;
+import ch.zhaw.labyrinth.view.MazePanel;
 
 import java.util.Observable;
+import java.util.Observer;
 
 /**
  * This class implements the RightHand Algorithm.
@@ -33,11 +34,11 @@ public class RightHand extends Observable implements Solver {
 
     // Implemented methods
     @Override
-    public void solve(LabyrinthDrawer labyrinthDrawer) {
+    public void solve(MazePanel mazePanel) {
         // Step counter
         int steps = 0;
 
-        addObserver(labyrinthDrawer);
+        addObserver(mazePanel);
 
         // Timer
         long startTime = System.currentTimeMillis();
@@ -65,7 +66,7 @@ public class RightHand extends Observable implements Solver {
             steps++;
 
             if(mazeModel.getCellAt(new Coordinate(x,y)).isPath()) {
-                labyrinthDrawer.setLabyrinth(heading.getSolvedLabyrinth(), new Coordinate(x, y));
+//                mazePanel.setLabyrinth(heading.getSolvedLabyrinth(), new Coordinate(x, y));
                 setChanged();
                 notifyObservers();
             }
@@ -120,11 +121,17 @@ public class RightHand extends Observable implements Solver {
 
         // Print steps
         System.out.println("Steps: " + steps + ", took: " + (stopTime-startTime) + "ms");
-        labyrinthDrawer.setLabyrinth(heading.getSolvedLabyrinth(), exit);
+//        mazePanel.setLabyrinth(heading.getSolvedLabyrinth(), exit);
         setChanged();
         notifyObservers();
 
     }
+
+    @Override
+    public void registerObserver(Observer obs) {
+        this.addObserver(obs);
+    }
+
 
     // Set x and y with the new values from the coordinate
     private void setCoordinate(Coordinate coordinate) {

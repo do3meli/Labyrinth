@@ -1,12 +1,10 @@
 package ch.zhaw.labyrinth.model.builder;
 
+import ch.zhaw.labyrinth.model.MazeModel;
 import ch.zhaw.labyrinth.model.utils.Coordinate;
-import ch.zhaw.labyrinth.model.utils.MazeModel;
+import ch.zhaw.labyrinth.view.MazeView;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Observable;
-import java.util.Random;
+import java.util.*;
 
 /**
  * This implements a DeepFirstSearch algorithm like descripted
@@ -20,28 +18,33 @@ public class DepthFirstSearch extends Observable implements Builder {
 	
 	// instance var
 	private MazeModel lab;
-	
+    private MazeView view;
+
 	/**
 	 * Default Constructor DFS
-	 * @param n size of the maze
+	 * @param dim size of the maze
 	 */
-	public DepthFirstSearch(int dim){
+	public DepthFirstSearch(MazeModel lab, int dim){
 		
 		// create a maze object
-		this.lab = new MazeModel(dim);
+		this.lab = lab;
+
+        lab.setDimension(dim);
+        lab.createEmptyMaze();
 	}
 	
 	/**
 	 * This builds the maze with the DepthFirstSearch Algorithm
 	 * @return MazeModel
-	 */
+     */
 	@Override
 	public MazeModel build() {
+        this.view = view;
 
 		// set start point in array
 		int x = lab.getRandomIntOdd(lab.getDimension());
 		int y = lab.getRandomIntOdd(lab.getDimension());
-		lab.setCellValue(x,y,PATH);
+		lab.setCellValue(x, y, PATH);
 				
 		// create whole maze array
 		createMaze(x,y);
@@ -53,6 +56,11 @@ public class DepthFirstSearch extends Observable implements Builder {
 		return lab;
 
 	}
+
+    @Override
+    public void registerObserver(Observer obs) {
+        this.addObserver(obs);
+    }
 	
 	/**
 	 * Method which is recursively called by the maze creation process.
@@ -204,7 +212,7 @@ public class DepthFirstSearch extends Observable implements Builder {
 
             // Save entry & exit
 			lab.setEntry(new Coordinate( rEntry,0));
-            lab.setExit(new Coordinate(rOut,lab.getDimension() - 1));
+            lab.setExit(new Coordinate(rOut, lab.getDimension() - 1));
 		}
 		
 		// r = 1 => entry is on the left site

@@ -1,6 +1,9 @@
 package ch.zhaw.labyrinth.model.builder;
 
-import ch.zhaw.labyrinth.model.utils.MazeModel;
+import ch.zhaw.labyrinth.model.MazeModel;
+import ch.zhaw.labyrinth.view.MazeView;
+
+import java.util.Observer;
 
 /**
  * Interface that makes sure build() method is getting implemented
@@ -10,7 +13,8 @@ import ch.zhaw.labyrinth.model.utils.MazeModel;
 public interface Builder {
 	 /**
      * This method implements the builder algorithm
-     * @param Labyrinth
-     */
-    public MazeModel build();
+      */
+    MazeModel build();
+
+    void registerObserver(Observer observer);
 }

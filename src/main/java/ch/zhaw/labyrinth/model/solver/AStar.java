@@ -1,11 +1,12 @@
 package ch.zhaw.labyrinth.model.solver;
 
-import ch.zhaw.labyrinth.model.utils.MazeModel;
-import ch.zhaw.labyrinth.view.LabyrinthDrawer;
+import ch.zhaw.labyrinth.model.MazeModel;
 import ch.zhaw.labyrinth.model.utils.Cell;
 import ch.zhaw.labyrinth.model.utils.Coordinate;
+import ch.zhaw.labyrinth.view.MazePanel;
 
 import java.util.Observable;
+import java.util.Observer;
 
 /**
  * This class implements the A* Algorithm based on the explanations from
@@ -38,8 +39,8 @@ public class AStar extends Observable implements Solver {
     }
 
     @Override
-    public void solve(LabyrinthDrawer labyrinthDrawer) {
-        addObserver(labyrinthDrawer);
+    public void solve(MazePanel mazePanel) {
+        addObserver(mazePanel);
 
         // Timer
         long startTime = System.currentTimeMillis();
@@ -130,8 +131,8 @@ public class AStar extends Observable implements Solver {
         closedSet.addPath(currentCoordinate, oldCell);
         long stopTime = System.currentTimeMillis();
 
-        labyrinthDrawer.setMazeModel(closedSet);
-        labyrinthDrawer.setMode("AStar");
+//        mazePanel.setMaze(closedSet);
+        mazePanel.setMode("AStar");
 
         // Print exit
         setChanged();
@@ -233,5 +234,10 @@ public class AStar extends Observable implements Solver {
 
         // Calculate F Value
         currentCell.setF(currentCell.getG() + currentCell.getH());
+    }
+
+    @Override
+    public void registerObserver(Observer obs) {
+        this.addObserver(obs);
     }
 }
