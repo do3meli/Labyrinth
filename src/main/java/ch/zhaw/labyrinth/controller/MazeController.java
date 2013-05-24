@@ -70,13 +70,19 @@ public class MazeController {
             } else if (createAlgorithm.equals("Import")) {
                 view.showFileChooser();
             }
-
+            
+           
             // Register observer
             mazeBuilder.registerObserver(mazePanel);
 
             // Build Maze
             mazeBuilder.build();
-
+            
+            // print data strucutre as array if debugging is enabled
+            if(view.getDebug()){
+            	model.printAsArray();
+            }
+            
         }
     }
 

@@ -36,7 +36,11 @@ public class MazeView {
     private int speed;
     private String mode;
     private Solver lbsolver;
-
+    
+    // constants
+    private static final int INIT_SPEED = 25;
+    
+    
     /**
      * Default constructor for MazeView
      *
@@ -44,6 +48,7 @@ public class MazeView {
      */
     public MazeView(MazeModel model) {
         this.model = model;
+        this.speed = INIT_SPEED;
     }
 
     public void createAndShowGUI() {
@@ -145,8 +150,8 @@ public class MazeView {
 
         // Speed Slider
         slider = new JSlider(0,50);
-        slider.setValue(25);
-        sliderLabel = new JLabel("25");
+        slider.setValue(INIT_SPEED);
+        sliderLabel = new JLabel(Integer.toString(INIT_SPEED));
         slider.setBounds(6, 310, 130, 16);
         sliderLabel.setBounds(136, 310, 40, 16);
         configPanel.add(slider);
@@ -245,10 +250,11 @@ public class MazeView {
     public JSlider getSlider() {
         return slider;
     }
-
-    public void setSlider(JSlider slider) {
-        this.slider = slider;
+    
+    public boolean getDebug(){
+    	return debug.isSelected();
     }
+
 
     /**
      * This creates the labyrinth drawer object and calls the paint methods.
@@ -256,10 +262,6 @@ public class MazeView {
      */
      public void createLabyrinth(){
 
-        // Print Debugging stuff to console if tickbox set
-        if(debug.isSelected()){
-        	lbuilder.printAsArray();
-        }
 
         //Schedule a job for the event dispatch thread:
         //creating and showing this application's GUI.

@@ -17,15 +17,13 @@ public class MazePanel extends JPanel implements Observer {
 	private static final long serialVersionUID = 623347107962887545L;
 	
 	// instance var
-//    private MazeModel maze;
     private int dimension;
     private int zoom;
     private int speed;
-
 	private JPanel canvas;
     private Coordinate curCoordinate;
     private String mode;
-
+	
 
     /**
      * Default constructor, called from the controller
@@ -46,7 +44,7 @@ public class MazePanel extends JPanel implements Observer {
         canvas = new JPanel();
         canvas.setBorder(BorderFactory.createEmptyBorder(1000, 1000, 1000, 1000));
         canvas.setPreferredSize(new Dimension(getDimension()*zoom, getDimension()*zoom));
-    // canvas.setBackground(Color.black);
+        canvas.setOpaque(false);
         
         // add the canvas to the frame and make it visible
         frame.add(canvas);
@@ -54,10 +52,11 @@ public class MazePanel extends JPanel implements Observer {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true); 
         frame.setResizable(false);
+        frame.setBackground(Color.black);
         
-        // now make black cells to start with
-      //  paintBlackWalls();
+    
     }
+
     
     /**
      * This is responsible for painting the stuff to the screen
@@ -66,12 +65,16 @@ public class MazePanel extends JPanel implements Observer {
     @Override
 	protected void paintComponent(Graphics g){
     	
-
+    	super.paintComponent(g);
+    	
         if(mode.equals("create")) {
-            
                 g.setColor(Color.white);
-           
         }
+        
+        if(mode.equals("init")) {
+            g.setColor(Color.black);
+        }
+        
 //        } else if (mode.equals("solve")) {
 //            if(maze.getCellAt(curCoordinate.getX(), curCoordinate.getY()).getVisits() > 1) {
 //                g.setColor(Color.blue);
@@ -85,7 +88,7 @@ public class MazePanel extends JPanel implements Observer {
 //        }
 
         g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom );
-        super.paintComponent(g);
+ 
     }
     
     /**
@@ -96,6 +99,7 @@ public class MazePanel extends JPanel implements Observer {
     public Dimension getPreferredSize() {
         return new Dimension(getDimension()*zoom, getDimension()*zoom);
     }
+    
     
 
     /**
@@ -150,16 +154,6 @@ public class MazePanel extends JPanel implements Observer {
         this.speed = speed;
     }
     
-    private void paintBlackWalls(){
-    	
-    	for(int i=0; i< getDimension(); i++) {
-          for (int j=0; j< getDimension(); j++) {
-
-              curCoordinate = new Coordinate(i,j);
-              paintComponent(canvas.getGraphics());
-              
-          }
-      }
-    }
+   
     
 }
