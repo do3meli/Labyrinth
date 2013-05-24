@@ -1,6 +1,5 @@
 package ch.zhaw.labyrinth.view;
 
-import ch.zhaw.labyrinth.model.utils.Cell;
 import ch.zhaw.labyrinth.model.utils.Coordinate;
 
 import javax.swing.*;
@@ -24,7 +23,6 @@ public class MazePanel extends JPanel implements Observer {
     private int speed;
 
 	private JPanel canvas;
-    private Cell curCell;
     private Coordinate curCoordinate;
     private String mode;
 
@@ -33,7 +31,7 @@ public class MazePanel extends JPanel implements Observer {
      * Default constructor, called from the controller
      */
     public MazePanel() {
-
+    	
     }
 
     /**
@@ -48,7 +46,7 @@ public class MazePanel extends JPanel implements Observer {
         canvas = new JPanel();
         canvas.setBorder(BorderFactory.createEmptyBorder(1000, 1000, 1000, 1000));
         canvas.setPreferredSize(new Dimension(getDimension()*zoom, getDimension()*zoom));
-        canvas.setBackground(Color.black);
+    // canvas.setBackground(Color.black);
         
         // add the canvas to the frame and make it visible
         frame.add(canvas);
@@ -57,6 +55,8 @@ public class MazePanel extends JPanel implements Observer {
         frame.setVisible(true); 
         frame.setResizable(false);
         
+        // now make black cells to start with
+      //  paintBlackWalls();
     }
     
     /**
@@ -65,12 +65,12 @@ public class MazePanel extends JPanel implements Observer {
      */
     @Override
 	protected void paintComponent(Graphics g){
-    	super.paintComponent(g);
+    	
 
         if(mode.equals("create")) {
-            if (curCell.isPath()){
-                g.setColor(Color.black);
-            }
+            
+                g.setColor(Color.white);
+           
         }
 //        } else if (mode.equals("solve")) {
 //            if(maze.getCellAt(curCoordinate.getX(), curCoordinate.getY()).getVisits() > 1) {
@@ -85,7 +85,7 @@ public class MazePanel extends JPanel implements Observer {
 //        }
 
         g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom );
-      
+        super.paintComponent(g);
     }
     
     /**
@@ -97,31 +97,23 @@ public class MazePanel extends JPanel implements Observer {
         return new Dimension(getDimension()*zoom, getDimension()*zoom);
     }
     
-//    @Override
-//    public void run() {
-//        HashMap<Coordinate, Cell> maze = this.maze.getMaze();
-//
-//        if(mode.equals("solve")) {
-//            curCell = this.maze.getCellAt(curCoordinate);
-//            paintComponent(canvas.getGraphics());
-//        } else {
-//
-//            for(int i=0; i< this.maze.getDimension(); i++) {
-//                for (int j=0; j< this.maze.getDimension(); j++) {
-//
-//                    curCoordinate = new Coordinate(i,j);
-//                    curCell = maze.get(curCoordinate);
-//
-//                    if(!(curCell == null)) {
-//                        paintComponent(canvas.getGraphics());
-//                    }
-//                }
-//            }
-//        }
-//    }
 
+    /**
+     * Update GUI via observer
+     */
+    @Override
+    public void update(Observable observable, Object o) {
+       
+    	curCoordinate = (Coordinate)o;
+        paintComponent(canvas.getGraphics());
 
-    
+        try {
+            Thread.sleep(getSpeed());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Getter method for mode instance variable
      * @return String with Draw mode
@@ -137,50 +129,6 @@ public class MazePanel extends JPanel implements Observer {
     public void setMode(String mode) {
         this.mode = mode;
     }
-    
-//    /**
-//     * Getter method for MazeModel instance var
-//     * @return MazeModel
-//     */
-//    public MazeModel getMaze() {
-//        return maze;
-//    }
-//
-//    /**
-//     * Setter method for MazeModel instance var
-//     * @param maze
-//     */
-//    public void setMaze(MazeModel maze) {
-//        this.maze = maze;
-//    }
-//
-//    /**
-//     * Setter method for MazeModel instance var.
-//     * This also sets the curCoordinate compared to setMaze(MazeModel maze)
-//     * @param mazeModel
-//     * @param coordinate
-//     */
-//    public void setLabyrinth(MazeModel mazeModel, Coordinate coordinate) {
-//        this.maze = mazeModel;
-//        this.curCoordinate = coordinate;
-//    }
-
-    /**
-     * Update GUI via observer
-     */
-    @Override
-    public void update(Observable observable, Object o) {
-        curCoordinate = (Coordinate)o;
-        paintComponent(canvas.getGraphics());
-
-        try {
-            Thread.sleep(getSpeed());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-
 
     public void setZoom(int zoom) {
         this.zoom = zoom;
@@ -201,4 +149,17 @@ public class MazePanel extends JPanel implements Observer {
     public void setSpeed(int speed) {
         this.speed = speed;
     }
+    
+    private void paintBlackWalls(){
+    	
+    	for(int i=0; i< getDimension(); i++) {
+          for (int j=0; j< getDimension(); j++) {
+
+              curCoordinate = new Coordinate(i,j);
+              paintComponent(canvas.getGraphics());
+              
+          }
+      }
+    }
+    
 }

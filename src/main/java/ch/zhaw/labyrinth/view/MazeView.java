@@ -21,7 +21,6 @@ public class MazeView {
     private MazeModel model;
     private MazeModel lbuilder;
     private MazePanel mazePanel;
-    private MazeView view;
     private JButton startButton;
 	private JFrame frame;
     private JTextField tfDimension;
@@ -45,7 +44,6 @@ public class MazeView {
      */
     public MazeView(MazeModel model) {
         this.model = model;
-        this.view = this;
     }
 
     public void createAndShowGUI() {
@@ -54,6 +52,7 @@ public class MazeView {
     	frame = new JFrame("LabyrinthSolver");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(200, 450);
+        frame.setLocationByPlatform(true);
         
         // create a content pane and add it to the frame
         Container contentPane = new Container();

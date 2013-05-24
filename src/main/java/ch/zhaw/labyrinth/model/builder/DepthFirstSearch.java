@@ -83,8 +83,7 @@ public class DepthFirstSearch extends Observable implements Builder {
 				moveLeft(x,y);
 			}
 
-            setChanged();
-            notifyObservers(new Coordinate(x, y));
+           
 		}
 	}
 
@@ -100,8 +99,14 @@ public class DepthFirstSearch extends Observable implements Builder {
 		if ( y - 2 > 0 && !lab.getCellValueAt(x, y - 2)){
 			
 			lab.setCellValue(x, y - 1, PATH);
+			 setChanged();
+	         notifyObservers(new Coordinate(x, y-1));
+			
 			lab.setCellValue(x, y - 2, PATH);
-				
+			 setChanged();
+	         notifyObservers(new Coordinate(x, y-2));
+			
+			
 			createMaze(x,y-2);
 		}		
 	}
@@ -118,8 +123,11 @@ public class DepthFirstSearch extends Observable implements Builder {
 		if ( x + 2 < lab.getDimension() && !lab.getCellValueAt(x + 2, y)){
 			
 			lab.setCellValue(x + 1, y, PATH);
+			 setChanged();
+	         notifyObservers(new Coordinate(x+1, y));
 			lab.setCellValue(x + 2, y, PATH);
-				
+			 setChanged();
+	         notifyObservers(new Coordinate(x+2, y));
 			createMaze(x + 2,y);
 		}
 	}
@@ -135,8 +143,12 @@ public class DepthFirstSearch extends Observable implements Builder {
 		if ( y + 2 < lab.getDimension() && !lab.getCellValueAt(x, y + 2)){
 						
 			lab.setCellValue(x,y+1,PATH);
+			 setChanged();
+	         notifyObservers(new Coordinate(x, y+1));
 			lab.setCellValue(x,y+2,PATH);
 										
+			 setChanged();
+	         notifyObservers(new Coordinate(x, y+2));
 			createMaze(x,y+2);
 		}	
 	}
@@ -152,7 +164,11 @@ public class DepthFirstSearch extends Observable implements Builder {
 		if ( x - 2 > 0 && !lab.getCellValueAt(x - 2, y)){
 			
 			lab.setCellValue(x-1,y,PATH);
+			 setChanged();
+	         notifyObservers(new Coordinate(x-1, y));
 			lab.setCellValue(x-2,y,PATH);
+			 setChanged();
+	         notifyObservers(new Coordinate(x-2, y));
 							
 			createMaze(x-2,y);
 		}
@@ -201,7 +217,11 @@ public class DepthFirstSearch extends Observable implements Builder {
 		
 			// now make the field a path
 			lab.setCellValue( rEntry,0, PATH);
+			 setChanged();
+	         notifyObservers(new Coordinate(rEntry, 0));
 			lab.setCellValue(rOut,lab.getDimension() - 1, PATH);
+			 setChanged();
+	         notifyObservers(new Coordinate(rOut, lab.getDimension() -1));
 
             // Save entry & exit
 			lab.setEntry(new Coordinate( rEntry,0));
@@ -223,8 +243,12 @@ public class DepthFirstSearch extends Observable implements Builder {
 		
 			// now make the field a path
 			lab.setCellValue(0, rEntry, PATH);
+			 setChanged();
+	         notifyObservers(new Coordinate(0, rEntry));
 			lab.setCellValue(lab.getDimension() - 1, rOut, PATH);
-
+			
+			 setChanged();
+	         notifyObservers(new Coordinate(lab.getDimension()-1, rOut));
             // Save entry & exit
             lab.setEntry(new Coordinate(0, rEntry));
             lab.setExit(new Coordinate(lab.getDimension() - 1, rOut));

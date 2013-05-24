@@ -51,8 +51,9 @@ public class MazeController {
     private class CreateActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Configure the MazePanel object
-            mazePanel.setMode("Create");
+            
+        	// Configure the MazePanel object
+            mazePanel.setMode("create");
             mazePanel.setZoom(view.getZoom());
             mazePanel.setDimension(view.getDimension());
             mazePanel.setSpeed(view.getSpeed());
