@@ -118,7 +118,8 @@ public class MazePanel extends JPanel implements Observer {
         Graphics2D g = bi.createGraphics();
         g.setPaint( Color.white );
         g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, zoom, zoom );
-       
+        
+        g.drawImage(getBuffImg(), 0, 0, this);
         
         try {
             Thread.sleep(getSpeed());
