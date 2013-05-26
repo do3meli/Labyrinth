@@ -6,8 +6,10 @@ import ch.zhaw.labyrinth.model.builder.DepthFirstSearch;
 import ch.zhaw.labyrinth.view.MazePanel;
 import ch.zhaw.labyrinth.view.MazeView;
 
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -59,7 +61,15 @@ public class MazeController {
             mazePanel.setSpeed(view.getSpeed());
 
             // Build panel
-            mazePanel.buildFrame();
+            mazePanel.buildPanel();
+
+            // Build new Frame
+            JFrame mazeFrame = new JFrame("Maze");
+            mazeFrame.add(mazePanel);
+            mazeFrame.pack();
+//        frame.setLocationRelativeTo(null);
+            mazeFrame.setVisible(true);
+            mazeFrame.setResizable(false);
 
             // Get Build Type
             String createAlgorithm = view.getCreateAlgorithm();
@@ -70,15 +80,14 @@ public class MazeController {
             } else if (createAlgorithm.equals("Import")) {
                 view.showFileChooser();
             }
-            
-           
+
             // Register observer
             mazeBuilder.registerObserver(mazePanel);
 
             // Build Maze
-            mazeBuilder.build();
-            
-            // print data strucutre as array if debugging is enabled
+            model = mazeBuilder.build();
+
+            // print data structure as array if debugging is enabled
             if(view.getDebug()){
             	model.printAsArray();
             }

@@ -49,7 +49,7 @@ public class DepthFirstSearch extends Observable implements Builder {
 		// create input and ouput of the maze
 		createInputOutput();
 		
-		// now return the created maze
+		// now return the created maze TODO: warum returnen wir da was?
 		return lab;
 
 	}

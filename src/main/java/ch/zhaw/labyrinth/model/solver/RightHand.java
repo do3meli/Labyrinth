@@ -68,7 +68,7 @@ public class RightHand extends Observable implements Solver {
             if(mazeModel.getCellAt(new Coordinate(x,y)).isPath()) {
 //                mazePanel.setLabyrinth(heading.getSolvedLabyrinth(), new Coordinate(x, y));
                 setChanged();
-                notifyObservers();
+                notifyObservers(new Coordinate(x,y));
             }
 
             // If we already visited the next cell, try to go right

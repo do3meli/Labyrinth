@@ -4,6 +4,7 @@ import ch.zhaw.labyrinth.model.utils.Coordinate;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -20,41 +21,29 @@ public class MazePanel extends JPanel implements Observer {
     private int dimension;
     private int zoom;
     private int speed;
-	private JPanel canvas;
+//	private JPanel panel;
     private Coordinate curCoordinate;
     private String mode;
-	
+    private static JPanel panel;
+
 
     /**
      * Default constructor, called from the controller
      */
     public MazePanel() {
-    	
+        panel = this;
     }
 
     /**
      * TODO: JavaDoc
      */
-    public void buildFrame(){
-    	
-    	// create the frame
-    	JFrame frame = new JFrame("Labyrinth Solver");   
-    	
+    public void buildPanel(){
+
         // create the JPanel
-        canvas = new JPanel();
-        canvas.setBorder(BorderFactory.createEmptyBorder(1000, 1000, 1000, 1000));
-        canvas.setPreferredSize(new Dimension(getDimension()*zoom, getDimension()*zoom));
-        canvas.setOpaque(false);
-        
-        // add the canvas to the frame and make it visible
-        frame.add(canvas);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true); 
-        frame.setResizable(false);
-        frame.setBackground(Color.black);
-        
-    
+        panel.setBorder(BorderFactory.createEmptyBorder(1000, 1000, 1000, 1000));
+        panel.setPreferredSize(new Dimension(getDimension() * zoom, getDimension() * zoom));
+        panel.setBackground(Color.black);
+
     }
 
     
@@ -71,10 +60,7 @@ public class MazePanel extends JPanel implements Observer {
                 g.setColor(Color.white);
         }
         
-        if(mode.equals("init")) {
-            g.setColor(Color.black);
-        }
-        
+
 //        } else if (mode.equals("solve")) {
 //            if(maze.getCellAt(curCoordinate.getX(), curCoordinate.getY()).getVisits() > 1) {
 //                g.setColor(Color.blue);
@@ -87,8 +73,8 @@ public class MazePanel extends JPanel implements Observer {
 //            g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom );
 //        }
 
-        g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom );
- 
+        g.fillRect(curCoordinate.getX() * zoom, curCoordinate.getY() * zoom, 1 * zoom, 1 * zoom);
+
     }
     
     /**
@@ -109,7 +95,7 @@ public class MazePanel extends JPanel implements Observer {
     public void update(Observable observable, Object o) {
        
     	curCoordinate = (Coordinate)o;
-        paintComponent(canvas.getGraphics());
+        paintComponent(panel.getGraphics());
 
         try {
             Thread.sleep(getSpeed());
