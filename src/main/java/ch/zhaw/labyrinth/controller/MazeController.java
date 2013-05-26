@@ -55,6 +55,7 @@ public class MazeController {
         @Override
         public void actionPerformed(ActionEvent e) {
             
+        	
         	// create maze panel
         	mazePanel = new MazePanel(view.getDimension(),view.getZoom());
         	
@@ -72,9 +73,6 @@ public class MazeController {
             mazeFrame.setLocationRelativeTo(null);
             mazeFrame.setVisible(true);
             mazeFrame.setResizable(false);
-
-            // Create BufferedImage
-            mazePanel.setBuffImg(new BufferedImage(mazePanel.getDimension() * view.getZoom(), mazePanel.getDimension() * view.getZoom(), BufferedImage.TYPE_INT_RGB));
 
             // Get Build Type
             String createAlgorithm = view.getCreateAlgorithm();

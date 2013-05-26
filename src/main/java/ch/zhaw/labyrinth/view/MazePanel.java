@@ -23,15 +23,29 @@ public class MazePanel extends JPanel implements Observer {
     private int speed;
     private Coordinate curCoordinate;
     private String mode;
-    private static JPanel panel;
     private BufferedImage buffImg;
 
 
     /**
      * Default constructor, called from the controller
+     * @param zoom 
+     * @param dim 
      */
-    public MazePanel() {
-        panel = this;
+    public MazePanel(int dim, int zoom) {
+      this.dimension = dim;
+      this.zoom = zoom; 
+      this.buffImg = new BufferedImage(getDimension() * getZoom(), getDimension() * getZoom(), BufferedImage.TYPE_INT_RGB);
+      prepareBuffImg();
+    }
+    
+    
+    private synchronized void prepareBuffImg(){
+    	 
+    	  BufferedImage bi = getBuffImg();
+          Graphics2D g = bi.createGraphics();
+          g.setPaint( Color.black );
+          g.fillRect(0, 0, getBuffImg().getWidth(), getBuffImg().getHeight() );
+         
     }
 
     /**
@@ -51,16 +65,14 @@ public class MazePanel extends JPanel implements Observer {
         return buffImg;
     }
 
-    public void setBuffImg(BufferedImage buffImg) {
-        this.buffImg = buffImg;
-    }
 
     @Override
     protected void paintComponent(Graphics g) {
 
-    	super.paintComponent(g);
-
-        g.drawImage(getBuffImg(), 0, 0, null);
+    //	super.paintComponent(g);
+    	
+        g.drawImage(getBuffImg(), 0, 0, this);
+        System.out.println("aslödkfjasölfdkj");
 //        if(mode.equals("create")) {
 //                g.setColor(Color.white);
 //        }
@@ -103,10 +115,11 @@ public class MazePanel extends JPanel implements Observer {
     	curCoordinate = (Coordinate)o;
 
         BufferedImage bi = getBuffImg();
-        Graphics g = bi.getGraphics();
+        Graphics2D g = bi.createGraphics();
+        g.setPaint( Color.white );
         g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, zoom, zoom );
-        g.drawImage(getBuffImg(), 0, 0, null);
-
+       
+        
         try {
             Thread.sleep(getSpeed());
         } catch (InterruptedException e) {
@@ -142,5 +155,9 @@ public class MazePanel extends JPanel implements Observer {
     public void setSpeed(int speed) {
         this.speed = speed;
     }
+    
+    public int getZoom() {
+		return zoom;
+	}
     
 }
