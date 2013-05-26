@@ -59,7 +59,6 @@ public class MazeController {
                 };
             }).start();
 
-            
         }
     }
 
@@ -79,8 +78,8 @@ public class MazeController {
         mazeFrame.add(mazePanel);
         mazeFrame.pack();
         mazeFrame.setLocationRelativeTo(null);
-        mazeFrame.setVisible(true);
         mazeFrame.setResizable(false);
+        mazeFrame.setVisible(true);
 
         // Get Build Type
         String createAlgorithm = view.getCreateAlgorithm();
@@ -132,6 +131,7 @@ public class MazeController {
         @Override
         public void stateChanged(ChangeEvent e) {
             view.setSpeed(view.getSlider().getValue());
+            mazePanel.setSpeed(view.getSpeed());
             String str = Integer.toString(view.getSpeed());
             view.setSliderLabel(str);
         }
