@@ -21,10 +21,10 @@ public class MazePanel extends JPanel implements Observer {
     private int dimension;
     private int zoom;
     private int speed;
-//	private JPanel panel;
     private Coordinate curCoordinate;
     private String mode;
     private static JPanel panel;
+    private BufferedImage buffImg;
 
 
     /**
@@ -46,7 +46,16 @@ public class MazePanel extends JPanel implements Observer {
 
     }
 
-    
+    public BufferedImage getBuffImg() {
+        return buffImg;
+
+
+    }
+
+    public void setBuffImg(BufferedImage buffImg) {
+        this.buffImg = buffImg;
+    }
+
     /**
      * This is responsible for painting the stuff to the screen
      * @param g Graphics
@@ -55,11 +64,13 @@ public class MazePanel extends JPanel implements Observer {
 	protected void paintComponent(Graphics g){
     	
     	super.paintComponent(g);
-    	
-        if(mode.equals("create")) {
-                g.setColor(Color.white);
-        }
-        
+
+        g.drawImage(getBuffImg(), 0, 0, null);
+//        if(mode.equals("create")) {
+//                g.setColor(Color.white);
+//        }
+
+
 
 //        } else if (mode.equals("solve")) {
 //            if(maze.getCellAt(curCoordinate.getX(), curCoordinate.getY()).getVisits() > 1) {
@@ -73,7 +84,7 @@ public class MazePanel extends JPanel implements Observer {
 //            g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom );
 //        }
 
-        g.fillRect(curCoordinate.getX() * zoom, curCoordinate.getY() * zoom, 1 * zoom, 1 * zoom);
+//        g.fillRect(curCoordinate.getX() * zoom, curCoordinate.getY() * zoom, zoom, zoom);
 
     }
     
@@ -85,8 +96,7 @@ public class MazePanel extends JPanel implements Observer {
     public Dimension getPreferredSize() {
         return new Dimension(getDimension()*zoom, getDimension()*zoom);
     }
-    
-    
+
 
     /**
      * Update GUI via observer
@@ -95,7 +105,12 @@ public class MazePanel extends JPanel implements Observer {
     public void update(Observable observable, Object o) {
        
     	curCoordinate = (Coordinate)o;
-        paintComponent(panel.getGraphics());
+
+        BufferedImage bi = getBuffImg();
+        Graphics g = bi.getGraphics();
+        g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom );
+        g.dispose();
+//        paintComponent(bi.getGraphics());
 
         try {
             Thread.sleep(getSpeed());
@@ -139,7 +154,5 @@ public class MazePanel extends JPanel implements Observer {
     public void setSpeed(int speed) {
         this.speed = speed;
     }
-    
-   
     
 }
