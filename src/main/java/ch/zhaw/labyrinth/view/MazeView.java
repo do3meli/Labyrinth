@@ -181,18 +181,6 @@ public class MazeView {
       
     }
 
-    /**
-     * Stats a new thread where the solver is running
-     */
-    private void startSolver() {
-        new Thread(new Runnable() {
-            public void run() {
-                mazePanel.setMode(getMode());
-                getLbsolver().solve(mazePanel);
-            };
-        }).start();
-    }
-
     public int getTfZoom() {
         return Integer.valueOf(tfZoom.getText());
 
@@ -264,6 +252,14 @@ public class MazeView {
     
     public boolean getDebug(){
     	return debug.isSelected();
+    }
+
+    public void enableSolveButton() {
+        solveButton.setEnabled(true);
+    }
+
+    public void disableSolveButton() {
+        solveButton.setEnabled(false);
     }
 
 

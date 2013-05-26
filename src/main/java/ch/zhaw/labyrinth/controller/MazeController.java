@@ -3,18 +3,19 @@ package ch.zhaw.labyrinth.controller;
 import ch.zhaw.labyrinth.model.MazeModel;
 import ch.zhaw.labyrinth.model.builder.Builder;
 import ch.zhaw.labyrinth.model.builder.DepthFirstSearch;
+import ch.zhaw.labyrinth.model.solver.AStar;
+import ch.zhaw.labyrinth.model.solver.RightHand;
+import ch.zhaw.labyrinth.model.solver.Solver;
 import ch.zhaw.labyrinth.view.MazePanel;
 import ch.zhaw.labyrinth.view.MazeView;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.image.BufferedImage;
 
 /**
  * Controller
@@ -24,6 +25,7 @@ public class MazeController {
     private MazeView view;
     private MazePanel mazePanel;
     private Builder mazeBuilder;
+    private Solver mazeSolver;
 
     /**
      * TODO: JavaDoc
@@ -41,28 +43,12 @@ public class MazeController {
         view.addImportListener(new ImportItemListener());
         view.addChangeSpeedListener(new SpeedChangeAction());
         view.addCreateListener(new CreateActionListener());
-        //view.addSolveListener(new SolveActionListener());
+        view.addSolveListener(new SolveActionListener());
 
     }
 
 
-    /**
-     * ActionListener for Create Algorithm Button
-     */
-    private class CreateActionListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-            new Thread(new Runnable() {
-                public void run() {
-                    startCreate();
-                };
-            }).start();
-
-        }
-    }
-
-    private void startCreate() {
+    private void startBuilder() {
         // create maze panel
         mazePanel = new MazePanel(view.getDimension(),view.getZoom());
 
@@ -101,31 +87,63 @@ public class MazeController {
         if(view.getDebug()){
             model.printAsArray();
         }
+
+        // Enable solve button
+        view.enableSolveButton();
     }
 
-//    /**
-//     * ActionListener for Solve Button
-//     */
-//    private class SolveActionListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent ae) {
-//            // Get Build Type
-//            String type = view.getSolveAlgorithm();
-//
-//            // Build selected MazePanel
-//            if (type.equals("Right-Hand")) {
-//                setLbsolver(new RightHand(lbuilder));
-//            } else if (type.equals("A* Search")) {
-//                setLbsolver(new AStar(lbuilder));
-//            } else {
-//                setLbsolver(null);
-//            }
-//            setMode("solve");
-//            startSolver();
-//
-//
-//        }
-//    }
+    private void startSolver() {
+        // Send MazePanel into solve mode
+        mazePanel.setMode("solve");
+
+        // Get Build Type
+        String type = view.getSolveAlgorithm();
+
+        // Build selected MazePanel
+        if (type.equals("Right-Hand")) {
+            mazeSolver = new RightHand(model);
+        } else if (type.equals("A* Search")) {
+            mazeSolver = new AStar(model);
+        }
+
+        // Register Observer
+        mazeSolver.registerObserver(mazePanel);
+
+        // Solve Maze
+        mazeSolver.solve(mazePanel);
+    }
+
+    /**
+     * ActionListener for Create Algorithm Button
+     */
+    private class CreateActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            new Thread(new Runnable() {
+                public void run() {
+                    startBuilder();
+                };
+            }).start();
+
+        }
+    }
+
+    /**
+     * ActionListener for Solve Button
+     */
+    private class SolveActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+
+            new Thread(new Runnable() {
+                public void run() {
+                    startSolver();
+                };
+            }).start();
+
+        }
+    }
 
     private class SpeedChangeAction implements ChangeListener {
         @Override
