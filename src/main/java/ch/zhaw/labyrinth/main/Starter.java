@@ -10,13 +10,11 @@ import ch.zhaw.labyrinth.view.MazeView;
  * @author b.buetikofer
  *
  */
-class Starter {
+public class Starter {
     public static void main(String[] args) { 
     	// Initialize MVC
         MazeModel model = new MazeModel();
         MazeView view = new MazeView(model);
         MazeController controller = new MazeController(model, view);
-
-
     }
 }

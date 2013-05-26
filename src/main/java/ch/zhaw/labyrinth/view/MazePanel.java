@@ -40,9 +40,10 @@ public class MazePanel extends JPanel implements Observer {
     public void buildPanel(){
 
         // create the JPanel
-        panel.setBorder(BorderFactory.createEmptyBorder(1000, 1000, 1000, 1000));
-        panel.setPreferredSize(new Dimension(getDimension() * zoom, getDimension() * zoom));
-        panel.setBackground(Color.black);
+        setBorder(BorderFactory.createEmptyBorder(1000, 1000, 1000, 1000));
+        setPreferredSize(new Dimension(getDimension() * zoom, getDimension() * zoom));
+        setBackground(Color.black);
+       
 
     }
 
@@ -54,20 +55,15 @@ public class MazePanel extends JPanel implements Observer {
         this.buffImg = buffImg;
     }
 
-    /**
-     * This is responsible for painting the stuff to the screen
-     * @param g Graphics
-     */
     @Override
-	protected void paintComponent(Graphics g){
-    	
+    protected void paintComponent(Graphics g) {
+
     	super.paintComponent(g);
 
         g.drawImage(getBuffImg(), 0, 0, null);
 //        if(mode.equals("create")) {
 //                g.setColor(Color.white);
 //        }
-
 
 
 //        } else if (mode.equals("solve")) {
@@ -83,6 +79,7 @@ public class MazePanel extends JPanel implements Observer {
 //        }
 
 //        g.fillRect(curCoordinate.getX() * zoom, curCoordinate.getY() * zoom, zoom, zoom);
+
 
     }
 
@@ -104,6 +101,7 @@ public class MazePanel extends JPanel implements Observer {
     public void update(Observable observable, Object o) {
        
     	curCoordinate = (Coordinate)o;
+
         BufferedImage bi = getBuffImg();
         Graphics g = bi.getGraphics();
         g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, zoom, zoom );
@@ -132,17 +130,10 @@ public class MazePanel extends JPanel implements Observer {
         this.mode = mode;
     }
 
-    public void setZoom(int zoom) {
-        this.zoom = zoom;
-    }
-
     public int getDimension() {
         return dimension;
     }
 
-    public void setDimension(int dimension) {
-        this.dimension = dimension;
-    }
 
     public int getSpeed() {
         return speed;

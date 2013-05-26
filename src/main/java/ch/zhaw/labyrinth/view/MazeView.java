@@ -266,7 +266,7 @@ public class MazeView {
         //Schedule a job for the event dispatch thread:
         //creating and showing this application's GUI.
         if(lbuilder != null){
-        	mazePanel = new MazePanel();
+        //	mazePanel = new MazePanel();
         }
 
         // now enable the solver button
