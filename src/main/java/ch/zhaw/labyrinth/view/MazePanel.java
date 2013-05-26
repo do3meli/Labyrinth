@@ -57,7 +57,6 @@ public class MazePanel extends JPanel implements Observer {
         setBorder(BorderFactory.createEmptyBorder(1000, 1000, 1000, 1000));
         setPreferredSize(new Dimension(getDimension() * zoom, getDimension() * zoom));
         setBackground(Color.black);
-       
 
     }
 
@@ -69,10 +68,8 @@ public class MazePanel extends JPanel implements Observer {
     @Override
     protected void paintComponent(Graphics g) {
 
-    //	super.paintComponent(g);
-    	
         g.drawImage(getBuffImg(), 0, 0, this);
-        System.out.println("aslödkfjasölfdkj");
+        System.out.println("I'm in paintComponent");
 //        if(mode.equals("create")) {
 //                g.setColor(Color.white);
 //        }
@@ -116,10 +113,16 @@ public class MazePanel extends JPanel implements Observer {
 
         BufferedImage bi = getBuffImg();
         Graphics2D g = bi.createGraphics();
-        g.setPaint( Color.white );
+        if(mode.equals("create")) {
+            g.setPaint( Color.white );
+        } else {
+            g.setPaint(Color.green);
+        }
         g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, zoom, zoom );
         
         g.drawImage(getBuffImg(), 0, 0, this);
+        System.out.println("I'm in update");
+        repaint();
         
         try {
             Thread.sleep(getSpeed());
