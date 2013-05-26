@@ -121,9 +121,8 @@ public class RightHand extends Observable implements Solver {
 
         // Print steps
         System.out.println("Steps: " + steps + ", took: " + (stopTime-startTime) + "ms");
-//        mazePanel.setLabyrinth(heading.getSolvedLabyrinth(), exit);
         setChanged();
-        notifyObservers();
+        notifyObservers(new Coordinate(u,v));
 
     }
 
