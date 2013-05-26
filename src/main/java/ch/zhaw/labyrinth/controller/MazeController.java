@@ -33,7 +33,7 @@ public class MazeController {
         this.model = model;
         this.view = view;
 
-        mazePanel = new MazePanel();
+      
 
         // Create Gui
         view.createAndShowGUI();
@@ -54,10 +54,11 @@ public class MazeController {
         @Override
         public void actionPerformed(ActionEvent e) {
             
+        	// create maze panel
+        	mazePanel = new MazePanel(view.getDimension(),view.getZoom());
+        	
         	// Configure the MazePanel object
             mazePanel.setMode("create");
-            mazePanel.setZoom(view.getZoom());
-            mazePanel.setDimension(view.getDimension());
             mazePanel.setSpeed(view.getSpeed());
 
             // Build panel
@@ -67,7 +68,7 @@ public class MazeController {
             JFrame mazeFrame = new JFrame("Maze");
             mazeFrame.add(mazePanel);
             mazeFrame.pack();
-//        frame.setLocationRelativeTo(null);
+            mazeFrame.setLocationRelativeTo(null);
             mazeFrame.setVisible(true);
             mazeFrame.setResizable(false);
 
