@@ -34,8 +34,6 @@ public class MazeController {
         this.model = model;
         this.view = view;
 
-      
-
         // Create Gui
         view.createAndShowGUI();
 
@@ -54,47 +52,55 @@ public class MazeController {
     private class CreateActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+
+            new Thread(new Runnable() {
+                public void run() {
+                    startCreate();
+                };
+            }).start();
+
             
-        	
-        	// create maze panel
-        	mazePanel = new MazePanel(view.getDimension(),view.getZoom());
-        	
-        	// Configure the MazePanel object
-            mazePanel.setMode("create");
-            mazePanel.setSpeed(view.getSpeed());
+        }
+    }
 
-            // Build panel
-            mazePanel.buildPanel();
+    private void startCreate() {
+        // create maze panel
+        mazePanel = new MazePanel(view.getDimension(),view.getZoom());
 
-            // Build new Frame
-            JFrame mazeFrame = new JFrame("Maze");
-            mazeFrame.add(mazePanel);
-            mazeFrame.pack();
-            mazeFrame.setLocationRelativeTo(null);
-            mazeFrame.setVisible(true);
-            mazeFrame.setResizable(false);
+        // Configure the MazePanel object
+        mazePanel.setMode("create");
+        mazePanel.setSpeed(view.getSpeed());
 
-            // Get Build Type
-            String createAlgorithm = view.getCreateAlgorithm();
+        // Build panel
+        mazePanel.buildPanel();
 
-            // Build selected maze
-            if (createAlgorithm.equals("Depth-First")) {
-                mazeBuilder = new DepthFirstSearch(model, view.getDimension());
-            } else if (createAlgorithm.equals("Import")) {
-                view.showFileChooser();
-            }
+        // Build new Frame
+        JFrame mazeFrame = new JFrame("Maze");
+        mazeFrame.add(mazePanel);
+        mazeFrame.pack();
+        mazeFrame.setLocationRelativeTo(null);
+        mazeFrame.setVisible(true);
+        mazeFrame.setResizable(false);
 
-            // Register observer
-            mazeBuilder.registerObserver(mazePanel);
+        // Get Build Type
+        String createAlgorithm = view.getCreateAlgorithm();
 
-            // Build Maze
-            model = mazeBuilder.build();
+        // Build selected maze
+        if (createAlgorithm.equals("Depth-First")) {
+            mazeBuilder = new DepthFirstSearch(model, view.getDimension());
+        } else if (createAlgorithm.equals("Import")) {
+            view.showFileChooser();
+        }
 
-            // print data structure as array if debugging is enabled
-            if(view.getDebug()){
-            	model.printAsArray();
-            }
-            
+        // Register observer
+        mazeBuilder.registerObserver(mazePanel);
+
+        // Build Maze
+        model = mazeBuilder.build();
+
+        // print data structure as array if debugging is enabled
+        if(view.getDebug()){
+            model.printAsArray();
         }
     }
 
@@ -146,4 +152,5 @@ public class MazeController {
             }
         }
     }
+
 }
