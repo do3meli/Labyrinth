@@ -48,8 +48,6 @@ public class MazePanel extends JPanel implements Observer {
 
     public BufferedImage getBuffImg() {
         return buffImg;
-
-
     }
 
     public void setBuffImg(BufferedImage buffImg) {
@@ -87,7 +85,8 @@ public class MazePanel extends JPanel implements Observer {
 //        g.fillRect(curCoordinate.getX() * zoom, curCoordinate.getY() * zoom, zoom, zoom);
 
     }
-    
+
+
     /**
      * Sets the preferred window size to the size of the maze * zoom factor
      * @return Dimension
@@ -105,12 +104,10 @@ public class MazePanel extends JPanel implements Observer {
     public void update(Observable observable, Object o) {
        
     	curCoordinate = (Coordinate)o;
-
         BufferedImage bi = getBuffImg();
         Graphics g = bi.getGraphics();
-        g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom );
-        g.dispose();
-//        paintComponent(bi.getGraphics());
+        g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, zoom, zoom );
+        g.drawImage(getBuffImg(), 0, 0, null);
 
         try {
             Thread.sleep(getSpeed());
