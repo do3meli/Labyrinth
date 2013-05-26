@@ -67,29 +67,7 @@ public class MazePanel extends JPanel implements Observer {
 
     @Override
     protected void paintComponent(Graphics g) {
-
         g.drawImage(getBuffImg(), 0, 0, this);
-        System.out.println("I'm in paintComponent");
-//        if(mode.equals("create")) {
-//                g.setColor(Color.white);
-//        }
-
-
-//        } else if (mode.equals("solve")) {
-//            if(maze.getCellAt(curCoordinate.getX(), curCoordinate.getY()).getVisits() > 1) {
-//                g.setColor(Color.blue);
-//            } else {
-//                g.setColor(Color.green);
-//            }
-//            g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom );
-//        } else if (mode.equals("AStar")) {
-//            g.setColor(Color.orange);
-//            g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, 1*zoom, 1*zoom );
-//        }
-
-//        g.fillRect(curCoordinate.getX() * zoom, curCoordinate.getY() * zoom, zoom, zoom);
-
-
     }
 
 
@@ -116,12 +94,16 @@ public class MazePanel extends JPanel implements Observer {
         if(mode.equals("create")) {
             g.setPaint( Color.white );
         } else {
-            g.setPaint(Color.green);
+            // TODO: print paths with more then 1 visit blue
+//            if(getVisits() > 1) {
+//                g.setPaint(Color.blue);
+//            } else {
+              g.setPaint(Color.green);
+//            }
         }
+
         g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, zoom, zoom );
-        
         g.drawImage(getBuffImg(), 0, 0, this);
-        System.out.println("I'm in update");
         repaint();
         
         try {
