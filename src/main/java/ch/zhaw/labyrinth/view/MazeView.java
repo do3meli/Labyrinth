@@ -49,6 +49,17 @@ public class MazeView {
     public MazeView(MazeModel model) {
         this.model = model;
         this.speed = INIT_SPEED;
+
+        /* Disable ugly lucking gui elemnts */
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        /* Turn off metal's use bold fonts */
+        UIManager.put("swing.boldMetal", Boolean.FALSE);
+
     }
 
     public void createAndShowGUI() {
