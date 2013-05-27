@@ -21,14 +21,16 @@ public class Import extends Observable implements Builder {
 	// instance vars
 	private File file;
 	private MazeModel lab;
+
 	
 	/**
 	 * This is the default Constructor for Importing a maze
+	 * @param model 
 	 * @param f File with the predefined maze as array in it
 	 */
-	public Import(File f) {
+	public Import(MazeModel model, File f) {
 		this.file = f;
-		this.lab = new MazeModel();
+		this.lab = model;
 	}
 
 	/**
@@ -111,4 +113,5 @@ public class Import extends Observable implements Builder {
     public void registerObserver(Observer observer) {
         this.addObserver(observer);
     }
+
 }
