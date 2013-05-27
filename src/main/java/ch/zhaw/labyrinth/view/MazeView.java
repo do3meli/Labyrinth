@@ -169,7 +169,6 @@ public class MazeView {
       
     }
 
-
     public int getSpeed() {
         return speed;
     }
