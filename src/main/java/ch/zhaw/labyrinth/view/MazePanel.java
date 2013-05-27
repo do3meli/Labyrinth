@@ -39,7 +39,7 @@ public class MazePanel extends JPanel implements Observer {
     }
     
     
-    private synchronized void prepareBuffImg(){
+    private void prepareBuffImg(){
     	 
     	  BufferedImage bi = getBuffImg();
           Graphics2D g = bi.createGraphics();
