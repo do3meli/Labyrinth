@@ -1,5 +1,7 @@
 package ch.zhaw.labyrinth.model.utils;
 
+import java.util.Random;
+
 import ch.zhaw.labyrinth.model.MazeModel;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -23,12 +25,12 @@ public class TestLabyrinth {
 		// INFO:
 		// to pick a number from from 5 to 35 inclusively, 
 		// the upper limit number will be 35-5+1=31 and 5 needs to be added to the result
-//		Random r = new Random();
-//		dim = r.nextInt(45) + 5;
-//
-//		// create a lab
-//		lab = new MazeModel(dim);
-		
+		Random r = new Random();
+		dim = r.nextInt(45) + 5;
+
+		// create a lab
+		lab = new MazeModel();
+		lab.setDimension(dim);
 	}
 	
 	@Test
