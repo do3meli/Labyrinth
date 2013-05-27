@@ -131,7 +131,9 @@ public class RightHand extends Observable implements Solver {
     }
 
 
-    // Set x and y with the new values from the coordinate
+    /**
+     * Set x and y with the new values from the coordinate
+     */
     private void setCoordinate(Coordinate coordinate) {
         x = coordinate.getX();
         y = coordinate.getY();

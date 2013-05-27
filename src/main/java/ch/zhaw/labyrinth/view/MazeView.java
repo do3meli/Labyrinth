@@ -31,7 +31,6 @@ public class MazeView {
     private JSlider slider;
     private JLabel sliderLabel;
     private int speed;
-    private String mode;
     
     // constants
     private static final int INIT_SPEED = 25;
@@ -178,7 +177,7 @@ public class MazeView {
       
     }
 
-    public int getTfZoom() {
+/**    public int getTfZoom() {
         return Integer.valueOf(tfZoom.getText());
 
     }
@@ -186,21 +185,13 @@ public class MazeView {
     public void setTfZoom(String zoom) {
         tfZoom.setText(zoom);
     }
-
+*/
     public int getSpeed() {
         return speed;
     }
 
     public void setSpeed(int speed) {
         this.speed = speed;
-    }
-
-    public String getMode() {
-        return mode;
-    }
-
-    public void setMode(String mode) {
-        this.mode = mode;
     }
 
     public int getDimension() {
@@ -225,10 +216,6 @@ public class MazeView {
 
     public String getSolveAlgorithm() {
         return (String)solveList.getSelectedItem();
-    }
-
-    public String getSliderLabel() {
-        return sliderLabel.getText();
     }
 
     public void setSliderLabel(String sliderLabel) {
@@ -277,6 +264,7 @@ public class MazeView {
 		}
     }
 
+
     /**
      * This method is called from the controller and adds the specific Listener to
      * the UI elements (Button, Dropdown List, Slider)
@@ -306,5 +294,3 @@ public class MazeView {
         slider.addChangeListener(ae);
     }
 }
-
-

@@ -12,7 +12,7 @@ import java.util.Random;
  * A maze contains a HashMap with a Coordinate as Key
  * and a Cell as value.
  *
- * @author d.schlegel
+ * @author d.schlegel, b.buetikofer
  */
 public class MazeModel {
     private static final String[] CREATE_ALGORITHMS = { "Depth-First", "Import" };
@@ -26,7 +26,7 @@ public class MazeModel {
 	
 	
 	/**
-	 * Default Constructor
+	 * Default Constructor, initializes the maze
 	 */
     public MazeModel() {
         this.maze = new HashMap<Coordinate, Cell>();

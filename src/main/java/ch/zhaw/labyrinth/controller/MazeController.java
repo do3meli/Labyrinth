@@ -20,7 +20,10 @@ import java.awt.event.ItemListener;
 import java.io.File;
 
 /**
- * Controller
+ * Maze Controller
+ * This class represents the controller. Every action to the gui is controlled from here
+ *
+ * @author b.buetikofer
  */
 public class MazeController {
     private MazeModel model;
@@ -32,8 +35,8 @@ public class MazeController {
     /**
      * Default constructor
      * creates a MazeControlle with a given model and a given view
-     * @param model
-     * @param view
+     * @param model the maze model
+     * @param view the view, main gui window
      */
     public MazeController(MazeModel model, MazeView view) {
         this.model = model;
@@ -51,7 +54,7 @@ public class MazeController {
     }
 
     /**
-     * This takes care about the builder process 
+     * This method setups the builder process
      */
     private void startBuilder() {
         // create maze panel
@@ -105,7 +108,7 @@ public class MazeController {
     }
     
     /**
-     * This takes care about the solver process
+     * This method setups the solve process
      */
     private void startSolver() {
         // Send MazePanel into solve mode
@@ -176,6 +179,7 @@ public class MazeController {
     /**
      * This ItemListeners does fire when the item of the createList is getting changed.
      * if the selected item is Import it does show JFileChooser otherwise it does nothing.
+     *
      * @author d.schlegel
      */
     private class ImportItemListener implements ItemListener {
