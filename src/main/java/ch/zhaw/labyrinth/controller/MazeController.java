@@ -43,6 +43,10 @@ public class MazeController {
         this.model = model;
         this.view = view;
 
+        // Populate Dropdowns
+        view.setCreateAlgorithms(model.getCreateAlgorithms());
+        view.setSolveAlgorithms(model.getSolveAlgorithms());
+
         // Create Gui
         view.createAndShowGUI();
 

@@ -1,5 +1,6 @@
 package ch.zhaw.labyrinth.view;
 
+import ch.zhaw.labyrinth.controller.MazeController;
 import ch.zhaw.labyrinth.model.MazeModel;
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
@@ -17,7 +18,7 @@ import java.io.File;
 public class MazeView {
     
 	// instance variables
-    private MazeModel model;
+    private MazeController controller;
     private JButton startButton;
 	private JFrame frame;
     private JTextField tfDimension;
@@ -38,10 +39,8 @@ public class MazeView {
    
     /**
      * Default constructor for MazeView
-     * @param model the MazeModel
      */
-    public MazeView(MazeModel model) {
-        this.model = model;
+    public MazeView() {
         this.speed = INIT_SPEED;
 
         /* Disable ugly lucking gui elemnts */
@@ -77,10 +76,6 @@ public class MazeView {
         // Building the config panel
         configPanel.setLayout(null);
         configPanel.setBounds(0, 0, 196, 478);
-
-        // set up drop downs
-        createAlgorithms = model.getCreateAlgorithms();
-        solveAlgorithms = model.getSolveAlgorithms();
 
         // Gui object: create label
         JLabel createLabel = new JLabel("Create Algorithm");
@@ -292,5 +287,25 @@ public class MazeView {
      */
     public void addChangeSpeedListener(ChangeListener ae) {
         slider.addChangeListener(ae);
+    }
+
+    public void setController(MazeController controller) {
+        this.controller = controller;
+    }
+
+    public String[] getSolveAlgorithms() {
+        return solveAlgorithms;
+    }
+
+    public void setSolveAlgorithms(String[] solveAlgorithms) {
+        this.solveAlgorithms = solveAlgorithms;
+    }
+
+    public String[] getCreateAlgorithms() {
+        return createAlgorithms;
+    }
+
+    public void setCreateAlgorithms(String[] createAlgorithms) {
+        this.createAlgorithms = createAlgorithms;
     }
 }

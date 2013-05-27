@@ -18,7 +18,9 @@ public class Starter {
     public static void main(String[] args) { 
     	// Initialize MVC
         MazeModel model = new MazeModel();
-        MazeView view = new MazeView(model);
+        MazeView view = new MazeView();
+
         MazeController controller = new MazeController(model, view);
+
     }
 }
