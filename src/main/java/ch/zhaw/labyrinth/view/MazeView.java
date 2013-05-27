@@ -181,7 +181,7 @@ public class MazeView {
       
     }
 
-    public int getTfZoom() {
+/**    public int getTfZoom() {
         return Integer.valueOf(tfZoom.getText());
 
     }
@@ -189,7 +189,7 @@ public class MazeView {
     public void setTfZoom(String zoom) {
         tfZoom.setText(zoom);
     }
-
+*/
     public int getSpeed() {
         return speed;
     }
@@ -198,7 +198,7 @@ public class MazeView {
         this.speed = speed;
     }
 
-    public String getMode() {
+/**    public String getMode() {
         return mode;
     }
 
@@ -213,7 +213,7 @@ public class MazeView {
     public void setLbsolver(Solver lbsolver) {
         this.lbsolver = lbsolver;
     }
-
+*/
     public int getDimension() {
         return Integer.valueOf(tfDimension.getText());
     }
@@ -237,11 +237,11 @@ public class MazeView {
     public String getSolveAlgorithm() {
         return (String)solveList.getSelectedItem();
     }
-
+/**
     public String getSliderLabel() {
         return sliderLabel.getText();
     }
-
+*/
     public void setSliderLabel(String sliderLabel) {
         this.sliderLabel.setText(sliderLabel);
     }
@@ -262,24 +262,9 @@ public class MazeView {
         solveButton.setEnabled(false);
     }
 
-
     /**
-     * This creates the labyrinth drawer object and calls the paint methods.
-     * If debugging is selected it also prints the maze as array.
+     * Todo: create labyrinth missing
      */
-     public void createLabyrinth(){
-
-
-        //Schedule a job for the event dispatch thread:
-        //creating and showing this application's GUI.
-        if(lbuilder != null){
-        //	mazePanel = new MazePanel();
-        }
-
-        // now enable the solver button
-        solveButton.setEnabled(true);
-    }
-    
     public void showFileChooser(){
     	
     	// create file chooser
@@ -294,8 +279,9 @@ public class MazeView {
 			lbuilder = null;
 		}
 		
-		createLabyrinth();
+		//createLabyrinth();
     }
+
 
     /**
      * These methods are called from the controller and add the specific Listener to

@@ -10,7 +10,7 @@ import java.util.Observer;
 
 /**
  * Draws a given Builder or Solver Algorithm to the screen
- * @author d.schlegel
+ * @author d.schlegel, b.buetikofer
  */
 public class MazePanel extends JPanel implements Observer {
    
@@ -37,9 +37,11 @@ public class MazePanel extends JPanel implements Observer {
       this.buffImg = new BufferedImage(getDimension() * getZoom(), getDimension() * getZoom(), BufferedImage.TYPE_INT_RGB);
       prepareBuffImg();
     }
-    
-    
-    private synchronized void prepareBuffImg(){
+
+    /**
+     * TODO: JavaDoc
+     */
+    private void prepareBuffImg(){
     	 
     	  BufferedImage bi = getBuffImg();
           Graphics2D g = bi.createGraphics();
@@ -60,6 +62,10 @@ public class MazePanel extends JPanel implements Observer {
 
     }
 
+    /**
+     * TODO: JavaDoc
+     * @return
+     */
     public BufferedImage getBuffImg() {
         return buffImg;
     }
@@ -129,19 +135,34 @@ public class MazePanel extends JPanel implements Observer {
         this.mode = mode;
     }
 
+    /**
+     * TODO: JavaDoc
+     * @return
+     */
     public int getDimension() {
         return dimension;
     }
 
-
+    /**
+     * TODO: JavaDoc
+     * @return
+     */
     public int getSpeed() {
         return speed;
     }
 
+    /**
+     * TODO: JavaDoc
+     * @param speed
+     */
     public void setSpeed(int speed) {
         this.speed = speed;
     }
-    
+
+    /**
+     * TODO: JavaDoc
+     * @return
+     */
     public int getZoom() {
 		return zoom;
 	}

@@ -15,6 +15,10 @@ public interface Solver {
      */
     void solve(MazePanel mazePanel);
 
+    /**
+     * TODO: JavaDoc
+     * @param observer
+     */
     void registerObserver(Observer observer);
     
 }

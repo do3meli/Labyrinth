@@ -5,7 +5,11 @@ import ch.zhaw.labyrinth.model.MazeModel;
 import ch.zhaw.labyrinth.view.MazeView;
 
 /**
- * Main Class to start the labyrinth solver. Everything starts with initializing the GUI
+ * Main Class to start the labyrinth solver.
+ *
+ * 1) create a new model instance
+ * 2) create a new view
+ * 3) create the controller and start the application
  *
  * @author b.buetikofer
  *

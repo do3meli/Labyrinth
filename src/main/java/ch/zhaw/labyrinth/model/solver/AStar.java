@@ -131,7 +131,6 @@ public class AStar extends Observable implements Solver {
         closedSet.addPath(currentCoordinate, oldCell);
         long stopTime = System.currentTimeMillis();
 
-//        mazePanel.setMaze(closedSet);
         mazePanel.setMode("AStar");
 
         // Print exit
