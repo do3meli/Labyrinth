@@ -20,7 +20,6 @@ public class MazeView {
 	// instance variables
     private MazeModel model;
     private MazeModel lbuilder;
-    private MazePanel mazePanel;
     private JButton startButton;
 	private JFrame frame;
     private JTextField tfDimension;
@@ -40,10 +39,9 @@ public class MazeView {
     // constants
     private static final int INIT_SPEED = 25;
     
-    
+   
     /**
      * Default constructor for MazeView
-     *
      * @param model the MazeModel
      */
     public MazeView(MazeModel model) {
@@ -59,9 +57,11 @@ public class MazeView {
 
         /* Turn off metal's use bold fonts */
         UIManager.put("swing.boldMetal", Boolean.FALSE);
-
     }
-
+    
+    /**
+     * This builds the frame and shows ghe GUI elements
+     */
     public void createAndShowGUI() {
         
     	// create a new frame
@@ -300,7 +300,6 @@ public class MazeView {
     /**
      * These methods are called from the controller and add the specific Listener to
      * the UI elements (Button, Dropdown List, Slider)
-     *
      */
     public void addImportListener(ItemListener ae) {
         createList.addItemListener(ae);

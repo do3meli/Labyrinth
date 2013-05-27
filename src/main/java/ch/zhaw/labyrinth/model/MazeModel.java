@@ -24,18 +24,9 @@ public class MazeModel {
     private Coordinate entry;
     private Coordinate exit;
 	
-//	/**
-//	 * Default constructor for creating a MazeModel
-//	 * @param dim int dimension of the maze
-//	 */
-//	public MazeModel(int dim){
-//		this.maze = new HashMap<Coordinate, Cell>();
-//		setDimension(dim);
-//		createEmptyMaze();
-//	}
 	
 	/**
-	 * Constructor used by some solver classes
+	 * Default Constructor
 	 */
     public MazeModel() {
         this.maze = new HashMap<Coordinate, Cell>();
@@ -44,8 +35,7 @@ public class MazeModel {
 	/**
 	 *  create empty maze with cell's and coordinate's
 	 */
-	public void createEmptyMaze() {
-		
+	public void createEmptyMaze() {	
 		for (int x = 0; x < getDimension(); x++) {
 			for (int y = 0; y < getDimension(); y++) {
 				this.maze.put(new Coordinate(x, y), new Cell());
@@ -99,7 +89,7 @@ public class MazeModel {
 
     /**
      * Gets a Random integer which is odd
-     * @param int dimension
+     * @param dimension int
 	 * @return a random int within the dimension 
 	 */
 	public int getRandomIntOdd(int dim){
@@ -302,11 +292,19 @@ public class MazeModel {
 
         return coordinate;
     }
-
+    
+    /**
+     * Getter method for create algorithm constant
+     * @return String Array with create algorithms
+     */
     public String[] getCreateAlgorithms() {
         return CREATE_ALGORITHMS;
     }
-
+    
+    /**
+     * Getter method for solve algorithm constant
+     * @return String Array with solve algorithms
+     */
     public String[] getSolveAlgorithms() {
         return SOLVE_ALGORITHMS;
     }

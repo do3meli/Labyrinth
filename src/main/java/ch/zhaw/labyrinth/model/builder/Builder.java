@@ -1,8 +1,6 @@
 package ch.zhaw.labyrinth.model.builder;
 
 import ch.zhaw.labyrinth.model.MazeModel;
-import ch.zhaw.labyrinth.view.MazeView;
-
 import java.util.Observer;
 
 /**
@@ -15,6 +13,10 @@ public interface Builder {
      * This method implements the builder algorithm
       */
     MazeModel build();
-
+    
+    /**
+     * will register the an object in observer
+     * @param observer
+     */
     void registerObserver(Observer observer);
 }
