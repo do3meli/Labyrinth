@@ -1,13 +1,12 @@
 package ch.zhaw.labyrinth.view;
 
-import ch.zhaw.labyrinth.model.builder.Import;
-import ch.zhaw.labyrinth.model.solver.Solver;
 import ch.zhaw.labyrinth.model.MazeModel;
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
+import java.io.File;
 
 /**
  * This class is responsible for creating the GUI
@@ -19,7 +18,6 @@ public class MazeView {
     
 	// instance variables
     private MazeModel model;
-    private MazeModel lbuilder;
     private JButton startButton;
 	private JFrame frame;
     private JTextField tfDimension;
@@ -34,7 +32,6 @@ public class MazeView {
     private JLabel sliderLabel;
     private int speed;
     private String mode;
-    private Solver lbsolver;
     
     // constants
     private static final int INIT_SPEED = 25;
@@ -206,14 +203,6 @@ public class MazeView {
         this.mode = mode;
     }
 
-    public Solver getLbsolver() {
-        return lbsolver;
-    }
-
-    public void setLbsolver(Solver lbsolver) {
-        this.lbsolver = lbsolver;
-    }
-
     public int getDimension() {
         return Integer.valueOf(tfDimension.getText());
     }
@@ -253,34 +242,27 @@ public class MazeView {
     public boolean getDebug(){
     	return debug.isSelected();
     }
-
+    
+    /**
+     * enables the solve button in the GUI
+     */
     public void enableSolveButton() {
         solveButton.setEnabled(true);
     }
-
+    
+    /**
+     * disables the Solve Button in the GUI
+     */
     public void disableSolveButton() {
         solveButton.setEnabled(false);
     }
 
-
     /**
-     * This creates the labyrinth drawer object and calls the paint methods.
-     * If debugging is selected it also prints the maze as array.
+     * This shows the file chooser panel and checks if you really did
+     * choose a file or not.
+     * @return File selected File
      */
-     public void createLabyrinth(){
-
-
-        //Schedule a job for the event dispatch thread:
-        //creating and showing this application's GUI.
-        if(lbuilder != null){
-        //	mazePanel = new MazePanel();
-        }
-
-        // now enable the solver button
-        solveButton.setEnabled(true);
-    }
-    
-    public void showFileChooser(){
+    public File getFileChooserObject(){
     	
     	// create file chooser
     	JFileChooser fChoose = new JFileChooser();
@@ -288,31 +270,38 @@ public class MazeView {
     	// show it, and hand over the file to Import
     	int returnVal = fChoose.showOpenDialog( frame );
 		if ( returnVal == JFileChooser.APPROVE_OPTION ) {
-			lbuilder = new Import(fChoose.getSelectedFile()).build();
+			return fChoose.getSelectedFile();
 		}else{
 			JOptionPane.showMessageDialog(frame, "You did not select a file");
-			lbuilder = null;
+			return null;
 		}
-		
-		createLabyrinth();
     }
 
     /**
-     * These methods are called from the controller and add the specific Listener to
+     * This method is called from the controller and adds the specific Listener to
      * the UI elements (Button, Dropdown List, Slider)
      */
     public void addImportListener(ItemListener ae) {
         createList.addItemListener(ae);
     }
-
+    /**
+     * This method is called from the controller and adds the specific Listener to
+     * the UI elements (Button, Dropdown List, Slider)
+     */
     public void addCreateListener(ActionListener ae) {
         startButton.addActionListener(ae);
     }
-
+    /**
+     * This method is called from the controller and adds the specific Listener to
+     * the UI elements (Button, Dropdown List, Slider)
+     */
     public void addSolveListener(ActionListener ae) {
         solveButton.addActionListener(ae);
     }
-
+    /**
+     * This method is called from the controller and adds the specific Listener to
+     * the UI elements (Button, Dropdown List, Slider)
+     */
     public void addChangeSpeedListener(ChangeListener ae) {
         slider.addChangeListener(ae);
     }

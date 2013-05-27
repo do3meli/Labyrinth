@@ -3,6 +3,7 @@ package ch.zhaw.labyrinth.controller;
 import ch.zhaw.labyrinth.model.MazeModel;
 import ch.zhaw.labyrinth.model.builder.Builder;
 import ch.zhaw.labyrinth.model.builder.DepthFirstSearch;
+import ch.zhaw.labyrinth.model.builder.Import;
 import ch.zhaw.labyrinth.model.solver.AStar;
 import ch.zhaw.labyrinth.model.solver.RightHand;
 import ch.zhaw.labyrinth.model.solver.Solver;
@@ -16,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
 
 /**
  * Controller
@@ -77,7 +79,14 @@ public class MazeController {
         if (createAlgorithm.equals("Depth-First")) {
             mazeBuilder = new DepthFirstSearch(model, view.getDimension());
         } else if (createAlgorithm.equals("Import")) {
-            view.showFileChooser();
+            File f = view.getFileChooserObject();
+            
+            // if a file has been choosen create the Import object
+            if(f != null){
+            	mazeBuilder = new Import(f);
+            	view.enableSolveButton();
+            }
+            
         }
 
         // Register observer
@@ -175,7 +184,11 @@ public class MazeController {
         public void itemStateChanged(ItemEvent e) {
             if (e.getStateChange() == ItemEvent.SELECTED && e.getItem().equals("Import")) {
 
-                view.showFileChooser();
+            	 new Thread(new Runnable() {
+                     public void run() {
+                         startBuilder();
+                     };
+                 }).start();
             }
         }
     }
