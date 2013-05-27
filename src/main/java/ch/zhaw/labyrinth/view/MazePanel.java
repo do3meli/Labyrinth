@@ -37,6 +37,14 @@ public class MazePanel extends JPanel implements Observer {
       this.buffImg = new BufferedImage(getDimension() * getZoom(), getDimension() * getZoom(), BufferedImage.TYPE_INT_RGB);
       prepareBuffImg();
     }
+    
+    /**
+     * this constructor is actually needed for import
+     * @param zoom
+     */
+    public MazePanel(int zoom){
+    	this.zoom = zoom;
+    }
 
 
     /**

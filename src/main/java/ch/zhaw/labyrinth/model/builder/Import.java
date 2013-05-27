@@ -31,6 +31,7 @@ public class Import extends Observable implements Builder {
 	public Import(MazeModel model, File f) {
 		this.file = f;
 		this.lab = model;
+		build();
 	}
 
 	/**

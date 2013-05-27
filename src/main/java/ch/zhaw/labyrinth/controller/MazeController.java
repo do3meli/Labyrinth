@@ -13,6 +13,7 @@ import ch.zhaw.labyrinth.view.MazeView;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -57,13 +58,38 @@ public class MazeController {
      * This method setups the builder process
      */
     private void startBuilder() {
-        // create maze panel
-        mazePanel = new MazePanel(view.getDimension(),view.getZoom());
+    	
+    	 // Get Build Type
+        String createAlgorithm = view.getCreateAlgorithm();
+    	
+        // local var for dim 
+        int dim = view.getDimension();
+        
+        // do import stuff
+        if (createAlgorithm.equals("Import")) {
+            
+        	// get the selected file
+        	File f = view.getFileChooserObject();
+            
+            // if a file has been choosen create the Import object
+            if(f != null){
+            	
+            	// create import obj
+            	mazeBuilder = new Import(model,f); 
+            	
+            	// override local var for dim
+            	dim = model.getDimension();
+            }
+        }
+        
+        
+		// create maze panel
+        mazePanel = new MazePanel(dim,view.getZoom());
 
         // Configure the MazePanel object
         mazePanel.setMode("create");
         mazePanel.setSpeed(view.getSpeed());
-
+        
         // Build panel
         mazePanel.buildPanel();
 
@@ -74,23 +100,15 @@ public class MazeController {
         mazeFrame.setLocationRelativeTo(null);
         mazeFrame.setResizable(false);
         mazeFrame.setVisible(true);
-
-        // Get Build Type
-        String createAlgorithm = view.getCreateAlgorithm();
-
+        
+        
         // Build selected maze
         if (createAlgorithm.equals("Depth-First")) {
-            mazeBuilder = new DepthFirstSearch(model, view.getDimension());
-        } else if (createAlgorithm.equals("Import")) {
-            File f = view.getFileChooserObject();
-            
-            // if a file has been choosen create the Import object
-            if(f != null){
-            	mazeBuilder = new Import(f);
-            	view.enableSolveButton();
-            }
-            
-        }
+        	
+        	// create a DFS object
+        	mazeBuilder = new DepthFirstSearch(model, view.getDimension());
+        
+        } 
 
         // Register observer
         mazeBuilder.registerObserver(mazePanel);
