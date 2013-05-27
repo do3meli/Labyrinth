@@ -31,6 +31,7 @@ public class TestLabyrinth {
 		// create a lab
 		lab = new MazeModel();
 		lab.setDimension(dim);
+		lab.createEmptyMaze();
 	}
 	
 	@Test
