@@ -173,7 +173,7 @@ public class MazeController {
 
         @Override
         public void itemStateChanged(ItemEvent e) {
-            if (e.getStateChange() == ItemEvent.SELECTED && e.getItem() == "Import") {
+            if (e.getStateChange() == ItemEvent.SELECTED && e.getItem().equals("Import")) {
 
                 view.showFileChooser();
             }
