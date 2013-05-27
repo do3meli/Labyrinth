@@ -18,7 +18,6 @@ import java.io.File;
 public class MazeView {
     
 	// instance variables
-    private MazeController controller;
     private JButton startButton;
 	private JFrame frame;
     private JTextField tfDimension;
@@ -289,21 +288,10 @@ public class MazeView {
         slider.addChangeListener(ae);
     }
 
-    public void setController(MazeController controller) {
-        this.controller = controller;
-    }
-
-    public String[] getSolveAlgorithms() {
-        return solveAlgorithms;
-    }
-
     public void setSolveAlgorithms(String[] solveAlgorithms) {
         this.solveAlgorithms = solveAlgorithms;
     }
 
-    public String[] getCreateAlgorithms() {
-        return createAlgorithms;
-    }
 
     public void setCreateAlgorithms(String[] createAlgorithms) {
         this.createAlgorithms = createAlgorithms;
