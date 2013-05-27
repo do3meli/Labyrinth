@@ -280,7 +280,8 @@ public class MazeModel {
      * @return the coordinates to the cell with the lowest F value
      */
     public Coordinate getLowestF() {
-        int last = 999999999;  // TODO: Very ulgy...
+        // TODO: Very ulgy...
+        int last = 999999999;  
         Coordinate coordinate = null;
 
         for (Map.Entry<Coordinate, Cell> entry : maze.entrySet()) {
