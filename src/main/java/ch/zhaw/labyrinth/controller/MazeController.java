@@ -28,7 +28,8 @@ public class MazeController {
     private Solver mazeSolver;
 
     /**
-     * TODO: JavaDoc
+     * Default constructor
+     * creates a MazeControlle with a given model and a given view
      * @param model
      * @param view
      */
@@ -47,7 +48,9 @@ public class MazeController {
 
     }
 
-
+    /**
+     * This takes care about the builder process 
+     */
     private void startBuilder() {
         // create maze panel
         mazePanel = new MazePanel(view.getDimension(),view.getZoom());
@@ -91,7 +94,10 @@ public class MazeController {
         // Enable solve button
         view.enableSolveButton();
     }
-
+    
+    /**
+     * This takes care about the solver process
+     */
     private void startSolver() {
         // Send MazePanel into solve mode
         mazePanel.setMode("solve");
@@ -144,7 +150,10 @@ public class MazeController {
 
         }
     }
-
+    
+    /** 
+     * ChangeListener for Seed changes in GUI
+     */
     private class SpeedChangeAction implements ChangeListener {
         @Override
         public void stateChanged(ChangeEvent e) {
