@@ -19,8 +19,8 @@ import java.util.Scanner;
 public class Import extends Observable implements Builder {
 	
 	// instance vars
-	private File file;
-	private MazeModel lab;
+	private final File file;
+	private final MazeModel lab;
 
 	
 	/**
@@ -86,7 +86,7 @@ public class Import extends Observable implements Builder {
                     }
                     
                     // set exit if there is 0 in the last row or last column
-                    if( (scanner.hasNext() == false || k == str.length -1) && str[k].equals("0")){
+                    if( (!scanner.hasNext() || k == str.length -1) && str[k].equals("0")){
                     	lab.setExit(cor);
                     }
                     

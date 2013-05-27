@@ -28,7 +28,7 @@ import java.io.File;
  */
 public class MazeController {
     private MazeModel model;
-    private MazeView view;
+    private final MazeView view;
     private MazePanel mazePanel;
     private Builder mazeBuilder;
     private Solver mazeSolver;
@@ -161,7 +161,7 @@ public class MazeController {
             new Thread(new Runnable() {
                 public void run() {
                     startBuilder();
-                };
+                }
             }).start();
         }
     }
@@ -176,7 +176,7 @@ public class MazeController {
             new Thread(new Runnable() {
                 public void run() {
                     startSolver();
-                };
+                }
             }).start();
         }
     }
@@ -209,7 +209,7 @@ public class MazeController {
             	 new Thread(new Runnable() {
                      public void run() {
                          startBuilder();
-                     };
+                     }
                  }).start();
             }
         }

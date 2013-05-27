@@ -16,7 +16,7 @@ public class DepthFirstSearch extends Observable implements Builder {
 	private static final boolean PATH = true;
 	
 	// instance var
-	private MazeModel lab;
+	private final MazeModel lab;
 
 	/**
 	 * Default Constructor DFS
@@ -193,7 +193,7 @@ public class DepthFirstSearch extends Observable implements Builder {
 	 * If the entry is at the top the exit is at the bottom.
 	 * If the entry is left the exit is right.
 	 */
-	public void createInputOutput(){
+    void createInputOutput(){
 		
 		// create random
 		Random rand = new Random();

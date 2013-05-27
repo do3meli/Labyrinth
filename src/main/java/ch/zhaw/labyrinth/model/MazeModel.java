@@ -21,7 +21,7 @@ public class MazeModel {
     private static final String[] SOLVE_ALGORITHMS = { "Right-Hand", "A* Search" };
 
 	// instance variables
-	private HashMap<Coordinate, Cell> maze;
+	private final HashMap<Coordinate, Cell> maze;
 	private int dimension;
     private Coordinate entry;
     private Coordinate exit;
