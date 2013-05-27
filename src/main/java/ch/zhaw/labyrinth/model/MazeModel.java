@@ -89,9 +89,9 @@ public class MazeModel {
 
     /**
      * Gets a Random integer which is odd
-     * @param dimension int
-	 * @return a random int within the dimension 
-	 */
+     * @param dim Dimension of the maze as an int
+     * * @return a random int within the dimension 
+     */
 	public int getRandomIntOdd(int dim){
 		Random rand = new Random();
 		int r = rand.nextInt(dim);
