@@ -1,7 +1,5 @@
 package ch.zhaw.labyrinth.view;
 
-import ch.zhaw.labyrinth.controller.MazeController;
-import ch.zhaw.labyrinth.model.MazeModel;
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
@@ -171,15 +169,7 @@ public class MazeView {
       
     }
 
-/**    public int getTfZoom() {
-        return Integer.valueOf(tfZoom.getText());
 
-    }
-
-    public void setTfZoom(String zoom) {
-        tfZoom.setText(zoom);
-    }
-*/
     public int getSpeed() {
         return speed;
     }
