@@ -1,7 +1,5 @@
 package ch.zhaw.labyrinth.view;
 
-import ch.zhaw.labyrinth.controller.MazeController;
-import ch.zhaw.labyrinth.model.MazeModel;
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
@@ -192,16 +190,8 @@ public class MazeView {
         return Integer.valueOf(tfDimension.getText());
     }
 
-    public void setDimension(int size) {
-        tfDimension.setText(String.valueOf(size));
-    }
-
     public int getZoom() {
         return Integer.valueOf(tfZoom.getText());
-    }
-
-    public void setZoom(int zoom) {
-        tfZoom.setText(String.valueOf(zoom));
     }
 
     public String getCreateAlgorithm() {
@@ -229,13 +219,6 @@ public class MazeView {
      */
     public void enableSolveButton() {
         solveButton.setEnabled(true);
-    }
-    
-    /**
-     * disables the Solve Button in the GUI
-     */
-    public void disableSolveButton() {
-        solveButton.setEnabled(false);
     }
 
     /**

@@ -17,15 +17,15 @@ import java.util.Observer;
  */
 public class AStar extends Observable implements Solver {
     // Predefined constants for the travel-costs
-    public static final int G_HORIZONTAL_VERTICAL = 10;
-    public static final int G_DIAGONAL = 14;
+    private static final int G_HORIZONTAL_VERTICAL = 10;
+    private static final int G_DIAGONAL = 14;
 
     // Our initial maze to solve
-    private MazeModel maze;
+    private final MazeModel maze;
     // this object will contain the shortest path
-    private MazeModel closedSet;
+    private final MazeModel closedSet;
     // In here are candidates for the shortest path
-    private MazeModel openSet;
+    private final MazeModel openSet;
 
     /**
      * Default constructor. This object has always an maze
@@ -50,7 +50,6 @@ public class AStar extends Observable implements Solver {
          */
         Coordinate entry = maze.getEntry();
         Coordinate exit = maze.getExit();
-
 
         Coordinate startCoordinate = entry;
         int x = startCoordinate.getX();

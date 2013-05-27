@@ -73,10 +73,4 @@ public interface Heading {
      */
     Coordinate getCoordinate();
 
-    /**
-     *
-     * @return the solvedMaze Map
-     */
-    MazeModel getSolvedLabyrinth();
-
 }

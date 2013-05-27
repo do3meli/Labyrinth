@@ -10,20 +10,15 @@ import ch.zhaw.labyrinth.model.MazeModel;
  */
 public abstract class AbstractHeading implements Heading {
     // Instance Variables
-    protected int x;
-    protected int y;
-    protected MazeModel maze;
-    protected MazeModel solvedMaze;
+    int x;
+    int y;
+    MazeModel maze;
+    MazeModel solvedMaze;
 
     // Getter & Setter
     @Override
     public Coordinate getCoordinate() {
         return new Coordinate(getX(), getY());
-    }
-
-    @Override
-    public MazeModel getSolvedLabyrinth() {
-        return solvedMaze;
     }
 
     @Override
@@ -35,7 +30,7 @@ public abstract class AbstractHeading implements Heading {
         return x;
     }
 
-    public void setX(int x) {
+    void setX(int x) {
         this.x = x;
     }
 
@@ -43,11 +38,11 @@ public abstract class AbstractHeading implements Heading {
         return y;
     }
 
-    public void setY(int y) {
+    void setY(int y) {
         this.y = y;
     }
 
-    public void storeIt() {
+    void storeIt() {
         solvedMaze.setCellValue(x, y, true);
         solvedMaze.setCellVisited(x,y);
     }

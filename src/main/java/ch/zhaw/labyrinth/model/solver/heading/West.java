@@ -80,8 +80,4 @@ public class West extends AbstractHeading implements Heading {
         return new East(x, y, maze, solvedMaze);
     }
 
-    @Override
-    public MazeModel getSolvedLabyrinth() {
-        return solvedMaze;
-    }
 }

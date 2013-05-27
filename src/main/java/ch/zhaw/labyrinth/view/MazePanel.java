@@ -19,9 +19,8 @@ public class MazePanel extends JPanel implements Observer {
 	
 	// instance var
     private int dimension;
-    private int zoom;
+    private final int zoom;
     private int speed;
-    private Coordinate curCoordinate;
     private String mode;
     private BufferedImage buffImg;
 
@@ -37,14 +36,6 @@ public class MazePanel extends JPanel implements Observer {
       this.buffImg = new BufferedImage(getDimension() * getZoom(), getDimension() * getZoom(), BufferedImage.TYPE_INT_RGB);
       prepareBuffImg();
     }
-    
-    /**
-     * this constructor is actually needed for import
-     * @param zoom
-     */
-    public MazePanel(int zoom){
-    	this.zoom = zoom;
-    }
 
 
     /**
@@ -53,8 +44,8 @@ public class MazePanel extends JPanel implements Observer {
     private void prepareBuffImg(){
     	  BufferedImage bi = getBuffImg();
           Graphics2D g = bi.createGraphics();
-          g.setPaint( Color.black );
-          g.fillRect(0, 0, getBuffImg().getWidth(), getBuffImg().getHeight() );
+          g.setPaint(Color.black);
+          g.fillRect(0, 0, getBuffImg().getWidth(), getBuffImg().getHeight());
     }
 
     /**
@@ -99,8 +90,8 @@ public class MazePanel extends JPanel implements Observer {
      */
     @Override
     public void update(Observable observable, Object o) {
-       
-    	curCoordinate = (Coordinate)o;
+
+        Coordinate curCoordinate = (Coordinate) o;
 
         BufferedImage bi = getBuffImg();
         Graphics2D g = bi.createGraphics();
@@ -124,14 +115,6 @@ public class MazePanel extends JPanel implements Observer {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Getter method for mode instance variable
-     * @return String with Draw mode
-     */
-    public String getMode() {
-        return mode;
     }
 
     /**

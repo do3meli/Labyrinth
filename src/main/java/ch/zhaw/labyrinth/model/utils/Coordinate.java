@@ -8,8 +8,8 @@ package ch.zhaw.labyrinth.model.utils;
 public class Coordinate {
 	
 	// instance variables
-	private int x;
-	private int y;
+	private final int x;
+	private final int y;
 
     /**
      *
@@ -59,11 +59,8 @@ public class Coordinate {
         if (x != that.x){
         	return false;
         }
-        if (y != that.y){
-        	return false;
-        }
+        return y == that.y;
 
-        return true;
     }
 	
     @Override

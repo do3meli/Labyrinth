@@ -18,9 +18,12 @@ import java.util.Observer;
  *
  */
 public class RightHand extends Observable implements Solver {
-    int x,y,u,v;
-    private MazeModel solvedMazeModel;
-    private MazeModel mazeModel;
+    private int x;
+    private int y;
+    private int u;
+    private int v;
+    private final MazeModel solvedMazeModel;
+    private final MazeModel mazeModel;
     private Heading heading;
 
     // Constructor
@@ -111,7 +114,6 @@ public class RightHand extends Observable implements Solver {
             if(heading.isBack()) {
                 heading = heading.goBack();
                 setCoordinate(heading.getCoordinate());
-                continue;
             }
         }
 
