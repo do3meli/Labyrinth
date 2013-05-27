@@ -71,6 +71,8 @@ public class Import extends Observable implements Builder {
                     // set path based on 0 or 1
                     if(str[k].equals("0")){
                     	c.setPath(true);
+                    	 setChanged();
+                         notifyObservers(cor);
                     }else{
                     	c.setPath(false);
                     }
@@ -87,8 +89,7 @@ public class Import extends Observable implements Builder {
                     
                     // put it into the maze and paint GUI
                     lab.getMaze().put(cor,c);
-                    setChanged();
-                    notifyObservers(cor);
+          
 				}
             	
             	// increase j
