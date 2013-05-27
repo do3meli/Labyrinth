@@ -64,8 +64,9 @@ public class Import extends Observable implements Builder {
             	// iterate over each element
             	for (int k = 0; k < str.length; k++) {
             		
-            		// create new cell
+            		// create new cell and new coordinate
                     Cell c = new Cell();
+                    Coordinate cor = new Coordinate(k,j);
                     
                     // set path based on 0 or 1
                     if(str[k].equals("0")){
@@ -76,16 +77,18 @@ public class Import extends Observable implements Builder {
                     
                     // set entry if there is 0 in first row or first column
                     if( (j == 0 || k == 0) && str[k].equals("0")){
-                    	lab.setEntry(new Coordinate(k,j));
+                    	lab.setEntry(cor);
                     }
                     
                     // set exit if there is 0 in the last row or last column
                     if( (scanner.hasNext() == false || k == str.length -1) && str[k].equals("0")){
-                    	lab.setExit(new Coordinate(k,j));
+                    	lab.setExit(cor);
                     }
                     
-                    // put it into the maze
-                    lab.getMaze().put(new Coordinate(k,j),c);
+                    // put it into the maze and paint GUI
+                    lab.getMaze().put(cor,c);
+                    setChanged();
+                    notifyObservers(cor);
 				}
             	
             	// increase j
