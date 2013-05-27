@@ -25,7 +25,7 @@ public class TestImport {
     @BeforeClass
     public static void beforeEverything() {
     	f = new File("src/test/resources/Maze1.txt");
-    	imp = new Import(f).build();
+    	imp = new Import(new MazeModel(),f).build();
     }
 	
 	@Test
@@ -95,7 +95,7 @@ public class TestImport {
         writer.close();
         
         // now try lets import that file
-        MazeModel imp2 = new Import(wrongFile).build();
+        MazeModel imp2 = new Import(new MazeModel(),wrongFile).build();
         
         // now dimension should be = 0
         assertEquals(0,imp2.getDimension());

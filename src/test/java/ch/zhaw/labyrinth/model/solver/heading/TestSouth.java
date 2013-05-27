@@ -24,7 +24,7 @@ public class TestSouth {
     // before every test
     @Before
     public void setUp() {
-    	lab = new Import(new File("src/test/resources/Maze1.txt")).build();
+    	lab = new Import(new MazeModel(),new File("src/test/resources/Maze1.txt")).build();
     	south = new South(x,y,lab,new MazeModel());
     }
 	
