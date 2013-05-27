@@ -15,7 +15,9 @@ import java.util.Random;
  * @author d.schlegel, b.buetikofer
  */
 public class MazeModel {
-    private static final String[] CREATE_ALGORITHMS = { "Depth-First", "Import" };
+    
+	// constants
+	private static final String[] CREATE_ALGORITHMS = { "Depth-First", "Import" };
     private static final String[] SOLVE_ALGORITHMS = { "Right-Hand", "A* Search" };
 
 	// instance variables

@@ -104,10 +104,8 @@ public class MazeController {
         
         // Build selected maze
         if (createAlgorithm.equals("Depth-First")) {
-        	
         	// create a DFS object
         	mazeBuilder = new DepthFirstSearch(model, view.getDimension());
-        
         } 
 
         // Register observer
@@ -161,7 +159,6 @@ public class MazeController {
                     startBuilder();
                 };
             }).start();
-
         }
     }
 
@@ -177,7 +174,6 @@ public class MazeController {
                     startSolver();
                 };
             }).start();
-
         }
     }
     
@@ -214,5 +210,4 @@ public class MazeController {
             }
         }
     }
-
 }
