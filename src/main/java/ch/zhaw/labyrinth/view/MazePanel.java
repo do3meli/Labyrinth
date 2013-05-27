@@ -143,23 +143,23 @@ public class MazePanel extends JPanel implements Observer {
     }
 
     /**
-     * TODO: JavaDoc
-     * @return
+     * getter method for dimension
+     * @return int dimension
      */
     public int getDimension() {
         return dimension;
     }
 
     /**
-     * TODO: JavaDoc
-     * @return
+     * getter method for speed
+     * @return int Speed
      */
     public int getSpeed() {
         return speed;
     }
 
     /**
-     * TODO: JavaDoc
+     * setter method for speed
      * @param speed
      */
     public void setSpeed(int speed) {
@@ -167,8 +167,8 @@ public class MazePanel extends JPanel implements Observer {
     }
 
     /**
-     * TODO: JavaDoc
-     * @return
+     * getter method for zoom
+     * @return int zoom
      */
     public int getZoom() {
 		return zoom;
