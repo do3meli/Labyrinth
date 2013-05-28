@@ -6,8 +6,6 @@ import ch.zhaw.labyrinth.model.solver.heading.East;
 import ch.zhaw.labyrinth.model.solver.heading.Heading;
 import ch.zhaw.labyrinth.model.solver.heading.South;
 import ch.zhaw.labyrinth.model.utils.Coordinate;
-import ch.zhaw.labyrinth.view.MazePanel;
-
 import java.util.Observable;
 import java.util.Observer;
 
@@ -35,13 +33,11 @@ public class RightHand extends Observable implements Solver {
 
     // Implemented methods
     @Override
-    public void solve(MazePanel mazePanel) {
+    public void solve() {
         // Step counter
         int steps = 0;
         int u;
         int v;
-
-        addObserver(mazePanel);
 
         // Timer
         long startTime = System.currentTimeMillis();

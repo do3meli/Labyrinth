@@ -3,8 +3,6 @@ package ch.zhaw.labyrinth.model.solver;
 import ch.zhaw.labyrinth.model.MazeModel;
 import ch.zhaw.labyrinth.model.utils.Cell;
 import ch.zhaw.labyrinth.model.utils.Coordinate;
-import ch.zhaw.labyrinth.view.MazePanel;
-
 import java.util.Observable;
 import java.util.Observer;
 
@@ -39,8 +37,8 @@ public class AStar extends Observable implements Solver {
     }
 
     @Override
-    public void solve(MazePanel mazePanel) {
-        addObserver(mazePanel);
+    public void solve() {
+       
 
         // Timer
         long startTime = System.currentTimeMillis();
@@ -130,7 +128,7 @@ public class AStar extends Observable implements Solver {
         closedSet.addPath(currentCoordinate, oldCell);
         long stopTime = System.currentTimeMillis();
 
-        mazePanel.setMode("AStar");
+      
 
         // Print exit
         setChanged();

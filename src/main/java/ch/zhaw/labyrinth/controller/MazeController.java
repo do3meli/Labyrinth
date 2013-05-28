@@ -141,14 +141,14 @@ public class MazeController {
         if (type.equals("Right-Hand")) {
             mazeSolver = new RightHand(model);
         } else if (type.equals("A* Search")) {
-            mazeSolver = new AStar(model);
+        	mazeSolver = new AStar(model);
         }
 
         // Register Observer
         mazeSolver.registerObserver(mazePanel);
 
         // Solve Maze
-        mazeSolver.solve(mazePanel);
+        mazeSolver.solve();
     }
 
     /**
