@@ -137,4 +137,8 @@ public class RightHand extends Observable implements Solver {
         y = coordinate.getY();
     }
 
+    @Override
+    public void printCheckedCells() {
+        System.out.println("Not implemented yet!");
+    }
 }

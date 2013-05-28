@@ -26,6 +26,7 @@ public class MazeView {
     private String[] createAlgorithms;
     private String[] solveAlgorithms;
     private JButton solveButton;
+    private JButton cellButton;
     private JSlider slider;
     private JLabel sliderLabel;
     private int speed;
@@ -129,20 +130,26 @@ public class MazeView {
         solveList.setBounds(0, 197, 184, 27);
         configPanel.add(solveList);
         
-        // Start button for solve algorithmen
+        // Start button for solve algorithem
         solveButton = new JButton("Solve");
         solveButton.setBounds(50, 230, 75, 29);
         solveButton.setEnabled(false);
         configPanel.add(solveButton);
+
+        // Start button for show all
+        cellButton = new JButton("Show Cells");
+        cellButton.setBounds(36, 263, 100, 29);
+        cellButton.setEnabled(false);
+        configPanel.add(cellButton);
        
         // create the separator between the panels
         JSeparator separator2 = new JSeparator();
-        separator2.setBounds(0, 280, 196, 16);
+        separator2.setBounds(0, 296, 196, 16);
         configPanel.add(separator2);
         
         // Options label
         JLabel optLabel = new JLabel("Options");
-        optLabel.setBounds(6, 290, 107, 16);
+        optLabel.setBounds(6, 310, 107, 16);
         optLabel.setHorizontalAlignment(SwingConstants.LEFT);
         optLabel.setFont(new Font(createLabel.getFont().getName(),Font.BOLD,createLabel.getFont().getSize()));
         configPanel.add(optLabel);
@@ -151,14 +158,14 @@ public class MazeView {
         slider = new JSlider(0,50);
         slider.setValue(INIT_SPEED);
         sliderLabel = new JLabel(Integer.toString(INIT_SPEED));
-        slider.setBounds(6, 310, 130, 16);
-        sliderLabel.setBounds(136, 310, 40, 16);
+        slider.setBounds(6, 330, 130, 16);
+        sliderLabel.setBounds(136, 330, 40, 16);
         configPanel.add(slider);
         configPanel.add(sliderLabel);
 
         // Tickbox for Debug
         debug = new JCheckBox("enable debugging");
-        debug.setBounds(6, 340, 180, 16);
+        debug.setBounds(6, 360, 180, 16);
         configPanel.add(debug);
 
         // now we are done with the config panel - add it 
@@ -213,6 +220,13 @@ public class MazeView {
     }
 
     /**
+     * enables the cell button in the GUI
+     */
+    public void enableCellButton() {
+        cellButton.setEnabled(true);
+    }
+
+    /**
      * This shows the file chooser panel and checks if you really did
      * choose a file or not.
      * @return File selected File
@@ -260,6 +274,13 @@ public class MazeView {
      */
     public void addChangeSpeedListener(ChangeListener ae) {
         slider.addChangeListener(ae);
+    }
+    /**
+     * This method is called from the controller and adds the specific Listener to
+     * the UI elements (Button, Dropdown List, Slider)
+     */
+    public void addCellListener(ActionListener ae) {
+        cellButton.addActionListener(ae);
     }
 
     public void setSolveAlgorithms(String[] solveAlgorithms) {

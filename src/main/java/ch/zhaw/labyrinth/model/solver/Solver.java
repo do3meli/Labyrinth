@@ -17,5 +17,7 @@ public interface Solver {
      * @param observer
      */
     void registerObserver(Observer observer);
+
+    void printCheckedCells();
     
 }

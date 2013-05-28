@@ -3,6 +3,8 @@ package ch.zhaw.labyrinth.model.solver;
 import ch.zhaw.labyrinth.model.MazeModel;
 import ch.zhaw.labyrinth.model.utils.Cell;
 import ch.zhaw.labyrinth.model.utils.Coordinate;
+
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -25,6 +27,12 @@ public class AStar extends Observable implements Solver {
     // In here are candidates for the shortest path
     private final MazeModel openSet;
 
+    private long startTime;
+    private long stopTime;
+    private Coordinate entry;
+    private Coordinate exit;
+
+
     /**
      * Default constructor. This object has always an maze
      *
@@ -41,13 +49,13 @@ public class AStar extends Observable implements Solver {
        
 
         // Timer
-        long startTime = System.currentTimeMillis();
+        startTime = System.currentTimeMillis();
 
         /**
          *  Entry
          */
-        Coordinate entry = maze.getEntry();
-        Coordinate exit = maze.getExit();
+        entry = maze.getEntry();
+        exit = maze.getExit();
 
         Coordinate startCoordinate = entry;
         int x = startCoordinate.getX();
@@ -126,33 +134,13 @@ public class AStar extends Observable implements Solver {
          * Add exit to closedSet
          */
         closedSet.addPath(currentCoordinate, oldCell);
-        long stopTime = System.currentTimeMillis();
-
-      
+        stopTime = System.currentTimeMillis();
 
         // Print exit
         setChanged();
         notifyObservers(currentCoordinate);
 
-        /**
-         *  Working backwards from the target square, go from each square to its parent square
-         *  until you reach the starting square.
-         */
-        int steps = 0;
-        Coordinate curCoordinate = new Coordinate(exit.getX(), exit.getY());
-        Coordinate target = new Coordinate(entry.getX(), entry.getY());
-
-        while(!curCoordinate.equals(target)) {
-            steps++;
-
-            Cell curCell = closedSet.getCellAt(curCoordinate);
-            curCoordinate = curCell.getPredecessor();
-
-            setChanged();
-            notifyObservers(curCoordinate);
-        }
-
-        System.out.println("Steps: " + steps + ", took: " + (stopTime - startTime) + "ms");
+        printSolution();
 
     }
 
@@ -230,6 +218,42 @@ public class AStar extends Observable implements Solver {
 
         // Calculate F Value
         currentCell.setF(currentCell.getG() + currentCell.getH());
+    }
+
+    private void printSolution() {
+        /**
+         *  Working backwards from the target square, go from each square to its parent square
+         *  until you reach the starting square.
+         */
+        int steps = 0;
+        Coordinate curCoordinate = new Coordinate(exit.getX(), exit.getY());
+        Coordinate target = new Coordinate(entry.getX(), entry.getY());
+
+        while(!curCoordinate.equals(target)) {
+            steps++;
+
+            Cell curCell = closedSet.getCellAt(curCoordinate);
+            curCoordinate = curCell.getPredecessor();
+
+            setChanged();
+            notifyObservers(curCoordinate);
+        }
+        System.out.println("Steps: " + steps + ", took: " + (stopTime - startTime) + "ms");
+
+    }
+
+    public void printCheckedCells() {
+        int steps = 0;
+
+        Map<Coordinate, Cell> map = closedSet.getMaze();
+        for (Coordinate coordinate : map.keySet()) {
+            setChanged();
+            notifyObservers(coordinate);
+            steps++;
+        }
+
+        System.out.println("Steps: " + steps);
+
     }
 
     @Override

@@ -23,6 +23,7 @@ public class MazePanel extends JPanel implements Observer {
     private int speed;
     private String mode;
     private BufferedImage buffImg;
+    private Color color;
 
 
     /**
@@ -95,16 +96,8 @@ public class MazePanel extends JPanel implements Observer {
 
         BufferedImage bi = getBuffImg();
         Graphics2D g = bi.createGraphics();
-        if(mode.equals("create")) {
-            g.setPaint( Color.white );
-        } else {
-            // TODO: print paths with more then 1 visit blue
-//            if(getVisits() > 1) {
-//                g.setPaint(Color.blue);
-//            } else {
-              g.setPaint(Color.green);
-//            }
-        }
+
+        g.setPaint(getColor());
 
         g.fillRect(curCoordinate.getX()*zoom, curCoordinate.getY()*zoom, zoom, zoom );
         g.drawImage(getBuffImg(), 0, 0, this);
@@ -156,5 +149,12 @@ public class MazePanel extends JPanel implements Observer {
     public int getZoom() {
 		return zoom;
 	}
-    
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public Color getColor() {
+        return color;
+    }
 }

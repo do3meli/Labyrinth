@@ -13,7 +13,7 @@ import ch.zhaw.labyrinth.view.MazeView;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -55,6 +55,7 @@ public class MazeController {
         view.addChangeSpeedListener(new SpeedChangeAction());
         view.addCreateListener(new CreateActionListener());
         view.addSolveListener(new SolveActionListener());
+        view.addCellListener(new CellActionListener());
 
     }
 
@@ -115,6 +116,9 @@ public class MazeController {
         // Register observer
         mazeBuilder.registerObserver(mazePanel);
 
+        // Set Color
+        mazePanel.setColor(Color.white);
+
         // Build Maze
         model = mazeBuilder.build();
 
@@ -140,8 +144,12 @@ public class MazeController {
         // Build selected MazePanel
         if (type.equals("Right-Hand")) {
             mazeSolver = new RightHand(model);
+            // Set Color
+            mazePanel.setColor(Color.green);
         } else if (type.equals("A* Search")) {
         	mazeSolver = new AStar(model);
+            // Set Color
+            mazePanel.setColor(Color.orange);
         }
 
         // Register Observer
@@ -149,6 +157,17 @@ public class MazeController {
 
         // Solve Maze
         mazeSolver.solve();
+
+        // enable Cell Button
+        view.enableCellButton();
+    }
+
+    /**
+     * This method shows all cells in the closedSet
+     */
+    private void showCells() {
+        mazePanel.setColor(Color.blue);
+        mazeSolver.printCheckedCells();
     }
 
     /**
@@ -176,6 +195,21 @@ public class MazeController {
             new Thread(new Runnable() {
                 public void run() {
                     startSolver();
+                }
+            }).start();
+        }
+    }
+
+    /**
+     * ActionListener for Solve Button
+     */
+    private class CellActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+
+            new Thread(new Runnable() {
+                public void run() {
+                    showCells();
                 }
             }).start();
         }
