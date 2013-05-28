@@ -21,7 +21,6 @@ public class MazePanel extends JPanel implements Observer {
     private int dimension;
     private final int zoom;
     private int speed;
-    private String mode;
     private BufferedImage buffImg;
     private Color color;
 
@@ -115,7 +114,6 @@ public class MazePanel extends JPanel implements Observer {
      * @param mode either solve or create
      */
     public void setMode(String mode) {
-        this.mode = mode;
     }
 
     /**
