@@ -60,6 +60,8 @@ public class TestLabyrinth {
 		assertEquals(false,lab.getCellValueAt(c));
 		
 		c.equals(lab.getCellAt(c));
+		
+		assertEquals(false,lab.getCellValueAt(new Coordinate(99,88)));
 	}
 	
 	@Test
