@@ -20,8 +20,6 @@ import java.util.Observer;
 public class RightHand extends Observable implements Solver {
     private int x;
     private int y;
-    private int u;
-    private int v;
     private final MazeModel solvedMazeModel;
     private final MazeModel mazeModel;
     private Heading heading;
@@ -40,6 +38,8 @@ public class RightHand extends Observable implements Solver {
     public void solve(MazePanel mazePanel) {
         // Step counter
         int steps = 0;
+        int u;
+        int v;
 
         addObserver(mazePanel);
 
