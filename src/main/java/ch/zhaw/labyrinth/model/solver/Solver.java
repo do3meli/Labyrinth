@@ -9,7 +9,6 @@ public interface Solver {
 
     /**
      * This method implements the solving algorithm
-     * @param mazePanel
      */
     void solve();
 
