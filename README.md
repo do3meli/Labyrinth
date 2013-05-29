@@ -19,5 +19,7 @@ The project documentation is written in german. A PDF version can be found here:
 
 Authors
 =======
+
 [Do3meli](https://github.com/do3meli)
+
 [bueti](https://github.com/bueti) 
