@@ -8,7 +8,14 @@ import ch.zhaw.labyrinth.model.MazeModel;
  * @author b.buetikofer
  */
 public class South extends AbstractHeading implements Heading {
-
+	
+	/**
+	 * default construcotr for South
+	 * @param x
+	 * @param y
+	 * @param maze
+	 * @param solvedMaze
+	 */
     public South(int x, int y, MazeModel maze, MazeModel solvedMaze) {
         this.x = x;
         this.y = y;

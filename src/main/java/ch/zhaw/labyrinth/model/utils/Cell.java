@@ -22,9 +22,7 @@ public class Cell {
 	
 	/**
 	 * Default constructor for Cell object.
-     *
 	 * A newly create cell has no visits
-     *
 	 */
 	public Cell(){
         visits = 0;
@@ -43,6 +41,7 @@ public class Cell {
 	
 	/**
 	 * setter for path instance variable
+	 * @param path boolean for the path
 	 */
 	public void setPath(boolean path) {
 		this.path = path;
@@ -65,7 +64,7 @@ public class Cell {
 
     /**
      * Returns the coordinates of predecessor from this cell
-     * @return the coordinate to the predecessor
+     * @return Coordinate the coordinate to the predecessor
      */
     public Coordinate getPredecessor() {
         return predecessor;

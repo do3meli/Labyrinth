@@ -16,7 +16,9 @@ import java.util.Observer;
  *
  */
 public class RightHand extends Observable implements Solver {
-    private int x;
+    
+	// instance vars
+	private int x;
     private int y;
     private final MazeModel solvedMazeModel;
     private final MazeModel mazeModel;
@@ -85,9 +87,10 @@ public class RightHand extends Observable implements Solver {
                 continue;
             }
 
-            /**
+            /*
              *  Move according to heading
-              */
+             */
+            
             // If possible go right, always the first choice
             if(heading.isRight()) {
                 heading = heading.goRight();
@@ -131,6 +134,7 @@ public class RightHand extends Observable implements Solver {
 
     /**
      * Set x and y with the new values from the coordinate
+     * @param coordinate
      */
     private void setCoordinate(Coordinate coordinate) {
         x = coordinate.getX();

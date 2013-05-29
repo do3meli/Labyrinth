@@ -175,39 +175,75 @@ public class MazeView {
         frame.setVisible(true);
       
     }
-
+    
+    /**
+     * gets the speed
+     * @return int
+     */
     public int getSpeed() {
         return speed;
     }
-
+    
+    /**
+     * sets the speed
+     * @param speed
+     */
     public void setSpeed(int speed) {
         this.speed = speed;
     }
-
+    
+    /**
+     * gets the dimension from the GUI
+     * @return int Dimension
+     */
     public int getDimension() {
         return Integer.valueOf(tfDimension.getText());
     }
-
+    
+    /**
+     * gets the zoom from the GUI
+     * @return int the zoom
+     */
     public int getZoom() {
         return Integer.valueOf(tfZoom.getText());
     }
-
+    
+    /**
+     * gets the current selected Create Alrorithm
+     * @return String the current selected create Alrogrithm
+     */
     public String getCreateAlgorithm() {
         return (String)createList.getSelectedItem();
     }
-
+    
+    /**
+     * gets the current selected Solve Algorithm
+     * @return String the current selected solve Algorithm
+     */
     public String getSolveAlgorithm() {
         return (String)solveList.getSelectedItem();
     }
-
+    
+    /**
+     * sets the label next to the slider to a given String
+     * @param sliderLabel String
+     */
     public void setSliderLabel(String sliderLabel) {
         this.sliderLabel.setText(sliderLabel);
     }
-
+    
+    /**
+     * retuns the speed slider object
+     * @return JSlider
+     */
     public JSlider getSlider() {
         return slider;
     }
     
+    /**
+     * gets the status of the debug tick box from the GUI
+     * @return boolean true if checkbox is selected
+     */
     public boolean getDebug(){
     	return debug.isSelected();
     }
@@ -282,12 +318,19 @@ public class MazeView {
     public void addCellListener(ActionListener ae) {
         cellButton.addActionListener(ae);
     }
-
+    
+    /**
+     * set the Solve Algorithms
+     * @param solveAlgorithms
+     */
     public void setSolveAlgorithms(String[] solveAlgorithms) {
         this.solveAlgorithms = solveAlgorithms;
     }
 
-
+    /**
+     * set the create Algorithms
+     * @param createAlgorithms
+     */
     public void setCreateAlgorithms(String[] createAlgorithms) {
         this.createAlgorithms = createAlgorithms;
     }

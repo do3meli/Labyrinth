@@ -8,7 +8,14 @@ import ch.zhaw.labyrinth.model.MazeModel;
  * @author b.buetikofer
  */
 public class East extends AbstractHeading implements Heading {
-
+	
+	/**
+	 * Default constructor for East
+	 * @param x
+	 * @param y
+	 * @param maze
+	 * @param solvedMaze
+	 */
     public East(int x, int y, MazeModel maze, MazeModel solvedMaze) {
         this.x = x;
         this.y = y;
@@ -67,7 +74,7 @@ public class East extends AbstractHeading implements Heading {
         storeIt();
         return new East(x, y, maze, solvedMaze);
     }
-
+ 
     @Override
     public West goBack() {
         // mark current cell as visited

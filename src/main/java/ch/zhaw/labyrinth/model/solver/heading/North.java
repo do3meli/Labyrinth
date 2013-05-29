@@ -9,7 +9,13 @@ import ch.zhaw.labyrinth.model.MazeModel;
  */
 public class North extends AbstractHeading implements Heading {
 
-
+	/**
+	 * default constructor for North
+	 * @param x
+	 * @param y
+	 * @param maze
+	 * @param solvedMaze
+	 */
     public North(int x, int y, MazeModel maze, MazeModel solvedMaze) {
         this.x = x;
         this.y = y;

@@ -8,7 +8,14 @@ import ch.zhaw.labyrinth.model.MazeModel;
  * @author b.buetikofer
  */
 public class West extends AbstractHeading implements Heading {
-
+	
+	/**
+	 * default constructor for West
+	 * @param x
+	 * @param y
+	 * @param maze
+	 * @param solvedMaze
+	 */
     public West(int x, int y, MazeModel maze, MazeModel solvedMaze) {
         this.x = x;
         this.y = y;

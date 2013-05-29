@@ -27,7 +27,9 @@ import java.io.File;
  * @author b.buetikofer
  */
 public class MazeController {
-    private MazeModel model;
+    
+	// instance variables
+	private MazeModel model;
     private final MazeView view;
     private MazePanel mazePanel;
     private Builder mazeBuilder;
@@ -87,7 +89,6 @@ public class MazeController {
             }
         }
         
-        
 		// create maze panel
         mazePanel = new MazePanel(dim,view.getZoom());
 
@@ -105,7 +106,6 @@ public class MazeController {
         mazeFrame.setLocationRelativeTo(null);
         mazeFrame.setResizable(false);
         mazeFrame.setVisible(true);
-        
         
         // Build selected maze
         if (createAlgorithm.equals("Depth-First")) {
@@ -143,10 +143,13 @@ public class MazeController {
 
         // Build selected MazePanel
         if (type.equals("Right-Hand")) {
-            mazeSolver = new RightHand(model);
+            
+        	mazeSolver = new RightHand(model);
             // Set Color
             mazePanel.setColor(Color.green);
+            
         } else if (type.equals("A* Search")) {
+        	
         	mazeSolver = new AStar(model);
             // Set Color
             mazePanel.setColor(Color.orange);

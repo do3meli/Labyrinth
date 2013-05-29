@@ -25,27 +25,41 @@ public abstract class AbstractHeading implements Heading {
     public int getVisits(int x, int y) {
         return maze.isCellVisited(x, y);
     }
-
+    
+    /**
+     * gets the current x
+     * @return int
+     */
     public int getX() {
         return x;
     }
-
+    /**
+     * sets the current x
+     * @param x
+     */
     void setX(int x) {
         this.x = x;
     }
-
+    /**
+     * gets the current y
+     * @return int
+     */
     public int getY() {
         return y;
     }
-
+    /**
+     * sets the current y
+     * @param y
+     */
     void setY(int y) {
         this.y = y;
     }
-
+    /**
+     * stores the stuff to the cell
+     */
     void storeIt() {
         solvedMaze.setCellValue(x, y, true);
         solvedMaze.setCellVisited(x,y);
     }
-
 
 }

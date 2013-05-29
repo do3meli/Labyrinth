@@ -16,7 +16,8 @@ import java.util.Observer;
  *
  */
 public class AStar extends Observable implements Solver {
-    // Predefined constants for the travel-costs
+    
+	// Predefined constants for the travel-costs
     private static final int G_HORIZONTAL_VERTICAL = 10;
     private static final int G_DIAGONAL = 14;
 
@@ -26,12 +27,12 @@ public class AStar extends Observable implements Solver {
     private final MazeModel closedSet;
     // In here are candidates for the shortest path
     private final MazeModel openSet;
-
+    
+    // other instance vars
     private long startTime;
     private long stopTime;
     private Coordinate entry;
     private Coordinate exit;
-
 
     /**
      * Default constructor. This object has always an maze
@@ -46,14 +47,11 @@ public class AStar extends Observable implements Solver {
 
     @Override
     public void solve() {
-       
-
+      
         // Timer
         startTime = System.currentTimeMillis();
 
-        /**
-         *  Entry
-         */
+        // get the entry and exit of the maze
         entry = maze.getEntry();
         exit = maze.getExit();
 
@@ -61,12 +59,10 @@ public class AStar extends Observable implements Solver {
         int x = startCoordinate.getX();
         int y = startCoordinate.getY();
 
-        /**
-         * Add start point to the openSet, set predecessor to self
-         */
+        // Add start point to the openSet, set predecessor to self
         openSet.addPath(startCoordinate, startCoordinate);
 
-        /**
+        /*
          * Here starts the fun.
          * For every of the eight surrounding cells we will calculate their f, g and h value
          * if they are reachable and not already part of the closedSet
@@ -74,12 +70,13 @@ public class AStar extends Observable implements Solver {
         Coordinate currentCoordinate = openSet.getLowestF();
         Cell currentCell = openSet.getCellAt(currentCoordinate);
         Cell oldCell = null;
+        
         // Move starting coordinate into the closedSet
         closedSet.addPath(currentCoordinate, currentCell);
         openSet.removeCell(currentCoordinate);
 
         while ( !currentCoordinate.equals(exit) ) {
-            /**
+            /*
              * Add all reachable neighbors to the openSet and add calculate f-cost
              */
             // north
@@ -117,7 +114,7 @@ public class AStar extends Observable implements Solver {
             }
 
 
-            /**
+            /*
              * Get cell with the lowest F value
              */
             currentCoordinate = openSet.getLowestF();
@@ -130,7 +127,7 @@ public class AStar extends Observable implements Solver {
             openSet.removeCell(currentCoordinate);
         }
 
-        /**
+        /*
          * Add exit to closedSet
          */
         closedSet.addPath(currentCoordinate, oldCell);
@@ -221,7 +218,7 @@ public class AStar extends Observable implements Solver {
     }
 
     private void printSolution() {
-        /**
+        /*
          *  Working backwards from the target square, go from each square to its parent square
          *  until you reach the starting square.
          */
@@ -251,9 +248,7 @@ public class AStar extends Observable implements Solver {
             notifyObservers(coordinate);
             steps++;
         }
-
         System.out.println("Steps: " + steps);
-
     }
 
     @Override

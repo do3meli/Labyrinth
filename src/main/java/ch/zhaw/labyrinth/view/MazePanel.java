@@ -49,7 +49,7 @@ public class MazePanel extends JPanel implements Observer {
     }
 
     /**
-     * TODO: JavaDoc
+     * This builds the boderer and sets the correct size of the frame
      */
     public void buildPanel(){
 
@@ -61,7 +61,7 @@ public class MazePanel extends JPanel implements Observer {
     }
 
     /**
-     * TODO: JavaDoc
+     * getter method for BufferedImages which is used to store the graphical maze representation
      * @return BufferedImage
      */
     public BufferedImage getBuffImg() {
@@ -147,11 +147,19 @@ public class MazePanel extends JPanel implements Observer {
     public int getZoom() {
 		return zoom;
 	}
-
+    
+    /**
+     * sets the color to the given parameter
+     * @param color
+     */
     public void setColor(Color color) {
         this.color = color;
     }
-
+    
+    /**
+     * gets the color
+     * @return
+     */
     public Color getColor() {
         return color;
     }
