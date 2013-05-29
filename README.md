@@ -1,18 +1,23 @@
 Labyrinth
 =========
 
-This repo will be used for the 4th semester work @ ZHAW in science IT 
+This is a Java Application created during the 2nd software project course @ ZHAW.
+As per now it uses Depth First Search algorithm to create a maze and also provides a Import function.
+To solve the created or imported maze it uses A* or Righthand algorithm.
 
-Build
-=====
+Automated Builds
+================
 
-Check out our Jenkins build server http://travelbutlr.com:8080/job/Labyrinth
-
-Test
-=====
-
-We will use Jmock and Junit for testing
+Check out our [Jenkins build server](http://travelbutlr.com:8080/job/Labyrinth)
+Also have a look at the [sonar analysis](http://rob.nerdherd.ch:9000/dashboard/index/ch.zhaw.mazeModel:LabyrinthSolver?did=1)
 
 Documentation
 =============
-Please find the link to the current documentation: https://docs.google.com/document/d/1W2P_6tJtwlpij7GQzeGk_nZcncv1k6EurGi2GAQ3GaI/edit?usp=sharing
+
+The project documentation is written in german. A PDF version can be found here: 
+[Labyrinth.pdf](https://github.com/do3meli/Labyrinth/blob/master/doc/Labyrinth.pdf?raw=true)
+
+Authors
+=======
+[Do3meli](https://github.com/do3meli)
+[bueti](https://github.com/bueti) 
