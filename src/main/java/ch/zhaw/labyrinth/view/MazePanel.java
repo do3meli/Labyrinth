@@ -158,7 +158,7 @@ public class MazePanel extends JPanel implements Observer {
     
     /**
      * gets the color
-     * @return
+     * @return Color 
      */
     public Color getColor() {
         return color;
