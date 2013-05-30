@@ -4,6 +4,8 @@ import java.util.Observer;
 
 /**
  * Every solver algorithm has to extend this
+ *
+ * @author b.buetikofer
  */
 public interface Solver {
 
@@ -13,11 +15,16 @@ public interface Solver {
     void solve();
 
     /**
-     * TODO: JavaDoc
+     * This methode registers an observer
+     *
      * @param observer
+     *          the observer object
      */
     void registerObserver(Observer observer);
 
+    /**
+     * This methode prints all visited Cells, not only the path
+     */
     void printCheckedCells();
     
 }

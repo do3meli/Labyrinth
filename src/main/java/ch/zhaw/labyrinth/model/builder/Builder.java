@@ -17,6 +17,7 @@ public interface Builder {
     /**
      * will register the an object in observer
      * @param observer
+     *          The observer object
      */
     void registerObserver(Observer observer);
 }

@@ -9,7 +9,9 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * Draws a given Builder or Solver Algorithm to the screen
+ * This class represents a JPanel in which a given Builder or Solver Algorithm
+ * prints the maze
+ *
  * @author d.schlegel, b.buetikofer
  */
 public class MazePanel extends JPanel implements Observer {
@@ -27,8 +29,10 @@ public class MazePanel extends JPanel implements Observer {
 
     /**
      * Default constructor, called from the controller
-     * @param zoom 
-     * @param dim 
+     * @param zoom
+     *          The zoom factor
+     * @param dim
+     *          The dimension of the maze
      */
     public MazePanel(int dim, int zoom) {
       this.dimension = dim;
@@ -135,6 +139,7 @@ public class MazePanel extends JPanel implements Observer {
     /**
      * setter method for speed
      * @param speed
+     *          The pause time in ms
      */
     public void setSpeed(int speed) {
         this.speed = speed;

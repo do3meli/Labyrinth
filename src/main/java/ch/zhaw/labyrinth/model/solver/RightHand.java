@@ -33,7 +33,18 @@ public class RightHand extends Observable implements Solver {
         solvedMazeModel.createEmptyMaze();
     }
 
-    // Implemented methods
+    /**
+     * Set x and y with the new values from the coordinate
+     * @param coordinate
+     */
+    private void setCoordinate(Coordinate coordinate) {
+        x = coordinate.getX();
+        y = coordinate.getY();
+    }
+
+    /**
+     * This method implements the RightHand algorithm
+     */
     @Override
     public void solve() {
         // Step counter
@@ -131,15 +142,6 @@ public class RightHand extends Observable implements Solver {
         this.addObserver(obs);
     }
 
-
-    /**
-     * Set x and y with the new values from the coordinate
-     * @param coordinate
-     */
-    private void setCoordinate(Coordinate coordinate) {
-        x = coordinate.getX();
-        y = coordinate.getY();
-    }
 
     @Override
     public void printCheckedCells() {

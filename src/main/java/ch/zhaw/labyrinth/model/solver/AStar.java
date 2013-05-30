@@ -62,11 +62,6 @@ public class AStar extends Observable implements Solver {
         // Add start point to the openSet, set predecessor to self
         openSet.addPath(startCoordinate, startCoordinate);
 
-        /*
-         * Here starts the fun.
-         * For every of the eight surrounding cells we will calculate their f, g and h value
-         * if they are reachable and not already part of the closedSet
-         */
         Coordinate currentCoordinate = openSet.getLowestF();
         Cell currentCell = openSet.getCellAt(currentCoordinate);
         Cell oldCell = null;
@@ -75,6 +70,11 @@ public class AStar extends Observable implements Solver {
         closedSet.addPath(currentCoordinate, currentCell);
         openSet.removeCell(currentCoordinate);
 
+         /*
+         * Here starts the fun.
+         * For every of the eight surrounding cells calculate their f, g and h value
+         * if they are reachable and not already part of the closedSet
+         */
         while ( !currentCoordinate.equals(exit) ) {
             /*
              * Add all reachable neighbors to the openSet and add calculate f-cost
@@ -142,6 +142,8 @@ public class AStar extends Observable implements Solver {
     }
 
     /**
+     * TODO: Simplify this method
+     *
      * This method checks if cell at a given coordinate is already in the open set.
      *
      * @param x x-ccordinate

@@ -54,6 +54,8 @@ public class MazeView {
     
     /**
      * This builds the frame and shows ghe GUI elements
+     *
+     * TODO: Simplify this method
      */
     public void createAndShowGUI() {
         
@@ -187,6 +189,7 @@ public class MazeView {
     /**
      * sets the speed
      * @param speed
+     *          the pause in ms
      */
     public void setSpeed(int speed) {
         this.speed = speed;
@@ -226,14 +229,15 @@ public class MazeView {
     
     /**
      * sets the label next to the slider to a given String
-     * @param sliderLabel String
+     * @param sliderLabel
+     *              The pause in ms as a string
      */
     public void setSliderLabel(String sliderLabel) {
         this.sliderLabel.setText(sliderLabel);
     }
     
     /**
-     * retuns the speed slider object
+     * returns the speed slider object
      * @return JSlider
      */
     public JSlider getSlider() {

@@ -36,6 +36,7 @@ public abstract class AbstractHeading implements Heading {
     /**
      * sets the current x
      * @param x
+     *          x-coordinate
      */
     void setX(int x) {
         this.x = x;
@@ -50,6 +51,7 @@ public abstract class AbstractHeading implements Heading {
     /**
      * sets the current y
      * @param y
+     *          y-coordinate
      */
     void setY(int y) {
         this.y = y;

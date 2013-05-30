@@ -25,8 +25,10 @@ public class Import extends Observable implements Builder {
 	
 	/**
 	 * This is the default Constructor for Importing a maze
-	 * @param model 
-	 * @param f File with the predefined maze as array in it
+	 * @param model
+     *          the maze model
+	 * @param f
+     *          File with the predefined maze as array in it
 	 */
 	public Import(MazeModel model, File f) {
 		this.file = f;

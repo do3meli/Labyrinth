@@ -36,10 +36,13 @@ public class MazeController {
     private Solver mazeSolver;
 
     /**
-     * Default constructor
-     * creates a MazeControlle with a given model and a given view
-     * @param model the maze model
-     * @param view the view, main gui window
+     *
+     * Creates a MazeController with a given model and a given view
+     *
+     * @param model
+     *          the maze model
+     * @param view
+     *          the view, main gui window
      */
     public MazeController(MazeModel model, MazeView view) {
         this.model = model;
@@ -62,7 +65,7 @@ public class MazeController {
     }
 
     /**
-     * This method setups the builder process
+     * This method configures the builder process and starts it
      */
     private void startBuilder() {
     	
@@ -132,7 +135,7 @@ public class MazeController {
     }
     
     /**
-     * This method setups the solve process
+     * This method configures the solve process and starts it
      */
     private void startSolver() {
         // Send MazePanel into solve mode
