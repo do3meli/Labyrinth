@@ -96,7 +96,6 @@ public class MazeController {
         mazePanel = new MazePanel(dim,view.getZoom());
 
         // Configure the MazePanel object
-        mazePanel.setMode("create");
         mazePanel.setSpeed(view.getSpeed());
         
         // Build panel
@@ -138,9 +137,6 @@ public class MazeController {
      * This method configures the solve process and starts it
      */
     private void startSolver() {
-        // Send MazePanel into solve mode
-        mazePanel.setMode("solve");
-
         // Get Build Type
         String type = view.getSolveAlgorithm();
 
