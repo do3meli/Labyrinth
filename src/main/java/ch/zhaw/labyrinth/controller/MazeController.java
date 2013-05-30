@@ -71,10 +71,10 @@ public class MazeController {
     	
     	 // Get Build Type
         String createAlgorithm = view.getCreateAlgorithm();
-    	
-        // local var for dim 
-        int dim = view.getDimension();
-        
+
+        // local var for dim
+        int dim;
+
         // do import stuff
         if (createAlgorithm.equals("Import")) {
             
@@ -91,7 +91,15 @@ public class MazeController {
             	dim = model.getDimension();
             }
         }
-        
+
+        // Build selected maze
+        if (createAlgorithm.equals("Depth-First")) {
+            // create a DFS object
+            mazeBuilder = new DepthFirstSearch(model, view.getDimension());
+        }
+
+        dim = model.getDimension();
+
 		// create maze panel
         mazePanel = new MazePanel(dim,view.getZoom());
 
@@ -109,12 +117,6 @@ public class MazeController {
         mazeFrame.setResizable(false);
         mazeFrame.setVisible(true);
         
-        // Build selected maze
-        if (createAlgorithm.equals("Depth-First")) {
-        	// create a DFS object
-        	mazeBuilder = new DepthFirstSearch(model, view.getDimension());
-        } 
-
         // Register observer
         mazeBuilder.registerObserver(mazePanel);
 
