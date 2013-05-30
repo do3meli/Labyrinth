@@ -12,9 +12,13 @@ public class South extends AbstractHeading implements Heading {
 	/**
 	 * default construcotr for South
 	 * @param x
+     *      x-coordinate
 	 * @param y
+     *      y-coordinate
 	 * @param maze
+     *      the maze to solve
 	 * @param solvedMaze
+     *      the solved maze
 	 */
     public South(int x, int y, MazeModel maze, MazeModel solvedMaze) {
         this.x = x;

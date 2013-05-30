@@ -73,6 +73,7 @@ public class Cell {
     /**
      * Sets the predecessor
      * @param predecessor
+     *          the coordinates to the predecessor
      */
     public void setPredecessor(Coordinate predecessor) {
         this.predecessor = predecessor;
@@ -89,6 +90,7 @@ public class Cell {
     /**
      * setter method for F
      * @param f
+     *      the f value
      */
     public void setF(int f) {
         this.f = f;

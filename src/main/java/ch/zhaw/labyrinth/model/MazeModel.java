@@ -57,6 +57,7 @@ public class MazeModel {
 	 * set the Dimension. 
 	 * makes sure dimension is odd by calling makeIntOdd
 	 * @param dimension
+     *          the dimension of the maze
 	 */
     public void setDimension(int dimension) {
         this.dimension = makeIntOdd(dimension);
@@ -83,7 +84,8 @@ public class MazeModel {
 	
 	/**
 	 * Returns the maze as HashMap
-	 * @return HashMap<Coordinate,Cell> with the maze
+	 * @return maze
+     *      the HashMap containing the maze
 	 */
     public HashMap<Coordinate, Cell> getMaze() {
         return maze;
@@ -168,7 +170,9 @@ public class MazeModel {
     /**
      * Adds a reachable cell to the maze and saves it's predecessor
      * @param coordinate
+     *          the coordinates of the current cell
      * @param predecessor
+     *          the coordinates of the predecessor cell
      */
     public void addPath(Coordinate coordinate, Coordinate predecessor) {
         Cell cell = new Cell();
@@ -180,6 +184,7 @@ public class MazeModel {
     /**
      * Adds a reachable cell to a maze
      * @param coordinate
+     *      the coordinates to the cell to add
      */
     public void addPath(Coordinate coordinate, Cell cell) {
         maze.put(coordinate, cell);
@@ -188,6 +193,7 @@ public class MazeModel {
     /**
      * removes a cell from a maze
      * @param currentCoordinate
+     *      the coordinates to the cell to remove
      */
     public void removeCell(Coordinate currentCoordinate) {
         maze.remove(currentCoordinate);

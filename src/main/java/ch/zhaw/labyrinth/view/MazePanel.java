@@ -20,10 +20,10 @@ public class MazePanel extends JPanel implements Observer {
 	private static final long serialVersionUID = 623347107962887545L;
 	
 	// instance var
-    private int dimension;
+    private final int dimension;
     private final int zoom;
     private int speed;
-    private BufferedImage buffImg;
+    private final BufferedImage buffImg;
     private Color color;
 
 
@@ -68,7 +68,7 @@ public class MazePanel extends JPanel implements Observer {
      * getter method for BufferedImages which is used to store the graphical maze representation
      * @return BufferedImage
      */
-    public BufferedImage getBuffImg() {
+    BufferedImage getBuffImg() {
         return buffImg;
     }
 
@@ -114,17 +114,10 @@ public class MazePanel extends JPanel implements Observer {
     }
 
     /**
-     * Setter method for instance variable mode
-     * @param mode either solve or create
-     */
-    public void setMode(String mode) {
-    }
-
-    /**
      * getter method for dimension
      * @return int dimension
      */
-    public int getDimension() {
+    int getDimension() {
         return dimension;
     }
 
@@ -132,7 +125,7 @@ public class MazePanel extends JPanel implements Observer {
      * getter method for speed
      * @return int Speed
      */
-    public int getSpeed() {
+    int getSpeed() {
         return speed;
     }
 
@@ -149,13 +142,14 @@ public class MazePanel extends JPanel implements Observer {
      * getter method for zoom
      * @return int zoom
      */
-    public int getZoom() {
+    int getZoom() {
 		return zoom;
 	}
     
     /**
      * sets the color to the given parameter
      * @param color
+     *      The color in which to print
      */
     public void setColor(Color color) {
         this.color = color;
@@ -165,7 +159,7 @@ public class MazePanel extends JPanel implements Observer {
      * gets the color
      * @return Color 
      */
-    public Color getColor() {
+    Color getColor() {
         return color;
     }
 }

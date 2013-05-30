@@ -12,9 +12,13 @@ public class North extends AbstractHeading implements Heading {
 	/**
 	 * default constructor for North
 	 * @param x
+     *      x-coordinate
 	 * @param y
+     *      y-coordinate
 	 * @param maze
+     *      the maze to solve
 	 * @param solvedMaze
+     *      the solved maze
 	 */
     public North(int x, int y, MazeModel maze, MazeModel solvedMaze) {
         this.x = x;

@@ -12,9 +12,13 @@ public class West extends AbstractHeading implements Heading {
 	/**
 	 * default constructor for West
 	 * @param x
+     *      x-coordinate
 	 * @param y
+     *      y-coordinate
 	 * @param maze
+     *      the maze to solve
 	 * @param solvedMaze
+     *      the solved maze
 	 */
     public West(int x, int y, MazeModel maze, MazeModel solvedMaze) {
         this.x = x;

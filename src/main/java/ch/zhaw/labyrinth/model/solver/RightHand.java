@@ -36,6 +36,7 @@ public class RightHand extends Observable implements Solver {
     /**
      * Set x and y with the new values from the coordinate
      * @param coordinate
+     *      the coordinate
      */
     private void setCoordinate(Coordinate coordinate) {
         x = coordinate.getX();

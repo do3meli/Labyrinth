@@ -326,6 +326,7 @@ public class MazeView {
     /**
      * set the Solve Algorithms
      * @param solveAlgorithms
+     *      This array contains all implemented solve algorithms
      */
     public void setSolveAlgorithms(String[] solveAlgorithms) {
         this.solveAlgorithms = solveAlgorithms;
@@ -334,6 +335,7 @@ public class MazeView {
     /**
      * set the create Algorithms
      * @param createAlgorithms
+     *      This array contains all implemented create algorithms
      */
     public void setCreateAlgorithms(String[] createAlgorithms) {
         this.createAlgorithms = createAlgorithms;

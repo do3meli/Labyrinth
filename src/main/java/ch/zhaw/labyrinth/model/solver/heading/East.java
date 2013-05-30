@@ -12,9 +12,13 @@ public class East extends AbstractHeading implements Heading {
 	/**
 	 * Default constructor for East
 	 * @param x
+     *          x-coordinate
 	 * @param y
+     *          y-coordinate
 	 * @param maze
+     *          the maze to solve
 	 * @param solvedMaze
+     *          the solved maze
 	 */
     public East(int x, int y, MazeModel maze, MazeModel solvedMaze) {
         this.x = x;
