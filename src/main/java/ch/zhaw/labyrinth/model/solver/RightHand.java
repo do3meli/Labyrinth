@@ -83,22 +83,6 @@ public class RightHand extends Observable implements Solver {
                 notifyObservers(new Coordinate(x,y));
             }
 
-            // If we already visited the next cell, try to go right
-            // otherwise, go straight ahead, if thats not possible go left
-            if(heading.getVisits(x, y) > 0) {
-                if(heading.isRight()) {
-                    heading = heading.goRight();
-                } else if (heading.isStraight()) {
-                    heading = heading.goStraight();
-                } else if (heading.isLeft()) {
-                    heading = heading.goLeft();
-                } else {
-                    heading = heading.goBack();
-                }
-                setCoordinate(heading.getCoordinate());
-                continue;
-            }
-
             /*
              *  Move according to heading
              */
